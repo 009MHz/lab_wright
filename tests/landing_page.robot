@@ -1,16 +1,17 @@
 *** Settings ***
 
 Resource    ../resources/setting.resource
-Resource    ../resources/customer/public/landing_page.resource
-Resource    ../resources/customer/login/login.resource
+Resource    ../resources/persona/customer/public/landing_page.resource
+Resource    ../resources/persona/customer/login/login.resource
 Library    DateTime
 
 *** Keywords ***
-${date}= Get Current Date
+${DATE}=    Get Current Date
 
 *** Test Cases ***
 
 Landing Page
+    Open Browser
     Wait Until Element Is Visible    xpath:/html/body/div[2]/div/div[2]/div/div[2]/div
     Wait Until Element Is Enabled    xpath:/html/body/div[2]/div/div[2]/div/div[2]/button
     Click Element   xpath:/html/body/div[2]/div/div[2]/div/div[2]/button
