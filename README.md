@@ -7,10 +7,10 @@ pip install -r requirements.txt
 
 # Directory Structure:
 - `resources`: store the required assets from each test execution
+  - `/PERSONA`: store any assets, locators / credentials for each account type
   - `/LANDING`: store any assets/locators related to the main landing page testfile (https://www.karirlab.co/job)
   - `/JOB`: store any assets/locators related to the main landing page testfile (https://www.karirlab.co/job)
-  - `/RESUME_BUILDER`: store any assets/locators related to the main landing page testfile (https://www.karirlab.co/resume-builder)- `tests/LANDING`: store any test cases related to the main landing page (https://www.karirlab.co/job)
-  - `/PERSONA`: store any assets, locators / credentials for each account type
+  - `/RESUME_BUILDER`: store any assets/locators related to the main landing page testfile (https://www.karirlab.co/resume-builder)
 
 
 - `tests`: store the created test scripts that will be collected into each feature/page directory:
