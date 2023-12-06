@@ -119,7 +119,7 @@ Dashboard - Resume Saya
     Click Element    //*[@id="__next"]/section/header/div[2]/ul/li[3]/span/a
 
 Jobs - List
-    #FIND JOB
+    #FIND job
     Wait Until Element Is Visible    //*[@id="keyword"]
     Click Element    //*[@id="keyword"]
     Input Text    //*[@id="keyword"]    QA GMT 2
