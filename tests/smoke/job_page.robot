@@ -1,18 +1,11 @@
 *** Settings ***
 Resource        ../../resources/job/list_job.resource
-
-*** Variables ***
-${browser}                  chrome
-${url}                      https://staging.karirlab.co/job
-
-*** Keywords ***
-Open Current Browser
-    Open Browser        ${url}  ${browser}
-    Maximize Browser Window
+Resource        ../browser.resource
+Test Teardown   Close Browser
 
 *** Test Cases ***
 Validate filter section
-    Open Current Browser
+    Open Page    job    staging    headless=True
     # Main Filter button
     FOR    ${btn}    IN    @{btn_filters}
         Wait Until Keyword Succeeds    3    5s    Element Should Be Visible    ${btn}
@@ -30,7 +23,7 @@ Validate filter section
     END
 
 Validate Sort Controller
-	Open Current Browser
+	Open Page    job    staging     headless=True
 	Wait Until Element Is Visible    ${sort_control}
     FOR    ${opt}    IN    @{sort_options}
         Click Element    ${sort_control}
