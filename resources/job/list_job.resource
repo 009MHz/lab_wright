@@ -37,3 +37,14 @@ ${page_previous}        xpath://li[@title='Previous Page']
 ${page_next}        xpath://li[@title='Next Page']
 @{page_arrow}   ${page_next}    ${page_previous}
 ${page_container}   xpath://li[contains(@class, 'ant-pagination-item')]
+
+
+*** Keywords ***
+Retrieve all pages locator
+	${total_pages}=     Get Element Count    ${page_container}
+	${pages}=   Create List
+	FOR    ${counter}    IN RANGE    ${total_pages}
+	    ${current_index}=    Convert To Lower Case   xpath:(//li[contains(@class, 'ant-pagination-item')])[${counter+1}]
+	    Append To List    ${pages}      ${current_index}
+	END
+	[Return]    ${pages}
