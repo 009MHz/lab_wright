@@ -29,3 +29,16 @@ Validate Sort Controller
         Wait Until Element Is Visible    ${opt}
         Click Element   ${opt}
     END
+
+Validate Pagination element
+	FOR    ${page_button_arrow}    IN    @{page_arrow}
+	    Wait Until Element Is Visible    ${page_button_arrow}
+	    Wait Until Keyword Succeeds    3s    2    Click Element    ${page_button_arrow}
+	END
+
+	${page_index}=  Retrieve all pages locator
+	FOR    ${element}    IN    @{page_index}
+	    Log    ${element}
+	    Wait Until Element Is Visible    ${element}
+	    Wait Until Keyword Succeeds    3s    2    Click Element    ${element}
+	END
