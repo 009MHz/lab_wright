@@ -16,9 +16,10 @@ Environment Selector
 
 Page Selector
     [Arguments]    ${base_url}
-    ${page}=    Convert To Lower Case    ${base_url}
-    ${selected_page}=    Run Keyword If    '${page}' == 'event'    Return From Keyword    ${page}/event
-    ...    ELSE IF    '${page}' == 'job'    Return From Keyword    /job
+    ${page}=    Run Keyword If    '${base_url}' != 'None'    Convert To Lower Case    ${base_url}
+    ${selected_page}=    Run Keyword If    '${page}' == 'None'    Return From Keyword    ${EMPTY}
+    ...    ELSE IF    '${page}' == 'event'      Return From Keyword    /event
+    ...    ELSE IF    '${page}' == 'job'        Return From Keyword    /job
     ...    ELSE IF    '${page}' == 'company'    Return From Keyword    /company
     ...    ELSE IF    '${page}' == 'signup'     Return From Keyword    /sign-up
     ...    ELSE IF    '${page}' == 'login'      Return From Keyword    /login
