@@ -1,7 +1,7 @@
 *** Settings ***
-Library        SeleniumLibrary
-Library    String
-Library    Collections
+Library     SeleniumLibrary
+Library     String
+Library     Collections
 
 *** Variables ***
 # Filter section
@@ -49,15 +49,15 @@ ${body_cards_containers}    ${body_logo}        ${body_company_name}    ${body_j
 ${page_previous}            xpath://li[@title='Previous Page']
 ${page_next}                xpath://li[@title='Next Page']
 @{page_arrow}   ${page_next}    ${page_previous}
-${page_container}           xpath://li[contains(@class, 'ant-pagination-item')]
+${page_container}           //li[contains(@class, 'ant-pagination-item')]
 
 
 *** Keywords ***
 Retrieve all pages locator
-	${total_pages}=     Get Element Count    locator
+	${total_pages}=     Get Element Count    xpath:${page_container}
 	${pages}=   Create List
 	FOR    ${counter}    IN RANGE    ${total_pages}
-	    ${current_index}=    Convert To String   xpath:(//li[contains(@class, 'ant-pagination-item')])[${counter+1}]
+	    ${current_index}=    Convert To String   xpath:(${page_container})[${counter+1}]
 	    Append To List    ${pages}      ${current_index}
 	END
 	[Return]    ${pages}
@@ -88,4 +88,4 @@ Retrieve job card component
         Set To Dictionary    ${current_card}    easy_apply=${card_easy_apply}
         Append To List      ${card_data}    ${current_card}
     END
-    [Return]    ${card_data}
+    [Return]            ${card_data}
