@@ -2,7 +2,7 @@
 Resource        ../../resources/job/list_job.resource
 Resource        ../browser.resource
 Test Teardown   Close Browser
-Test Setup      Open Page    staging    job    headless=False
+Test Setup      Open Page    staging    job     headless=False
 
 *** Test Cases ***
 Validate filter section
@@ -22,7 +22,7 @@ Validate filter section
         Wait Until Keyword Succeeds    3s    2    Click Element    ${checkbox}
     END
 
-Validate Sort Controller
+Validate sort Controller
 	Wait Until Element Is Visible    ${sort_control}
     FOR    ${opt}    IN    @{sort_options}
         Click Element    ${sort_control}
@@ -30,7 +30,7 @@ Validate Sort Controller
         Click Element   ${opt}
     END
 
-Validate Pagination element
+Validate pagination element
 	FOR    ${page_button_arrow}    IN    @{page_arrow}
 	    Wait Until Element Is Visible    ${page_button_arrow}
 	    Wait Until Keyword Succeeds    3s    2    Click Element    ${page_button_arrow}
@@ -41,4 +41,29 @@ Validate Pagination element
 	    Log    ${element}
 	    Wait Until Element Is Visible    ${element}
 	    Wait Until Keyword Succeeds    3s    2    Click Element    ${element}
+	END
+
+Validate job list content
+	${cards_count}=     Get Element Count    ${body_cards}
+	FOR    ${counter}    IN RANGE    ${cards_count}
+	    ${card_logo}=           Convert To String    xpath:(${body_logo})[${counter+1}]
+	    ${card_company}=        Convert To String    xpath:(${body_company_name})[${counter+1}]
+	    ${card_title}=          Convert To String    xpath:(${body_job_title})[${counter+1}]
+	    ${card_location}=       Convert To String    xpath:(${body_job_location})[${counter+1}]
+	    ${card_description}=    Convert To String    xpath:(${body_job_description})[${counter+1}]
+	    ${card_industry}=       Convert To String    xpath:(${body_job_industry})[${counter+1}]
+	    ${card_type}=           Convert To String    xpath:(${body_job_type})[${counter+1}]
+	    ${card_daycount}=       Convert To String    xpath:(${body_job_daycount})[${counter+1}]
+	    ${card_easy_apply}=     Convert To String    xpath:(${body_job_easy_apply})[${counter+1}]
+
+	    Wait Until Element Is Visible    ${card_logo}
+	    Wait Until Element Is Visible    ${card_company}
+	    Wait Until Element Is Visible    ${card_title}
+	    Wait Until Element Is Visible    ${card_location}
+	    Wait Until Element Is Visible    ${card_description}
+	    Wait Until Element Is Visible    ${card_industry}
+	    Wait Until Element Is Visible    ${card_type}
+	    Wait Until Element Is Visible    ${card_daycount}
+	    Wait Until Element Is Visible    ${card_easy_apply}
+	    Wait Until Keyword Succeeds    3s    2    Click Element    ${card_easy_apply}
 	END
