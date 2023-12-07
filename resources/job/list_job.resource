@@ -34,21 +34,22 @@ ${sorter_name_desc}         xpath://div[@title='Nama (Z to A)']
 
 # Page Body
 ${body_cards}               xpath://div[contains(@class, 'jobCard__41hUw')]
-${body_logo}                xpath://img[contains(@class, 'jobCard__image')]
-${body_company_name}        xpath://div[contains(@class, 'jobCard__content')]/span[contains(@class, 'secondary')]
-${body_job_title}           xpath://div[contains(@class, 'jobCard__content')]/h4
-${body_job_location}        xpath://div[contains(@class, 'jobCard__content')]/span[not(contains(@class, 'secondary'))]
-${body_job_description}     xpath://div[contains(@class, 'description')]
-${body_job_industry}        xpath://div[contains(@class, 'description')]/span[1]
-${body_job_type}            xpath://div[contains(@class, 'description')]/span[2]
-${body_job_daycount}        xpath://div[@class='ant-col ant-col-14']
-${body_job_easy_apply}      xpath://div[contains(@class, 'easyApply')]
+${body_logo}                //img[contains(@class, 'jobCard__image')]
+${body_company_name}        //div[contains(@class, 'jobCard__content')]/span[contains(@class, 'secondary')]
+${body_job_title}           //div[contains(@class, 'jobCard__content')]/h4
+${body_job_location}        //div[contains(@class, 'jobCard__content')]/span[not(contains(@class, 'secondary'))]
+${body_job_description}     //div[contains(@class, 'description')]
+${body_job_industry}        //div[contains(@class, 'description')]/span[1]
+${body_job_type}            //div[contains(@class, 'description')]/span[2]
+${body_job_daycount}        //div[@class='ant-col ant-col-14']
+${body_job_easy_apply}      //div[contains(@class, 'easyApply')]
+${body_cards_containers}    ${body_logo}        ${body_company_name}    ${body_job_title}   ${body_job_location}    ${body_job_description}     ${body_job_industry}    ${body_job_type}    ${body_job_daycount}    ${body_job_easy_apply}
 
 # Pagination Section
-${page_previous}        xpath://li[@title='Previous Page']
-${page_next}        xpath://li[@title='Next Page']
+${page_previous}            xpath://li[@title='Previous Page']
+${page_next}                xpath://li[@title='Next Page']
 @{page_arrow}   ${page_next}    ${page_previous}
-${page_container}   xpath://li[contains(@class, 'ant-pagination-item')]
+${page_container}           xpath://li[contains(@class, 'ant-pagination-item')]
 
 
 *** Keywords ***
@@ -60,3 +61,12 @@ Retrieve all pages locator
 	    Append To List    ${pages}      ${current_index}
 	END
 	[Return]    ${pages}
+
+Retrieve job card component
+	[Arguments]    ${card_index}    @{card_elements}
+    ${card_data}=    Create Dictionary
+    FOR    ${element}    IN    @{card_elements}
+        ${element_value}=    Convert To String    xpath:(${element})[${card_index}]
+        Set To Dictionary    ${card_data}    ${element}=${element_value}
+    END
+    [Return]    ${card_data}
