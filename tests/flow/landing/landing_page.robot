@@ -1,16 +1,17 @@
 *** Settings ***
 
 Resource    ../resources/setting.resource
-Resource    ../resources/customer/public/landing_page.resource
-Resource    ../resources/customer/login/login.resource
+Resource    ../resources/persona/customer/public/landing_page.resource
+Resource    ../resources/persona/customer/login/login.resource
 Library    DateTime
 
 *** Keywords ***
-${date}= Get Current Date
+${DATE}=    Get Current Date
 
 *** Test Cases ***
 
 Landing Page
+    Open Browser
     Wait Until Element Is Visible    xpath:/html/body/div[2]/div/div[2]/div/div[2]/div
     Wait Until Element Is Enabled    xpath:/html/body/div[2]/div/div[2]/div/div[2]/button
     Click Element   xpath:/html/body/div[2]/div/div[2]/div/div[2]/button
@@ -118,7 +119,7 @@ Dashboard - Resume Saya
     Click Element    //*[@id="__next"]/section/header/div[2]/ul/li[3]/span/a
 
 Jobs - List
-    #FIND JOB
+    #FIND job
     Wait Until Element Is Visible    //*[@id="keyword"]
     Click Element    //*[@id="keyword"]
     Input Text    //*[@id="keyword"]    QA GMT 2

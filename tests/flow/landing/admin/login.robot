@@ -1,11 +1,12 @@
 *** Settings ***
 
-Resource    ../../resources/setting.resource
-Resource    ../../resources/admin/variable_admin.resource
-Resource    ../../resources/admin/element_admin.resource
+Resource    ../../../resources/setting.resource
+Resource    ../../../resources/persona/admin/variable_admin.resource
+Resource    ../../../resources/persona/admin/element_admin.resource
 
 *** Test Cases ***
 Open Login page
+	Open Browser
     Wait Until Element Contains    xpath://*[@id="__next"]/div/div[2]/div/div/h3    ${ADMIN_TEXT_PAGE}
     # Page Should Contain    ${ADMIN_TEXT_PAGE}
     Wait Until Element Is Enabled    ${ADMIN_FIELD_EMAIL}
