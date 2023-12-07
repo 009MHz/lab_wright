@@ -1,5 +1,7 @@
 *** Settings ***
 Library        SeleniumLibrary
+Library    String
+Library    Collections
 
 *** Variables ***
 # Filter section
@@ -29,3 +31,9 @@ ${sorter_date_desc}         xpath://div[@title='Tanggal Dibuat (Z to A)']
 ${sorter_name_asc}          xpath://div[@title='Nama (A to Z)']
 ${sorter_name_desc}         xpath://div[@title='Nama (Z to A)']
 @{sort_options}     ${sorter_date_asc}     ${sorter_date_desc}    ${sorter_name_asc}     ${sorter_name_desc}
+
+# Pagination Section
+${page_previous}        xpath://li[@title='Previous Page']
+${page_next}        xpath://li[@title='Next Page']
+@{page_arrow}   ${page_next}    ${page_previous}
+${page_container}   xpath://li[contains(@class, 'ant-pagination-item')]
