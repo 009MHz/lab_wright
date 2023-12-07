@@ -63,10 +63,29 @@ Retrieve all pages locator
 	[Return]    ${pages}
 
 Retrieve job card component
-	[Arguments]    ${card_index}    @{card_elements}
-    ${card_data}=    Create Dictionary
-    FOR    ${element}    IN    @{card_elements}
-        ${element_value}=    Convert To String    xpath:(${element})[${card_index}]
-        Set To Dictionary    ${card_data}    ${element}=${element_value}
+    ${card_index}=        Get Element Count    ${body_cards}
+    ${card_data}=        Create List
+    FOR    ${counter}    IN RANGE    ${card_index}
+        ${current_card}=        Create Dictionary
+        ${card_logo}=           Convert To String    xpath:(${body_logo})[${counter+1}]
+        ${card_company}=        Convert To String    xpath:(${body_company_name})[${counter+1}]
+        ${card_title}=          Convert To String    xpath:(${body_job_title})[${counter+1}]
+        ${card_location}=       Convert To String    xpath:(${body_job_location})[${counter+1}]
+        ${card_description}=    Convert To String    xpath:(${body_job_description})[${counter+1}]
+        ${card_industry}=       Convert To String    xpath:(${body_job_industry})[${counter+1}]
+        ${card_type}=           Convert To String    xpath:(${body_job_type})[${counter+1}]
+        ${card_daycount}=       Convert To String    xpath:(${body_job_daycount})[${counter+1}]
+        ${card_easy_apply}=     Convert To String    xpath:(${body_job_easy_apply})[${counter+1}]
+
+        Set To Dictionary    ${current_card}    logo=${card_logo}
+        Set To Dictionary    ${current_card}    company=${card_company}
+        Set To Dictionary    ${current_card}    title=${card_title}
+        Set To Dictionary    ${current_card}    location=${card_location}
+        Set To Dictionary    ${current_card}    description=${card_description}
+        Set To Dictionary    ${current_card}    industry=${card_industry}
+        Set To Dictionary    ${current_card}    type=${card_type}
+        Set To Dictionary    ${current_card}    daycount=${card_daycount}
+        Set To Dictionary    ${current_card}    easy_apply=${card_easy_apply}
+        Append To List      ${card_data}    ${current_card}
     END
     [Return]    ${card_data}
