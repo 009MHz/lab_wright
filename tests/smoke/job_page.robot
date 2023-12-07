@@ -48,27 +48,11 @@ Validate pagination element
 	    Wait Until Keyword Succeeds    3s    2    Click Element    ${element}
 	END
 
-Validate job list content
-	${cards_count}=     Get Element Count    ${body_cards}
-	FOR    ${counter}    IN RANGE    ${cards_count}
-	    ${card_logo}=           Convert To String    xpath:(${body_logo})[${counter+1}]
-	    ${card_company}=        Convert To String    xpath:(${body_company_name})[${counter+1}]
-	    ${card_title}=          Convert To String    xpath:(${body_job_title})[${counter+1}]
-	    ${card_location}=       Convert To String    xpath:(${body_job_location})[${counter+1}]
-	    ${card_description}=    Convert To String    xpath:(${body_job_description})[${counter+1}]
-	    ${card_industry}=       Convert To String    xpath:(${body_job_industry})[${counter+1}]
-	    ${card_type}=           Convert To String    xpath:(${body_job_type})[${counter+1}]
-	    ${card_daycount}=       Convert To String    xpath:(${body_job_daycount})[${counter+1}]
-	    ${card_easy_apply}=     Convert To String    xpath:(${body_job_easy_apply})[${counter+1}]
-
-	    Wait Until Element Is Visible    ${card_logo}
-	    Wait Until Element Is Visible    ${card_company}
-	    Wait Until Element Is Visible    ${card_title}
-	    Wait Until Element Is Visible    ${card_location}
-	    Wait Until Element Is Visible    ${card_description}
-	    Wait Until Element Is Visible    ${card_industry}
-	    Wait Until Element Is Visible    ${card_type}
-	    Wait Until Element Is Visible    ${card_daycount}
-	    Wait Until Element Is Visible    ${card_easy_apply}
-	    Wait Until Keyword Succeeds    3s    2    Click Element    ${card_easy_apply}
-	END
+Validate body job card component
+	[Tags]      Smoke Test      Job Carousel
+    ${card_data}=    Retrieve job card component
+    IF    ${card_data}!=[]
+        Check job card    ${card_data}
+    ELSE
+        Fail   Unable to fetching the valid data
+    END
