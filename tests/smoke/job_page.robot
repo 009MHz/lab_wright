@@ -2,10 +2,10 @@
 Resource        ../../resources/job/list_job.resource
 Resource        ../browser.resource
 Test Teardown   Close Browser
+Test Setup      Open Page    staging    job    headless=False
 
 *** Test Cases ***
 Validate filter section
-    Open Page    job    staging    headless=True
     # Main Filter button
     FOR    ${btn}    IN    @{btn_filters}
         Wait Until Keyword Succeeds    3    5s    Element Should Be Visible    ${btn}
@@ -19,11 +19,10 @@ Validate filter section
     # Filter Checkboxes
     FOR    ${checkbox}    IN    @{checkboxes}
         Wait Until Element Is Enabled       ${checkbox}
-        Wait Until Keyword Succeeds    2    3s    Click Element    ${checkbox}
+        Wait Until Keyword Succeeds    3s    2    Click Element    ${checkbox}
     END
 
 Validate Sort Controller
-	Open Page    job    staging     headless=True
 	Wait Until Element Is Visible    ${sort_control}
     FOR    ${opt}    IN    @{sort_options}
         Click Element    ${sort_control}
