@@ -12,8 +12,8 @@ ${btn_MSIB}                 xpath:(//button[contains(@class, 'jobFilter')])[2]
 ${textbox_position}         name:keyword
 ${textbox_company}          name:company_industries
 ${textbox_location}         name:locations
-
 @{text_boxes}   ${textbox_position}     ${textbox_company}      ${textbox_location}
+
 ${checkbox_full}            xpath://input[@value='Full-Time']
 ${checkbox_part}            xpath://input[@value='Part-Time']
 ${checkbox_intern}          xpath://input[@value='Internship']
@@ -32,6 +32,18 @@ ${sorter_name_asc}          xpath://div[@title='Nama (A to Z)']
 ${sorter_name_desc}         xpath://div[@title='Nama (Z to A)']
 @{sort_options}     ${sorter_date_asc}     ${sorter_date_desc}    ${sorter_name_asc}     ${sorter_name_desc}
 
+# Page Body
+${body_cards}               xpath://div[contains(@class, 'jobCard__41hUw')]
+${body_logo}                xpath://img[contains(@class, 'jobCard__image')]
+${body_company_name}        xpath://div[contains(@class, 'jobCard__content')]/span[contains(@class, 'secondary')]
+${body_job_title}           xpath://div[contains(@class, 'jobCard__content')]/h4
+${body_job_location}        xpath://div[contains(@class, 'jobCard__content')]/span[not(contains(@class, 'secondary'))]
+${body_job_description}     xpath://div[contains(@class, 'description')]
+${body_job_industry}        xpath://div[contains(@class, 'description')]/span[1]
+${body_job_type}            xpath://div[contains(@class, 'description')]/span[2]
+${body_job_daycount}        xpath://div[@class='ant-col ant-col-14']
+${body_job_easy_apply}      xpath://div[contains(@class, 'easyApply')]
+
 # Pagination Section
 ${page_previous}        xpath://li[@title='Previous Page']
 ${page_next}        xpath://li[@title='Next Page']
@@ -41,10 +53,10 @@ ${page_container}   xpath://li[contains(@class, 'ant-pagination-item')]
 
 *** Keywords ***
 Retrieve all pages locator
-	${total_pages}=     Get Element Count    ${page_container}
+	${total_pages}=     Get Element Count    locator
 	${pages}=   Create List
 	FOR    ${counter}    IN RANGE    ${total_pages}
-	    ${current_index}=    Convert To Lower Case   xpath:(//li[contains(@class, 'ant-pagination-item')])[${counter+1}]
+	    ${current_index}=    Convert To String   xpath:(//li[contains(@class, 'ant-pagination-item')])[${counter+1}]
 	    Append To List    ${pages}      ${current_index}
 	END
 	[Return]    ${pages}
