@@ -89,3 +89,18 @@ Retrieve job card component
         Append To List      ${card_data}    ${current_card}
     END
     [Return]            ${card_data}
+
+Check job card
+	[Arguments]        ${source}
+    FOR  ${item}    IN      @{source}
+        Wait Until Element Is Visible    ${item["logo"]}
+        Wait Until Element Is Visible    ${item["company"]}
+        Wait Until Element Is Visible    ${item["title"]}
+        Wait Until Element Is Visible    ${item["location"]}
+        Wait Until Element Is Visible    ${item["description"]}
+        Wait Until Element Is Visible    ${item["industry"]}
+        Wait Until Element Is Visible    ${item["type"]}
+        Wait Until Element Is Visible    ${item["daycount"]}
+        Wait Until Element Is Visible    ${item["easy_apply"]}
+        Wait Until Keyword Succeeds    5s    2    Click Element    ${item["easy_apply"]}
+    END
