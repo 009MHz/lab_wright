@@ -44,20 +44,10 @@ ${apply_title}              xpath://h4[normalize-space()='Lamar posisi ini?']
 ${apply_button}             xpath://button[contains(@class, 'apply')]
 
 
-
-
-
-
-
 *** Keywords ***
 Open Tested Page
 	Open Browser    ${URL}      chrome
 	Maximize Browser Window
-
-Calculate element total
-	[Arguments]     ${path}
-	${total}=   Get Element Count    ${path}
-	Log    ${total}
 
 Locators to list
 	[Arguments]     ${identical_locator}
