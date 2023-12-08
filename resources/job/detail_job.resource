@@ -46,7 +46,7 @@ ${apply_button}             xpath://button[contains(@class, 'apply')]
 
 *** Keywords ***
 Open Tested Page
-	Open Browser    ${URL}      chrome
+	Open Browser    ${URL}      headlesschrome
 	Maximize Browser Window
 
 Locators to list
