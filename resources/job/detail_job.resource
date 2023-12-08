@@ -10,7 +10,7 @@ ${nav_back}         class:BackNavigation_breadcrumbs__FZwHF
 # Company Detail Section
 ${comp_deadline_top}        xpath:(//span[contains(@class, 'deadline')])[1]
 ${comp_image}               class:ant-image-img
-${comp_name_small}           xpath:(//span[@class='ant-typography'])[1] 
+${comp_name_small}          xpath:(//span[@class='ant-typography'])[1]
 ${comp_job_title}           xpath:(//h4[@class='ant-typography'])[2]
 ${comp_badge_msib}          class:JobDetail_jobDetail__chip__v7Ytc
 ${comp_badge_location}      xpath:(//span[contains(@class, 'chip')])[1]
@@ -24,20 +24,20 @@ ${desc_tag_wrapper}         xpath:(//div[contains(@class, 'horizontal')])[4]
 ${desc_tag_index}           //a[contains(@href, '/job?tags')]
 
 # Job Footer Section
-${foot_title}             xpath://h4[normalize-space()='Informasi Perusahaan']
-${foot_wrapper}           xpath://div[contains(@class, 'jobInfo')]
-${foot_company}        xpath:(//span[@class='ant-typography'])[2]
-${foot_location}        xpath:(//span[@class='ant-typography'])[3]
-${foot_industry}        xpath:(//span[@class='ant-typography'])[4]
-${foot_linkedin}        xpath:(//span[@class='ant-typography'])[5]
-${foot_employee}        xpath:(//span[@class='ant-typography'])[6]
-${foot_site}        xpath:(//span[@class='ant-typography'])[7]
+${foot_title}               xpath://h4[normalize-space()='Informasi Perusahaan']
+${foot_wrapper}             xpath://div[contains(@class, 'jobInfo')]
+${foot_company}             xpath:(//span[@class='ant-typography'])[2]
+${foot_location}            xpath:(//span[@class='ant-typography'])[3]
+${foot_industry}            xpath:(//span[@class='ant-typography'])[4]
+${foot_linkedin}            xpath:(//span[@class='ant-typography'])[5]
+${foot_employee}            xpath:(//span[@class='ant-typography'])[6]
+${foot_site}                xpath:(//span[@class='ant-typography'])[7]
 @{foot_url}        ${foot_linkedin}    ${foot_site}
 
 # Job Detail Apply
-${apply_wraper}        class:JobDetail_jobDetail__card__xiqli
-${apply_title}        xpath://h4[normalize-space()='Lamar posisi ini?']
-${apply_button}        xpath://button[contains(@class, 'apply')]
+${apply_wraper}             class:JobDetail_jobDetail__card__xiqli
+${apply_title}              xpath://h4[normalize-space()='Lamar posisi ini?']
+${apply_button}             xpath://button[contains(@class, 'apply')]
 
 
 
