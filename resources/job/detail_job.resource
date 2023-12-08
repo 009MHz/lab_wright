@@ -17,6 +17,8 @@ ${comp_badge_location}      xpath:(//span[contains(@class, 'chip')])[1]
 ${comp_badge_industry}      xpath:(//span[contains(@class, 'chip')])[2]
 ${comp_badge_type}          xpath:(//span[contains(@class, 'chip')])[3]
 ${comp_deadline_bottom}     xpath:(//span[contains(@class, 'deadline')])[2]
+@{comp_visual}      ${comp_deadline_top}    ${comp_image}   ${comp_name_small}  ${comp_job_title}   ${comp_badge_msib}  ${comp_badge_location}  ${comp_badge_industry}  ${comp_badge_type}  ${comp_deadline_bottom}
+@{comp_text}    ${comp_job_title}   ${comp_name_small}  ${comp_badge_location}  ${comp_badge_industry}  ${comp_badge_type}
 
 # Job Description section
 ${desc_title}               xpath://h4[normalize-space()='Deskripsi Pekerjaan']
@@ -33,11 +35,16 @@ ${foot_linkedin}            xpath:(//span[@class='ant-typography'])[5]
 ${foot_employee}            xpath:(//span[@class='ant-typography'])[6]
 ${foot_site}                xpath:(//span[@class='ant-typography'])[7]
 @{foot_url}        ${foot_linkedin}    ${foot_site}
+@{foot_visual}  ${foot_title}   ${foot_wrapper}     ${foot_company}     ${foot_location}    ${foot_industry}    ${foot_linkedin}    ${foot_employee}    ${foot_site}
+@{foot_text}    ${foot_company}     ${foot_location}    ${foot_industry}    ${foot_employee}
 
 # Job Detail Apply
 ${apply_wraper}             class:JobDetail_jobDetail__card__xiqli
 ${apply_title}              xpath://h4[normalize-space()='Lamar posisi ini?']
 ${apply_button}             xpath://button[contains(@class, 'apply')]
+
+
+
 
 
 
