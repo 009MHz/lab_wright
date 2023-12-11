@@ -1,8 +1,8 @@
 *** Settings ***
 
-Resource    ../../../resources/setting.resource
-Resource    ../../../resources/persona/admin/variable_admin.resource
-Resource    ../../../resources/persona/admin/element_admin.resource
+Resource    ../../resources/setting.resource
+Resource    ../../resources/persona/admin/variable_admin.resource
+Resource    ../../resources/persona/admin/element_admin.resource
 
 *** Test Cases ***
 Open Login page
