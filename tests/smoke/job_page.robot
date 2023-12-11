@@ -1,11 +1,12 @@
 *** Settings ***
 Resource        ../../resources/job/list_job.resource
 Resource        ../browser.resource
+Library        SeleniumLibrary
 Test Teardown   Close Browser
 
 *** Test Cases ***
 Validate filter section
-    Open Page    job    staging    headless=True
+    Open Page    job    staging    headless=False
     # Main Filter button
     FOR    ${btn}    IN    @{btn_filters}
         Wait Until Keyword Succeeds    3    5s    Element Should Be Visible    ${btn}

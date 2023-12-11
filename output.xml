@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.13 on darwin)" generated="20231211 09:18:10.645" rpa="false" schemaversion="3">
+<suite id="s1" name="Resume Builder Page" source="/Users/macbookpro/Documents/Project/karirlab/tests/smoke/resume_builder_page.robot">
+<test id="s1-t1" name="Open Login page" line="9">
+<kw name="Open Page" library="browser">
+<arg>login</arg>
+<arg>staging</arg>
+<arg>headless=False</arg>
+<kw name="Selector Enviro" library="browser">
+<var>${base}</var>
+<arg>${environment}</arg>
+<kw name="Convert To Lower Case" library="String">
+<var>${env}</var>
+<arg>${enviro}</arg>
+<doc>Converts string to lower case.</doc>
+<msg timestamp="20231211 09:18:10.767" level="INFO">${env} = staging</msg>
+<status status="PASS" starttime="20231211 09:18:10.767" endtime="20231211 09:18:10.769"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${selected_enviro}</var>
+<arg>'${env}' == 'prod'</arg>
+<arg>Return From Keyword</arg>
+<arg>${KL_PROD}</arg>
+<arg>ELSE IF</arg>
+<arg>'${env}' == 'staging'</arg>
+<arg>Return From Keyword</arg>
+<arg>${KL_STAGING}</arg>
+<arg>ELSE IF</arg>
+<arg>'${env}' == 'dev-a'</arg>
+<arg>Return From Keyword</arg>
+<arg>${KL_DEV_A}</arg>
+<arg>ELSE IF</arg>
+<arg>'${env}' == 'dev-b'</arg>
+<arg>Return From Keyword</arg>
+<arg>${KL_DEV_B}</arg>
+<arg>ELSE IF</arg>
+<arg>'${env}' == 'dev-c'</arg>
+<arg>Return From Keyword</arg>
+<arg>${KL_DEV_C}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Return From Keyword" library="BuiltIn">
+<arg>${KL_STAGING}</arg>
+<doc>Returns from the enclosing user keyword.</doc>
+<msg timestamp="20231211 09:18:10.771" level="INFO">Returning from the enclosing user keyword.</msg>
+<status status="PASS" starttime="20231211 09:18:10.771" endtime="20231211 09:18:10.772"/>
+</kw>
+<status status="PASS" starttime="20231211 09:18:10.770" endtime="20231211 09:18:10.772"/>
+</kw>
+<msg timestamp="20231211 09:18:10.773" level="INFO">${base} = https://staging.karirlab.co</msg>
+<status status="PASS" starttime="20231211 09:18:10.766" endtime="20231211 09:18:10.773"/>
+</kw>
+<kw name="Selector Page" library="browser">
+<var>${path}</var>
+<arg>${page_name}</arg>
+<kw name="Convert To Lower Case" library="String">
+<var>${page}</var>
+<arg>${base_url}</arg>
+<doc>Converts string to lower case.</doc>
+<msg timestamp="20231211 09:18:10.774" level="INFO">${page} = login</msg>
+<status status="PASS" starttime="20231211 09:18:10.773" endtime="20231211 09:18:10.774"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${selected_page}</var>
+<arg>'${page}' == 'event'</arg>
+<arg>Return From Keyword</arg>
+<arg>${page}/event</arg>
+<arg>ELSE IF</arg>
+<arg>'${page}' == 'job'</arg>
+<arg>Return From Keyword</arg>
+<arg>/job</arg>
+<arg>ELSE IF</arg>
+<arg>'${page}' == 'company'</arg>
+<arg>Return From Keyword</arg>
+<arg>/company</arg>
+<arg>ELSE IF</arg>
+<arg>'${page}' == 'signup'</arg>
+<arg>Return From Keyword</arg>
+<arg>/sign-up</arg>
+<arg>ELSE IF</arg>
+<arg>'${page}' == 'login'</arg>
+<arg>Return From Keyword</arg>
+<arg>/login</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Return From Keyword" library="BuiltIn">
+<arg>/login</arg>
+<doc>Returns from the enclosing user keyword.</doc>
+<msg timestamp="20231211 09:18:10.782" level="INFO">Returning from the enclosing user keyword.</msg>
+<status status="PASS" starttime="20231211 09:18:10.774" endtime="20231211 09:18:10.782"/>
+</kw>
+<status status="PASS" starttime="20231211 09:18:10.774" endtime="20231211 09:18:10.782"/>
+</kw>
+<msg timestamp="20231211 09:18:10.783" level="INFO">${path} = /login</msg>
+<status status="PASS" starttime="20231211 09:18:10.773" endtime="20231211 09:18:10.783"/>
+</kw>
+<kw name="Mode Selector" library="browser">
+<var>${used_browser}</var>
+<arg>${headless}</arg>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${selected_mode}</var>
+<arg>'${mode}' == 'False'</arg>
+<arg>Return From Keyword</arg>
+<arg>${BROWSER}</arg>
+<arg>ELSE IF</arg>
+<arg>'${mode}' == 'True'</arg>
+<arg>Return From Keyword</arg>
+<arg>headless${BROWSER}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Return From Keyword" library="BuiltIn">
+<arg>${BROWSER}</arg>
+<doc>Returns from the enclosing user keyword.</doc>
+<msg timestamp="20231211 09:18:10.784" level="INFO">Returning from the enclosing user keyword.</msg>
+<status status="PASS" starttime="20231211 09:18:10.784" endtime="20231211 09:18:10.784"/>
+</kw>
+<status status="PASS" starttime="20231211 09:18:10.783" endtime="20231211 09:18:10.784"/>
+</kw>
+<msg timestamp="20231211 09:18:10.785" level="INFO">${used_browser} = chrome</msg>
+<status status="PASS" starttime="20231211 09:18:10.783" endtime="20231211 09:18:10.785"/>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${base}${path}</arg>
+<arg>${used_browser}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20231211 09:18:10.785" level="INFO">Opening browser 'chrome' to base url 'https://staging.karirlab.co/login'.</msg>
+<status status="PASS" starttime="20231211 09:18:10.785" endtime="20231211 09:18:23.148"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20231211 09:18:23.149" endtime="20231211 09:18:28.962"/>
+</kw>
+<status status="PASS" starttime="20231211 09:18:10.765" endtime="20231211 09:18:28.962"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20231211 09:18:28.963" endtime="20231211 09:18:29.040"/>
+</kw>
+<status status="PASS" starttime="20231211 09:18:10.765" endtime="20231211 09:18:29.040"/>
+</test>
+<status status="PASS" starttime="20231211 09:18:10.648" endtime="20231211 09:18:29.041"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Resume Builder Page">Resume Builder Page</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
