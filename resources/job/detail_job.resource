@@ -4,7 +4,7 @@ Library     String
 Library     Collections
 
 *** Variables ***
-${URL}              https://staging.karirlab.co/job/msib-test-status-badges--karirlab
+${URL}              https://staging.karirlab.co/job/automation-msib-test-status-badges--karirlab
 ${nav_back}         class:BackNavigation_breadcrumbs__FZwHF
 
 # Company Detail Section
