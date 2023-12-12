@@ -13,6 +13,14 @@ ${test_URL}                 https://staging.karirlab.co/job/automation-msib-test
 ${nav_back}                 class:BackNavigation_breadcrumbs__FZwHF
 ${page_title}               xpath://h3[@class='ant-typography']
 
+# Resume Section
+${res_title}                css:label[title='Pilih Resume']
+${res_description}          xpath:(//span[contains(@class, 'typography')])[1]
+${res_field}                xpath://div[contains(@name, 'resume_id')]
+${res_field_expand}         class:rc-virtual-list-holder-inner
+${res_field_content}        //div[@class='ant-select-item-option-content']
+${res_create}               xpath://span[contains(@class, 'Resume__link')]
+
 # Job Cards Default State Component
 ${card_image}               xpath://img[@alt='Company thumbnail']
 ${card_top_deadline}        xpath:(//span[contains(@class, 'deadline')])[1]
