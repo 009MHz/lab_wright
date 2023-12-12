@@ -8,7 +8,7 @@ Task Setup      Open Page    staging    job     headless=True
 Validate filter section
     # Main Filter button
     FOR    ${btn}    IN    @{btn_filters}
-        Wait Until Keyword Succeeds    3    5s    Element Should Be Visible    ${btn}
+        Wait Until Keyword Succeeds    2x    3s    Element Should Be Visible    ${btn}
         Click Button                        ${btn}
     END
     # Filter Textboxes
@@ -19,7 +19,7 @@ Validate filter section
     # Filter Checkboxes
     FOR    ${checkbox}    IN    @{checkboxes}
         Wait Until Element Is Enabled       ${checkbox}
-        Wait Until Keyword Succeeds    3s    2    Click Element    ${checkbox}
+        Wait Until Keyword Succeeds    2x    3s    Click Element    ${checkbox}
     END
 
 Validate sort controller
@@ -46,8 +46,4 @@ Validate pagination element
 
 Validate body job card component
     ${card_data}=    Retrieve job card component
-    IF    ${card_data}!=[]
-        Check job card    ${card_data}
-    ELSE
-        Fail   Unable to fetching the valid data
-    END
+    Check job card        ${card_data}

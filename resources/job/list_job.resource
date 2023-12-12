@@ -62,10 +62,15 @@ Retrieve all pages locator
 	END
 	[Return]    ${pages}
 
-Retrieve job card component
-    ${card_index}=        Get Element Count    ${body_cards}
+
+Whole cards counter
+    ${carousel_count}=    Get Element Count    ${body_cards}
+    [Return]        ${carousel_count}
+
+Create all job card locators
+    [Arguments]        ${total_items}
     ${card_data}=        Create List
-    FOR    ${counter}    IN RANGE    ${card_index}
+    FOR    ${counter}    IN RANGE    ${total_items}
         ${current_card}=        Create Dictionary
         ${card_logo}=           Convert To String    xpath:(${body_logo})[${counter+1}]
         ${card_company}=        Convert To String    xpath:(${body_company_name})[${counter+1}]
@@ -89,6 +94,22 @@ Retrieve job card component
         Append To List      ${card_data}    ${current_card}
     END
     [Return]            ${card_data}
+
+Retrieve job card component
+    ${collected_cards}=    Create List
+    FOR    ${attempt}    IN RANGE    4
+        ${counter}=    Whole cards counter
+        IF  ${attempt} > 2
+            Fail    Unable to retrieve the elements after 3 attempts
+        ELSE IF    ${counter} != 0
+            ${collected_cards}=    Create all job card locators    ${counter}
+            Exit For Loop
+        ELSE    
+            Log    Attempt ${attempt + 1} failed. Retrying...    
+        END
+    END
+    [Return]    ${collected_cards}
+
 
 Check job card
 	[Arguments]        ${source}
