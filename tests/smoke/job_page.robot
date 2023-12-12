@@ -1,13 +1,11 @@
 *** Settings ***
 Resource        ../../resources/job/list_job.resource
 Resource        ../browser.resource
-Task Tags       Job Page
 Task Teardown   Close Browser
 Task Setup      Open Page    staging    job     headless=True
 
 *** Test Cases ***
 Validate filter section
-	[Tags]      Smoke Test      Filter
     # Main Filter button
     FOR    ${btn}    IN    @{btn_filters}
         Wait Until Keyword Succeeds    3    5s    Element Should Be Visible    ${btn}
@@ -25,7 +23,6 @@ Validate filter section
     END
 
 Validate sort controller
-	[Tags]      Smoke Test      Sort Controller
 	Wait Until Element Is Visible    ${sort_control}
     FOR    ${opt}    IN    @{sort_options}
         Click Element    ${sort_control}
@@ -35,7 +32,6 @@ Validate sort controller
     END
 
 Validate pagination element
-	[Tags]      Smoke Test      Pagination
 	FOR    ${page_button_arrow}    IN    @{page_arrow}
 	    Wait Until Element Is Visible    ${page_button_arrow}
 	    Wait Until Keyword Succeeds    3s    2    Click Element    ${page_button_arrow}
@@ -49,7 +45,6 @@ Validate pagination element
 	END
 
 Validate body job card component
-	[Tags]      Smoke Test      Job Carousel
     ${card_data}=    Retrieve job card component
     IF    ${card_data}!=[]
         Check job card    ${card_data}

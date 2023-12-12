@@ -1,13 +1,11 @@
 *** Settings ***
 Resource        ../../resources/job/detail_job.resource
 Resource        ../browser.resource
-Task Tags       Job Details     Smoke Test
 Test Setup      Open Tested Page
 Task Teardown   Close Browser
 
 *** Test Cases ***
 Validate breadcrumb component
-	[Tags]      Breadcrumb
 	Wait Until Element Is Enabled           ${nav_back}
 	Element Text Should Be                  ${nav_back}    Kembali ke daftar lowongan
 	Click Element                           ${nav_back}
@@ -15,7 +13,6 @@ Validate breadcrumb component
 	Go Back
 
 Validate company detail section
-	[Tags]      Company Info
 	FOR    ${element}    IN    @{comp_visual}
 	    Wait Until Element Is Visible    ${element}
 	END
@@ -26,7 +23,6 @@ Validate company detail section
 
 
 Validate job description component
-	[Tags]      Job Details
 	Wait Until Element Is Visible           ${desc_title}
 	Wait Until Element Is Visible           ${desc_tag_wrapper}
 	${tags}=    Locators to list            ${desc_tag_index}
