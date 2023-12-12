@@ -37,7 +37,7 @@ Validate pagination element
 	    Wait Until Keyword Succeeds    2x    3s    Click Element    ${page_button_arrow}
 	END
 
-	${page_index}=  Retrieve all pages locator
+	${page_index}=  Collect locators as array
 	FOR    ${element}    IN    @{page_index}
 	    Log    ${element}
 	    Wait Until Element Is Visible    ${element}
