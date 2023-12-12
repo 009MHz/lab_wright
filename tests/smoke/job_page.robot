@@ -34,14 +34,14 @@ Validate sort controller
 Validate pagination element
 	FOR    ${page_button_arrow}    IN    @{page_arrow}
 	    Wait Until Element Is Visible    ${page_button_arrow}
-	    Wait Until Keyword Succeeds    3s    2    Click Element    ${page_button_arrow}
+	    Wait Until Keyword Succeeds    2x    3s    Click Element    ${page_button_arrow}
 	END
 
 	${page_index}=  Retrieve all pages locator
 	FOR    ${element}    IN    @{page_index}
 	    Log    ${element}
 	    Wait Until Element Is Visible    ${element}
-	    Wait Until Keyword Succeeds    3s    2    Click Element    ${element}
+	    Wait Until Keyword Succeeds    2x    3s    Click Element    ${element}
 	END
 
 Validate body job card component
