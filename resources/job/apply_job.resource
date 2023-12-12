@@ -32,33 +32,33 @@ ${card_badge_location}      xpath:(//span[contains(@class, 'chip')])[1]
 ${card_badge_industry}      xpath:(//span[contains(@class, 'chip')])[2]
 ${card_badge_type}          xpath:(//span[contains(@class, 'chip')])[3]
 ${card_arrow_expand}        xpath://div[contains(text(),'Lihat Lebih Banyak')]
-@{card_default_visual}     ${card_image}   ${card_top_deadline}    ${card_easy_apply}  ${card_title}   ${card_badge_msib}  ${card_badge_location}  ${card_badge_industry}  ${card_badge_type}  ${card_arrow_expand}
-@{card_default_text}       ${card_top_deadline}    ${card_easy_apply}  ${card_title}   ${card_badge_location}  ${card_badge_industry}  ${card_badge_type}  ${card_arrow_expand}
+@{card_default_visual}      ${card_image}   ${card_top_deadline}    ${card_easy_apply}  ${card_title}   ${card_badge_msib}  ${card_badge_location}  ${card_badge_industry}  ${card_badge_type}  ${card_arrow_expand}
+@{card_default_text}        ${card_top_deadline}    ${card_easy_apply}  ${card_title}   ${card_badge_location}  ${card_badge_industry}  ${card_badge_type}  ${card_arrow_expand}
 
 ${card_bot_deadline}        xpath:(//span[contains(@class, 'deadline')])[2]
 ${card_description_title}   xpath:(//h4[@class='ant-typography'])[2]
 ${card_tag_wrapper}         xpath://div[contains(@class,'horizontal')])[3]
 ${card_tag_index}           //a[contains(@href, '/job?tags')]
 ${card_arrow_collapse}      xpath://div[contains(@class, 'item') and text()='Lihat Lebih Sedikit']
-@{card_expand_component}       ${card_bot_deadline}    ${card_description_title}   ${card_arrow_collapse}
+@{card_expand_component}    ${card_bot_deadline}    ${card_description_title}   ${card_arrow_collapse}
 
 
 
 
 *** Keywords ***
 Open job apply page
-	Login as admin  staging  login  headless=False
-    Go To    ${test_URL}
+	Login as admin          staging       login     headless=False
+    Go To                   ${test_URL}
 
 Locators to list
-	[Arguments]     ${identical_locator}
-	${total_element}=   Get Element Count     xpath:${identical_locator}
+	[Arguments]             ${identical_locator}
+	${total_element}=       Get Element Count       xpath:${identical_locator}
 	${collected_elements}=  Create List
 	FOR    ${counter}    IN RANGE    ${total_element}
-		${current_locator}=     Convert To String    xpath:(${identical_locator})[${counter+1}]
-		Append To List    ${collected_elements}     ${current_locator}
+		${current_locator}=     Convert To String   xpath:(${identical_locator})[${counter+1}]
+		Append To List      ${collected_elements}   ${current_locator}
 	END
-	[Return]    ${collected_elements}
+	[Return]                ${collected_elements}
 
 Scroll down to the bottom page
-    Execute JavaScript    window.scrollTo(0, document.body.scrollHeight)
+    Execute JavaScript      window.scrollTo(0, document.body.scrollHeight)
