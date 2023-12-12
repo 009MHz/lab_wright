@@ -24,15 +24,15 @@ ${card_badge_location}      xpath:(//span[contains(@class, 'chip')])[1]
 ${card_badge_industry}      xpath:(//span[contains(@class, 'chip')])[2]
 ${card_badge_type}          xpath:(//span[contains(@class, 'chip')])[3]
 ${card_arrow_expand}        xpath://div[contains(text(),'Lihat Lebih Banyak')]
-@{badge_default_visual}     ${card_image}   ${card_top_deadline}    ${card_easy_apply}  ${card_title}   ${card_badge_msib}  ${card_badge_location}  ${card_badge_industry}  ${card_badge_type}  ${card_arrow_expand}
-@{badge_default_text}       ${card_top_deadline}    ${card_easy_apply}  ${card_title}   ${card_badge_location}  ${card_badge_industry}  ${card_badge_type}  ${card_arrow_expand}
+@{card_default_visual}     ${card_image}   ${card_top_deadline}    ${card_easy_apply}  ${card_title}   ${card_badge_msib}  ${card_badge_location}  ${card_badge_industry}  ${card_badge_type}  ${card_arrow_expand}
+@{card_default_text}       ${card_top_deadline}    ${card_easy_apply}  ${card_title}   ${card_badge_location}  ${card_badge_industry}  ${card_badge_type}  ${card_arrow_expand}
 
 ${card_bot_deadline}        xpath:(//span[contains(@class, 'deadline')])[2]
 ${card_description_title}   xpath:(//h4[@class='ant-typography'])[2]
 ${card_tag_wrapper}         xpath://div[contains(@class,'horizontal')])[3]
 ${card_tag_index}           //a[contains(@href, '/job?tags')]
 ${card_arrow_collapse}      xpath://div[contains(@class, 'item') and text()='Lihat Lebih Sedikit']
-${footer}                   xpath://div[contains(@class, 'footer')]
+@{card_expand_component}       ${card_bot_deadline}    ${card_description_title}   ${card_arrow_collapse}
 
 
 
