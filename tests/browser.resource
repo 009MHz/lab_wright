@@ -52,7 +52,8 @@ Login as admin
     ${path}=            Page Selector               ${page_name}
     ${used_browser}=    Mode Selector               ${headless}
 
-    Open Browser        ${base}${path}              ${used_browser}         alias=login_session
+    Open Browser        ${base}${path}              ${used_browser}
+    Maximize Browser Window
     Input Text          ${email_field}              ${LOGIN_ADMIN_EMAIL}
     Input Text          ${password_field}           ${LOGIN_ADMIN_PASSWORD}
     Click Element       ${button_masuk}
