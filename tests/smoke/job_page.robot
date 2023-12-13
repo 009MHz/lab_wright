@@ -1,8 +1,8 @@
 *** Settings ***
 Resource        ../../resources/job/list_job.resource
 Resource        ../browser.resource
-Task Teardown   Close Browser
-Task Setup      Open Page    staging    job     headless=True
+Suite Setup      Open Page    staging    job     headless=True
+Suite Teardown   Close Browser
 
 *** Test Cases ***
 Validate filter section

@@ -1,9 +1,9 @@
 *** Settings ***
 Resource        ../../resources/job/apply_job.resource
 Resource        ../browser.resource
-Library         SeleniumLibrary
-Test Setup      Open job apply page
-Test Teardown   Close Browser
+Suite Setup     Login as admin    staging       login      headless=False
+Test Setup      Go To    ${test_URL}
+Suite Teardown  Close Browser
 
 *** Test Cases ***
 Validate header & job card component
