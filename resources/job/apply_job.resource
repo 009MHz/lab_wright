@@ -48,8 +48,8 @@ ${scr_title}                xpath://h5[@class='ant-typography']
 ${scr_wrapper}              //div[contains(@class, 'screeningQuestion__lGS3L')]
 ${scr_index}                //div[contains(@class, 'InternalContainer')]
 ${scr_pharagraph}           //textarea[@type='text']
-${scr_choices}          //label[contains(@class, 'ant-radio')]
-${scr_checkbox}          //span[@class='ant-checkbox']
+${scr_choices}          //label[contains(@class, 'radio')]
+${scr_checkbox}          //label[contains(@class, 'checkbox')]
 ${scr_upload}          //span[contains(@class, 'upload-btn')]
 
 
@@ -67,11 +67,11 @@ Locators to list
 Scroll down to the bottom page
     Execute JavaScript      window.scrollTo(0, document.body.scrollHeight)
 
-Screening question check
-	Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
+#Screening question check
+#	Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
 
 Validate screening question wrapper
-	${status}=  Run Keyword And Return Status    Screening question check
+	${status}=  Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
 	IF    ${status}==True
 	    Wait Until Page Contains Element    ${scr_title}
 	    Element Text Should Be    ${scr_title}    Pertanyaan Seleksi Awal
@@ -84,7 +84,7 @@ Validate screening question wrapper
 	END
 
 Validate screening questions multiple choice
-	${status}=  Run Keyword And Return Status    Screening question check
+	${status}=  Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
 	IF    ${status}==True
 	    ${elements_radio}=   Locators to list    ${scr_choices}
 	    FOR    ${element}    IN    @{elements_radio}
@@ -96,9 +96,18 @@ Validate screening questions multiple choice
 	    Element Should Not Be Visible    ${scr_index}
 	END
 
-# TODO 2: screening questions checkboxes
 Validate screening questions checkboxes
-	Pass Execution    For Now just to store the keywords
+	${status}=  Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
+	IF    ${status}==True
+	    ${elements_checkbox}=   Locators to list    ${scr_checkbox}
+	    FOR    ${element}    IN    @{elements_checkbox}
+	        Wait Until Element Is Enabled    ${element}
+	        Element Text Should Not Be    ${element}    ${EMPTY}
+	        Wait Until Keyword Succeeds    3x    1s    Click Element    ${element}
+		END
+	ELSE
+	    Element Should Not Be Visible    ${scr_index}
+	END
 
 # TODO 3: screening questions pharagraph
 Validate screening questions pharagraph
