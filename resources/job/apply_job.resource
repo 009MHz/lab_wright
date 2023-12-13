@@ -50,7 +50,10 @@ ${scr_index}                //div[contains(@class, 'InternalContainer')]
 ${scr_pharagraph}           //textarea[@type='text']
 ${scr_choices}          //label[contains(@class, 'radio')]
 ${scr_checkbox}          //label[contains(@class, 'checkbox')]
-${scr_upload}          //span[contains(@class, 'upload-btn')]
+${scr_upload_wrapper}          //span[contains(@class,'upload')]
+${scr_upload_doc}          //input[@accept='.pdf,.doc']
+${scr_upload_data_file}          //input[@accept='.xlsx,.csv']
+${scr_upload_image}          //input[@accept='.jpg,.jpeg,.png']
 
 
 *** Keywords ***
@@ -124,4 +127,30 @@ Validate screening questions paragraph
 
 # TODO 4: screening questions upload file
 Validate screening questions upload file
-	Pass Execution    For Now just to store the keywords
+	${status}=  Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
+	IF    ${status}==True
+	    ${elements_upload_wrapper}=   Locators to list    ${scr_upload_wrapper}
+	    FOR    ${element}    IN    @{elements_upload_wrapper}
+	        Wait Until Element Is Enabled    ${element}
+	        ${type}=    Get Element Attribute    ${element}//input    accept
+	        IF          '${type}'=='.pdf,.doc'
+	            Element Should Contain    ${element}    Format file pdf, doc Max 2MB
+	        ELSE IF     '${type}'=='.xlsx,.csv'
+	            Element Should Contain    ${element}    Format file xlsx, csv Max 2MB
+            ELSE IF     '${type}'=='.jpg,.jpeg,.png'
+	            Element Should Contain    ${element}    Format file jpg, jpeg, png Max 2MB
+            ELSE
+                Fail        Unsupportd file key detected
+	        END
+		END
+		# Todo 1:  Upload document type file
+		${elements_doc}=    Locators to list    ${scr_upload_doc}
+		FOR    ${element}    IN    @{elements_doc}
+		    Log    ${element}
+		END
+		# Todo 2:  Upload data table type file
+		# Todo 4:  Upload image type file
+
+	ELSE
+	    Element Should Not Be Visible    ${scr_index}
+	END
