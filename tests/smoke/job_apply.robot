@@ -54,5 +54,5 @@ Validate screening question
 	Validate screening question wrapper
 	Validate screening questions multiple choice
 	Validate screening questions checkboxes
-	Validate screening questions pharagraph
+	Validate screening questions paragraph
 	Validate screening questions upload file

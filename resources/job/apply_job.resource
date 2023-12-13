@@ -109,9 +109,18 @@ Validate screening questions checkboxes
 	    Element Should Not Be Visible    ${scr_index}
 	END
 
-# TODO 3: screening questions pharagraph
-Validate screening questions pharagraph
-	Pass Execution    For Now just to store the keywords
+Validate screening questions paragraph
+	${status}=  Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
+	IF    ${status}==True
+	    ${elements_pharagraph}=   Locators to list    ${scr_pharagraph}
+	    FOR    ${element}    IN    @{elements_pharagraph}
+	        Wait Until Element Is Enabled    ${element}
+	        Wait Until Keyword Succeeds    3x    1s    Click Element    ${element}
+	        Input Text    ${element}    This text written from robotframework on the element: ${element}
+		END
+	ELSE
+	    Element Should Not Be Visible    ${scr_index}
+	END
 
 # TODO 4: screening questions upload file
 Validate screening questions upload file
