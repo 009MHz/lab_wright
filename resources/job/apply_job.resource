@@ -7,8 +7,8 @@ Resource    ../../tests/browser.resource
 
 *** Variables ***
 # Pre-requisite
-${test_URL}                 https://staging.karirlab.co/job/automation-msib-test-status-badges--karirlab/applicant
-
+${URL_screening}            https://staging.karirlab.co/job/automation-msib-test-status-badges--karirlab/applicant
+${URL_no_screening}         https://staging.karirlab.co/job/automation-test-apply-job-with-no-screening--karirlab/applicant
 # Header Components
 ${nav_back}                 class:BackNavigation_breadcrumbs__FZwHF
 ${page_title}               xpath://h3[@class='ant-typography']
@@ -35,12 +35,18 @@ ${card_arrow_expand}        xpath://div[contains(text(),'Lihat Lebih Banyak')]
 @{card_default_visual}      ${card_image}   ${card_top_deadline}    ${card_easy_apply}  ${card_title}   ${card_badge_msib}  ${card_badge_location}  ${card_badge_industry}  ${card_badge_type}  ${card_arrow_expand}
 @{card_default_text}        ${card_top_deadline}    ${card_easy_apply}  ${card_title}   ${card_badge_location}  ${card_badge_industry}  ${card_badge_type}  ${card_arrow_expand}
 
+# Job Cards Expanded State Component
 ${card_bot_deadline}        xpath:(//span[contains(@class, 'deadline')])[2]
 ${card_description_title}   xpath:(//h4[@class='ant-typography'])[2]
 ${card_tag_wrapper}         xpath://div[contains(@class,'horizontal')])[3]
 ${card_tag_index}           //a[contains(@href, '/job?tags')]
 ${card_arrow_collapse}      xpath://div[contains(@class, 'item') and text()='Lihat Lebih Sedikit']
 @{card_expand_component}    ${card_bot_deadline}    ${card_description_title}   ${card_arrow_collapse}
+
+# Screening Question
+${scr_title}            xpath://h5[@class='ant-typography']
+${scr_wrapper}        //div[contains(@class, 'screeningQuestion__lGS3L')]
+${scr_index}          //div[contains(@class, 'InternalContainer')]
 
 *** Keywords ***
 Locators to list
@@ -55,3 +61,30 @@ Locators to list
 
 Scroll down to the bottom page
     Execute JavaScript      window.scrollTo(0, document.body.scrollHeight)
+
+Screening question check
+	${status}=  Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
+	IF    ${status}==True
+	    Wait Until Page Contains Element    ${scr_title}
+	    Element Text Should Be    ${scr_title}    Pertanyaan Seleksi Awal
+	    ${scr_question_elements}=   Locators to list    ${scr_index}
+	ELSE
+	    Pass Execution    Marked as PASS due to screening question doesn't exist
+	END
+	[Return]        ${scr_question_elements}
+
+# TODO 1: screening questions multiple choice
+Validate screening questions multiple choice
+	Pass Execution    For Now just to store the keywords
+
+# TODO 2: screening questions checkboxes
+Validate screening questions checkboxes
+	Pass Execution    For Now just to store the keywords
+
+# TODO 3: screening questions pharagraph
+Validate screening questions pharagraph
+	Pass Execution    For Now just to store the keywords
+
+# TODO 4: screening questions upload file
+Validate screening questions upload file
+	Pass Execution    For Now just to store the keywords

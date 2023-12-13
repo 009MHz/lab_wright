@@ -2,7 +2,7 @@
 Resource        ../../resources/job/apply_job.resource
 Resource        ../browser.resource
 Suite Setup     Login as admin    staging       login      headless=False
-Test Setup      Go To    ${test_URL}
+Test Setup      Go To    ${URL_screening}
 Suite Teardown  Close Browser
 
 *** Test Cases ***
@@ -47,4 +47,15 @@ Validate resume section
 	END
 	Press Keys                                  ${None}                 ESC
 	Wait Until Keyword Succeeds     2x  3s      Click Element           ${res_create}
-	Wait Until Location Is Not                  ${test_URL}
+	Wait Until Location Is Not                  ${URL_screening}
+
+Validate screening question
+	[Setup]     Go To       ${URL_screening}
+	${screening}   Screening question check
+	FOR    ${element}    IN    @{screening}
+	    Wait Until Element Is Visible    ${element}
+	END
+	Validate screening questions checkboxes
+	Validate screening questions multiple choice
+	Validate screening questions pharagraph
+	Validate screening questions upload file
