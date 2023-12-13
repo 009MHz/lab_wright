@@ -42,14 +42,7 @@ ${card_tag_index}           //a[contains(@href, '/job?tags')]
 ${card_arrow_collapse}      xpath://div[contains(@class, 'item') and text()='Lihat Lebih Sedikit']
 @{card_expand_component}    ${card_bot_deadline}    ${card_description_title}   ${card_arrow_collapse}
 
-
-
-
 *** Keywords ***
-Open job apply page
-	Login as admin          staging       login     headless=False
-    Go To                   ${test_URL}
-
 Locators to list
 	[Arguments]             ${identical_locator}
 	${total_element}=       Get Element Count       xpath:${identical_locator}
