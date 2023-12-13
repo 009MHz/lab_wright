@@ -44,9 +44,14 @@ ${card_arrow_collapse}      xpath://div[contains(@class, 'item') and text()='Lih
 @{card_expand_component}    ${card_bot_deadline}    ${card_description_title}   ${card_arrow_collapse}
 
 # Screening Question
-${scr_title}            xpath://h5[@class='ant-typography']
-${scr_wrapper}        //div[contains(@class, 'screeningQuestion__lGS3L')]
-${scr_index}          //div[contains(@class, 'InternalContainer')]
+${scr_title}                xpath://h5[@class='ant-typography']
+${scr_wrapper}              //div[contains(@class, 'screeningQuestion__lGS3L')]
+${scr_index}                //div[contains(@class, 'InternalContainer')]
+${scr_pharagraph}           //textarea[@type='text']
+${scr_choices}          //label[contains(@class, 'ant-radio')]
+${scr_checkbox}          //span[@class='ant-checkbox']
+${scr_upload}          //span[contains(@class, 'upload-btn')]
+
 
 *** Keywords ***
 Locators to list
@@ -63,19 +68,33 @@ Scroll down to the bottom page
     Execute JavaScript      window.scrollTo(0, document.body.scrollHeight)
 
 Screening question check
-	${status}=  Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
+	Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
+
+Validate screening question wrapper
+	${status}=  Run Keyword And Return Status    Screening question check
 	IF    ${status}==True
 	    Wait Until Page Contains Element    ${scr_title}
 	    Element Text Should Be    ${scr_title}    Pertanyaan Seleksi Awal
 	    ${scr_question_elements}=   Locators to list    ${scr_index}
+	    FOR    ${element}    IN    @{scr_question_elements}
+	        Wait Until Element Is Visible    ${element}
+		END
 	ELSE
-	    Pass Execution    Marked as PASS due to screening question doesn't exist
+	    Element Should Not Be Visible    ${scr_index}
 	END
-	[Return]        ${scr_question_elements}
 
-# TODO 1: screening questions multiple choice
 Validate screening questions multiple choice
-	Pass Execution    For Now just to store the keywords
+	${status}=  Run Keyword And Return Status    Screening question check
+	IF    ${status}==True
+	    ${elements_radio}=   Locators to list    ${scr_choices}
+	    FOR    ${element}    IN    @{elements_radio}
+	        Wait Until Element Is Enabled    ${element}
+	        Element Text Should Not Be    ${element}    ${EMPTY}
+	        Wait Until Keyword Succeeds    3x    1s    Click Element    ${element}
+		END
+	ELSE
+	    Element Should Not Be Visible    ${scr_index}
+	END
 
 # TODO 2: screening questions checkboxes
 Validate screening questions checkboxes

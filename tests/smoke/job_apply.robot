@@ -51,11 +51,8 @@ Validate resume section
 
 Validate screening question
 	[Setup]     Go To       ${URL_screening}
-	${screening}   Screening question check
-	FOR    ${element}    IN    @{screening}
-	    Wait Until Element Is Visible    ${element}
-	END
-	Validate screening questions checkboxes
+	Validate screening question wrapper
 	Validate screening questions multiple choice
+	Validate screening questions checkboxes
 	Validate screening questions pharagraph
 	Validate screening questions upload file
