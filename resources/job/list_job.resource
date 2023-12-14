@@ -33,7 +33,7 @@ ${sorter_name_desc}         xpath://div[@title='Nama (Z to A)']
 @{sort_options}     ${sorter_date_asc}     ${sorter_date_desc}    ${sorter_name_asc}     ${sorter_name_desc}
 
 # Page Body
-${body_cards}               xpath://div[contains(@class, 'jobCard__41hUw')]
+${body_cards}               xpath://div[contains(@class,'md-12')]
 ${body_logo}                //img[contains(@class, 'jobCard__image')]
 ${body_company_name}        //div[contains(@class, 'jobCard__content')]/span[contains(@class, 'secondary')]
 ${body_job_title}           //div[contains(@class, 'jobCard__content')]/h4
