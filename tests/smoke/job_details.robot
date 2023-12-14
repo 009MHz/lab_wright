@@ -35,7 +35,6 @@ Validate job description component
 	END
 
 Validate footer component
-	[Tags]      Company Info
 	FOR    ${element}    IN                 @{foot_visual}
 	    Wait Until Element Is Visible       ${element}
 	END
@@ -51,7 +50,6 @@ Validate footer component
     END
 
 Validate job apply component
-	[Tags]      Job Apply
     Wait Until Element Is Visible           ${apply_wraper}
 	Wait Until Element Is Visible           ${apply_title}
 	Element Text Should Be                  ${apply_title}          Lamar posisi ini?
