@@ -5,14 +5,14 @@ Library     Collections
 
 *** Variables ***
 ${URL}              https://staging.karirlab.co/job/automation-msib-test-status-badges--karirlab
-${nav_back}         class:BackNavigation_breadcrumbs__FZwHF
+${nav_back}         xpath://a[contains(@class, 'BackNavigation')]
 
 # Company Detail Section
 ${comp_deadline_top}        xpath:(//span[contains(@class, 'deadline')])[1]
 ${comp_image}               class:ant-image-img
 ${comp_name_small}          xpath:(//span[@class='ant-typography'])[1]
 ${comp_job_title}           xpath:(//h4[@class='ant-typography'])[2]
-${comp_badge_msib}          class:JobDetail_jobDetail__chip__v7Ytc
+${comp_badge_msib}          xpath://div[contains(@class, 'jobDetail__chip')]
 ${comp_badge_location}      xpath:(//span[contains(@class, 'chip')])[1]
 ${comp_badge_industry}      xpath:(//span[contains(@class, 'chip')])[2]
 ${comp_badge_type}          xpath:(//span[contains(@class, 'chip')])[3]
@@ -39,7 +39,7 @@ ${foot_site}                xpath:(//span[@class='ant-typography'])[7]
 @{foot_text}    ${foot_company}     ${foot_location}    ${foot_industry}    ${foot_employee}
 
 # Job Detail Apply
-${apply_wraper}             class:JobDetail_jobDetail__card__xiqli
+${apply_wraper}             xpath://button[contains(@class, 'applyButton')]
 ${apply_title}              xpath://h4[normalize-space()='Lamar posisi ini?']
 ${apply_button}             xpath://button[contains(@class, 'apply')]
 
