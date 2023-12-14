@@ -10,7 +10,7 @@ Resource    ../../tests/browser.resource
 ${URL_screening}            https://staging.karirlab.co/job/automation-msib-test-status-badges--karirlab/applicant
 ${URL_no_screening}         https://staging.karirlab.co/job/automation-test-apply-job-with-no-screening--karirlab/applicant
 # Header Components
-${nav_back}                 class:BackNavigation_breadcrumbs__FZwHF
+${nav_back}                 xpath://a[contains(@class, 'BackNavigation')]
 ${page_title}               xpath://h3[@class='ant-typography']
 
 # Resume Section
@@ -27,7 +27,7 @@ ${card_top_deadline}        xpath:(//span[contains(@class, 'deadline')])[1]
 ${card_easy_apply}          xpath://span[contains(@class, 'easyApply')]
 ${card_title}               xpath:(//h4[@class='ant-typography'])[1]
 ${card_badge_index}         (//span[contains(@class, 'chip')])
-${card_badge_msib}          class:JobDetail_jobDetail__chip__v7Ytc
+${card_badge_msib}          xpath://div[contains(@class,'jobDetail__chip')]
 ${card_badge_location}      xpath:(//span[contains(@class, 'chip')])[1]
 ${card_badge_industry}      xpath:(//span[contains(@class, 'chip')])[2]
 ${card_badge_type}          xpath:(//span[contains(@class, 'chip')])[3]
@@ -45,7 +45,7 @@ ${card_arrow_collapse}      xpath://div[contains(@class, 'item') and text()='Lih
 
 # Screening Question
 ${scr_title}                xpath://h5[@class='ant-typography']
-${scr_wrapper}              //div[contains(@class, 'screeningQuestion__lGS3L')]
+${scr_wrapper}              //div[contains(@class, 'screeningQuestion')]
 ${scr_index}                //div[contains(@class, 'InternalContainer')]
 ${scr_pharagraph}           //textarea[@type='text']
 ${scr_choices}          //label[contains(@class, 'radio')]
