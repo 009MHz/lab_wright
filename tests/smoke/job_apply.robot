@@ -1,6 +1,5 @@
 *** Settings ***
 Resource        ../../resources/job/apply_job.resource
-Resource        ../browser.resource
 Suite Setup     Login as admin    staging       login      headless=False
 Test Setup      Go To    ${URL_screening}
 Suite Teardown  Close Browser
