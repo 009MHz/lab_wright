@@ -2,13 +2,14 @@
 Library     SeleniumLibrary
 Library     String
 Library     Collections
+Library     OperatingSystem
 Resource    ../persona/admin/variable_admin.resource
 Resource    ../../tests/browser.resource
 
 *** Variables ***
 ${URL_screening}            https://staging.karirlab.co/job/automation-msib-test-status-badges--karirlab/applicant
 ${URL_no_screening}         https://staging.karirlab.co/job/automation-test-apply-job-with-no-screening--karirlab/applicant
-${data_path}                ../test_data/
+${data_path}                ${CURDIR}${/}..${/}test_data/
 
 # Header Components
 ${nav_back}                 xpath://a[contains(@class, 'BackNavigation')]
@@ -71,9 +72,6 @@ Locators to list
 Scroll down to the bottom page
     Execute JavaScript      window.scrollTo(0, document.body.scrollHeight)
 
-#Screening question check
-#	Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
-
 Validate screening question wrapper
 	${status}=  Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
 	IF    ${status}==True
@@ -126,7 +124,6 @@ Validate screening questions paragraph
 	    Element Should Not Be Visible    ${scr_index}
 	END
 
-# TODO 4: screening questions upload file
 Validate screening questions upload file
 	${status}=  Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
 	IF    ${status}==True
@@ -168,11 +165,9 @@ Validate screening questions upload file
 	    Element Should Not Be Visible    ${scr_index}
 	END
 
-	
-
 Inject file
-	[Arguments]            ${locator}        ${file_name}
-	[Documentation]    Requires a valid name with the supported file types(test.csv, ,test.xlsx, test.doc, test.pdf, test.png, test.jpeg)
-    ${path_converter}        Convert To String    ${data_path}${file_name}
-	Log    ${path_converter}
-	Choose File    ${locator}        ${path_converter}
+    [Arguments]            ${locator}        ${file_name}
+    [Documentation]        Requires a valid name with the supported file types(test.csv, test.xlsx, test.doc, test.pdf, test.png, test.jpeg)
+    ${absolute_path}=       Join Path        ${data_path}${file_name}
+    Log    ${absolute_path}
+    Choose File    ${locator}        ${absolute_path}
