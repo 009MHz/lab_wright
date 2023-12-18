@@ -58,7 +58,7 @@ ${scr_upload_data_file}     //input[@accept='.xlsx,.csv']
 ${scr_upload_image}         //input[@accept='.jpg,.jpeg,.png']
 
 # Apply Button
-${apply_btn}        //button[contains(., 'Lamar Sekarang')]
+${apply_btn}                //button[contains(., 'Lamar Sekarang')]
 
 
 *** Keywords ***
@@ -77,10 +77,10 @@ Scroll down to the bottom page
 
 Screening Questions Checker
 	${status}=  Run Keyword And Return Status       Wait Until Page Contains Element    ${scr_wrapper}
-	[Return]    ${status}
+	[Return]                            ${status}
 
 Inject file
-    [Arguments]            ${locator}        ${file_name}
-    [Documentation]        Requires a valid name with the supported file types(test.csv, test.xlsx, test.doc, test.pdf, test.png, test.jpeg)
-    ${absolute_path}=       Join Path        ${data_path}${file_name}
-    Choose File    ${locator}        ${absolute_path}
+    [Arguments]                         ${locator}                  ${file_name}
+    [Documentation]     Requires a valid name with the supported file types(test.csv, test.xlsx, test.doc, test.pdf, test.png, test.jpeg)
+    ${absolute_path}=   Join Path       ${data_path}${file_name}
+    Choose File                         ${locator}                  ${absolute_path}
