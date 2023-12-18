@@ -50,78 +50,78 @@ ${scr_title}                xpath://h5[@class='ant-typography']
 ${scr_wrapper}              //div[contains(@class, 'screeningQuestion')]
 ${scr_index}                //div[contains(@class, 'InternalContainer')]
 ${scr_pharagraph}           //textarea[@type='text']
-${scr_choices}          //label[contains(@class, 'radio')]
-${scr_checkbox}          //label[contains(@class, 'checkbox')]
-${scr_upload_wrapper}          //span[contains(@class,'upload')]
-${scr_upload_doc}          //input[@accept='.pdf,.doc']
-${scr_upload_data_file}          //input[@accept='.xlsx,.csv']
-${scr_upload_image}          //input[@accept='.jpg,.jpeg,.png']
+${scr_choices}              //label[contains(@class, 'radio')]
+${scr_checkbox}             //label[contains(@class, 'checkbox')]
+${scr_upload_wrapper}       //span[contains(@class,'upload')]
+${scr_upload_doc}           //input[@accept='.pdf,.doc']
+${scr_upload_data_file}     //input[@accept='.xlsx,.csv']
+${scr_upload_image}         //input[@accept='.jpg,.jpeg,.png']
 
 
 *** Keywords ***
 Locators to list
-	[Arguments]             ${identical_locator}
-	${total_element}=       Get Element Count       xpath:${identical_locator}
+	[Arguments]                         ${identical_locator}
+	${total_element}=                   Get Element Count           xpath:${identical_locator}
 	${collected_elements}=  Create List
-	FOR    ${counter}    IN RANGE    ${total_element}
-		${current_locator}=     Convert To String   xpath:(${identical_locator})[${counter+1}]
-		Append To List      ${collected_elements}   ${current_locator}
+	FOR    ${counter}    IN RANGE       ${total_element}
+		${current_locator}= Convert To String                       xpath:(${identical_locator})[${counter+1}]
+		Append To List                  ${collected_elements}       ${current_locator}
 	END
-	[Return]                ${collected_elements}
+	[Return]    ${collected_elements}
 
 Scroll down to the bottom page
-    Execute JavaScript      window.scrollTo(0, document.body.scrollHeight)
+    Execute JavaScript                  window.scrollTo(0, document.body.scrollHeight)
 
 Validate screening question wrapper
-	${status}=  Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
+	${status}=  Run Keyword And Return Status       Wait Until Page Contains Element    ${scr_wrapper}
 	IF    ${status}==True
-	    Wait Until Page Contains Element    ${scr_title}
-	    Element Text Should Be    ${scr_title}    Pertanyaan Seleksi Awal
-	    ${scr_question_elements}=   Locators to list    ${scr_index}
-	    FOR    ${element}    IN    @{scr_question_elements}
-	        Wait Until Element Is Visible    ${element}
+	    Wait Until Page Contains Element                            ${scr_title}
+	    Element Text Should Be                                      ${scr_title}        Pertanyaan Seleksi Awal
+	    ${scr_question_elements}=       Locators to list            ${scr_index}
+	    FOR    ${element}    IN         @{scr_question_elements}
+	        Wait Until Element Is Visible                           ${element}
 		END
 	ELSE
-	    Element Should Not Be Visible    ${scr_index}
+	    Element Should Not Be Visible   ${scr_index}
 	END
 
 Validate screening questions multiple choice
-	${status}=  Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
+	${status}=  Run Keyword And Return Status       Wait Until Page Contains Element    ${scr_wrapper}
 	IF    ${status}==True
-	    ${elements_radio}=   Locators to list    ${scr_choices}
-	    FOR    ${element}    IN    @{elements_radio}
-	        Wait Until Element Is Enabled    ${element}
-	        Element Text Should Not Be    ${element}    ${EMPTY}
-	        Wait Until Keyword Succeeds    3x    1s    Click Element    ${element}
+	    ${elements_radio}=  Locators to list        ${scr_choices}
+	    FOR    ${element}    IN         @{elements_radio}
+	        Wait Until Element Is Enabled                           ${element}
+	        Element Text Should Not Be                              ${element}          ${EMPTY}
+	        Wait Until Keyword Succeeds    3x    1s    Click Element                    ${element}
 		END
 	ELSE
-	    Element Should Not Be Visible    ${scr_index}
+	    Element Should Not Be Visible   ${scr_index}
 	END
 
 Validate screening questions checkboxes
-	${status}=  Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
+	${status}=  Run Keyword And Return Status       Wait Until Page Contains Element    ${scr_wrapper}
 	IF    ${status}==True
 	    ${elements_checkbox}=   Locators to list    ${scr_checkbox}
-	    FOR    ${element}    IN    @{elements_checkbox}
-	        Wait Until Element Is Enabled    ${element}
-	        Element Text Should Not Be    ${element}    ${EMPTY}
-	        Wait Until Keyword Succeeds    3x    1s    Click Element    ${element}
+	    FOR    ${element}    IN         @{elements_checkbox}
+	        Wait Until Element Is Enabled                           ${element}
+	        Element Text Should Not Be                              ${element}          ${EMPTY}
+	        Wait Until Keyword Succeeds    3x    1s    Click Element                    ${element}
 		END
 	ELSE
-	    Element Should Not Be Visible    ${scr_index}
+	    Element Should Not Be Visible   ${scr_index}
 	END
 
 Validate screening questions paragraph
-	${status}=  Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
+	${status}=  Run Keyword And Return Status       Wait Until Page Contains Element    ${scr_wrapper}
 	IF    ${status}==True
 	    ${elements_pharagraph}=   Locators to list    ${scr_pharagraph}
-	    FOR    ${element}    IN    @{elements_pharagraph}
-	        Wait Until Element Is Enabled    ${element}
+	    FOR    ${element}    IN         @{elements_pharagraph}
+	        Wait Until Element Is Enabled                           ${element}
 	        Wait Until Keyword Succeeds    3x    1s    Click Element    ${element}
 	        Input Text    ${element}    This text written from robotframework on the element: ${element}
 		END
 	ELSE
-	    Element Should Not Be Visible    ${scr_index}
+	    Element Should Not Be Visible   ${scr_index}
 	END
 
 Validate screening questions upload file
