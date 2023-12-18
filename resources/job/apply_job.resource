@@ -57,6 +57,9 @@ ${scr_upload_doc}           //input[@accept='.pdf,.doc']
 ${scr_upload_data_file}     //input[@accept='.xlsx,.csv']
 ${scr_upload_image}         //input[@accept='.jpg,.jpeg,.png']
 
+# Apply Button
+${apply_btn}        //button[contains(., 'Lamar Sekarang')]
+
 
 *** Keywords ***
 Locators to list
@@ -72,102 +75,12 @@ Locators to list
 Scroll down to the bottom page
     Execute JavaScript                  window.scrollTo(0, document.body.scrollHeight)
 
-Validate screening question wrapper
+Screening Questions Checker
 	${status}=  Run Keyword And Return Status       Wait Until Page Contains Element    ${scr_wrapper}
-	IF    ${status}==True
-	    Wait Until Page Contains Element                            ${scr_title}
-	    Element Text Should Be                                      ${scr_title}        Pertanyaan Seleksi Awal
-	    ${scr_question_elements}=       Locators to list            ${scr_index}
-	    FOR    ${element}    IN         @{scr_question_elements}
-	        Wait Until Element Is Visible                           ${element}
-		END
-	ELSE
-	    Element Should Not Be Visible   ${scr_index}
-	END
-
-Validate screening questions multiple choice
-	${status}=  Run Keyword And Return Status       Wait Until Page Contains Element    ${scr_wrapper}
-	IF    ${status}==True
-	    ${elements_radio}=  Locators to list        ${scr_choices}
-	    FOR    ${element}    IN         @{elements_radio}
-	        Wait Until Element Is Enabled                           ${element}
-	        Element Text Should Not Be                              ${element}          ${EMPTY}
-	        Wait Until Keyword Succeeds    3x    1s    Click Element                    ${element}
-		END
-	ELSE
-	    Element Should Not Be Visible   ${scr_index}
-	END
-
-Validate screening questions checkboxes
-	${status}=  Run Keyword And Return Status       Wait Until Page Contains Element    ${scr_wrapper}
-	IF    ${status}==True
-	    ${elements_checkbox}=   Locators to list    ${scr_checkbox}
-	    FOR    ${element}    IN         @{elements_checkbox}
-	        Wait Until Element Is Enabled                           ${element}
-	        Element Text Should Not Be                              ${element}          ${EMPTY}
-	        Wait Until Keyword Succeeds    3x    1s    Click Element                    ${element}
-		END
-	ELSE
-	    Element Should Not Be Visible   ${scr_index}
-	END
-
-Validate screening questions paragraph
-	${status}=  Run Keyword And Return Status       Wait Until Page Contains Element    ${scr_wrapper}
-	IF    ${status}==True
-	    ${elements_pharagraph}=   Locators to list    ${scr_pharagraph}
-	    FOR    ${element}    IN         @{elements_pharagraph}
-	        Wait Until Element Is Enabled                           ${element}
-	        Wait Until Keyword Succeeds    3x    1s    Click Element    ${element}
-	        Input Text    ${element}    This text written from robotframework on the element: ${element}
-		END
-	ELSE
-	    Element Should Not Be Visible   ${scr_index}
-	END
-
-Validate screening questions upload file
-	${status}=  Run Keyword And Return Status    Wait Until Page Contains Element    ${scr_wrapper}
-	IF    ${status}==True
-	    ${elements_upload_wrapper}=   Locators to list    ${scr_upload_wrapper}
-	    FOR    ${element}    IN    @{elements_upload_wrapper}
-	        Wait Until Element Is Enabled    ${element}
-	        ${type}=    Get Element Attribute    ${element}//input    accept
-	        IF          '${type}'=='.pdf,.doc'
-	            Element Should Contain    ${element}    Format file pdf, doc Max 2MB
-	        ELSE IF     '${type}'=='.xlsx,.csv'
-	            Element Should Contain    ${element}    Format file xlsx, csv Max 2MB
-            ELSE IF     '${type}'=='.jpg,.jpeg,.png'
-	            Element Should Contain    ${element}    Format file jpg, jpeg, png Max 2MB
-            ELSE
-                Fail        Unsupportd file key detected
-	        END
-		END
-		
-		${elements_doc}=    Locators to list    ${scr_upload_doc}
-		FOR    ${element}    IN    @{elements_doc}
-		    Inject file    ${element}    article.pdf
-			Inject file    ${element}    article.doc
-		END
-
-		${elements_table}=    Locators to list    ${scr_upload_data_file}
-		FOR    ${element}    IN    @{elements_table}
-		    Inject file    ${element}    table.csv
-			Inject file    ${element}    table.xlsx
-		END
-
-		${elements_image}=    Locators to list    ${scr_upload_image}
-		FOR    ${element}    IN    @{elements_image}
-		    Inject file    ${element}    images.jpg
-			Inject file    ${element}    images.jpeg
-			Inject file    ${element}    images.png
-		END
-
-	ELSE
-	    Element Should Not Be Visible    ${scr_index}
-	END
+	[Return]    ${status}
 
 Inject file
     [Arguments]            ${locator}        ${file_name}
     [Documentation]        Requires a valid name with the supported file types(test.csv, test.xlsx, test.doc, test.pdf, test.png, test.jpeg)
     ${absolute_path}=       Join Path        ${data_path}${file_name}
-    Log    ${absolute_path}
     Choose File    ${locator}        ${absolute_path}

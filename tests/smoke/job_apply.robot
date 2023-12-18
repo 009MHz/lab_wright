@@ -1,7 +1,7 @@
 *** Settings ***
 Resource        ../../resources/job/apply_job.resource
 Suite Setup     Login as admin    staging       login      headless=False
-Test Setup      Go To    ${URL_screening}
+Task Setup      Go To    ${URL_screening}
 Suite Teardown  Close Browser
 
 *** Test Cases ***
@@ -48,10 +48,113 @@ Validate resume section
 	Wait Until Keyword Succeeds     2x  3s      Click Element           ${res_create}
 	Wait Until Location Is Not                  ${URL_screening}
 
-Validate screening question
+Validate screening question: Existence
+	${status}   Screening Questions Checker
+	IF    ${status} == True
+	    Wait Until Page Contains Element                            ${scr_title}
+	    Element Text Should Be                                      ${scr_title}        Pertanyaan Seleksi Awal
+	    ${scr_question_elements}=       Locators to list            ${scr_index}
+	    FOR    ${element}    IN         @{scr_question_elements}
+	        Wait Until Element Is Visible                           ${element}
+		END
+	ELSE
+	    Element Should Not Be Visible   ${scr_index}
+	    Pass Execution    Screening Questions doesn't exist on the current page
+	END
+
+
+Validate screening questions: Multiple Choice
+	${status}=      Screening Questions Checker
+	IF    ${status} == True
+	    ${elements_radio}=  Locators to list        ${scr_choices}
+	    FOR    ${element}    IN         @{elements_radio}
+	        Wait Until Element Is Enabled                           ${element}
+	        Element Text Should Not Be                              ${element}          ${EMPTY}
+	        Wait Until Keyword Succeeds    3x    1s    Click Element                    ${element}
+		END
+	ELSE
+	    Element Should Not Be Visible   ${scr_index}
+	    Pass Execution    Screening questions with multiple choice doesn't exist on the current page
+	END
+
+Validate screening questions: Checkboxes
+	${status}=      Screening Questions Checker
+	IF    ${status} == True
+	    ${elements_checkbox}=   Locators to list    ${scr_checkbox}
+	    FOR    ${element}    IN         @{elements_checkbox}
+	        Wait Until Element Is Enabled                           ${element}
+	        Element Text Should Not Be                              ${element}          ${EMPTY}
+	        Wait Until Keyword Succeeds    3x    1s    Click Element                    ${element}
+		END
+	ELSE
+	    Element Should Not Be Visible   ${scr_index}
+	    Pass Execution    Screening questions with checkboxes doesn't exist on the current page
+	END
+Validate screening questions: Paragraph
+	${status}=      Screening Questions Checker
+	IF    ${status} == True
+	    ${elements_pharagraph}=   Locators to list    ${scr_pharagraph}
+	    FOR    ${element}    IN         @{elements_pharagraph}
+	        Wait Until Element Is Enabled                           ${element}
+	        Wait Until Keyword Succeeds    3x    1s    Click Element    ${element}
+	        Input Text    ${element}    This text written from robotframework on the element: ${element}
+		END
+	ELSE
+	    Element Should Not Be Visible   ${scr_index}
+	    Pass Execution    Screening questions with paragrapgh doesn't exist on the current page
+	END
+
+Validate screening questions: Upload File
+	${status}=      Screening Questions Checker
+	IF    ${status} == True
+	    ${elements_upload_wrapper}=   Locators to list    ${scr_upload_wrapper}
+	    FOR    ${element}    IN    @{elements_upload_wrapper}
+	        Wait Until Element Is Enabled    ${element}
+	        ${type}=    Get Element Attribute    ${element}//input    accept
+	        IF          '${type}'=='.pdf,.doc'
+	            Element Should Contain    ${element}    Format file pdf, doc Max 2MB
+	        ELSE IF     '${type}'=='.xlsx,.csv'
+	            Element Should Contain    ${element}    Format file xlsx, csv Max 2MB
+            ELSE IF     '${type}'=='.jpg,.jpeg,.png'
+	            Element Should Contain    ${element}    Format file jpg, jpeg, png Max 2MB
+            ELSE
+                Fail        Unsupported file key detected
+	        END
+		END
+	ELSE
+	    Element Should Not Be Visible   ${scr_index}
+	    Pass Execution    Screening questions with upload files doesn't exist on the current page
+	END
+
+Validate screening questions: Injecting File
+	${status}=      Screening Questions Checker
+	IF    ${status} == True
+		${elements_doc}=    Locators to list    ${scr_upload_doc}
+		FOR    ${element}    IN    @{elements_doc}
+		    Inject file    ${element}    article.pdf
+			Inject file    ${element}    article.doc
+		END
+
+		${elements_table}=    Locators to list    ${scr_upload_data_file}
+		FOR    ${element}    IN    @{elements_table}
+		    Inject file    ${element}    table.csv
+			Inject file    ${element}    table.xlsx
+		END
+
+		${elements_image}=    Locators to list    ${scr_upload_image}
+		FOR    ${element}    IN    @{elements_image}
+		    Inject file    ${element}    images.jpg
+			Inject file    ${element}    images.jpeg
+			Inject file    ${element}    images.png
+		END
+	ELSE
+	    Element Should Not Be Visible   ${scr_index}
+	    Pass Execution    Screening questions with upload files doesn't exist on the current page
+	END
+
+Validate apply button
 	[Setup]     Go To       ${URL_screening}
-	Validate screening question wrapper
-	Validate screening questions multiple choice
-	Validate screening questions checkboxes
-	Validate screening questions paragraph
-	Validate screening questions upload file
+	Wait Until Element Is Enabled    ${apply_btn}
+	Element Text Should Be    ${apply_btn}    Lamar Sekarang
+	Wait Until Keyword Succeeds    2x    3s    Click Button    ${apply_btn}
+#	Wait Until Location Is Not    ${URL_screening}
