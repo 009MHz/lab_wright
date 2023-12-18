@@ -6,9 +6,10 @@ Resource    ../persona/admin/variable_admin.resource
 Resource    ../../tests/browser.resource
 
 *** Variables ***
-# Pre-requisite
 ${URL_screening}            https://staging.karirlab.co/job/automation-msib-test-status-badges--karirlab/applicant
 ${URL_no_screening}         https://staging.karirlab.co/job/automation-test-apply-job-with-no-screening--karirlab/applicant
+${data_path}                ../test_data/
+
 # Header Components
 ${nav_back}                 xpath://a[contains(@class, 'BackNavigation')]
 ${page_title}               xpath://h3[@class='ant-typography']
@@ -143,14 +144,35 @@ Validate screening questions upload file
                 Fail        Unsupportd file key detected
 	        END
 		END
-		# Todo 1:  Upload document type file
+		
 		${elements_doc}=    Locators to list    ${scr_upload_doc}
 		FOR    ${element}    IN    @{elements_doc}
-		    Log    ${element}
+		    Inject file    ${element}    article.pdf
+			Inject file    ${element}    article.doc
 		END
-		# Todo 2:  Upload data table type file
-		# Todo 4:  Upload image type file
+
+		${elements_table}=    Locators to list    ${scr_upload_data_file}
+		FOR    ${element}    IN    @{elements_table}
+		    Inject file    ${element}    table.csv
+			Inject file    ${element}    table.xlsx
+		END
+
+		${elements_image}=    Locators to list    ${scr_upload_image}
+		FOR    ${element}    IN    @{elements_image}
+		    Inject file    ${element}    images.jpg
+			Inject file    ${element}    images.jpeg
+			Inject file    ${element}    images.png
+		END
 
 	ELSE
 	    Element Should Not Be Visible    ${scr_index}
 	END
+
+	
+
+Inject file
+	[Arguments]            ${locator}        ${file_name}
+	[Documentation]    Requires a valid name with the supported file types(test.csv, ,test.xlsx, test.doc, test.pdf, test.png, test.jpeg)
+    ${path_converter}        Convert To String    ${data_path}${file_name}
+	Log    ${path_converter}
+	Choose File    ${locator}        ${path_converter}
