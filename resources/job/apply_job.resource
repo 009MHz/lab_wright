@@ -62,9 +62,9 @@ ${scr_upload_image}         //input[@accept='.jpg,.jpeg,.png']
 Locators to list
 	[Arguments]                         ${identical_locator}
 	${total_element}=                   Get Element Count           xpath:${identical_locator}
-	${collected_elements}=  Create List
+	${collected_elements}=              Create List
 	FOR    ${counter}    IN RANGE       ${total_element}
-		${current_locator}= Convert To String                       xpath:(${identical_locator})[${counter+1}]
+		${current_locator}=             Convert To String           xpath:(${identical_locator})[${counter+1}]
 		Append To List                  ${collected_elements}       ${current_locator}
 	END
 	[Return]    ${collected_elements}
