@@ -9,7 +9,7 @@ Resource    ../../tests/browser.resource
 *** Variables ***
 ${URL_screening}            https://staging.karirlab.co/job/automation-msib-test-status-badges--karirlab/applicant
 ${URL_no_screening}         https://staging.karirlab.co/job/automation-test-apply-job-with-no-screening--karirlab/applicant
-${data_path}                ${CURDIR}${/}..${/}test_data/
+${data_path}                ${CURDIR}${/}..${/}..${/}data${/}test_data/
 
 # Header Components
 ${nav_back}                 xpath://a[contains(@class, 'BackNavigation')]
