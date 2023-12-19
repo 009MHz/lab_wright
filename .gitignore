@@ -138,7 +138,7 @@ dist
 .vscode
 
 # Test Report
-#reports/
+reports/
 
 
 # Pycharm Config extension
