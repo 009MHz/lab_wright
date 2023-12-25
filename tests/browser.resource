@@ -6,6 +6,7 @@ Library     Process
 Library     SeleniumLibrary
 Library     RequestsLibrary
 Library     OperatingSystem
+Library     json
 
 *** Variables ***
 ${email_field}      id:username
@@ -45,6 +46,20 @@ Open Page
 
     Open Browser    ${base}${path}    ${used_browser}
     Maximize Browser Window
+
+Get account
+	[Arguments]         ${account_type}
+    ${raw_data}=    Get File    data/account/credentials.json
+    ${json}=        Evaluate    json.loads('''${raw_data}''')
+    ${account}=       Set Variable    ${EMPTY}
+    FOR    ${account}    IN    @{json}
+        FOR    ${credential}    IN    @{account}
+            IF  "${credential}" == "${account_type}"
+                ${account}=   Set Variable    ${account}[${credential}]
+				RETURN  ${account}
+            END
+        END
+    END
 
 Login as admin
 	[Arguments]         ${environment}              ${page_name}=None      ${headless}=True
