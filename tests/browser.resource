@@ -49,7 +49,7 @@ Open Page
 
 Get account
 	[Arguments]         ${account_type}
-    ${raw_data}=    Get File    data/account/credentials.json
+    ${raw_data}=    Get File    ../data/account/credentials.json
     ${json}=        Evaluate    json.loads('''${raw_data}''')
     ${account}=       Set Variable    ${EMPTY}
     FOR    ${account}    IN    @{json}
