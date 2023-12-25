@@ -297,7 +297,8 @@ dmypy.json
 .vscode/
 /test/reports/
 /reports/report.html
-/reports/
+/reports/log.html
+/reports/output.xml
 /reports/assets/style.css
 .vscode/settings.json
 *.pkl
