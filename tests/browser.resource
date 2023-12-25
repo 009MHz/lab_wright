@@ -62,14 +62,15 @@ Get account
     END
 
 Login as admin
-	[Arguments]         ${environment}              ${page_name}=None      ${headless}=True
+	[Arguments]         ${environment}              ${page_name}=None      ${headless}=False
 	${base}=            Environment Selector        ${environment}
     ${path}=            Page Selector               ${page_name}
     ${used_browser}=    Mode Selector               ${headless}
+    ${account}          Get account                 admin
 
     Open Browser        ${base}${path}              ${used_browser}
     Maximize Browser Window
-    Input Text          ${email_field}              ${LOGIN_ADMIN_EMAIL}
-    Input Text          ${password_field}           ${LOGIN_ADMIN_PASSWORD}
+    Input Text          ${email_field}              ${account["email"]}
+    Input Text          ${password_field}           ${account["password"]}
     Click Element       ${button_masuk}
     Wait Until Location Is      https://staging.karirlab.co/dashboard
