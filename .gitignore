@@ -139,6 +139,8 @@ dist
 
 # Test Report
 reports/
+reports
+/reports/
 
 
 # Pycharm Config extension
