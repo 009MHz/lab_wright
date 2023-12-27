@@ -7,7 +7,7 @@ Suite Teardown   Close Browser
 *** Test Cases ***
 Validate breadcrumb component
 	Wait Until Element Is Enabled           ${nav_back}
-	Element Text Should Be                  ${nav_back}             Kembali ke daftar lowongan
+	Element Text Should Be                  ${nav_back}                 Kembali ke daftar lowongan
 	Click Element                           ${nav_back}
 	Wait Until Location Is Not              ${URL}
 	Go Back
@@ -18,8 +18,10 @@ Validate company detail section
 	END
 
 	FOR    ${element}    IN                 @{comp_text}
-	    Element Text Should Not Be          ${element}              ${EMPTY}
+	    Element Text Should Not Be          ${element}                  ${EMPTY}
 	END
+	Element Should Contain                  ${comp_deadline_top}        Batas Pendaftaran
+	Element Should Contain                  ${comp_deadline_bottom}     Diunggah
 
 
 Validate job description component
@@ -34,7 +36,7 @@ Validate job description component
 	    Go Back
 	END
 
-Validate footer component
+Validate tag component
 	FOR    ${element}    IN                 @{foot_visual}
 	    Wait Until Element Is Visible       ${element}
 	END
