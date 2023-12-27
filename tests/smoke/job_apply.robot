@@ -5,12 +5,17 @@ Task Setup      Go To    ${URL_screening}
 Suite Teardown  Close Browser
 
 *** Test Cases ***
-Validate header & job card component
+Validate header section
 	${tag_elements}=    Locators to list        ${card_tag_index}
 	Wait Until Element Is Visible               ${nav_back}
 	Element Text Should Be                      ${nav_back}             Back to Job List
 	Wait Until Element Is Visible               ${page_title}
 	Element Text Should Be                      ${page_title}           Lamar Pekerjaan
+	Click Element    ${nav_back}
+	Wait Until Location Is Not    ${URL_screening}
+	Go Back
+
+Validate job card component
 	FOR    ${element}    IN                     @{card_default_visual}
 	    Wait Until Element Is Visible           ${element}
 	END
@@ -26,9 +31,13 @@ Validate header & job card component
 	END
 
 	Scroll down to the bottom page
+	${tag_elements}     Locators to list    ${card_tag_index}
 	FOR    ${element}    IN                     @{tag_elements}
 	    Wait Until Element Is Visible           ${element}
 	    Element Text Should Not Be              ${element}              ${EMPTY}
+	    Wait Until Keyword Succeeds     3x  5s      Click Element           ${element}
+	    Wait Until Location Is Not              ${URL_screening}
+	    Go Back
 	END
 	Wait Until Keyword Succeeds     3x  5s      Click Element           ${card_arrow_collapse}
 
