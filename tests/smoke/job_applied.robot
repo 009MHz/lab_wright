@@ -9,9 +9,11 @@ Applied job > 60 minutes state: Validate header component
     FOR    ${element}    IN    @{header_visuals}
         Wait Until Element Is Visible                           ${element}
     END
-    Element Text Should Be          ${header_breadcrumb}        Back to Job List
     Element Text Should Be          ${header_title}             Lamar Pekerjaan
     Element Should Contain          ${header_status}            Lamaran kamu telah berhasil terkirim ke
+    Element Text Should Be          ${header_breadcrumb}        Back to Job List
+    Click Element    ${header_breadcrumb}
+    Wait Until Location Is Not              ${URL_applied_job}
 
 Applied job > 60 minutes state: Employers profile component
     FOR    ${element}    IN    @{emp_visuals}
