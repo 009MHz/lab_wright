@@ -9,7 +9,7 @@ Resource    ../../tests/browser.resource
 *** Variables ***
 ${URL_screening}            https://staging.karirlab.co/job/automation-msib-test-status-badges--karirlab/applicant
 ${URL_no_screening}         https://staging.karirlab.co/job/automation-test-apply-job-with-no-screening--karirlab/applicant
-${data_path}                ${CURDIR}${/}..${/}..${/}data${/}test_data/
+${data_path}                ${CURDIR}${/}..${/}..${/}resources${/}data${/}file_upload/
 
 # Header Components
 ${nav_back}                 xpath://a[contains(@class, 'BackNavigation')]
@@ -82,5 +82,5 @@ Screening Questions Checker
 Inject file
     [Arguments]                         ${locator}                  ${file_name}
     [Documentation]     Requires a valid name with the supported file types(test.csv, test.xlsx, test.doc, test.pdf, test.png, test.jpeg)
-    ${absolute_path}=   Join Path       ${data_path}${file_name}
-    Choose File                         ${locator}                  ${absolute_path}
+    ${complete_file_path}=   Join Path       ${data_path}${file_name}
+    Choose File                         ${locator}                  ${complete_file_path}
