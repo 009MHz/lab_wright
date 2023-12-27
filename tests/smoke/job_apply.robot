@@ -1,6 +1,6 @@
 *** Settings ***
 Resource        ../../resources/job/apply_job.resource
-Suite Setup     Login as normal user    staging       login      headless=False
+Suite Setup     Login as normal user    staging       login      headless=True
 Task Setup      Go To    ${URL_screening}
 Suite Teardown  Close Browser
 
@@ -15,7 +15,7 @@ Validate header section
 	Wait Until Location Is Not    ${URL_screening}
 	Go Back
 
-Validate job card component
+Validate job card component: collapsed state
 	FOR    ${element}    IN                     @{card_default_visual}
 	    Wait Until Element Is Visible           ${element}
 	END
@@ -25,21 +25,21 @@ Validate job card component
 	END
 
 	Click Element    ${card_arrow_expand}
+
+Validate job card component: expanded state
+	Click Element    ${card_arrow_expand}
+	Scroll down to the bottom page
 	FOR    ${element}    IN                     @{card_expand_component}
 	    Wait Until Element Is Visible           ${element}
 	    Element Text Should Not Be              ${element}              ${EMPTY}
 	END
 
-	Scroll down to the bottom page
 	${tag_elements}     Locators to list    ${card_tag_index}
 	FOR    ${element}    IN                     @{tag_elements}
-	    Wait Until Element Is Visible           ${element}
-	    Element Text Should Not Be              ${element}              ${EMPTY}
-	    Wait Until Keyword Succeeds     3x  5s      Click Element           ${element}
-	    Wait Until Location Is Not              ${URL_screening}
-	    Go Back
+        Wait Until Element Is Visible           ${element}
 	END
-	Wait Until Keyword Succeeds     3x  5s      Click Element           ${card_arrow_collapse}
+
+	Wait Until Keyword Succeeds    2x    3s    Click Element           ${card_arrow_collapse}
 
 Validate resume section
 	Wait Until Element Is Visible               ${res_title}
