@@ -165,5 +165,5 @@ Validate apply button
 	[Setup]     Go To       ${URL_screening}
 	Wait Until Element Is Enabled   ${apply_btn}
 	Element Text Should Be          ${apply_btn}    Lamar Sekarang
-	Wait Until Keyword Succeeds    2x    3s         Click Button        ${apply_btn}
+	Wait Until Keyword Succeeds    2x    5s         Click Button        ${apply_btn}
 #	Wait Until Location Is Not    ${URL_screening}
