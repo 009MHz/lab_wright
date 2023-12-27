@@ -1,6 +1,6 @@
 *** Settings ***
 Resource        ../../resources/job/applied_job.resource
-Suite Setup     Login as normal user    staging       login      headless=True
+Suite Setup     Login as job applicant    staging       login      headless=True
 Task Setup      Go To    ${URL_applied_job}
 Suite Teardown  Close Browser
 
