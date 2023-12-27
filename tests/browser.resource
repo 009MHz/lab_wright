@@ -94,12 +94,25 @@ Login as normal user
 	${base}=            Environment Selector        ${environment}
     ${path}=            Page Selector               ${page_name}
     ${used_browser}=    Mode Selector               ${headless}
-    ${account}         Get account                 normal
-    Log         ${account}
+    ${account}          Get account                 normal
 
     Open Browser        ${base}${path}              ${used_browser}
     Maximize Browser Window
     Input Text          ${email_field}              ${account['email']}
     Input Text          ${password_field}           ${account['password']}
+    Click Element       ${button_masuk}
+    Wait Until Location Is      https://staging.karirlab.co/dashboard
+
+Login as job applicant
+	[Arguments]         ${environment}              ${page_name}=None      ${headless}=False
+	${base}=            Environment Selector        ${environment}
+    ${path}=            Page Selector               ${page_name}
+    ${used_browser}=    Mode Selector               ${headless}
+    ${account}          Get account                 normal
+
+    Open Browser        ${base}${path}              ${used_browser}
+    Maximize Browser Window
+    Input Text          ${email_field}              siapaboleh5@gmail.com
+    Input Text          ${password_field}           123456
     Click Element       ${button_masuk}
     Wait Until Location Is      https://staging.karirlab.co/dashboard
