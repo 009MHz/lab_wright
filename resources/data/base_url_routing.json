@@ -5,7 +5,7 @@
             {"admin": "https://karirlab.co/admin"}
         ]},
         {"staging": [
-            {"user": "https://staging.karirlab.co/"},
+            {"user": "https://staging.karirlab.co"},
             {"admin": "https://staging.karirlab.co/admin"}
         ]},
         {"dev": [
