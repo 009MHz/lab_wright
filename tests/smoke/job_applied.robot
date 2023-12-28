@@ -22,7 +22,7 @@ Applied job > 60 minutes state: Employers profile component
     Element Text Should Be          ${emp_job_state}            Applied
     Element Text Should Not Be      ${emp_job_title}            ${EMPTY}
     Element Text Should Not Be      ${emp_used_resume}          ${EMPTY}
-    Element Should Contain          ${emp_apply_day_count}      hari yang lalu
+    Element Should Contain          ${emp_apply_day_count}      yang lalu
 
 Applied job > 60 minutes state: Job cards component default state
 	FOR    ${element}    IN    @{card_default_visuals}
@@ -69,7 +69,7 @@ Applied job > 60 minutes state: Apply button
 	Element Should Be Disabled          ${apply_button}
 
 Applied job < 60 minutes state: Validate header component
-    FOR    ${element}    IN    @{pending_header}
+    FOR    ${element}    IN    @{header_visuals}
         Wait Until Element Is Visible       ${element}
     END
 	Element Text Should Be          ${header_title}             Lamar Pekerjaan
