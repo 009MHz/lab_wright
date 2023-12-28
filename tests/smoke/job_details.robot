@@ -57,5 +57,5 @@ Validate job apply component
 	Element Text Should Be                  ${apply_title}          Lamar posisi ini?
 	Wait Until Element Is Enabled           ${apply_button}
 	Element Text Should Be                  ${apply_button}         Lamar Posisi
-	Click Button                            ${apply_button}
+	Wait Until Keyword Succeeds             2x    4s        Click Button        ${apply_button}
 	Wait Until Location Is Not              ${URL}
