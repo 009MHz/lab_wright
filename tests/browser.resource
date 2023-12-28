@@ -10,7 +10,7 @@ Library     json
 *** Variables ***
 ${email_field}      id:username
 ${password_field}   id:password
-${button_masuk}     xpath://button[@type='submit']
+${button_masuk}     //button[@type='submit']
 
 *** Keywords ***
 Get account
@@ -84,5 +84,5 @@ Login with specific role
     Maximize Browser Window
     Input Text          ${email_field}              ${account['email']}
     Input Text          ${password_field}           ${account['password']}
-    Click Element       ${button_masuk}
+    Press Keys    ${None}    ENTER
     Wait Until Location Is      https://staging.karirlab.co/dashboard
