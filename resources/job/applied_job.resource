@@ -10,8 +10,12 @@ ${URL_applied_job}          https://staging.karirlab.co/job/automation-msib-test
 # Header
 ${header_breadcrumb}        //a[contains(@class, 'breadcrumbs')]
 ${header_title}             //h3[contains(., 'Lamar')]
+${header_checkmark}         //span[contains(@class, 'check-circle')]
 ${header_status}            //h5[contains(@class, 'submitted')]
-@{header_visuals}           ${header_breadcrumb}    ${header_title}     ${header_status}
+@{header_visuals}           ${header_breadcrumb}    ${header_title}     ${header_checkmark}     ${header_status}
+
+#Less than 60 minutes
+${pending_countdown}        //div[contains(@class, 'Heading')]//strong
 
 # Employers Profile
 ${emp_logo}                 //img[@alt='company logo']
@@ -44,11 +48,6 @@ ${card_arrow_collapse}      xpath://div[contains(@class, 'item') and text()='Lih
 
 # Apply Button
 ${apply_button}             //button[@type='submit']
-
-#Less than 60 minutes
-${pending_checkmark}        //span[contains(@class, 'check-circle')]
-${pending_countdown}        //div[contains(@class, 'Heading')]//strong
-@{pending_header}    ${header_breadcrumb}    ${header_status}     ${header_status}    ${pending_checkmark}    ${pending_countdown}
 
 *** Keywords ***
 Locators to list
