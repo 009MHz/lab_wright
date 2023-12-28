@@ -45,6 +45,11 @@ ${card_arrow_collapse}      xpath://div[contains(@class, 'item') and text()='Lih
 # Apply Button
 ${apply_button}             //button[@type='submit']
 
+#Less than 60 minutes
+${pending_checkmark}        //span[contains(@class, 'check-circle')]
+${pending_countdown}        //div[contains(@class, 'Heading')]//strong
+@{pending_header}    ${header_breadcrumb}    ${header_status}     ${header_status}    ${pending_checkmark}    ${pending_countdown}
+
 *** Keywords ***
 Locators to list
 	[Arguments]                         ${identical_locator}
