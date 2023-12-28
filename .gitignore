@@ -303,3 +303,6 @@ dmypy.json
 .vscode/settings.json
 *.pkl
 /log/
+
+# ParallelBot runner config
+.pabotsuitenames
