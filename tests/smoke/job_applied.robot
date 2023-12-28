@@ -12,7 +12,7 @@ Applied job > 60 minutes state: Validate header component
     Element Text Should Be          ${header_title}             Lamar Pekerjaan
     Element Should Contain          ${header_status}            Lamaran kamu telah berhasil terkirim ke
     Element Text Should Be          ${header_breadcrumb}        Back to Job List
-    Click Element    ${header_breadcrumb}
+    Wait Until Keyword Succeeds    2x    4s    Click Element    ${header_breadcrumb}
     Wait Until Location Is Not              ${URL_applied_job}
 
 Applied job > 60 minutes state: Employers profile component
@@ -77,5 +77,5 @@ Applied job < 60 minutes state: Validate header component
     Element Should Contain          ${pending_countdown}        Kamu masih bisa mengubah lamaranmu dalam waktu
 	Element Should Contain          ${pending_countdown}        Menit
 	Element Text Should Be          ${header_breadcrumb}        Back to Job List
-    Click Element    ${header_breadcrumb}
+    Wait Until Keyword Succeeds    2x    4s    Click Element    ${header_breadcrumb}
     Wait Until Location Is Not              ${URL_applied_job}
