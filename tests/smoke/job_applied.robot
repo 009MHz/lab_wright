@@ -67,3 +67,15 @@ Applied job > 60 minutes state: Apply button
 	Wait Until Element Is Visible       ${apply_button}
 	Element Should Contain              ${apply_button}         Lamar Sekarang
 	Element Should Be Disabled          ${apply_button}
+
+Applied job < 60 minutes state: Validate header component
+    FOR    ${element}    IN    @{pending_header}
+        Wait Until Element Is Visible       ${element}
+    END
+	Element Text Should Be          ${header_title}             Lamar Pekerjaan
+    Element Should Contain          ${header_status}            Lamaran kamu telah berhasil terkirim ke
+    Element Should Contain          ${pending_countdown}        Kamu masih bisa mengubah lamaranmu dalam waktu
+	Element Should Contain          ${pending_countdown}        Menit
+	Element Text Should Be          ${header_breadcrumb}        Back to Job List
+    Click Element    ${header_breadcrumb}
+    Wait Until Location Is Not              ${URL_applied_job}
