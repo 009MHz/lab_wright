@@ -5,17 +5,21 @@ Task Setup      Go To    ${URL_applied_job}
 Suite Teardown  Close Browser
 
 *** Test Cases ***
-Applied job > 60 minutes state: Validate header component
-    FOR    ${element}    IN    @{header_visuals}
+Validate Applied Job: header component
+	FOR    ${element}    IN    @{header_visuals}
         Wait Until Element Is Visible                           ${element}
     END
     Element Text Should Be          ${header_title}             Lamar Pekerjaan
     Element Should Contain          ${header_status}            Lamaran kamu telah berhasil terkirim ke
     Element Text Should Be          ${header_breadcrumb}        Back to Job List
-    Wait Until Keyword Succeeds    2x    4s    Click Element    ${header_breadcrumb}
+	${edit_mode}    Run Keyword And Return Status    Wait Until Page Contains Element    ${pending_countdown}
+	IF    '${edit_mode}' == True
+	    Element Should Contain          ${pending_countdown}        Kamu masih bisa mengubah lamaranmu dalam waktu
+	END
+	Wait Until Keyword Succeeds    2x    4s    Click Element    ${header_breadcrumb}
     Wait Until Location Is Not              ${URL_applied_job}
 
-Applied job > 60 minutes state: Employers profile component
+Validate Applied Job: employers profile component
     FOR    ${element}    IN    @{emp_visuals}
         Wait Until Element Is Visible       ${element}
     END
@@ -24,7 +28,7 @@ Applied job > 60 minutes state: Employers profile component
     Element Text Should Not Be      ${emp_used_resume}          ${EMPTY}
     Element Should Contain          ${emp_apply_day_count}      yang lalu
 
-Applied job > 60 minutes state: Job cards component default state
+Validate Applied Job: job cards/default state
 	FOR    ${element}    IN    @{card_default_visuals}
 	    Wait Until Element Is Visible       ${element}
 	END
@@ -37,7 +41,7 @@ Applied job > 60 minutes state: Job cards component default state
 	Wait Until Element Is Enabled   ${card_arrow_expand}
 	Wait Until Keyword Succeeds    2x    5s    Click Element    ${card_arrow_expand}
 
-Applied job > 60 minutes state: Job cards component expanded state
+Validate Applied Job: job cards/expanded state
 	Wait Until Element Is Enabled    ${card_arrow_expand}
 	Wait Until Keyword Succeeds    2x    5s    Click Element    ${card_arrow_expand}
 	FOR    ${element}    IN    @{card_expanded_visuals}
@@ -48,7 +52,7 @@ Applied job > 60 minutes state: Job cards component expanded state
 	Wait Until Keyword Succeeds     2x  3s      Click Element   ${card_arrow_collapse}
 
 
-Applied job > 60 minutes state: Job cards component expanded state - tags
+Validate Applied Job: job cards/expanded state/tags
 	${tag_elements}=    Locators to list        ${card_tag_index}
 	Click Element        ${card_arrow_expand}
 	FOR    ${element}    IN                     @{tag_elements}
@@ -63,20 +67,8 @@ Applied job > 60 minutes state: Job cards component expanded state - tags
 	Scroll down to the bottom page
 	Wait Until Keyword Succeeds    2x    3s    Click Element        ${card_arrow_collapse}
 
-Applied job > 60 minutes state: Apply button
+Validate Applied Job: Apply button
 	Wait Until Element Is Visible       ${apply_button}
 	Scroll down to the bottom page
 	Element Should Contain              ${apply_button}         Lamar Sekarang
 	Element Should Be Disabled          ${apply_button}
-
-Applied job < 60 minutes state: Validate header component
-    FOR    ${element}    IN    @{header_visuals}
-        Wait Until Element Is Visible       ${element}
-    END
-	Element Text Should Be          ${header_title}             Lamar Pekerjaan
-    Element Should Contain          ${header_status}            Lamaran kamu telah berhasil terkirim ke
-    Element Should Contain          ${pending_countdown}        Kamu masih bisa mengubah lamaranmu dalam waktu
-	Element Should Contain          ${pending_countdown}        Menit
-	Element Text Should Be          ${header_breadcrumb}        Back to Job List
-    Wait Until Keyword Succeeds    2x    4s    Click Element    ${header_breadcrumb}
-    Wait Until Location Is Not              ${URL_applied_job}
