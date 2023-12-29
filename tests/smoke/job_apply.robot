@@ -40,6 +40,21 @@ Validate job card component: expanded state
 
 	Wait Until Keyword Succeeds    2x    3s    Click Element           ${card_arrow_collapse}
 
+Validate job card component: expanded state/tags
+    [Tags]    robot:skip
+	${tag_elements}=    Locators to list        ${card_tag_index}
+	FOR    ${element}    IN                     @{tag_elements}
+	    Wait Until Keyword Succeeds    2x    4s    Click Element    ${card_arrow_expand}
+		Scroll down into element                ${element}
+		Wait Until Element Is Visible           ${element}
+	    Element Text Should Not Be              ${element}              ${EMPTY}
+		Wait Until Keyword Succeeds     2x	    4s      Click Element       ${element}
+	    Wait Until Location Is Not              ${URL_screening}
+	    Go Back
+	END
+	
+	Wait Until Keyword Succeeds    2x    4s    Click Element           ${card_arrow_collapse}
+
 Validate resume section
 	Wait Until Element Is Visible               ${res_title}
 	Element Should Contain                      ${res_description}      Pilih resume KarirLabmu
