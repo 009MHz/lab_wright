@@ -72,5 +72,12 @@ Locators to list
 	END
 	[Return]    ${collected_elements}
 
-Scroll down to the bottom page
-    Execute JavaScript                  window.scrollTo(0, document.body.scrollHeight)
+Screening Questions Checker
+	${status}=  Run Keyword And Return Status       Wait Until Page Contains Element    ${scr_wrapper}
+	[Return]                            ${status}
+
+Inject file
+    [Arguments]                         ${locator}                  ${file_name}
+    [Documentation]     Requires a valid name with the supported file types(test.csv, test.xlsx, test.doc, test.pdf, test.png, test.jpeg)
+    ${complete_file_path}=   Join Path       ${data_path}${file_name}
+    Choose File                         ${locator}                  ${complete_file_path}
