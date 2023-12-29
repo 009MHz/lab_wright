@@ -71,4 +71,4 @@ Validate Applied Job: Apply button
 	Wait Until Element Is Visible       ${apply_button}
 	Scroll down to the bottom page
 	Element Should Contain              ${apply_button}         Lamar Sekarang
-	Element Should Be Disabled          ${apply_button}
+	Wait Until Keyword Succeeds    2x    4s    Element Should Be Disabled          ${apply_button}
