@@ -30,8 +30,8 @@ Validate job description component
 	${tags}=    Locators to list            ${desc_tag_index}
 	FOR    ${element}    IN    @{tags}
 	    Wait Until Element Is Visible       ${element}
-		Element Text Should Not Be          ${element}              ${EMPTY}
-	    Wait Until Keyword Succeeds    4s    2    Click Element     ${element}
+		Element Text Should Not Be          ${element}	                ${EMPTY}
+	    Wait Until Keyword Succeeds    2x    4s    Click Element	    ${element}
 	    Wait Until Location Is Not          ${URL}
 	    Go Back
 	END

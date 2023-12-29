@@ -55,16 +55,17 @@ Applied job > 60 minutes state: Job cards component expanded state - tags
 	    Scroll down to the bottom page
 	    Wait Until Element Is Visible   ${element}
 	    Element Text Should Not Be      ${element}              ${EMPTY}
-	    Wait Until Keyword Succeeds     2x  3s      Click Element       ${element}
+	    Wait Until Keyword Succeeds     2x	    4s      Click Element       ${element}
 	    Wait Until Location Is Not      ${URL_applied_job}
 	    Go Back
-	    Wait Until Keyword Succeeds    2x    3s    Click Element        ${card_arrow_expand}
+	    Wait Until Keyword Succeeds    2x    4s    Click Element        ${card_arrow_expand}
 	END
 	Scroll down to the bottom page
 	Wait Until Keyword Succeeds    2x    3s    Click Element        ${card_arrow_collapse}
 
 Applied job > 60 minutes state: Apply button
 	Wait Until Element Is Visible       ${apply_button}
+	Scroll down to the bottom page
 	Element Should Contain              ${apply_button}         Lamar Sekarang
 	Element Should Be Disabled          ${apply_button}
 
