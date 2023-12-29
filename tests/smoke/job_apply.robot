@@ -1,6 +1,6 @@
 *** Settings ***
 Resource        ../../resources/job/apply_job.resource
-Suite Setup     Login with specific role    normal    staging       login      headless=True
+Suite Setup     Login with specific role    normal    staging       login      headless=False
 Task Setup      Go To    ${URL_screening}
 Suite Teardown  Close Browser
 
@@ -163,7 +163,8 @@ Validate screening questions: Injecting File
 
 Validate apply button
 	[Setup]     Go To       ${URL_screening}
+	Scroll down to the bottom page
 	Wait Until Element Is Enabled   ${apply_btn}
 	Element Text Should Be          ${apply_btn}    Lamar Sekarang
-	Wait Until Keyword Succeeds    2x    5s         Click Button        ${apply_btn}
+	Wait Until Keyword Succeeds    2x    4s         Click Button        ${apply_btn}
 #	Wait Until Location Is Not    ${URL_screening}
