@@ -5,8 +5,8 @@ Resource    ../../tests/browser.resource
 
 *** Variables ***
 ${URL_applied_job}          https://staging.karirlab.co/job/automation-msib-test-status-badges--karirlab/applicant
+${data_path}                ${CURDIR}${/}..${/}..${/}resources${/}data${/}file_upload/
 
-# More than 60 minutes state
 # Header
 ${header_breadcrumb}        //a[contains(@class, 'breadcrumbs')]
 ${header_title}             //h3[contains(., 'Lamar')]
@@ -45,6 +45,18 @@ ${card_tag_wrapper}         //div[contains(@class,'horizontal')])[3]
 ${card_tag_index}           //a[contains(@href, '/job?tags')]
 ${card_arrow_collapse}      xpath://div[contains(@class, 'item') and text()='Lihat Lebih Sedikit']
 @{card_expanded_visuals}    ${card_bot_deadline}    ${card_description_title}   ${card_arrow_collapse}
+
+# Screening Question
+${scr_title}                //h5[@class='ant-typography']
+${scr_wrapper}              //div[contains(@class, 'screeningQuestion')]
+${scr_index}                //div[contains(@class, 'InternalContainer')]
+${scr_pharagraph}           //textarea[@type='text']
+${scr_choices}              //label[contains(@class, 'radio')]
+${scr_checkbox}             //label[contains(@class, 'checkbox')]
+${scr_upload_wrapper}       //span[contains(@class,'upload')]
+${scr_upload_doc}           //input[@accept='.pdf,.doc']
+${scr_upload_data_file}     //input[@accept='.xlsx,.csv']
+${scr_upload_image}         //input[@accept='.jpg,.jpeg,.png']
 
 # Apply Button
 ${apply_button}             //button[@type='submit']
