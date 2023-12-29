@@ -1,6 +1,6 @@
 *** Settings ***
 Resource        ../../resources/job/applied_job.resource
-Suite Setup     Login with specific role    job_applicant    staging       login      headless=True
+Suite Setup     Login with specific role    job_applicant    staging       login      headless=False
 Task Setup      Go To    ${URL_applied_job}
 Suite Teardown  Close Browser
 
@@ -42,9 +42,9 @@ Validate Applied Job: job cards/default state
 	Wait Until Keyword Succeeds    2x    5s    Click Element    ${card_arrow_expand}
 
 Validate Applied Job: job cards/expanded state
-	Wait Until Element Is Enabled    ${card_arrow_expand}
-	Wait Until Keyword Succeeds    2x    5s    Click Element    ${card_arrow_expand}
+    Click Element    ${card_arrow_expand}	
 	FOR    ${element}    IN    @{card_expanded_visuals}
+	    Scroll down into element            ${element}
 	    Wait Until Element Is Visible       ${element}
 	END
 	Element Should Contain          ${card_bot_deadline}        Diunggah
@@ -56,7 +56,7 @@ Validate Applied Job: job cards/expanded state/tags
 	${tag_elements}=    Locators to list        ${card_tag_index}
 	Click Element        ${card_arrow_expand}
 	FOR    ${element}    IN                     @{tag_elements}
-	    Scroll down to the bottom page
+	    Scroll down into element        ${element}
 	    Wait Until Element Is Visible   ${element}
 	    Element Text Should Not Be      ${element}              ${EMPTY}
 	    Wait Until Keyword Succeeds     2x	    4s      Click Element       ${element}
@@ -64,11 +64,11 @@ Validate Applied Job: job cards/expanded state/tags
 	    Go Back
 	    Wait Until Keyword Succeeds    2x    4s    Click Element        ${card_arrow_expand}
 	END
-	Scroll down to the bottom page
+	Scroll down into element        ${card_arrow_collapse}
 	Wait Until Keyword Succeeds    2x    3s    Click Element        ${card_arrow_collapse}
 
 Validate Applied Job: Apply button
+	Scroll down into element            ${apply_button}
 	Wait Until Element Is Visible       ${apply_button}
-	Scroll down to the bottom page
 	Element Should Contain              ${apply_button}         Lamar Sekarang
 	Wait Until Keyword Succeeds    2x    4s    Element Should Be Disabled          ${apply_button}
