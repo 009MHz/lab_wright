@@ -6,7 +6,6 @@ Suite Teardown  Close Browser
 
 *** Test Cases ***
 Validate header section
-	${tag_elements}=    Locators to list        ${card_tag_index}
 	Wait Until Element Is Visible               ${nav_back}
 	Element Text Should Be                      ${nav_back}             Back to Job List
 	Wait Until Element Is Visible               ${page_title}
