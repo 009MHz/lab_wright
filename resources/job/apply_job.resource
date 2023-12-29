@@ -46,7 +46,7 @@ ${card_arrow_collapse}      xpath://div[contains(@class, 'item') and text()='Lih
 @{card_expand_component}    ${card_bot_deadline}    ${card_description_title}   ${card_arrow_collapse}
 
 # Screening Question
-${scr_title}                xpath://h5[@class='ant-typography']
+${scr_title}                //h5[@class='ant-typography']
 ${scr_wrapper}              //div[contains(@class, 'screeningQuestion')]
 ${scr_index}                //div[contains(@class, 'InternalContainer')]
 ${scr_pharagraph}           //textarea[@type='text']
@@ -84,3 +84,8 @@ Inject file
     [Documentation]     Requires a valid name with the supported file types(test.csv, test.xlsx, test.doc, test.pdf, test.png, test.jpeg)
     ${complete_file_path}=   Join Path       ${data_path}${file_name}
     Choose File                         ${locator}                  ${complete_file_path}
+
+Scroll down into element
+    [Arguments]        ${locator}
+	${y_pos}=        Get Vertical Position        ${locator}
+	Execute Javascript    window.scrollTo(0, ${y_pos})
