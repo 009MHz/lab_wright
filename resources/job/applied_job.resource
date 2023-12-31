@@ -51,10 +51,11 @@ ${card_arrow_collapse}      //span[@class='anticon anticon-up']
 ${scr_title}                //h5[@class='ant-typography']
 ${scr_wrapper}              //div[contains(@class, 'screeningQuestion')]
 ${scr_index_inactive}       //div[contains(@class,'__panel')]
+${scr_inactive_header}      //div[contains(@class, 'header')]
 ${scr_index_active}         //div[contains(@class,'__panel')]
 ${scr_index_nest}           //div[contains(@class, 'formItem')]
 ${scr_pharagraph}           //textarea[@type='text']
-${scr_choices}              //label[contains(@class, 'radio')]
+${scr_choices}              //input[@type='radio']
 ${scr_checkbox}             //label[contains(@class, 'checkbox')]
 ${scr_upload_wrapper}       //span[contains(@class,'upload')]
 ${scr_upload_doc}           //input[@accept='.pdf,.doc']
@@ -93,13 +94,13 @@ Inject file
     ${complete_file_path}=              Join Path                   ${data_path}${file_name}
     Choose File                         ${locator}                  ${complete_file_path}
 
-Scroll down into element
+Scroll into element
     [Arguments]             ${locator}
 	${y_pos}=               Get Vertical Position        ${locator}
 	Execute Javascript      window.scrollTo(0, ${y_pos})
 
 Scrol down into side anchor
-	Scroll down into element    ${apply_button}
+	Scroll into element    ${apply_button}
 	${y_pos}=               Get Vertical Position        ${apply_button}
 	Execute Javascript      window.scrollTo(0, ${y_pos})
-	Sleep    1s
+	Sleep    500ms
