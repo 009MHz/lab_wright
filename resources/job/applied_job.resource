@@ -5,6 +5,7 @@ Resource    ../../tests/browser.resource
 
 *** Variables ***
 ${URL_applied_job}          https://staging.karirlab.co/job/automation-msib-test-status-badges--karirlab/applicant
+${URL_no_screening}         https://staging.karirlab.co/job/automation-test-apply-job-with-no-screening--karirlab
 ${data_path}                ${CURDIR}${/}..${/}..${/}resources${/}data${/}file_upload/
 
 # Header
@@ -36,7 +37,7 @@ ${card_badge_location}       (//span[contains(@class, 'chip')])[1]
 ${card_badge_industry}       (//span[contains(@class, 'chip')])[2]
 ${card_badge_type}           (//span[contains(@class, 'chip')])[3]
 ${card_arrow_expand}         //div[contains(text(),'Lihat Lebih Banyak')]
-@{card_default_visuals}     ${card_deadline_top}    ${card_company_logo}    ${card_easy_apply}  ${card_title}   ${card_badge_msib}  ${card_badge_location}  ${card_badge_industry}  ${card_badge_type}
+@{card_default_visuals}      ${card_deadline_top}    ${card_company_logo}    ${card_easy_apply}  ${card_title}   ${card_badge_msib}  ${card_badge_location}  ${card_badge_industry}  ${card_badge_type}
 
 # Job card Expanded State
 ${card_bot_deadline}        (//span[contains(@class, 'deadline')])[2]
@@ -87,12 +88,6 @@ Edit mode checker
 	...     Edit mode Returns "False": user applied the current job in hase exceeded 60 minutes
 	${edit_state}      Run Keyword And Return Status    Wait Until Page Contains Element    ${pending_countdown}
 	[Return]    ${edit_state}
-
-Inject file
-    [Arguments]                         ${locator}                  ${file_name}
-    [Documentation]     Requires a valid name with the supported file types(test.csv, test.xlsx, test.doc, test.pdf, test.png, test.jpeg)
-    ${complete_file_path}=              Join Path                   ${data_path}${file_name}
-    Choose File                         ${locator}                  ${complete_file_path}
 
 Scroll into element
     [Arguments]             ${locator}
