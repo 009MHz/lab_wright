@@ -114,7 +114,19 @@ Validate Applied Job > 60 minutes: Screening questions response is disabled
     ${status}   Screening questions checker
 	IF    ${status} == True
 		Expand all screening questions
-		# Todo 1: Validate pharagraph type
+
+		# Validate pharagraph type
+		${essay_status}=    Run Keyword And Return Status    Page Should Contain Element    ${scr_pharagraph}
+		IF    ${essay_status} == True
+		    ${elements_pharagraph}=     Locators to list      ${scr_pharagraph}
+		    FOR    ${element}    IN             @{elements_pharagraph}
+		        Scroll into element             ${element}
+		        Element Should Be Disabled      ${element}
+			END
+		ELSE
+			Pass Execution    No essay questions type on this vacancy
+		END
+
 		# Todo 2: Validate multiple choice type
 		# Todo 3: Validate checkboxes type
 		# Todo 4: Validate upload doc type
