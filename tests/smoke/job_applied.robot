@@ -1,6 +1,6 @@
 *** Settings ***
 Resource        ../../resources/job/applied_job.resource
-Suite Setup     Login with specific role    job_applicant    staging       login      headless=True
+Suite Setup     Login with specific role    job_applicant    staging       login      headless=False
 Task Setup      Go To    ${URL_applied_job}
 Suite Teardown  Close Browser
 
@@ -78,7 +78,7 @@ Validate Applied Job: job cards/expanded state/tags
 Validate Applied Job: Apply button
 	${edit_mode}    Edit mode checker
 	Wait Until Element Is Visible           ${apply_button}
-	Scroll down into element                ${apply_button}
+	Scroll into element                     ${apply_button}
 	Element Text Should Be                  ${apply_button}             Lamar Sekarang
 	IF    ${edit_mode} == True
 	    Element Should Be Enabled           ${apply_button}
@@ -93,14 +93,17 @@ Validate Applied Job > 60 minutes: Screening questions existence
 	IF    ${status} == True
 		Wait Until Page Contains Element    ${scr_title}
         Element Text Should Be              ${scr_title}                Pertanyaan Seleksi Awal
-		${edit_mode}    Edit mode checker
-		${scr_question}=               Locators to list                 ${scr_index_active}
+		${scr_question}=    Locators to list    ${scr_index_inactive}
 		FOR    ${element}    IN                 @{scr_question}
 		        ${element_expanded}=    Convert To String               ${element}${scr_index_nest}
+		        ${expand_state}=        Convert To String               ${element}${scr_inactive_header}
 				Wait Until Element Is Visible   ${element}
 				Wait Until Keyword Succeeds    2x    4s    Click Element    ${element}
-				Wait Until Element Is Visible   ${element_expanded}
-				Scroll down into element        ${element_expanded}
+				Element Attribute Value Should Be       ${expand_state}        aria-expanded    true
+				Wait Until Element Is Visible           ${element_expanded}
+				Scroll into element                     ${element_expanded}
+				Wait Until Keyword Succeeds    2x    4s    Click Element    ${expand_state}
+				Element Attribute Value Should Be       ${expand_state}        aria-expanded    false
 		END
 	ELSE
 	    Page Should Not Contain                 ${scr_index_inactive}
