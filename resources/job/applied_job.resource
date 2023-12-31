@@ -97,3 +97,9 @@ Scroll down into element
     [Arguments]             ${locator}
 	${y_pos}=               Get Vertical Position        ${locator}
 	Execute Javascript      window.scrollTo(0, ${y_pos})
+
+Scrol down into side anchor
+	Scroll down into element    ${apply_button}
+	${y_pos}=               Get Vertical Position        ${apply_button}
+	Execute Javascript      window.scrollTo(0, ${y_pos})
+	Sleep    1s
