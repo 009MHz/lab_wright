@@ -1,6 +1,6 @@
 *** Settings ***
 Resource        ../../resources/job/apply_job.resource
-Suite Setup     Login with specific role    normal    staging       login      headless=False
+Suite Setup     Login with specific role    normal    staging       login      headless=True
 Task Setup      Go To    ${URL_screening}
 Suite Teardown  Close Browser
 
@@ -41,19 +41,17 @@ Validate job card component: expanded state
 	Wait Until Keyword Succeeds    2x    3s    Click Element           ${card_arrow_collapse}
 
 Validate job card component: expanded state/tags
-    [Tags]    robot:skip
 	${tag_elements}=    Locators to list        ${card_tag_index}
 	FOR    ${element}    IN                     @{tag_elements}
 	    Wait Until Keyword Succeeds    2x    4s    Click Element    ${card_arrow_expand}
-		Scroll down into element                ${element}
+		Scrol down into side anchor
 		Wait Until Element Is Visible           ${element}
 	    Element Text Should Not Be              ${element}              ${EMPTY}
+		Sleep    300ms
 		Wait Until Keyword Succeeds     2x	    4s      Click Element       ${element}
-	    Wait Until Location Is Not              ${URL_screening}
+		Wait Until Location Is Not              ${URL_screening}
 	    Go Back
 	END
-	
-	Wait Until Keyword Succeeds    2x    4s    Click Element           ${card_arrow_collapse}
 
 Validate resume section
 	Wait Until Element Is Visible               ${res_title}

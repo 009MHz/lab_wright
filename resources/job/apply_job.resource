@@ -3,7 +3,6 @@ Library     SeleniumLibrary
 Library     String
 Library     Collections
 Library     OperatingSystem
-Resource    ../persona/admin/variable_admin.resource
 Resource    ../../tests/browser.resource
 
 *** Variables ***
@@ -85,7 +84,13 @@ Inject file
     ${complete_file_path}=   Join Path       ${data_path}${file_name}
     Choose File                         ${locator}                  ${complete_file_path}
 
-Scroll down into element
-    [Arguments]        ${locator}
-	${y_pos}=        Get Vertical Position        ${locator}
-	Execute Javascript    window.scrollTo(0, ${y_pos})
+Scroll into element
+    [Arguments]             ${locator}
+	${y_pos}=               Get Vertical Position        ${locator}
+	Execute Javascript      window.scrollTo(0, ${y_pos})
+
+Scrol down into side anchor
+	Scroll into element    ${apply_btn}
+	${y_pos}=               Get Vertical Position        ${apply_btn}
+	Execute Javascript      window.scrollTo(0, ${y_pos})
+	Sleep    500ms
