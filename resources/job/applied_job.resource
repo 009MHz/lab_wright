@@ -41,15 +41,18 @@ ${card_arrow_expand}         //div[contains(text(),'Lihat Lebih Banyak')]
 # Job card Expanded State
 ${card_bot_deadline}        (//span[contains(@class, 'deadline')])[2]
 ${card_description_title}   (//h4[@class='ant-typography'])[2]
+${card_expanded_body}       //div[contains(@class, 'jobDetail__wrapper')]
 ${card_tag_wrapper}         //div[contains(@class,'horizontal')])[3]
 ${card_tag_index}           //a[contains(@href, '/job?tags')]
-${card_arrow_collapse}      xpath://div[contains(@class, 'item') and text()='Lihat Lebih Sedikit']
+${card_arrow_collapse}      //span[@class='anticon anticon-up']
 @{card_expanded_visuals}    ${card_bot_deadline}    ${card_description_title}   ${card_arrow_collapse}
 
 # Screening Question
 ${scr_title}                //h5[@class='ant-typography']
 ${scr_wrapper}              //div[contains(@class, 'screeningQuestion')]
-${scr_index}                //div[contains(@class, 'InternalContainer')]
+${scr_index_inactive}       //div[contains(@class,'__panel')]
+${scr_index_active}         //div[contains(@class,'__panel')]
+${scr_index_nest}           //div[contains(@class, 'formItem')]
 ${scr_pharagraph}           //textarea[@type='text']
 ${scr_choices}              //label[contains(@class, 'radio')]
 ${scr_checkbox}             //label[contains(@class, 'checkbox')]
@@ -72,9 +75,17 @@ Locators to list
 	END
 	[Return]    ${collected_elements}
 
-Screening Questions Checker
-	${status}=  Run Keyword And Return Status       Wait Until Page Contains Element    ${scr_wrapper}
-	[Return]                            ${status}
+Screening questions checker
+	[Documentation]     Return boolean value based on the screening questions wrapper existence on the current page
+	${questions_status}    Run Keyword And Return Status       Wait Until Page Contains Element    ${scr_wrapper}
+	[Return]    ${questions_status}
+
+Edit mode checker
+	[Documentation]     Return boolean value based on the job applicant mode based on the current state on the page
+	...     Edit mode Returns "True": user applied the current job in the less than 60 minutes
+	...     Edit mode Returns "False": user applied the current job in hase exceeded 60 minutes
+	${edit_state}      Run Keyword And Return Status    Wait Until Page Contains Element    ${pending_countdown}
+	[Return]    ${edit_state}
 
 Inject file
     [Arguments]                         ${locator}                  ${file_name}
