@@ -109,3 +109,18 @@ Validate Applied Job > 60 minutes: Screening questions existence
 	    Page Should Not Contain                 ${scr_index_inactive}
 	    Pass Execution                          Screening Questions doesn't exist on the current page
 	END
+
+Validate Applied Job > 60 minutes: Screening questions response is disabled
+    ${status}   Screening questions checker
+	IF    ${status} == True
+		Expand all screening questions
+		# Todo 1: Validate pharagraph type
+		# Todo 2: Validate multiple choice type
+		# Todo 3: Validate checkboxes type
+		# Todo 4: Validate upload doc type
+		# Todo 5: Validate upload datafile type
+		# Todo 6: Validate upload image type
+	ELSE
+	    Page Should Not Contain                 ${scr_index_inactive}
+	    Pass Execution                          Screening Questions doesn't exist on the current page
+	END
