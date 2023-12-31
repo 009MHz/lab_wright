@@ -116,12 +116,11 @@ Validate Applied Job > 60 minutes: Screening questions response is disabled
 		Expand all screening questions
 
 		# Validate pharagraph type
-		${essay_status}=    Run Keyword And Return Status    Page Should Contain Element    ${scr_pharagraph}
+		${essay_status}=    Run Keyword And Return Status    Page Should Contain Element    ${scr_paragraph}
 		IF    ${essay_status} == True
-		    ${elements_pharagraph}=     Locators to list      ${scr_pharagraph}
-		    FOR    ${element}    IN             @{elements_pharagraph}
-		        Scroll into element             ${element}
-		        Element Should Be Disabled      ${element}
+		    ${elements_paragraph}=     Locators to list      ${scr_paragraph}
+		    FOR    ${paragraph}    IN           @{elements_paragraph}
+		        Element Should Be Disabled      ${paragraph}
 			END
 		ELSE
 			Pass Execution    No essay questions type on this vacancy
@@ -131,15 +130,24 @@ Validate Applied Job > 60 minutes: Screening questions response is disabled
 		${choices_status}=    Run Keyword And Return Status    Page Should Contain Element    ${scr_choices}
 		IF    ${choices_status} == True
 		    ${elements_choices}=     Locators to list      ${scr_choices}
-		    FOR    ${element}    IN             @{elements_choices}
-		        Scroll into element             ${element}
-		        Element Should Be Disabled      ${element}
+		    FOR    ${choice}    IN             @{elements_choices}
+		        Element Should Be Disabled      ${choice}
 			END
 		ELSE
 			Pass Execution    No multiple choice type question on this vacancy
 		END
 
-		# Todo 3: Validate checkboxes type
+		# Validate checkboxes type
+		${checkbox_status}=    Run Keyword And Return Status    Page Should Contain Element    ${scr_checkbox}
+		IF    ${checkbox_status} == True
+		    ${elements_choices}=     Locators to list      ${scr_checkbox}
+		    FOR    ${choice}    IN             @{elements_choices}
+		        Element Should Be Disabled      ${choice}
+			END
+		ELSE
+			Pass Execution    No checkboxes type question on this vacancy
+		END
+
 		# Todo 4: Validate upload doc type
 		# Todo 5: Validate upload datafile type
 		# Todo 6: Validate upload image type
