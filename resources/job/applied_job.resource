@@ -104,3 +104,13 @@ Scrol down into side anchor
 	${y_pos}=               Get Vertical Position        ${apply_button}
 	Execute Javascript      window.scrollTo(0, ${y_pos})
 	Sleep    500ms
+
+Expand all screening questions
+	${scr_question}=    Locators to list    ${scr_index_inactive}
+	FOR    ${element}    IN                 @{scr_question}
+        ${expand_state}=        Convert To String               ${element}${scr_inactive_header}
+		Scroll into element    ${expand_state}
+		Sleep    500ms
+		Wait Until Keyword Succeeds    2x    4s    Click Element    ${expand_state}
+		Element Attribute Value Should Be    ${expand_state}        aria-expanded    true
+	END
