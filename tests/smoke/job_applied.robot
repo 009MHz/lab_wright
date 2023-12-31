@@ -127,7 +127,18 @@ Validate Applied Job > 60 minutes: Screening questions response is disabled
 			Pass Execution    No essay questions type on this vacancy
 		END
 
-		# Todo 2: Validate multiple choice type
+		# Validate multiple choice type
+		${choices_status}=    Run Keyword And Return Status    Page Should Contain Element    ${scr_choices}
+		IF    ${choices_status} == True
+		    ${elements_choices}=     Locators to list      ${scr_choices}
+		    FOR    ${element}    IN             @{elements_choices}
+		        Scroll into element             ${element}
+		        Element Should Be Disabled      ${element}
+			END
+		ELSE
+			Pass Execution    No multiple choice type question on this vacancy
+		END
+
 		# Todo 3: Validate checkboxes type
 		# Todo 4: Validate upload doc type
 		# Todo 5: Validate upload datafile type
