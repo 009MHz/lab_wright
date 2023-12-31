@@ -126,18 +126,38 @@ Validate Applied Job > 60 minutes: Screening questions response is disabled
 			Pass Execution    No essay questions type on this vacancy
 		END
 
-		# Validate file uploader
+		# Validate multiple choice type
+		${choices_status}=    Run Keyword And Return Status    Page Should Contain Element    ${scr_choices}
+		IF    ${choices_status} == True
+		    ${elements_choices}=     Locators to list      ${scr_choices}
+		    FOR    ${choice}    IN             @{elements_choices}
+		        Element Should Be Disabled      ${choice}
+			END
+		ELSE
+			Pass Execution    No multiple choice type question on this vacancy
+		END
+
+		# Validate checkboxes type
+		${checkbox_status}=    Run Keyword And Return Status    Page Should Contain Element    ${scr_checkbox}
+		IF    ${checkbox_status} == True
+		    ${elements_choices}=     Locators to list      ${scr_checkbox}
+		    FOR    ${choice}    IN             @{elements_choices}
+		        Element Should Be Disabled      ${choice}
+			END
+		ELSE
+			Pass Execution    No checkboxes type question on this vacancy
+		END
+
+		# Validate file uploader type
 		${uploader_status}=    Run Keyword And Return Status    Page Should Contain Element    ${scr_upload_wrapper}
 		IF    ${uploader_status} == True
-		    ${elements_upload}=     Locators to list      ${scr_upload_wrapper}
-		    FOR    ${uploader}    IN             @{elements_upload}
+		    ${file_uploader}=     Locators to list      ${scr_upload_wrapper}
+		    FOR    ${uploader}    IN             @{file_uploader}
 		        Element Should Be Disabled      ${uploader}
 			END
 		ELSE
 			Pass Execution    No checkboxes type question on this vacancy
 		END
-		# Todo 5: Validate upload datafile type
-		# Todo 6: Validate upload image type
 	ELSE
 	    Page Should Not Contain                 ${scr_index_inactive}
 	    Pass Execution                          Screening Questions doesn't exist on the current page
