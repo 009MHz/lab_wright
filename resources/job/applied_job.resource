@@ -79,10 +79,10 @@ Screening Questions Checker
 Inject file
     [Arguments]                         ${locator}                  ${file_name}
     [Documentation]     Requires a valid name with the supported file types(test.csv, test.xlsx, test.doc, test.pdf, test.png, test.jpeg)
-    ${complete_file_path}=   Join Path       ${data_path}${file_name}
+    ${complete_file_path}=              Join Path                   ${data_path}${file_name}
     Choose File                         ${locator}                  ${complete_file_path}
 
 Scroll down into element
-    [Arguments]        ${locator}
-	${y_pos}=        Get Vertical Position        ${locator}
-	Execute Javascript    window.scrollTo(0, ${y_pos})
+    [Arguments]             ${locator}
+	${y_pos}=               Get Vertical Position        ${locator}
+	Execute Javascript      window.scrollTo(0, ${y_pos})
