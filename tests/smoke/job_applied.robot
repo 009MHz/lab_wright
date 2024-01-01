@@ -96,12 +96,14 @@ Validate Applied Job > 60 minutes: Screening questions existence
 		        ${element_expanded}=        Convert To String               ${element}${scr_index_nest}
 		        ${expand_state}=            Convert To String               ${element}${scr_inactive_header}
 				Wait Until Element Is Visible       ${element}
+				Scroll into element    ${element}
+				Sleep    300ms
 				Wait Until Keyword Succeeds    2x    4s    Click Element    ${element}
 				Element Attribute Value Should Be   ${expand_state}         aria-expanded    true
 				Wait Until Element Is Visible       ${element_expanded}
 				Scroll into element                 ${element_expanded}
-				Wait Until Keyword Succeeds    2x    4s    Click Element    ${expand_state}
 				Sleep   300ms
+				Wait Until Keyword Succeeds    2x    4s    Click Element    ${expand_state}
 				Element Attribute Value Should Be   ${expand_state}         aria-expanded    false
 		END
 	ELSE
