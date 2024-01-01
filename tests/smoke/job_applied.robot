@@ -72,8 +72,6 @@ Validate Applied Job: job cards/expanded state/tags
 	    Go Back
 	    Wait Until Keyword Succeeds    2x    4s         Click Element       ${card_arrow_expand}
 	END
-	Scrol down into side anchor
-	Wait Until Keyword Succeeds    2x    3s             Click Element       ${card_arrow_collapse}
 
 Validate Applied Job: Apply button
 	${edit_mode}    Edit mode checker
@@ -122,10 +120,12 @@ Validate Applied Job > 60 minutes: Screening questions response inactive - parag
 		        Element Should Be Disabled                  ${paragraph}
 			END
 		ELSE
-			Skip    No essay questions type on this vacancy
+			Page Should Not Contain Element     ${scr_paragraph}
+			Pass Execution      No paragraph type question on this vacancy
 		END
 	ELSE
-		Skip    Screening Questions doesn't exist on the current page
+		Page Should Not Contain Element             ${scr_index_inactive}
+		Pass Execution If   ${status} == False      Screening Questions doesn't exist on this vacancy
 	END
 
 Validate Applied Job > 60 minutes: Screening questions response inactive - multiple choice
@@ -139,10 +139,12 @@ Validate Applied Job > 60 minutes: Screening questions response inactive - multi
 		        Element Should Be Disabled                  ${choice}
 			END
 		ELSE
-			Skip    No multiple choice type question on this vacancy
+			Page Should Not Contain Element         ${scr_choices}
+			Pass Execution      No multiple choice type question on this vacancy
 		END
 	ELSE
-		Skip    Screening Questions doesn't exist on the current page
+		Page Should Not Contain Element             ${scr_index_inactive}
+		Pass Execution If   ${status} == False      Screening Questions doesn't exist on this vacancy
 	END
 
 Validate Applied Job > 60 minutes: Screening questions response inactive - checkboxes
@@ -156,10 +158,12 @@ Validate Applied Job > 60 minutes: Screening questions response inactive - check
 		        Element Should Be Disabled                  ${choice}
 			END
 		ELSE
-			Skip    No checkboxes type question on this vacancy
+			Page Should Not Contain Element    ${scr_checkbox}
+			Pass Execution    No checkboxes type question on this vacancy
 		END
 	ELSE
-		Skip    Screening Questions doesn't exist on the current page
+		Page Should Not Contain Element             ${scr_index_inactive}
+		Pass Execution If   ${status} == False      Screening Questions doesn't exist on this vacancy
 	END
 
 Validate Applied Job > 60 minutes: Screening questions response inactive - file uploader
@@ -173,8 +177,10 @@ Validate Applied Job > 60 minutes: Screening questions response inactive - file 
 		        Element Should Be Disabled                  ${uploader}
 			END
 		ELSE
-			Skip    No file uploader question type on this vacancy
+			Page Should Not Contain Element    ${scr_upload_wrapper}
+			Pass Execution    No file uploader question type on this vacancy
 		END
 	ELSE
-		Skip    Screening Questions doesn't exist on the current page
+		Page Should Not Contain Element             ${scr_index_inactive}
+		Pass Execution If   ${status} == False      Screening Questions doesn't exist on this vacancy
 	END
