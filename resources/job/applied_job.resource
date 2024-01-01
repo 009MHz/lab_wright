@@ -5,7 +5,7 @@ Resource    ../../tests/browser.resource
 
 *** Variables ***
 ${URL_applied_job}          https://staging.karirlab.co/job/automation-msib-test-status-badges--karirlab/applicant
-${URL_no_screening}         https://staging.karirlab.co/job/automation-test-apply-job-with-no-screening--karirlab
+${URL_no_screening}         https://staging.karirlab.co/job/automation-test-apply-job-with-no-screening--karirlab/applicant
 ${data_path}                ${CURDIR}${/}..${/}..${/}resources${/}data${/}file_upload/
 
 # Header
