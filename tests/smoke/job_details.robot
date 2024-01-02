@@ -7,7 +7,7 @@ Suite Teardown   Close Browser
 *** Test Cases ***
 Validate breadcrumb component
 	Wait Until Element Is Enabled           ${nav_back}
-	Element Text Should Be                  ${nav_back}             Kembali ke daftar lowongan
+	Element Text Should Be                  ${nav_back}                 Kembali ke daftar lowongan
 	Click Element                           ${nav_back}
 	Wait Until Location Is Not              ${URL}
 	Go Back
@@ -18,8 +18,10 @@ Validate company detail section
 	END
 
 	FOR    ${element}    IN                 @{comp_text}
-	    Element Text Should Not Be          ${element}              ${EMPTY}
+	    Element Text Should Not Be          ${element}                  ${EMPTY}
 	END
+	Element Should Contain                  ${comp_deadline_top}        Batas Pendaftaran
+	Element Should Contain                  ${comp_deadline_bottom}     Diunggah
 
 
 Validate job description component
@@ -28,13 +30,13 @@ Validate job description component
 	${tags}=    Locators to list            ${desc_tag_index}
 	FOR    ${element}    IN    @{tags}
 	    Wait Until Element Is Visible       ${element}
-		Element Text Should Not Be          ${element}              ${EMPTY}
-	    Wait Until Keyword Succeeds    4s    2    Click Element     ${element}
+		Element Text Should Not Be          ${element}	                ${EMPTY}
+	    Wait Until Keyword Succeeds    2x    4s    Click Element	    ${element}
 	    Wait Until Location Is Not          ${URL}
 	    Go Back
 	END
 
-Validate footer component
+Validate tag component
 	FOR    ${element}    IN                 @{foot_visual}
 	    Wait Until Element Is Visible       ${element}
 	END
@@ -55,5 +57,5 @@ Validate job apply component
 	Element Text Should Be                  ${apply_title}          Lamar posisi ini?
 	Wait Until Element Is Enabled           ${apply_button}
 	Element Text Should Be                  ${apply_button}         Lamar Posisi
-	Click Button                            ${apply_button}
+	Wait Until Keyword Succeeds             2x    4s        Click Button        ${apply_button}
 	Wait Until Location Is Not              ${URL}

@@ -1,16 +1,20 @@
 *** Settings ***
 Resource        ../../resources/job/apply_job.resource
-Suite Setup     Login as admin    staging       login      headless=False
+Suite Setup     Login with specific role    normal    staging       login      headless=True
 Task Setup      Go To    ${URL_screening}
 Suite Teardown  Close Browser
 
 *** Test Cases ***
-Validate header & job card component
-	${tag_elements}=    Locators to list        ${card_tag_index}
+Validate header section
 	Wait Until Element Is Visible               ${nav_back}
 	Element Text Should Be                      ${nav_back}             Back to Job List
 	Wait Until Element Is Visible               ${page_title}
 	Element Text Should Be                      ${page_title}           Lamar Pekerjaan
+	Click Element    ${nav_back}
+	Wait Until Location Is Not    ${URL_screening}
+	Go Back
+
+Validate job card component: collapsed state
 	FOR    ${element}    IN                     @{card_default_visual}
 	    Wait Until Element Is Visible           ${element}
 	END
@@ -20,17 +24,34 @@ Validate header & job card component
 	END
 
 	Click Element    ${card_arrow_expand}
+
+Validate job card component: expanded state
+	Click Element    ${card_arrow_expand}
+	Scroll down to the bottom page
 	FOR    ${element}    IN                     @{card_expand_component}
 	    Wait Until Element Is Visible           ${element}
 	    Element Text Should Not Be              ${element}              ${EMPTY}
 	END
 
-	Scroll down to the bottom page
+	${tag_elements}     Locators to list    ${card_tag_index}
 	FOR    ${element}    IN                     @{tag_elements}
-	    Wait Until Element Is Visible           ${element}
-	    Element Text Should Not Be              ${element}              ${EMPTY}
+        Wait Until Element Is Visible           ${element}
 	END
-	Wait Until Keyword Succeeds     3x  5s      Click Element           ${card_arrow_collapse}
+
+	Wait Until Keyword Succeeds    2x    3s    Click Element           ${card_arrow_collapse}
+
+Validate job card component: expanded state/tags
+	${tag_elements}=    Locators to list        ${card_tag_index}
+	FOR    ${element}    IN                     @{tag_elements}
+	    Wait Until Keyword Succeeds    2x    4s    Click Element    ${card_arrow_expand}
+		Scrol down into side anchor
+		Wait Until Element Is Visible           ${element}
+	    Element Text Should Not Be              ${element}              ${EMPTY}
+		Sleep    300ms
+		Wait Until Keyword Succeeds     2x	    4s      Click Element       ${element}
+		Wait Until Location Is Not              ${URL_screening}
+	    Go Back
+	END
 
 Validate resume section
 	Wait Until Element Is Visible               ${res_title}
@@ -154,7 +175,8 @@ Validate screening questions: Injecting File
 
 Validate apply button
 	[Setup]     Go To       ${URL_screening}
+	Scroll down to the bottom page
 	Wait Until Element Is Enabled   ${apply_btn}
 	Element Text Should Be          ${apply_btn}    Lamar Sekarang
-	Wait Until Keyword Succeeds    2x    3s         Click Button        ${apply_btn}
+	Wait Until Keyword Succeeds    2x    4s         Click Button        ${apply_btn}
 #	Wait Until Location Is Not    ${URL_screening}

@@ -10,15 +10,14 @@ ${nav_back}         xpath://a[contains(@class, 'BackNavigation')]
 # Company Detail Section
 ${comp_deadline_top}        xpath:(//span[contains(@class, 'deadline')])[1]
 ${comp_image}               class:ant-image-img
-${comp_name_small}          xpath:(//span[@class='ant-typography'])[1]
 ${comp_job_title}           xpath:(//h4[@class='ant-typography'])[2]
 ${comp_badge_msib}          xpath://div[contains(@class, 'jobDetail__chip')]
 ${comp_badge_location}      xpath:(//span[contains(@class, 'chip')])[1]
 ${comp_badge_industry}      xpath:(//span[contains(@class, 'chip')])[2]
 ${comp_badge_type}          xpath:(//span[contains(@class, 'chip')])[3]
 ${comp_deadline_bottom}     xpath:(//span[contains(@class, 'deadline')])[2]
-@{comp_visual}      ${comp_deadline_top}    ${comp_image}   ${comp_name_small}  ${comp_job_title}   ${comp_badge_msib}  ${comp_badge_location}  ${comp_badge_industry}  ${comp_badge_type}  ${comp_deadline_bottom}
-@{comp_text}    ${comp_job_title}   ${comp_name_small}  ${comp_badge_location}  ${comp_badge_industry}  ${comp_badge_type}
+@{comp_visual}      ${comp_deadline_top}    ${comp_image}   ${comp_job_title}   ${comp_badge_msib}  ${comp_badge_location}  ${comp_badge_industry}  ${comp_badge_type}  ${comp_deadline_bottom}
+@{comp_text}    ${comp_job_title}     ${comp_badge_location}  ${comp_badge_industry}  ${comp_badge_type}
 
 # Job Description section
 ${desc_title}               xpath://h4[normalize-space()='Deskripsi Pekerjaan']

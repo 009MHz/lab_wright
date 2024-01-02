@@ -3,13 +3,12 @@ Library     SeleniumLibrary
 Library     String
 Library     Collections
 Library     OperatingSystem
-Resource    ../persona/admin/variable_admin.resource
 Resource    ../../tests/browser.resource
 
 *** Variables ***
 ${URL_screening}            https://staging.karirlab.co/job/automation-msib-test-status-badges--karirlab/applicant
 ${URL_no_screening}         https://staging.karirlab.co/job/automation-test-apply-job-with-no-screening--karirlab/applicant
-${data_path}                ${CURDIR}${/}..${/}..${/}data${/}test_data/
+${data_path}                ${CURDIR}${/}..${/}..${/}resources${/}data${/}file_upload/
 
 # Header Components
 ${nav_back}                 xpath://a[contains(@class, 'BackNavigation')]
@@ -46,7 +45,7 @@ ${card_arrow_collapse}      xpath://div[contains(@class, 'item') and text()='Lih
 @{card_expand_component}    ${card_bot_deadline}    ${card_description_title}   ${card_arrow_collapse}
 
 # Screening Question
-${scr_title}                xpath://h5[@class='ant-typography']
+${scr_title}                //h5[@class='ant-typography']
 ${scr_wrapper}              //div[contains(@class, 'screeningQuestion')]
 ${scr_index}                //div[contains(@class, 'InternalContainer')]
 ${scr_pharagraph}           //textarea[@type='text']
@@ -82,5 +81,16 @@ Screening Questions Checker
 Inject file
     [Arguments]                         ${locator}                  ${file_name}
     [Documentation]     Requires a valid name with the supported file types(test.csv, test.xlsx, test.doc, test.pdf, test.png, test.jpeg)
-    ${absolute_path}=   Join Path       ${data_path}${file_name}
-    Choose File                         ${locator}                  ${absolute_path}
+    ${complete_file_path}=   Join Path       ${data_path}${file_name}
+    Choose File                         ${locator}                  ${complete_file_path}
+
+Scroll into element
+    [Arguments]             ${locator}
+	${y_pos}=               Get Vertical Position        ${locator}
+	Execute Javascript      window.scrollTo(0, ${y_pos})
+
+Scrol down into side anchor
+	Scroll into element    ${apply_btn}
+	${y_pos}=               Get Vertical Position        ${apply_btn}
+	Execute Javascript      window.scrollTo(0, ${y_pos})
+	Sleep    500ms
