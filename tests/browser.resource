@@ -1,6 +1,5 @@
 *** Settings ***
 Resource    ../resources/setting.resource
-Resource    ../resources/persona/admin/variable_admin.resource
 Library     String
 Library     Process
 Library     RequestsLibrary
@@ -8,6 +7,9 @@ Library     OperatingSystem
 Library     json
 
 *** Variables ***
+${vpn_email}        id:identifierId
+${vpn_pass}         name:Passwd
+${vpn_continue}     //button[contains(., 'Continue')]
 ${email_field}      id:username
 ${password_field}   id:password
 ${button_masuk}     //button[@type='submit']
@@ -53,20 +55,32 @@ Mode Selector
 
 Account Selector
     [Arguments]        ${role_name}
-    ${selected_account}=    Run Keyword If    '${role_name}' == 'normal'    Get account     normal
+    ${selected_account}=    Run Keyword If    '${role_name}' == 'personal'    Get account     personal
+    ...    ELSE IF          '${role_name}' == 'normal'              Get account     normal
     ...    ELSE IF          '${role_name}' == 'admin'               Get account     admin
     ...    ELSE IF          '${role_name}' == 'super_admin'         Get account     super_admin
     ...    ELSE IF          '${role_name}' == 'job_applicant'       Get account     job_applicant
-    [Return]            ${selected_account}
+    [Return]                ${selected_account}
+
+VPN login
+    [Arguments]            ${url}
+    ${credentials}=               Account Selector    personal
+    Input Text                    ${vpn_email}        ${credentials['email']}
+    Press Keys                    ${vpn_email}        ENTER
+    Wait Until Keyword Succeeds   2x        4s        Input Text        ${vpn_pass}        ${credentials['password']}
+    Press Keys                    ${vpn_pass}         ENTER
+    Wait Until Keyword Succeeds   2x        4s        Click Element     ${vpn_continue}
+    Wait Until Location Is        ${url}    3s        "VPN Successfully connected"
 
 Open Page
     [Arguments]         ${environment}              ${page_name}=None      ${headless}=False
     ${base}=            Environment Selector        ${environment}
     ${path}=            Page Selector               ${page_name}
     ${used_browser}=    Mode Selector               ${headless}
-
-    Open Browser    ${base}${path}    ${used_browser}
+    ${page_url}=        Set Variable                ${base}${path}
+    Open Browser        ${page_url}                 ${used_browser}
     Maximize Browser Window
+    VPN login           ${page_url}
 
 Login with specific role
 	[Documentation]     Executing login action with specific condition. 
@@ -79,10 +93,12 @@ Login with specific role
     ${path}=            Page Selector               ${page_name}
     ${used_browser}=    Mode Selector               ${headless}
     ${account}          Account Selector            ${role}
+    ${page_url}=        Set Variable                ${base}${path}
 
-    Open Browser        ${base}${path}              ${used_browser}
+    Open Browser        ${page_url}                 ${used_browser}
     Maximize Browser Window
+    VPN login           ${page_url}
     Input Text          ${email_field}              ${account['email']}
     Input Text          ${password_field}           ${account['password']}
-    Press Keys    ${None}    ENTER
+    Press Keys          ${None}                     ENTER
     Wait Until Location Is      https://staging.karirlab.co/dashboard
