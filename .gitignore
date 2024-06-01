@@ -306,5 +306,4 @@ dmypy.json
 
 # ParallelBot runner config
 .pabotsuitenames
-
-resources\data\account\credentials.json
+resources/data/account/credentials.jsona
