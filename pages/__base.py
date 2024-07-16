@@ -1,7 +1,6 @@
 import json
-import time as tm
-from playwright.sync_api import Page, expect
-
+from playwright.sync_api import Page
+import time
 
 class BasePage:
     def __init__(self, page: Page):
@@ -10,28 +9,31 @@ class BasePage:
     def _find(self, locator: str):
         return self.page.locator(locator)
 
-    def _view(self, locator: str, timeout: int = 10000):
-        self.page.wait_for_selector(locator, timeout=timeout)
+    def _view(self, locator: str, timeout: int = 5000):
+        self.page.locator(locator).wait_for(state='visible', timeout=timeout)
 
     def _unseen(self, locator: str, timeout: int = 10000):
-        self.page.wait_for_selector(locator, state="hidden", timeout=timeout)
+        self.page.locator(locator).wait_for(state='hidden', timeout=timeout)
+
+    def _touch(self, locator: str, timeout: int = 10000):
+        self._view(locator)
+        self.page.locator(locator).is_enabled(timeout=timeout)
 
     def _type(self, locator: str, text: str, timeout: int = 10000):
         self._view(locator, timeout)
-        self.page.fill(locator, text)
+        self.page.locator(locator).fill(text)
 
-    def _touch(self, locator: str, timeout: int = 15000):
-        self.page.wait_for_selector(locator, state="visible", timeout=timeout)
+    def _click(self, locator: str, timeout: int = 10000):
+        self._touch(locator, timeout=timeout)
+        self.page.locator(locator).click()
 
-    def _click(self, locator: str):
-        self._touch(locator)
-        self.page.click(locator)
+    def _force(self, locator: str, timeout: int = 10000):
+        self._view(locator, timeout)
+        self.page.locator(locator).click(force=True)
 
     def _collect(self, locator: str):
+        self._view(locator)
         return self.page.locator(locator).all_text_contents()
-
-    def _url_check(self, url: str, timeout: int = 15000):
-        self.page.wait_for_url(url, timeout=timeout)
 
     def _save_session(self, file_name: str):
         cookies = self.page.context.cookies()
@@ -56,6 +58,6 @@ class BasePage:
             except Exception as e:
                 attempts += 1
                 print(f"Retry attempt {attempts} failed for {action}: {e}")
-                tm.sleep(interval)  # Wait for a moment before retrying
+                time.sleep(interval)  # Wait for a moment before retrying
         else:
             raise Exception(f"Failed to perform action {action} after {retry} attempts")
