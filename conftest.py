@@ -43,7 +43,9 @@ def browser(playwright_instance):
         server_url = "http://remote-playwright-server:4444"
         browser = playwright_instance[browser_type].connect(server_url)
     elif mode == 'local':
-        browser = playwright_instance[browser_type].launch(headless=headless)
+        browser = playwright_instance[browser_type].launch(
+            headless=headless,
+            args=["--start-maximized"])
     else:
         raise ValueError(f"Unsupported execution type: {mode}")
 
@@ -53,7 +55,7 @@ def browser(playwright_instance):
 
 @pytest.fixture(scope='function')
 def page(browser):
-    context = browser.new_context()
+    context = browser.new_context(no_viewport=True)
     page = context.new_page()
     yield page
     context.close()
