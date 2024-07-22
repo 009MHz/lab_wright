@@ -27,7 +27,7 @@ class BasePage:
         self._touch(locator, timeout=timeout)
         self.page.locator(locator).click()
 
-    def _clicked(self, locator: str, timeout: int = 10000):
+    def _interacted(self, locator: str, timeout: int = 10000):
         expect(self.page.locator(locator)).to_be_focused(timeout=timeout)
 
     def _force(self, locator: str, timeout: int = 10000):
