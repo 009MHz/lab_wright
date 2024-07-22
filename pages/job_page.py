@@ -21,4 +21,7 @@ class JobPage(BasePage):
         for item in JobLoc.sort_options:
             self.sort_control_click()
             self._view(JobLoc.sort_options[item])
+            if not self._find(JobLoc.sort_options[item]).is_visible():
+                return False
             self._click(JobLoc.sort_options[item])
+        return True
