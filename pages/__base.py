@@ -1,5 +1,5 @@
 import json
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 import time
 
 class BasePage:
@@ -26,6 +26,9 @@ class BasePage:
     def _click(self, locator: str, timeout: int = 10000):
         self._touch(locator, timeout=timeout)
         self.page.locator(locator).click()
+
+    def _clicked(self, locator: str, timeout: int = 10000):
+        expect(self.page.locator(locator)).to_be_focused(timeout=timeout)
 
     def _force(self, locator: str, timeout: int = 10000):
         self._view(locator, timeout)
