@@ -30,6 +30,9 @@ class BasePage:
     def _interacted(self, locator: str, timeout: int = 10000):
         expect(self.page.locator(locator)).to_be_focused(timeout=timeout)
 
+    def _checked(self, locator: str, timeout: int = 10000):
+        expect(self.page.locator(locator)).to_be_checked(timeout=timeout)
+
     def _force(self, locator: str, timeout: int = 10000):
         self._view(locator, timeout)
         self.page.locator(locator).click(force=True)
