@@ -2,8 +2,8 @@ class JobLoc:
     url = "https://staging.karirlab.co/job"
 
     # Filter section
-    btn_easy_apply = "xpath=(//button[contains(@class, 'jobFilter')])[1]"
-    btn_MSIB = "xpath=(//button[contains(@class, 'jobFilter')])[2]"
+    btn_easy_apply = "#EasyBtn"
+    btn_MSIB = "#msibBtn"
     btn_filters = [btn_easy_apply, btn_MSIB]
 
     textbox_position = "name=keyword"
@@ -21,18 +21,19 @@ class JobLoc:
     checkboxes = [checkbox_intern, checkbox_partner, checkbox_contract, checkbox_volunteer, checkbox_scholar, checkbox_full, checkbox_part]
 
     # Sort section
-    sort_control = "xpath=(//div[@class='ant-select-selector'])[2]"
-    sort_control_expanded = "class=rc-virtual-list-holder"
-    sorter_date_asc = "xpath=//div[@title='Tanggal Dibuat (A to Z)']"
-    sorter_date_desc = "xpath=//div[@title='Tanggal Dibuat (Z to A)']"
-    sorter_name_asc = "xpath=//div[@title='Nama (A to Z)']"
-    sorter_name_desc = "xpath=//div[@title='Nama (Z to A)']"
-    # sort_options = [sorter_date_asc, sorter_date_desc, sorter_name_asc, sorter_name_desc]
+    sort_control = "xpath=(//div[@class='ant-select-selector'])[5]"
+    sort_control_expanded = "[class='rc-virtual-list-holder-inner']"
+    sorter_date_asc = "[title='Tanggal Diposting (A to Z)']"
+    sorter_date_desc = "[title='Tanggal Diposting (Z to A)']"
+    sorter_end_asc = "[title='Tanggal Batas Registrasi (A to Z)']"
+    sorter_name_desc = "[title='Tanggal Batas Registrasi (Z to A)']"
     sort_options = {
-        "date_asc": sorter_date_asc,
-        "date_desc": sorter_date_desc,
-        "name_asc": sorter_name_asc,
-        "name_desc": sorter_name_desc}
+        "post_asc": sorter_date_asc,
+        "post_desc": sorter_date_desc,
+        "end_asc": sorter_end_asc,
+        "end_desc": sorter_name_desc
+    }
+
 
     # Page Body
     body_cards = "xpath=//div[contains(@class, 'jobCard__41hUw')]"
