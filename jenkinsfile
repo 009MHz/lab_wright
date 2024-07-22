@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    environment {
+        PYTHON_VERSION = '3.9' // Adjust as needed
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git url: 'https://github.com/009MHz/lab_wright.git', credentialsId: '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'
+            }
+        }
+
+        stage('Setup Python Environment') {
+            steps {
+                sh """
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install -r requirements.txt
+                """
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh """
+                    . venv/bin/activate
+                    pytest --headless --maxfail=5 --disable-warnings --start-maximized
+                """
+            }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'reports/**/*', allowEmptyArchive: true
+            junit 'reports/**/*.xml'
+        }
+        success {
+            echo 'Tests passed!'
+        }
+        failure {
+            echo 'Tests failed.'
+        }
+    }
+}
