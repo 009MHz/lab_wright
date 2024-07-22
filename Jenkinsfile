@@ -9,7 +9,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 script {
-                    def branchName = 'main'  // Change to the branch you want to build
+                    def branchName = 'main'
                     git branch: branchName, url: 'https://github.com/009MHz/lab_wright.git', credentialsId: 'github-credentials-main'
                 }
             }
@@ -19,7 +19,7 @@ pipeline {
             steps {
                 bat '''
                     python -m venv venv
-                    venv\\Scripts\\activate
+                    call venv\\Scripts\\activate
                     pip install -r requirements.txt
                 '''
             }
@@ -28,7 +28,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 bat '''
-                    venv\\Scripts\\activate
+                    call venv\\Scripts\\activate
                     pytest --headless
                 '''
             }
