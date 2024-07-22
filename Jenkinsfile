@@ -29,7 +29,7 @@ pipeline {
             steps {
                 bat '''
                     venv\\Scripts\\activate
-                    pytest .\tests\ --headless
+                    pytest --headless
                 '''
             }
         }
