@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/009MHz/lab_wright.git', credentialsId: 'github-personal-token'
+                git url: 'https://github.com/009MHz/lab_wright.git', credentialsId: 'github-token'
             }
         }
 
