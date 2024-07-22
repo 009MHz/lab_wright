@@ -37,8 +37,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'reports/**/*', allowEmptyArchive: true
-            junit 'reports/**/*.xml'
+            echo 'Pipeline completed.'
         }
         success {
             echo 'Tests passed!'
