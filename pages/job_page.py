@@ -26,3 +26,15 @@ class JobPage(BasePage):
             self._click(JobLoc.sort_options[item])
             self.sort_control_click()
         return True
+
+    def click_easy_apply(self):
+        self._click(JobLoc.btn_easy_apply)
+
+    def easy_apply_selected(self):
+        self._interacted(JobLoc.btn_easy_apply)
+
+    def click_msib(self):
+        self._click(JobLoc.btn_MSIB)
+
+    def msib_selected(self):
+        self._interacted(JobLoc.btn_MSIB)
