@@ -14,9 +14,9 @@ pipeline {
 
         stage('Setup Python Environment') {
             steps {
-                sh '''
-                    python3 -m venv venv
-                    . venv/bin/activate
+                bat '''
+                    python -m venv venv
+                    venv\\Scripts\\activate
                     pip install -r requirements.txt
                 '''
             }
@@ -24,8 +24,8 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh '''
-                    . venv/bin/activate
+                bat '''
+                    venv\\Scripts\\activate
                     pytest --headless
                 '''
             }
@@ -34,7 +34,6 @@ pipeline {
 
     post {
         always {
-            // Archive test reports and artifacts
             archiveArtifacts artifacts: 'reports/**/*', allowEmptyArchive: true
             junit 'reports/**/*.xml'
         }
