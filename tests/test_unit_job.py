@@ -17,3 +17,16 @@ class TestJobPageSmoke:
             assert job_page.sort_control_check(), "Sort Control Doesn't Exist"
             job_page.sort_control_click()
             assert job_page.sort_item_check(), "One or more Sort Options were not visible"
+
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Main Filter button Validation")
+    def test_main_filter(self, page):
+        with allure.step("1. Navigate to the Job page"):
+            job_page = JobPage(page)
+            job_page.open_job_page()
+        with allure.step("2. Interact & validate Main Filter state"):
+            job_page.click_easy_apply()
+            job_page.easy_apply_selected()
+            job_page.click_msib()
+            job_page.msib_selected()
