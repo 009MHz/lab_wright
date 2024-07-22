@@ -19,6 +19,6 @@ def test_get_started_link(page: Page):
     expect(page.get_by_role("heading", name="Installation")).to_be_visible()
 
 
-def test_example(page):
+def test_karirlab_title_page(page):
     page.goto("https://staging.karirlab.co/")
-    assert page.title() == "KarirLab"
+    assert page.title() == "Awali Cerita Karirmu! | Mulai dari KarirLab | Tips Karir Terlengkap!"

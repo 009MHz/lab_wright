@@ -34,7 +34,6 @@ class JobLoc:
         "end_desc": sorter_name_desc
     }
 
-
     # Page Body
     body_cards = "xpath=//div[contains(@class, 'jobCard__41hUw')]"
     body_logo = "//img[contains(@class, 'jobCard__image')]"
