@@ -8,15 +8,18 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/009MHz/lab_wright.git', credentialsId: 'github-credentials-main'
+                script {
+                    def branchName = 'main'
+                    git branch: branchName, url: 'https://github.com/009MHz/lab_wright.git', credentialsId: 'github-credentials-main'
+                }
             }
         }
 
         stage('Setup Python Environment') {
             steps {
                 bat '''
-                    python -m venv venv
-                    venv\\Scripts\\activate
+                    python -m venv pipe
+                    pipe\\Scripts\\activate
                     pip install -r requirements.txt
                 '''
             }
