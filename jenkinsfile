@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/009MHz/lab_wright.git', credentialsId: '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'
+                git url: 'https://github.com/009MHz/lab_wright.git', credentialsId: 'github-personal-token'
             }
         }
 
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 sh """
                     . venv/bin/activate
-                    pytest --headless --maxfail=5 --disable-warnings --start-maximized
+                    pytest --headless --maxfail=3 --disable-warnings --start-maximized
                 """
             }
         }
