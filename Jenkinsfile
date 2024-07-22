@@ -5,9 +5,9 @@ pipeline {
         PYTHON_VERSION = '3.9'
     }
 
-    stage('Clone Repository') {
+    stages {
+        stage('Clone Repository') {
             steps {
-                // Ensure correct branch name and URL
                 script {
                     def branchName = 'main'  // Change to the branch you want to build
                     git branch: branchName, url: 'https://github.com/009MHz/lab_wright.git', credentialsId: 'github-credentials-main'
