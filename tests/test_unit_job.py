@@ -39,4 +39,13 @@ class TestJobPageSmoke:
             job_page = JobPage(page)
             job_page.open_job_page()
         with allure.step("2. Check the each job cards element availability"):
-            job_page.check_job_cards()
+            job_page.check_job_cards_logo()
+            job_page.check_job_cards_company()
+            job_page.check_job_cards_title()
+            job_page.check_job_cards_location()
+            job_page.check_job_cards_industry()
+            job_page.check_job_cards_type()
+            job_page.check_job_cards_daycount()
+            job_page.check_job_cards_easyapply()
+            job_page.check_job_cards_msib()
+

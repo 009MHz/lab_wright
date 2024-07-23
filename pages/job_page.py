@@ -44,29 +44,73 @@ class JobPage(BasePage):
         self._click(JobLoc.btn_apply)
         expect(self._find(JobLoc.btn_apply)).to_be_focused()
 
-    def check_job_cards(self):
+    def _card_component(self, locator, component_name, index):
+        locator = f"({locator})[{index}]"
+        self.page.wait_for_selector(locator, state='visible')
+        expect(self._find(locator)).to_be_visible(timeout=3000), f"{component_name} is not visible for card {index}"
+
+    def check_job_cards_logo(self):
         self._look(JobLoc.body_cards)
         total_cards = self._find(JobLoc.body_cards).count()
-
         for index in range(1, total_cards + 1):
-            locators = {
-                "logo": f"({JobLoc.body_logo})[{index}]",
-                "company": f"({JobLoc.body_company_name})[{index}]",
-                "title": f"({JobLoc.body_job_title})[{index}]",
-                "location": f"({JobLoc.body_job_location})[{index}]",
-                "description": f"({JobLoc.body_job_description})[{index}]",
-                "industry": f"({JobLoc.body_job_industry})[{index}]",
-                "type": f"({JobLoc.body_job_type})[{index}]",
-                "daycount": f"({JobLoc.body_job_daycount})[{index}]",
-                "easyapply": f"({JobLoc.body_job_easy_apply})[{index}]",
-                "msib": f"({JobLoc.body_job_msib})[{index}]",
-            }
+            self._card_component(JobLoc.body_logo, 'logo', index)
 
-            for key, locator in locators.items():
-                if key in ["easyapply", "msib"]:
-                    if not self._find(locator).is_visible():
-                        print(f"{key} button doesn't applied for card {index}")
-                        continue
+    def check_job_cards_company(self):
+        self._look(JobLoc.body_cards)
+        total_cards = self._find(JobLoc.body_cards).count()
+        for index in range(1, total_cards + 1):
+            self._card_component(JobLoc.body_company_name, 'company', index)
 
-                self.page.wait_for_selector(locator, state='visible')
-                expect(self._find(locator)).to_be_visible(timeout=5000), f"{key} is not visible for card {index}"
+    def check_job_cards_title(self):
+        self._look(JobLoc.body_cards)
+        total_cards = self._find(JobLoc.body_cards).count()
+        for index in range(1, total_cards + 1):
+            self._card_component(JobLoc.body_job_title, 'title', index)
+
+    def check_job_cards_location(self):
+        self._look(JobLoc.body_cards)
+        total_cards = self._find(JobLoc.body_cards).count()
+        for index in range(1, total_cards + 1):
+            self._card_component(JobLoc.body_job_location, 'location', index)
+
+    def check_job_cards_description(self):
+        self._look(JobLoc.body_cards)
+        total_cards = self._find(JobLoc.body_cards).count()
+        for index in range(1, total_cards + 1):
+            self._card_component(JobLoc.body_job_description, 'description', index)
+
+    def check_job_cards_industry(self):
+        self._look(JobLoc.body_cards)
+        total_cards = self._find(JobLoc.body_cards).count()
+        for index in range(1, total_cards + 1):
+            self._card_component(JobLoc.body_job_industry, 'industry', index)
+
+    def check_job_cards_type(self):
+        self._look(JobLoc.body_cards)
+        total_cards = self._find(JobLoc.body_cards).count()
+        for index in range(1, total_cards + 1):
+            self._card_component(JobLoc.body_job_type, 'type', index)
+
+    def check_job_cards_daycount(self):
+        self._look(JobLoc.body_cards)
+        total_cards = self._find(JobLoc.body_cards).count()
+        for index in range(1, total_cards + 1):
+            self._card_component(JobLoc.body_job_daycount, 'daycount', index)
+
+    def check_job_cards_easyapply(self):
+        self._look(JobLoc.body_cards)
+        total_cards = self._find(JobLoc.body_cards).count()
+        for index in range(1, total_cards + 1):
+            if not self._find(f"({JobLoc.body_job_easy_apply})[{index}]").is_visible():
+                print(f"easyapply button doesn't apply for card {index}")
+                continue
+            self._card_component(JobLoc.body_job_easy_apply, 'easyapply', index)
+
+    def check_job_cards_msib(self):
+        self._look(JobLoc.body_cards)
+        total_cards = self._find(JobLoc.body_cards).count()
+        for index in range(1, total_cards + 1):
+            if not self._find(f"({JobLoc.body_job_msib})[{index}]").is_visible():
+                print(f"msib button doesn't apply for card {index}")
+                continue
+            self._card_component(JobLoc.body_job_msib, 'msib', index)
