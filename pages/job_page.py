@@ -56,9 +56,9 @@ class JobPage(BasePage):
 
             for key, locator in locators.items():
                 if key in ["easyapply", "msib"]:
-                    if not self.page.locator(locator).is_visible():
+                    if not self._find(locator).is_visible():
                         print(f"{key} button doesn't applied for card {index}")
                         continue
 
                 self.page.wait_for_selector(locator, state='visible')
-                assert self.page.locator(locator).is_visible(), f"{key} is not visible for card {index}"
+                expect(self._find(locator)).to_be_visible(), f"{key} is not visible for card {index}"
