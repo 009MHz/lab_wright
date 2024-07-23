@@ -38,14 +38,18 @@ def browser(playwright_instance):
     mode = os.getenv("mode")
     headless = os.getenv("headless") == "True"
 
-    if mode == 'grid' or mode == 'pipeline':
-        # Configure remote browser options if needed
-        server_url = "http://remote-playwright-server:4444"
-        browser = playwright_instance[browser_type].connect(server_url)
+    if mode == 'pipeline':
+        browser = playwright_instance[browser_type].launch(
+            headless=headless,
+            args=["--start-maximized"])
     elif mode == 'local':
         browser = playwright_instance[browser_type].launch(
             headless=headless,
             args=["--start-maximized"])
+    elif mode == 'grid':
+        # Configure remote browser options if needed
+        server_url = "http://remote-playwright-server:4444"
+        browser = playwright_instance[browser_type].connect(server_url)
     else:
         raise ValueError(f"Unsupported execution type: {mode}")
 
