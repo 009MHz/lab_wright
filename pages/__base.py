@@ -2,6 +2,7 @@ import json
 from playwright.sync_api import Page, expect
 import time
 
+
 class BasePage:
     def __init__(self, page: Page):
         self.page = page
@@ -10,10 +11,10 @@ class BasePage:
         return self.page.locator(locator)
 
     def _view(self, locator: str, timeout: int = 5000):
-        self.page.locator(locator).wait_for(state='visible', timeout=timeout)
+        self.page.wait_for_selector(locator, state='visible', timeout=timeout)
 
     def _unseen(self, locator: str, timeout: int = 10000):
-        self.page.locator(locator).wait_for(state='hidden', timeout=timeout)
+        self.page.wait_for_selector(locator, state='hidden', timeout=timeout)
 
     def _touch(self, locator: str, timeout: int = 10000):
         self._view(locator)
