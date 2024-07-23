@@ -10,7 +10,7 @@ class BasePage:
     def _find(self, locator: str):
         return self.page.locator(locator)
 
-    def _look(self, locator: str, timeout: int = 5000):
+    def _look(self, locator: str, timeout: int = 10000):
         self.page.wait_for_selector(locator, state='visible', timeout=timeout)
 
     def _conceal(self, locator: str, timeout: int = 7000):
