@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Jul 23 17:05:32 UTC 2024","Tue Jul 23 17:05:39 UTC 2024","7252","tests","test_unit_job","TestJobPageSmoke","","","Main Filter button Validation",""
+"passed","Tue Jul 23 17:05:30 UTC 2024","Tue Jul 23 17:05:40 UTC 2024","10842","tests","test_unit_job","TestJobPageSmoke","","","Sorting Control Test Validation",""
+"passed","Tue Jul 23 17:05:33 UTC 2024","Tue Jul 23 17:05:42 UTC 2024","9009","tests","test_unit_job","TestJobPageSmoke","","","Main Job Card Validation",""
+"passed","Tue Jul 23 17:05:30 UTC 2024","Tue Jul 23 17:05:30 UTC 2024","678","tests","test_example","","","","test_has_title",""
+"passed","Tue Jul 23 17:05:30 UTC 2024","Tue Jul 23 17:05:31 UTC 2024","1172","tests","test_example","","","","test_get_started_link",""
+"passed","Tue Jul 23 17:05:30 UTC 2024","Tue Jul 23 17:05:33 UTC 2024","3799","tests","test_example","","","","test_karirlab_title_page",""
