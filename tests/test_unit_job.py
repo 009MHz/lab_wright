@@ -31,3 +31,12 @@ class TestJobPageSmoke:
             job_page.click_clear()
             job_page.click_apply()
 
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Main Job Card Validation")
+    def test_job_cards(self, page):
+        with allure.step("1. Navigate to the Job page"):
+            job_page = JobPage(page)
+            job_page.open_job_page()
+        with allure.step("2. Check the each job cards element availability"):
+            job_page.check_job_cards()
