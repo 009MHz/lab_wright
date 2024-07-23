@@ -36,6 +36,14 @@ class JobPage(BasePage):
         self._click(JobLoc.btn_MSIB)
         expect(self._find(JobLoc.btn_MSIB)).to_be_focused()
 
+    def click_clear(self):
+        self._click(JobLoc.btn_clear)
+        expect(self._find(JobLoc.btn_clear)).to_be_focused()
+
+    def click_apply(self):
+        self._click(JobLoc.btn_apply)
+        expect(self._find(JobLoc.btn_apply)).to_be_focused()
+
     def check_job_cards(self):
         self._look(JobLoc.body_cards)
         total_cards = self._find(JobLoc.body_cards).count()
@@ -61,4 +69,4 @@ class JobPage(BasePage):
                         continue
 
                 self.page.wait_for_selector(locator, state='visible')
-                expect(self._find(locator)).to_be_visible(), f"{key} is not visible for card {index}"
+                expect(self._find(locator)).to_be_visible(timeout=5000), f"{key} is not visible for card {index}"
