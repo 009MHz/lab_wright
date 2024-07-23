@@ -30,10 +30,6 @@ jobs:
     - name: Ensure browsers are installed
       run: python -m playwright install --with-deps
 
-    - name: Run tests with reporter
-      run: |
-        pytest --env=test --mode=pipeline --headless --alluredir=reports -n=auto --screenshot=only-on-failure --video=retain-on-failure
-
     - name: Install Allure CLI
       run: |
         if [ $RUNNER_OS == 'Linux' ]; then
@@ -41,6 +37,10 @@ jobs:
           tar -zxvf allure.tgz -C /opt/
           export PATH=$PATH:/opt/allure-2.21.0/bin
         fi
+
+    - name: Run tests with reporter
+      run: |
+        pytest --env=test --mode=pipeline --headless --alluredir=reports -n=auto --screenshot=only-on-failure --video=retain-on-failure
 
     - name: Generate Allure Report
       run: |
