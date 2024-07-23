@@ -1,6 +1,7 @@
 import os
 import pytest
 from playwright.sync_api import sync_playwright
+import allure
 
 
 def pytest_addoption(parser):
@@ -33,21 +34,21 @@ def playwright_instance():
 
 @pytest.fixture(scope='class')
 def browser(playwright_instance):
-    # Use Playwright's provided browser option
-    browser_type = os.getenv("BROWSER", "chromium")  # Default to chromium if not set
+    browser_type = os.getenv("BROWSER", "chromium")
     mode = os.getenv("mode")
     headless = os.getenv("headless") == "True"
 
+    video_dir = "videos"
+    if not os.path.exists(video_dir):
+        os.makedirs(video_dir)
+
+    launch_args = {"headless": headless, "args": ["--start-maximized"]}
+
     if mode == 'pipeline':
-        browser = playwright_instance[browser_type].launch(
-            headless=headless,
-            args=["--start-maximized"])
+        browser = playwright_instance[browser_type].launch(**launch_args)
     elif mode == 'local':
-        browser = playwright_instance[browser_type].launch(
-            headless=headless,
-            args=["--start-maximized"])
+        browser = playwright_instance[browser_type].launch(**launch_args)
     elif mode == 'grid':
-        # Configure remote browser options if needed
         server_url = "http://remote-playwright-server:4444"
         browser = playwright_instance[browser_type].connect(server_url)
     else:
@@ -59,7 +60,35 @@ def browser(playwright_instance):
 
 @pytest.fixture(scope='function')
 def page(browser):
-    context = browser.new_context(no_viewport=True)
+    video_option = os.getenv("video", "retain-on-failure")  # Defaulting to retain-on-failure
+    screenshot_option = os.getenv("screenshot", "only-on-failure")  # Defaulting to only-on-failure
+    full_page_screenshot = os.getenv("full_page_screenshot", "off") == "on"
+
+    context = browser.new_context(
+        record_video_dir="videos" if video_option != "off" else None
+    )
     page = context.new_page()
     yield page
+
+    if screenshot_option != "off":
+        screenshot_path = f"reports/screenshots/{page.title()}_screenshot.png"
+        page.screenshot(path=screenshot_path, full_page=full_page_screenshot)
+
+    if video_option == "retain-on-failure" and hasattr(page, "video"):
+        video_path = f"reports/videos/{page.title()}_test_failed_video.webm"
+        page.close()
+        page.video.save_as(video_path)
+
     context.close()
+
+
+def pytest_runtest_makereport(item, call):
+    if call.when == "call":
+        if "page" in item.funcargs:
+            page = item.funcargs["page"]
+            allure.attach(page.screenshot(full_page=True), name="screenshot",
+                          attachment_type=allure.attachment_type.PNG)
+
+            if os.getenv("video") != "off" and hasattr(page, "video"):
+                video_path = page.video.path()
+                allure.attach.file(video_path, name="video", attachment_type=allure.attachment_type.WEBM)
