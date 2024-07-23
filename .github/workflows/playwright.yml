@@ -29,11 +29,12 @@ jobs:
 
     - name: Install Allure CLI
       run: |
-        if [ $RUNNER_OS == 'Linux' ]; then
-          curl -o allure.tgz -L https://github.com/allure-framework/allure2/releases/latest/download/allure-2.21.0.tgz
-          tar -zxvf allure.tgz -C /opt/
-          export PATH=$PATH:/opt/allure-2.21.0/bin
-        fi
+        ALLURE_VERSION=2.21.0
+        curl -Ls "https://github.com/allure-framework/allure2/releases/download/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz" -o allure.tgz
+        tar -zxvf allure.tgz
+        sudo mv allure-${ALLURE_VERSION} /opt/allure
+        export PATH=$PATH:/opt/allure/bin
+      shell: bash
 
     - name: Run tests with reporter
       run: |
@@ -41,13 +42,13 @@ jobs:
 
     - name: Generate Allure Report
       run: |
-        allure generate reports --clean -o allure-report
+        /opt/allure/bin/allure generate reports --clean -o allure-report
 
     - name: Upload Allure Report
       uses: actions/upload-artifact@v4
       with:
-        name: reports
-        path: reports
+        name: allure-report
+        path: allure-report
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
