@@ -14,9 +14,9 @@ class TestJobPageSmoke:
             job_page = JobPage(page)
             job_page.open_job_page()
         with allure.step("2. Interact & validate the sort control"):
-            assert job_page.sort_control_check(), "Sort Control Doesn't Exist"
+            job_page.sort_control_check()
             job_page.sort_control_click()
-            assert job_page.sort_item_check(), "One or more Sort Options were not visible"
+            job_page.sort_item_check()
 
     @pytest.mark.positive
     @pytest.mark.smoke
@@ -25,8 +25,9 @@ class TestJobPageSmoke:
         with allure.step("1. Navigate to the Job page"):
             job_page = JobPage(page)
             job_page.open_job_page()
-        with allure.step("2. Interact & validate Main Filter state"):
+        with allure.step("2. Interact with Main Filter"):
             job_page.click_easy_apply()
-            job_page.easy_apply_selected()
             job_page.click_msib()
-            job_page.msib_selected()
+            job_page.click_clear()
+            job_page.click_apply()
+

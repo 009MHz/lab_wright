@@ -4,7 +4,8 @@ class JobLoc:
     # Filter section
     btn_easy_apply = "#EasyBtn"
     btn_MSIB = "#msibBtn"
-    btn_filters = [btn_easy_apply, btn_MSIB]
+    btn_clear = "#bersihkanBtn"
+    btn_apply = "#terapkanBtn"
 
     textbox_position = "name=keyword"
     textbox_company = "name=company_industries"
