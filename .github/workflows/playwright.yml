@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: Playwright Pipeline Tests
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
     - name: Ensure browsers are installed
       run: python -m playwright install --with-deps
 
-    - name: Run Playwright tests with Allure
+    - name: Run tests with reporter
       run: |
         pytest --env=test --mode=pipeline --headless --alluredir=reports -n=auto
 
