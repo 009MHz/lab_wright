@@ -32,7 +32,7 @@ jobs:
 
     - name: Run tests with reporter
       run: |
-        pytest --env=test --mode=pipeline --alluredir=reports -n=auto
+        pytest --env=test --mode=pipeline --headless --alluredir=reports -n=auto
 
     - name: Install Allure CLI
       run: |
