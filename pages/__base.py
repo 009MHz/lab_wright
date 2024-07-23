@@ -1,6 +1,4 @@
-import json
 from playwright.sync_api import Page, expect
-import time
 
 
 class BasePage:
