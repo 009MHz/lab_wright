@@ -178,3 +178,5 @@ dmypy.json
 .vscode/settings.json
 *.pkl
 /log/
+
+reports
