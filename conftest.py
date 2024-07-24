@@ -65,6 +65,7 @@ def page(browser):
     full_page_screenshot = os.getenv("full_page_screenshot", "off") == "on"
 
     context = browser.new_context(
+        no_viewport=True,
         record_video_dir="videos" if video_option != "off" else None
     )
     page = context.new_page()
