@@ -69,12 +69,23 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Download Allure results from artifacts
+    - name: Download Allure results from shard 1
       uses: actions/download-artifact@v4
       with:
-        name: 'allure-results-*'
-        path: merged-allure-results
-        merge-multiple: true
+        name: allure-results-1
+        path: merged-allure-results/shard-1
+
+    - name: Download Allure results from shard 2
+      uses: actions/download-artifact@v4
+      with:
+        name: allure-results-2
+        path: merged-allure-results/shard-2
+
+    - name: Download Allure results from shard 3
+      uses: actions/download-artifact@v4
+      with:
+        name: allure-results-3
+        path: merged-allure-results/shard-3
 
     - name: Generate Allure Report
       run: |
