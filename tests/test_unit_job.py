@@ -74,3 +74,35 @@ class TestJobPageSmoke:
             job_page.industri_input_clear()
             job_page.lokasi_input_clear()
             job_page.skill_input_clear()
+
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("'Tipe Pekerjaan' Check Validation")
+    def test_input_search(self, page):
+        with allure.step("1. Navigate to the Job page"):
+            job_page = JobPage(page)
+            job_page.open_job_page()
+        with allure.step("2. Check each Tipe Pekerjaan Checkbox availability"):
+            job_page.full_time_presence()
+            job_page.part_time_presence()
+            job_page.intern_presence()
+            job_page.volunteer_presence()
+            job_page.contract_presence()
+            job_page.scholar_presence()
+            job_page.partner_presence()
+        with allure.step("3. Click on each checkboxes"):
+            job_page.full_time_check()
+            job_page.part_time_check()
+            job_page.intern_check()
+            job_page.volunteer_check()
+            job_page.contract_check()
+            job_page.scholar_check()
+            job_page.partner_check()
+        with allure.step("4. Uncheck all checkboxes"):
+            job_page.full_time_uncheck()
+            job_page.part_time_uncheck()
+            job_page.intern_uncheck()
+            job_page.volunteer_uncheck()
+            job_page.contract_uncheck()
+            job_page.scholar_uncheck()
+            job_page.partner_uncheck()

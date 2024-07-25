@@ -1,7 +1,6 @@
 from pages.__base import BasePage
 from elements.__job import JobLoc
 from playwright.sync_api import Page, expect
-import json
 
 
 class JobPage(BasePage):
@@ -11,6 +10,7 @@ class JobPage(BasePage):
     def open_job_page(self):
         self.page.goto(JobLoc.url)
 
+    """Job List Sorting Control"""
     def sort_control_presence(self):
         self._look(JobLoc.sort_control)
         expect(self._find(JobLoc.sort_control)).to_be_visible()
@@ -28,6 +28,7 @@ class JobPage(BasePage):
             self._click(JobLoc.sort_options[item])
             self.sort_control_click()
 
+    """Job List Main Button Filter"""
     def click_easy_apply(self):
         self._click(JobLoc.btn_easy_apply)
         expect(self._find(JobLoc.btn_easy_apply)).to_be_focused()
@@ -44,6 +45,7 @@ class JobPage(BasePage):
         self._click(JobLoc.btn_apply)
         expect(self._find(JobLoc.btn_apply)).to_be_focused()
 
+    """Job List Carousel"""
     def _card_component(self, locator, component_name, index):
         locator = f"({locator})[{index}]"
         self.page.wait_for_selector(locator, state='visible')
@@ -122,6 +124,7 @@ class JobPage(BasePage):
         self._click(JobLoc.box_position_input)
         expect(self._find(JobLoc.box_position_input)).to_be_focused()
 
+    """Filter Input Field Search"""
     def position_input_type(self, text: str):
         self._type(JobLoc.box_position_input, text)
         expect(self._find(JobLoc.box_position_input)).not_to_be_empty()
@@ -194,3 +197,68 @@ class JobPage(BasePage):
         self._force(JobLoc.box_skill_clear)
         self._click(JobLoc.box_skill_clear)
         expect(self._find(JobLoc.box_skill_input)).to_be_empty()
+
+    def full_time_presence(self):
+        pass
+
+    def full_time_check(self):
+        pass
+
+    def full_time_uncheck(self):
+        pass
+
+    def part_time_presence(self):
+        pass
+
+    def part_time_check(self):
+        pass
+
+    def part_time_uncheck(self):
+        pass
+    
+    def intern_presence(self):
+        pass
+
+    def intern_check(self):
+        pass
+
+    def intern_uncheck(self):
+        pass
+
+    def volunteer_presence(self):
+        pass
+
+    def volunteer_check(self):
+        pass
+
+    def volunteer_uncheck(self):
+        pass
+    
+    def contract_presence(self):
+        pass
+
+    def contract_check(self):
+        pass
+
+    def contract_uncheck(self):
+        pass
+
+    def scholar_presence(self):
+        pass
+
+    def scholar_check(self):
+        pass
+
+    def scholar_uncheck(self):
+        pass
+    
+    def partner_presence(self):
+        pass
+
+    def partner_check(self):
+        pass
+
+    def partner_uncheck(self):
+        pass
+
+    
