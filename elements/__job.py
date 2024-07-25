@@ -38,6 +38,13 @@ class JobLoc:
     checkbox_on_site = "[value='On-site']"
     checkbox_remote = "[value='Remote']"
 
+    # Checkboxes Job Experiences
+    checkbox_no_exp = "[value='0']"
+    checkbox_01_yr = "[value='1']"
+    checkbox_02_yr = "[value='2']"
+    checkbox_03_yr = "[value='3']"
+    checkbox_04_yr = "[value='4']"
+
     # Sort section
     sort_control = "xpath=(//div[@class='ant-select-selector'])[5]"
     sort_control_expanded = "[class='rc-virtual-list-holder-inner']"
