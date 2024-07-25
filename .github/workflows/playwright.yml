@@ -1,4 +1,4 @@
-name: Run tests and publish report
+name: Playwright Pipeline Tests
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   pages: write
 
 jobs:
-  test-and-publish:
+  test:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -27,7 +27,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Ensure browsers are installed
+    - name: Install playwright browsers
       run: python -m playwright install --with-deps
 
     - name: Run tests
