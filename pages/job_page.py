@@ -396,3 +396,18 @@ class JobPage(BasePage):
         self._click(JobLoc.checkbox_04_yr)
         expect(self._find(JobLoc.checkbox_04_yr)).not_to_be_checked()
 
+    """Pagination Section"""
+
+    def prev_chevron_presence(self):
+        self._look(JobLoc.page_previous)
+        expect(self._find(JobLoc.page_previous)).to_be_visible()
+
+    def prev_chevron_click(self):
+        self._click(JobLoc.page_previous)
+        expect(self._find(JobLoc.page_previous)).to_be_focused()
+
+    def next_chevron_presence(self):
+        pass
+
+    def next_chevron_click(self):
+        pass
