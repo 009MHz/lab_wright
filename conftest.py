@@ -42,7 +42,10 @@ def browser(playwright_instance):
     if not os.path.exists(video_dir):
         os.makedirs(video_dir)
 
-    launch_args = {"headless": headless, "args": ["--start-maximized"]}
+    launch_args = {
+        "headless": headless,
+        "args": ["--start-maximized"]
+    }
 
     if mode == 'pipeline':
         browser = playwright_instance[browser_type].launch(**launch_args)
@@ -65,7 +68,8 @@ def page(browser):
     full_page_screenshot = os.getenv("full_page_screenshot", "off") == "on"
 
     context = browser.new_context(
-        no_viewport=True,
+        # no_viewport=True,
+        viewport={"width": 1920, "height": 1080},
         record_video_dir="videos" if video_option != "off" else None
     )
     page = context.new_page()
