@@ -7,7 +7,7 @@ class JobPage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
 
-    def open_job_page(self):
+    def open_page(self):
         self.page.goto(JobLoc.url)
 
     """Job List Sorting Control"""
