@@ -83,7 +83,7 @@ class TestJobPageSmoke:
     @pytest.mark.smoke
     @allure.feature("Filter", "Checkbox")
     @allure.title("'Tipe Pekerjaan' Check Validation")
-    def test_tipe_pekerjaan_checkboxes(self, page):
+    def test_job_type_checkboxes(self, page):
         with allure.step("1. Navigate to the Job page"):
             job_page = JobPage(page)
             job_page.open_job_page()
@@ -132,3 +132,30 @@ class TestJobPageSmoke:
             job_page.hybrid_uncheck()
             job_page.on_site_uncheck()
             job_page.remote_uncheck()
+
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.feature("Filter", "Checkbox")
+    @allure.title("'Pengalaman Kerja' Check Validation")
+    def test_experience_checkboxes(self, page):
+        with allure.step("1. Navigate to the Job page"):
+            job_page = JobPage(page)
+            job_page.open_job_page()
+        with allure.step("2. Check each Pengalaman Kerja Checkbox availability"):
+            job_page.no_exp_presence()
+            job_page.year_01_presence()
+            job_page.year_02_presence()
+            job_page.year_03_presence()
+            job_page.year_04_presence()
+        with allure.step("3. Click on each checkboxes"):
+            job_page.no_exp_check()
+            job_page.year_01_check()
+            job_page.year_02_check()
+            job_page.year_03_check()
+            job_page.year_04_check()
+        with allure.step("4. Uncheck all checkboxes"):
+            job_page.no_exp_uncheck()
+            job_page.year_01_uncheck()
+            job_page.year_02_uncheck()
+            job_page.year_03_uncheck()
+            job_page.year_04_uncheck()

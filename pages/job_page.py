@@ -339,3 +339,75 @@ class JobPage(BasePage):
         self._touch(JobLoc.checkbox_remote)
         self._click(JobLoc.checkbox_remote)
         expect(self._find(JobLoc.checkbox_remote)).not_to_be_checked()
+
+    """Pengalaman Kerja Section"""
+    def no_exp_presence(self):
+        self._look(JobLoc.checkbox_no_exp)
+        expect(self._find(JobLoc.checkbox_no_exp)).to_be_visible()
+
+    def no_exp_check(self):
+        self._touch(JobLoc.checkbox_no_exp)
+        self._find(JobLoc.checkbox_no_exp).check()
+        expect(self._find(JobLoc.checkbox_no_exp)).to_be_checked()
+
+    def no_exp_uncheck(self):
+        self._touch(JobLoc.checkbox_no_exp)
+        self._click(JobLoc.checkbox_no_exp)
+        expect(self._find(JobLoc.checkbox_no_exp)).not_to_be_checked()
+
+    def year_01_presence(self):
+        self._look(JobLoc.checkbox_01_yr)
+        expect(self._find(JobLoc.checkbox_01_yr)).to_be_visible()
+
+    def year_01_check(self):
+        self._touch(JobLoc.checkbox_01_yr)
+        self._find(JobLoc.checkbox_01_yr).check()
+        expect(self._find(JobLoc.checkbox_01_yr)).to_be_checked()
+
+    def year_01_uncheck(self):
+        self._touch(JobLoc.checkbox_01_yr)
+        self._click(JobLoc.checkbox_01_yr)
+        expect(self._find(JobLoc.checkbox_01_yr)).not_to_be_checked()
+
+    def year_02_presence(self):
+        self._look(JobLoc.checkbox_02_yr)
+        expect(self._find(JobLoc.checkbox_02_yr)).to_be_visible()
+
+    def year_02_check(self):
+        self._touch(JobLoc.checkbox_02_yr)
+        self._find(JobLoc.checkbox_02_yr).check()
+        expect(self._find(JobLoc.checkbox_02_yr)).to_be_checked()
+
+    def year_02_uncheck(self):
+        self._touch(JobLoc.checkbox_02_yr)
+        self._click(JobLoc.checkbox_02_yr)
+        expect(self._find(JobLoc.checkbox_02_yr)).not_to_be_checked()
+
+    def year_03_presence(self):
+        self._look(JobLoc.checkbox_03_yr)
+        expect(self._find(JobLoc.checkbox_03_yr)).to_be_visible()
+
+    def year_03_check(self):
+        self._touch(JobLoc.checkbox_03_yr)
+        self._find(JobLoc.checkbox_03_yr).check()
+        expect(self._find(JobLoc.checkbox_03_yr)).to_be_checked()
+
+    def year_03_uncheck(self):
+        self._touch(JobLoc.checkbox_03_yr)
+        self._click(JobLoc.checkbox_03_yr)
+        expect(self._find(JobLoc.checkbox_03_yr)).not_to_be_checked()
+
+    def year_04_presence(self):
+        self._look(JobLoc.checkbox_04_yr)
+        expect(self._find(JobLoc.checkbox_04_yr)).to_be_visible()
+
+    def year_04_check(self):
+        self._touch(JobLoc.checkbox_04_yr)
+        self._find(JobLoc.checkbox_04_yr).check()
+        expect(self._find(JobLoc.checkbox_04_yr)).to_be_checked()
+
+    def year_04_uncheck(self):
+        self._touch(JobLoc.checkbox_04_yr)
+        self._click(JobLoc.checkbox_04_yr)
+        expect(self._find(JobLoc.checkbox_04_yr)).not_to_be_checked()
+
