@@ -37,7 +37,11 @@ jobs:
       run: playwright install
 
     - name: Install Allure CLI
-      run: pip install allure-cli==2.13.2
+      run: |
+        ALLURE_VERSION=2.21.0
+        wget -qO- "https://github.com/allure-framework/allure2/releases/download/${ALLURE_VERSION}/allure-${ALLURE_VERSION}.tgz" | tar -zx -C /tmp/
+        sudo mv /tmp/allure-${ALLURE_VERSION} /opt/allure
+        echo "/opt/allure/bin" >> $GITHUB_PATH
 
     - name: Run tests
       run: |
