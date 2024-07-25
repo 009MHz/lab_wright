@@ -209,7 +209,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_full)).to_be_checked()
 
     def full_time_uncheck(self):
-        self._touch(JobLoc.checkbox_full)
         self._click(JobLoc.checkbox_full)
         expect(self._find(JobLoc.checkbox_full)).not_to_be_checked()
 
@@ -223,7 +222,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_part)).to_be_checked()
 
     def part_time_uncheck(self):
-        self._touch(JobLoc.checkbox_part)
         self._click(JobLoc.checkbox_part)
         expect(self._find(JobLoc.checkbox_part)).not_to_be_checked()
 
@@ -237,7 +235,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_intern)).to_be_checked()
 
     def intern_uncheck(self):
-        self._touch(JobLoc.checkbox_intern)
         self._click(JobLoc.checkbox_intern)
         expect(self._find(JobLoc.checkbox_intern)).not_to_be_checked()
 
@@ -251,7 +248,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_volunteer)).to_be_checked()
 
     def volunteer_uncheck(self):
-        self._touch(JobLoc.checkbox_volunteer)
         self._click(JobLoc.checkbox_volunteer)
         expect(self._find(JobLoc.checkbox_volunteer)).not_to_be_checked()
 
@@ -265,7 +261,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_contract)).to_be_checked()
 
     def contract_uncheck(self):
-        self._touch(JobLoc.checkbox_contract)
         self._click(JobLoc.checkbox_contract)
         expect(self._find(JobLoc.checkbox_contract)).not_to_be_checked()
 
@@ -279,7 +274,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_scholar)).to_be_checked()
 
     def scholar_uncheck(self):
-        self._touch(JobLoc.checkbox_scholar)
         self._click(JobLoc.checkbox_scholar)
         expect(self._find(JobLoc.checkbox_scholar)).not_to_be_checked()
 
@@ -293,7 +287,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_partner)).to_be_checked()
 
     def partner_uncheck(self):
-        self._touch(JobLoc.checkbox_partner)
         self._click(JobLoc.checkbox_partner)
         expect(self._find(JobLoc.checkbox_partner)).not_to_be_checked()
 
@@ -308,7 +301,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_hybrid)).to_be_checked()
 
     def hybrid_uncheck(self):
-        self._touch(JobLoc.checkbox_hybrid)
         self._click(JobLoc.checkbox_hybrid)
         expect(self._find(JobLoc.checkbox_hybrid)).not_to_be_checked()
         
@@ -322,7 +314,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_on_site)).to_be_checked()
 
     def on_site_uncheck(self):
-        self._touch(JobLoc.checkbox_on_site)
         self._click(JobLoc.checkbox_on_site)
         expect(self._find(JobLoc.checkbox_on_site)).not_to_be_checked()
         
@@ -336,7 +327,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_remote)).to_be_checked()
 
     def remote_uncheck(self):
-        self._touch(JobLoc.checkbox_remote)
         self._click(JobLoc.checkbox_remote)
         expect(self._find(JobLoc.checkbox_remote)).not_to_be_checked()
 
@@ -351,7 +341,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_no_exp)).to_be_checked()
 
     def no_exp_uncheck(self):
-        self._touch(JobLoc.checkbox_no_exp)
         self._click(JobLoc.checkbox_no_exp)
         expect(self._find(JobLoc.checkbox_no_exp)).not_to_be_checked()
 
@@ -365,7 +354,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_01_yr)).to_be_checked()
 
     def year_01_uncheck(self):
-        self._touch(JobLoc.checkbox_01_yr)
         self._click(JobLoc.checkbox_01_yr)
         expect(self._find(JobLoc.checkbox_01_yr)).not_to_be_checked()
 
@@ -379,7 +367,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_02_yr)).to_be_checked()
 
     def year_02_uncheck(self):
-        self._touch(JobLoc.checkbox_02_yr)
         self._click(JobLoc.checkbox_02_yr)
         expect(self._find(JobLoc.checkbox_02_yr)).not_to_be_checked()
 
@@ -393,7 +380,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_03_yr)).to_be_checked()
 
     def year_03_uncheck(self):
-        self._touch(JobLoc.checkbox_03_yr)
         self._click(JobLoc.checkbox_03_yr)
         expect(self._find(JobLoc.checkbox_03_yr)).not_to_be_checked()
 
@@ -407,7 +393,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.checkbox_04_yr)).to_be_checked()
 
     def year_04_uncheck(self):
-        self._touch(JobLoc.checkbox_04_yr)
         self._click(JobLoc.checkbox_04_yr)
         expect(self._find(JobLoc.checkbox_04_yr)).not_to_be_checked()
 
