@@ -10,10 +10,10 @@ permissions:
   contents: write
 
 jobs:
-  run-tests:
+  tests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up JDK
       uses: actions/setup-java@v3
@@ -22,7 +22,7 @@ jobs:
         java-version: 17
 
     - name: Set up Python
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: '3.11'
 
@@ -31,7 +31,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Ensure browsers are installed
+    - name: Install playwright browsers
       run: python -m playwright install --with-deps
 
     - name: Run tests
@@ -39,7 +39,7 @@ jobs:
         pytest --env=test --mode=pipeline --headless --alluredir=allure-results -n=auto --screenshot=only-on-failure --video=retain-on-failure
 
     - name: Load test report history
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       if: always()
       continue-on-error: true
       with:
@@ -51,14 +51,13 @@ jobs:
       if: always()
       with:
         gh_pages: gh-pages
-        allure_history: gh-pages/allure-history
+        allure_history: allure-history
         allure_results: allure-results
 
-    - name: Deploy to GitHub Pages
+    - name: Publish test report
+      uses: peaceiris/actions-gh-pages@v3
       if: always()
-      run: |
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
-        git add gh-pages/
-        git commit -m "Update Allure report" || echo "No changes to commit"
-        git push origin gh-pages
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: gh-pages
