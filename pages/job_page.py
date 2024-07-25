@@ -48,7 +48,7 @@ class JobPage(BasePage):
     """Job List Carousel"""
     def _card_component(self, locator, component_name, index):
         locator = f"({locator})[{index}]"
-        self.page.wait_for_selector(locator, state='visible')
+        self._look(locator)
         expect(self._find(locator)).to_be_visible(timeout=3000), f"{component_name} is not visible for card {index}"
 
     def job_cards_logo_presence(self):
