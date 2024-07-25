@@ -145,3 +145,17 @@ class TestJobPageSmoke:
             job_page.year_02_uncheck()
             job_page.year_03_uncheck()
             job_page.year_04_uncheck()
+
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.feature("Pagination")
+    @allure.title("Pagination Section Validation")
+    def test_pagination(self, job_page):
+        with allure.step("1. The Pagination Component should be exist"):
+            job_page.next_chevron_presence()
+            job_page.prev_chevron_presence()
+            job_page.page_number_presence()
+        with allure.step("2. Click on Pagination Chevron"):
+            job_page.next_chevron_click()
+            job_page.next_chevron_click()
+            job_page.prev_chevron_click()

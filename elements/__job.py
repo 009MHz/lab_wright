@@ -74,7 +74,6 @@ class JobLoc:
     body_cards_containers = [body_logo, body_company_name, body_job_title, body_job_location, body_job_description, body_job_industry, body_job_type, body_job_daycount, body_job_easy_apply]
 
     # Pagination Section
-    page_previous = "xpath=//li[@title='Previous Page']"
-    page_next = "xpath=//li[@title='Next Page']"
-    page_arrow = [page_next, page_previous]
+    page_previous = "//li[@title='Previous Page']//button[@type='button']"
+    page_next = "//li[@title='Next Page']//button[@type='button']"
     page_container = "//li[contains(@class, 'ant-pagination-item')]"

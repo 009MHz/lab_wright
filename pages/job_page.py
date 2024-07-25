@@ -407,7 +407,16 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.page_previous)).to_be_focused()
 
     def next_chevron_presence(self):
-        pass
+        self._look(JobLoc.page_next)
+        expect(self._find(JobLoc.page_next)).to_be_visible()
 
     def next_chevron_click(self):
-        pass
+        self._click(JobLoc.page_next)
+        expect(self._find(JobLoc.page_next)).to_be_focused()
+
+    def page_number_count(self):
+        print(f"Total Pages: {self._find(JobLoc.page_container).count()}")
+
+    def page_number_presence(self):
+        self._look(JobLoc.page_container)
+        expect(self._find(JobLoc.page_container)).to_be_visible()
