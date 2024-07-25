@@ -198,67 +198,103 @@ class JobPage(BasePage):
         self._click(JobLoc.box_skill_clear)
         expect(self._find(JobLoc.box_skill_input)).to_be_empty()
 
+    """Tipe Pekerjaan Checkboxes Section"""
     def full_time_presence(self):
-        pass
+        self._look(JobLoc.checkbox_full)
+        expect(self._find(JobLoc.checkbox_full)).to_be_visible()
 
     def full_time_check(self):
-        pass
+        self._touch(JobLoc.checkbox_full)
+        self._find(JobLoc.checkbox_full).check()
+        expect(self._find(JobLoc.checkbox_full)).to_be_checked()
 
     def full_time_uncheck(self):
-        pass
+        self._touch(JobLoc.checkbox_full)
+        self._click(JobLoc.checkbox_full)
+        expect(self._find(JobLoc.checkbox_full)).not_to_be_checked()
 
     def part_time_presence(self):
-        pass
+        self._look(JobLoc.checkbox_part)
+        expect(self._find(JobLoc.checkbox_part)).to_be_visible()
 
     def part_time_check(self):
-        pass
+        self._touch(JobLoc.checkbox_part)
+        self._find(JobLoc.checkbox_part).check()
+        expect(self._find(JobLoc.checkbox_part)).to_be_checked()
 
     def part_time_uncheck(self):
-        pass
-    
+        self._touch(JobLoc.checkbox_part)
+        self._click(JobLoc.checkbox_part)
+        expect(self._find(JobLoc.checkbox_part)).not_to_be_checked()
+
     def intern_presence(self):
-        pass
+        self._look(JobLoc.checkbox_intern)
+        expect(self._find(JobLoc.checkbox_intern)).to_be_visible()
 
     def intern_check(self):
-        pass
+        self._touch(JobLoc.checkbox_intern)
+        self._find(JobLoc.checkbox_intern).check()
+        expect(self._find(JobLoc.checkbox_intern)).to_be_checked()
 
     def intern_uncheck(self):
-        pass
+        self._touch(JobLoc.checkbox_intern)
+        self._click(JobLoc.checkbox_intern)
+        expect(self._find(JobLoc.checkbox_intern)).not_to_be_checked()
 
     def volunteer_presence(self):
-        pass
+        self._look(JobLoc.checkbox_volunteer)
+        expect(self._find(JobLoc.checkbox_volunteer)).to_be_visible()
 
     def volunteer_check(self):
-        pass
+        self._touch(JobLoc.checkbox_volunteer)
+        self._find(JobLoc.checkbox_volunteer).check()
+        expect(self._find(JobLoc.checkbox_volunteer)).to_be_checked()
 
     def volunteer_uncheck(self):
-        pass
-    
+        self._touch(JobLoc.checkbox_volunteer)
+        self._click(JobLoc.checkbox_volunteer)
+        expect(self._find(JobLoc.checkbox_volunteer)).not_to_be_checked()
+
     def contract_presence(self):
-        pass
+        self._look(JobLoc.checkbox_contract)
+        expect(self._find(JobLoc.checkbox_contract)).to_be_visible()
 
     def contract_check(self):
-        pass
+        self._touch(JobLoc.checkbox_contract)
+        self._find(JobLoc.checkbox_contract).check()
+        expect(self._find(JobLoc.checkbox_contract)).to_be_checked()
 
     def contract_uncheck(self):
-        pass
+        self._touch(JobLoc.checkbox_contract)
+        self._click(JobLoc.checkbox_contract)
+        expect(self._find(JobLoc.checkbox_contract)).not_to_be_checked()
 
     def scholar_presence(self):
-        pass
+        self._look(JobLoc.checkbox_scholar)
+        expect(self._find(JobLoc.checkbox_scholar)).to_be_visible()
 
     def scholar_check(self):
-        pass
+        self._touch(JobLoc.checkbox_scholar)
+        self._find(JobLoc.checkbox_scholar).check()
+        expect(self._find(JobLoc.checkbox_scholar)).to_be_checked()
 
     def scholar_uncheck(self):
-        pass
-    
+        self._touch(JobLoc.checkbox_scholar)
+        self._click(JobLoc.checkbox_scholar)
+        expect(self._find(JobLoc.checkbox_scholar)).not_to_be_checked()
+
     def partner_presence(self):
-        pass
+        self._look(JobLoc.checkbox_partner)
+        expect(self._find(JobLoc.checkbox_partner)).to_be_visible()
 
     def partner_check(self):
-        pass
+        self._touch(JobLoc.checkbox_partner)
+        self._find(JobLoc.checkbox_partner).check()
+        expect(self._find(JobLoc.checkbox_partner)).to_be_checked()
 
     def partner_uncheck(self):
-        pass
+        self._touch(JobLoc.checkbox_partner)
+        self._click(JobLoc.checkbox_partner)
+        expect(self._find(JobLoc.checkbox_partner)).not_to_be_checked()
 
     

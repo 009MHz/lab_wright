@@ -78,7 +78,7 @@ class TestJobPageSmoke:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("'Tipe Pekerjaan' Check Validation")
-    def test_input_search(self, page):
+    def test_tipe_pekerjaan_checkboxes(self, page):
         with allure.step("1. Navigate to the Job page"):
             job_page = JobPage(page)
             job_page.open_job_page()
