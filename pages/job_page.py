@@ -114,3 +114,84 @@ class JobPage(BasePage):
                 print(f"msib button doesn't apply for card {index}")
                 continue
             self._card_component(JobLoc.body_job_msib, 'msib', index)
+
+    def check_posisi_input(self):
+        self._touch(JobLoc.box_position_input)
+        expect(self._find(JobLoc.box_position_input)).to_be_visible()
+
+        self._click(JobLoc.box_position_input)
+        expect(self._find(JobLoc.box_position_input)).to_be_focused()
+
+    def posisi_input_type(self, text: str):
+        self._type(JobLoc.box_position_input, text)
+        expect(self._find(JobLoc.box_position_input)).not_to_be_empty()
+
+    def posisi_input_clear(self):
+        self._look(JobLoc.box_position_clear)
+        self._click(JobLoc.box_position_clear)
+        expect(self._find(JobLoc.box_position_input)).to_be_empty()
+
+    def check_company_input(self):
+        self._touch(JobLoc.box_company_input)
+        expect(self._find(JobLoc.box_company_input)).to_be_visible()
+
+        self._click(JobLoc.box_company_input)
+        expect(self._find(JobLoc.box_company_input)).to_be_focused()
+
+    def company_input_type(self, text: str):
+        self._type(JobLoc.box_company_input, text)
+        expect(self._find(JobLoc.box_company_input)).not_to_be_empty()
+
+    def company_input_clear(self):
+        self._look(JobLoc.box_company_clear)
+        self._click(JobLoc.box_company_clear)
+        expect(self._find(JobLoc.box_company_input)).to_be_empty()
+
+    def check_industri_input(self):
+        self._touch(JobLoc.box_industri_input)
+        expect(self._find(JobLoc.box_industri_input)).to_be_visible()
+
+        self._click(JobLoc.box_industri_input)
+        expect(self._find(JobLoc.box_industri_input)).to_be_focused()
+
+    def industri_input_type(self, text: str):
+        self._type(JobLoc.box_industri_input, text)
+        expect(self._find(JobLoc.box_industri_input)).not_to_be_empty()
+
+    def industri_input_clear(self):
+        self._look(JobLoc.box_industri_clear)
+        self._look(JobLoc.box_industri_input)
+        self._force(JobLoc.box_industri_clear)
+        expect(self._find(JobLoc.box_industri_input)).to_be_empty()
+
+    def check_lokasi_input(self):
+        self._touch(JobLoc.box_lokasi_input)
+        expect(self._find(JobLoc.box_lokasi_input)).to_be_visible()
+
+        self._click(JobLoc.box_lokasi_input)
+        expect(self._find(JobLoc.box_lokasi_input)).to_be_focused()
+
+    def lokasi_input_type(self, text: str):
+        self._type(JobLoc.box_lokasi_input, text)
+        expect(self._find(JobLoc.box_lokasi_input)).not_to_be_empty()
+
+    def lokasi_input_clear(self):
+        self._look(JobLoc.box_lokasi_clear)
+        self._click(JobLoc.box_lokasi_clear)
+        expect(self._find(JobLoc.box_lokasi_input)).to_be_empty()
+
+    def check_skill_input(self):
+        self._touch(JobLoc.box_skill_input)
+        expect(self._find(JobLoc.box_skill_input)).to_be_visible()
+
+        self._click(JobLoc.box_skill_input)
+        expect(self._find(JobLoc.box_skill_input)).to_be_focused()
+
+    def skill_input_type(self, text: str):
+        self._type(JobLoc.box_skill_input, text)
+        expect(self._find(JobLoc.box_skill_input)).not_to_be_empty()
+
+    def skill_input_clear(self):
+        self._look(JobLoc.box_skill_clear)
+        self._click(JobLoc.box_skill_clear)
+        expect(self._find(JobLoc.box_skill_input)).to_be_empty()

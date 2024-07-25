@@ -7,11 +7,23 @@ class JobLoc:
     btn_clear = "#bersihkanBtn"
     btn_apply = "#terapkanBtn"
 
-    textbox_position = "name=keyword"
-    textbox_company = "name=company_industries"
-    textbox_location = "name=locations"
-    text_boxes = [textbox_position, textbox_company, textbox_location]
-
+    # Search Input Field
+    box_position_input = "#posInput"
+    box_position_clear = "(//span[@role='button'])[1]"
+    box_position_search = "(//span[@aria-label='search'])[1]"
+    box_company_input = "#compInput"
+    box_company_clear = "(//span[@role='button'])[2]"
+    box_company_search = "(//span[@role='button'])[2]"
+    box_industri_input = "[placeholder='Cari Industri']"
+    box_industri_clear = "(//span[@class='anticon anticon-close-circle'])[1]"
+    box_industri_search = "(//span[@role='button'])[3]"
+    box_lokasi_input = "[placeholder='Cari Lokasi']"
+    box_lokasi_clear = "(//span[@class='ant-input-clear-icon'])[2]"
+    box_lokasi_search = "(//span[@role='button'])[4]"
+    box_skill_input = "[placeholder='Cari Kemampuan']"
+    box_skill_clear = "(//span[@role='button'])[5]"
+    box_skill_search = "(//span[@role='button'])[5]"
+    
     checkbox_full = "[value='Full-Time']"
     checkbox_part = "[value='Part-Time']"
     checkbox_intern = "[value='Internship']"

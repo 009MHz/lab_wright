@@ -49,3 +49,29 @@ class TestJobPageSmoke:
             job_page.check_job_cards_easyapply()
             job_page.check_job_cards_msib()
 
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Input Field Search Validation")
+    def test_input_search(self, page):
+        with allure.step("1. Navigate to the Job page"):
+            job_page = JobPage(page)
+            job_page.open_job_page()
+        with allure.step("2. Check each input field availability"):
+            job_page.check_posisi_input()
+            job_page.check_company_input()
+            job_page.check_industri_input()
+            job_page.check_lokasi_input()
+            job_page.check_skill_input()
+        with allure.step("3. Insert text on the each input field"):
+            job_page.posisi_input_type("Written from playwright, on Posisi field")
+            job_page.company_input_type("Written from playwright, on Company field")
+            job_page.industri_input_type("Written from playwright, on Industri field")
+            job_page.lokasi_input_type("Written from playwright, on Lokasi field")
+            job_page.skill_input_type("Written from playwright, on Kemampuan field")
+        with allure.step("3. Clear the text from each input field"):
+            job_page.posisi_input_clear()
+            job_page.company_input_clear()
+            job_page.industri_input_clear()
+            job_page.lokasi_input_clear()
+            job_page.skill_input_clear()
+
