@@ -1,4 +1,4 @@
-name: Playwright Pipeline Tests
+name: Run tests and publish report
 
 on:
   push:
@@ -8,18 +8,14 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 jobs:
-  tests:
+  test-and-publish:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up JDK
-      uses: actions/setup-java@v3
-      with:
-        distribution: zulu
-        java-version: 17
+    - name: Checkout code
+      uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -31,7 +27,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Install playwright browsers
+    - name: Ensure browsers are installed
       run: python -m playwright install --with-deps
 
     - name: Run tests
@@ -60,4 +56,4 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: gh-pages
-        publish_dir: gh-pages
+        publish_dir: allure-history
