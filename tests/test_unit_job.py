@@ -111,3 +111,24 @@ class TestJobPageSmoke:
             job_page.contract_uncheck()
             job_page.scholar_uncheck()
             job_page.partner_uncheck()
+
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.feature("Filter", "Checkbox")
+    @allure.title("'Tipe Pengaturan Kerja' Check Validation")
+    def test_arrangement_checkboxes(self, page):
+        with allure.step("1. Navigate to the Job page"):
+            job_page = JobPage(page)
+            job_page.open_job_page()
+        with allure.step("2. Check each Tipe Pengaturan KErja Checkbox availability"):
+            job_page.hybrid_presence()
+            job_page.on_site_presence()
+            job_page.remote_presence()
+        with allure.step("3. Click on each checkboxes"):
+            job_page.hybrid_check()
+            job_page.on_site_check()
+            job_page.remote_check()
+        with allure.step("4. Uncheck all checkboxes"):
+            job_page.hybrid_uncheck()
+            job_page.on_site_uncheck()
+            job_page.remote_uncheck()

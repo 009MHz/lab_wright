@@ -297,4 +297,45 @@ class JobPage(BasePage):
         self._click(JobLoc.checkbox_partner)
         expect(self._find(JobLoc.checkbox_partner)).not_to_be_checked()
 
-    
+    """Tipe Pengaturan Kerja Section"""
+    def hybrid_presence(self):
+        self._look(JobLoc.checkbox_hybrid)
+        expect(self._find(JobLoc.checkbox_hybrid)).to_be_visible()
+
+    def hybrid_check(self):
+        self._touch(JobLoc.checkbox_hybrid)
+        self._find(JobLoc.checkbox_hybrid).check()
+        expect(self._find(JobLoc.checkbox_hybrid)).to_be_checked()
+
+    def hybrid_uncheck(self):
+        self._touch(JobLoc.checkbox_hybrid)
+        self._click(JobLoc.checkbox_hybrid)
+        expect(self._find(JobLoc.checkbox_hybrid)).not_to_be_checked()
+        
+    def on_site_presence(self):
+        self._look(JobLoc.checkbox_on_site)
+        expect(self._find(JobLoc.checkbox_on_site)).to_be_visible()
+
+    def on_site_check(self):
+        self._touch(JobLoc.checkbox_on_site)
+        self._find(JobLoc.checkbox_on_site).check()
+        expect(self._find(JobLoc.checkbox_on_site)).to_be_checked()
+
+    def on_site_uncheck(self):
+        self._touch(JobLoc.checkbox_on_site)
+        self._click(JobLoc.checkbox_on_site)
+        expect(self._find(JobLoc.checkbox_on_site)).not_to_be_checked()
+        
+    def remote_presence(self):
+        self._look(JobLoc.checkbox_remote)
+        expect(self._find(JobLoc.checkbox_remote)).to_be_visible()
+
+    def remote_check(self):
+        self._touch(JobLoc.checkbox_remote)
+        self._find(JobLoc.checkbox_remote).check()
+        expect(self._find(JobLoc.checkbox_remote)).to_be_checked()
+
+    def remote_uncheck(self):
+        self._touch(JobLoc.checkbox_remote)
+        self._click(JobLoc.checkbox_remote)
+        expect(self._find(JobLoc.checkbox_remote)).not_to_be_checked()
