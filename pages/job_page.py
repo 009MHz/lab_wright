@@ -11,14 +11,14 @@ class JobPage(BasePage):
     def open_job_page(self):
         self.page.goto(JobLoc.url)
 
-    def sort_control_check(self):
+    def sort_control_presence(self):
         self._look(JobLoc.sort_control)
         expect(self._find(JobLoc.sort_control)).to_be_visible()
 
     def sort_control_click(self):
         self._click(JobLoc.sort_control)
 
-    def sort_item_check(self):
+    def sort_item_presence(self):
         for item in JobLoc.sort_options:
             self._look(JobLoc.sort_control_expanded)
             expect(self._find(JobLoc.sort_control_expanded)).to_be_visible()
@@ -49,43 +49,43 @@ class JobPage(BasePage):
         self.page.wait_for_selector(locator, state='visible')
         expect(self._find(locator)).to_be_visible(timeout=3000), f"{component_name} is not visible for card {index}"
 
-    def check_job_cards_logo(self):
+    def job_cards_logo_presence(self):
         self._look(JobLoc.body_cards)
         total_cards = self._find(JobLoc.body_cards).count()
         for index in range(1, total_cards + 1):
             self._card_component(JobLoc.body_logo, 'logo', index)
 
-    def check_job_cards_company(self):
+    def job_cards_company_presence(self):
         self._look(JobLoc.body_cards)
         total_cards = self._find(JobLoc.body_cards).count()
         for index in range(1, total_cards + 1):
             self._card_component(JobLoc.body_company_name, 'company', index)
 
-    def check_job_cards_title(self):
+    def job_cards_title_presence(self):
         self._look(JobLoc.body_cards)
         total_cards = self._find(JobLoc.body_cards).count()
         for index in range(1, total_cards + 1):
             self._card_component(JobLoc.body_job_title, 'title', index)
 
-    def check_job_cards_location(self):
+    def job_cards_location_presence(self):
         self._look(JobLoc.body_cards)
         total_cards = self._find(JobLoc.body_cards).count()
         for index in range(1, total_cards + 1):
             self._card_component(JobLoc.body_job_location, 'location', index)
 
-    def check_job_cards_description(self):
+    def job_cards_description_presence(self):
         self._look(JobLoc.body_cards)
         total_cards = self._find(JobLoc.body_cards).count()
         for index in range(1, total_cards + 1):
             self._card_component(JobLoc.body_job_description, 'description', index)
 
-    def check_job_cards_industry(self):
+    def job_cards_industry_presence(self):
         self._look(JobLoc.body_cards)
         total_cards = self._find(JobLoc.body_cards).count()
         for index in range(1, total_cards + 1):
             self._card_component(JobLoc.body_job_industry, 'industry', index)
 
-    def check_job_cards_type(self):
+    def job_cards_type_presence(self):
         self._look(JobLoc.body_cards)
         total_cards = self._find(JobLoc.body_cards).count()
         for index in range(1, total_cards + 1):
@@ -97,7 +97,7 @@ class JobPage(BasePage):
         for index in range(1, total_cards + 1):
             self._card_component(JobLoc.body_job_daycount, 'daycount', index)
 
-    def check_job_cards_easyapply(self):
+    def job_cards_easyapply_presence(self):
         self._look(JobLoc.body_cards)
         total_cards = self._find(JobLoc.body_cards).count()
         for index in range(1, total_cards + 1):
@@ -106,7 +106,7 @@ class JobPage(BasePage):
                 continue
             self._card_component(JobLoc.body_job_easy_apply, 'easyapply', index)
 
-    def check_job_cards_msib(self):
+    def job_cards_msib_presence(self):
         self._look(JobLoc.body_cards)
         total_cards = self._find(JobLoc.body_cards).count()
         for index in range(1, total_cards + 1):
@@ -115,23 +115,23 @@ class JobPage(BasePage):
                 continue
             self._card_component(JobLoc.body_job_msib, 'msib', index)
 
-    def check_posisi_input(self):
+    def position_input_presence(self):
         self._touch(JobLoc.box_position_input)
         expect(self._find(JobLoc.box_position_input)).to_be_visible()
 
         self._click(JobLoc.box_position_input)
         expect(self._find(JobLoc.box_position_input)).to_be_focused()
 
-    def posisi_input_type(self, text: str):
+    def position_input_type(self, text: str):
         self._type(JobLoc.box_position_input, text)
         expect(self._find(JobLoc.box_position_input)).not_to_be_empty()
 
-    def posisi_input_clear(self):
+    def position_input_clear(self):
         self._look(JobLoc.box_position_clear)
         self._click(JobLoc.box_position_clear)
         expect(self._find(JobLoc.box_position_input)).to_be_empty()
 
-    def check_company_input(self):
+    def company_input_presence(self):
         self._touch(JobLoc.box_company_input)
         expect(self._find(JobLoc.box_company_input)).to_be_visible()
 
@@ -147,7 +147,7 @@ class JobPage(BasePage):
         self._click(JobLoc.box_company_clear)
         expect(self._find(JobLoc.box_company_input)).to_be_empty()
 
-    def check_industri_input(self):
+    def industri_input_presence(self):
         self._touch(JobLoc.box_industri_input)
         expect(self._find(JobLoc.box_industri_input)).to_be_visible()
 
@@ -163,7 +163,7 @@ class JobPage(BasePage):
         self._click(JobLoc.box_industri_clear)
         expect(self._find(JobLoc.box_industri_input)).to_be_empty()
 
-    def check_lokasi_input(self):
+    def lokasi_input_presence(self):
         self._touch(JobLoc.box_lokasi_input)
         expect(self._find(JobLoc.box_lokasi_input)).to_be_visible()
 
@@ -179,7 +179,7 @@ class JobPage(BasePage):
         self._click(JobLoc.box_lokasi_clear)
         expect(self._find(JobLoc.box_lokasi_input)).to_be_empty()
 
-    def check_skill_input(self):
+    def skill_input_presence(self):
         self._touch(JobLoc.box_skill_input)
         expect(self._find(JobLoc.box_skill_input)).to_be_visible()
 

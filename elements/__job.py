@@ -24,6 +24,7 @@ class JobLoc:
     box_skill_clear = "(//span[contains(@class, 'clear-icon')])[5]"
     box_skill_search = "(//span[@role='button'])[5]"
     
+    # Checkbox
     checkbox_full = "[value='Full-Time']"
     checkbox_part = "[value='Part-Time']"
     checkbox_intern = "[value='Internship']"
