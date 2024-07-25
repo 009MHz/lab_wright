@@ -37,7 +37,7 @@ jobs:
       run: playwright install
 
     - name: Install Allure CLI
-      run: pip install allure-cli
+      run: pip install allure-cli==2.13.2
 
     - name: Run tests
       run: |
