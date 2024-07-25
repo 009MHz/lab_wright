@@ -159,9 +159,11 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.box_industri_input)).not_to_be_empty()
 
     def industri_input_clear(self):
-        self._look(JobLoc.box_industri_clear)
-        self._look(JobLoc.box_industri_input)
+        self._click(JobLoc.box_industri_input)
+
+        self._find(JobLoc.box_industri_clear).focus()
         self._force(JobLoc.box_industri_clear)
+        self._click(JobLoc.box_industri_clear)
         expect(self._find(JobLoc.box_industri_input)).to_be_empty()
 
     def check_lokasi_input(self):
