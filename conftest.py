@@ -3,7 +3,6 @@ import pytest
 from playwright.sync_api import sync_playwright
 import allure
 
-
 def pytest_addoption(parser):
     """ pytest --option variables from shell
     --env:
@@ -38,11 +37,14 @@ def browser(playwright_instance):
     mode = os.getenv("mode")
     headless = os.getenv("headless") == "True"
 
-    video_dir = "videos"
+    video_dir = "reports/videos"
     if not os.path.exists(video_dir):
         os.makedirs(video_dir)
 
-    launch_args = {"headless": headless, "args": ["--start-maximized"]}
+    launch_args = {
+        "headless": headless,
+        "args": ["--start-maximized"]
+    }
 
     if mode == 'pipeline':
         browser = playwright_instance[browser_type].launch(**launch_args)
@@ -63,10 +65,19 @@ def page(browser):
     video_option = os.getenv("video", "retain-on-failure")  # Defaulting to retain-on-failure
     screenshot_option = os.getenv("screenshot", "only-on-failure")  # Defaulting to only-on-failure
     full_page_screenshot = os.getenv("full_page_screenshot", "off") == "on"
+    headless = os.getenv("headless") == "True"
 
-    context = browser.new_context(
-        record_video_dir="videos" if video_option != "off" else None
-    )
+    if headless:
+        context = browser.new_context(
+            viewport={"width": 1920, "height": 1080},
+            record_video_dir="reports/videos" if video_option != "off" else None
+        )
+    else:
+        context = browser.new_context(
+            no_viewport=True,
+            record_video_dir="reports/videos" if video_option != "off" else None
+        )
+
     page = context.new_page()
     yield page
 
