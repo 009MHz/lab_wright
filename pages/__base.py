@@ -26,6 +26,10 @@ class BasePage:
         self._touch(locator, timeout=timeout)
         self._find(locator).click()
 
+    def _double_click(self, locator: str, timeout: int = 10000):
+        self._touch(locator, timeout=timeout)
+        self._find(locator).dblclick()
+
     def _force(self, locator: str, timeout: int = 10000):
         self._look(locator, timeout)
         self._find(locator).click(force=True)
