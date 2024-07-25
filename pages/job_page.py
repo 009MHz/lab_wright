@@ -159,9 +159,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.box_industri_input)).not_to_be_empty()
 
     def industri_input_clear(self):
-        self._click(JobLoc.box_industri_input)
-
-        self._find(JobLoc.box_industri_clear).focus()
         self._force(JobLoc.box_industri_clear)
         self._click(JobLoc.box_industri_clear)
         expect(self._find(JobLoc.box_industri_input)).to_be_empty()
@@ -178,7 +175,7 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.box_lokasi_input)).not_to_be_empty()
 
     def lokasi_input_clear(self):
-        self._look(JobLoc.box_lokasi_clear)
+        self._force(JobLoc.box_lokasi_clear)
         self._click(JobLoc.box_lokasi_clear)
         expect(self._find(JobLoc.box_lokasi_input)).to_be_empty()
 
@@ -194,6 +191,6 @@ class JobPage(BasePage):
         expect(self._find(JobLoc.box_skill_input)).not_to_be_empty()
 
     def skill_input_clear(self):
-        self._look(JobLoc.box_skill_clear)
+        self._force(JobLoc.box_skill_clear)
         self._click(JobLoc.box_skill_clear)
         expect(self._find(JobLoc.box_skill_input)).to_be_empty()
