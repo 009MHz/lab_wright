@@ -3,12 +3,13 @@ from pages.job_page import JobPage
 import allure
 
 
-@allure.feature("Job Page")
+@allure.epic("Job Page")
 @allure.story("Job Page Smoke Test")
 class TestJobPageSmoke:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Sorting Control Test Validation")
+    @allure.feature("Sort")
     def test_sort_control(self, page):
         with allure.step("1. Navigate to the Job page"):
             job_page = JobPage(page)
@@ -20,6 +21,7 @@ class TestJobPageSmoke:
 
     @pytest.mark.positive
     @pytest.mark.smoke
+    @allure.feature("Filter", "Main", "Easy Apply", "MSIB")
     @allure.title("Main Filter button Validation")
     def test_main_filter(self, page):
         with allure.step("1. Navigate to the Job page"):
@@ -33,6 +35,7 @@ class TestJobPageSmoke:
 
     @pytest.mark.positive
     @pytest.mark.smoke
+    @allure.feature("Carousel", "Job Card")
     @allure.title("Main Job Card Validation")
     def test_job_cards(self, page):
         with allure.step("1. Navigate to the Job page"):
@@ -51,6 +54,7 @@ class TestJobPageSmoke:
 
     @pytest.mark.positive
     @pytest.mark.smoke
+    @allure.feature("Filter", "Auto Complete", "Input")
     @allure.title("Input Field Search Validation")
     def test_input_search(self, page):
         with allure.step("1. Navigate to the Job page"):
@@ -77,6 +81,7 @@ class TestJobPageSmoke:
 
     @pytest.mark.positive
     @pytest.mark.smoke
+    @allure.feature("Filter", "Checkbox")
     @allure.title("'Tipe Pekerjaan' Check Validation")
     def test_tipe_pekerjaan_checkboxes(self, page):
         with allure.step("1. Navigate to the Job page"):
