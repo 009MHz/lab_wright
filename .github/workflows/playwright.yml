@@ -30,7 +30,7 @@ jobs:
     - name: Install playwright browsers
       run: python -m playwright install --with-deps
 
-    - name: Run tests
+    - name: Test execution
       run: |
         pytest --env=test --mode=pipeline --headless --alluredir=allure-results -n=auto --screenshot=only-on-failure --video=retain-on-failure
 
