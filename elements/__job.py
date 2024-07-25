@@ -24,7 +24,7 @@ class JobLoc:
     box_skill_clear = "(//span[contains(@class, 'clear-icon')])[5]"
     box_skill_search = "(//span[@role='button'])[5]"
     
-    # Checkbox
+    # Checkboxes Work Type
     checkbox_full = "[value='Full-Time']"
     checkbox_part = "[value='Part-Time']"
     checkbox_intern = "[value='Internship']"
@@ -32,7 +32,11 @@ class JobLoc:
     checkbox_volunteer = "[value='Volunteer']"
     checkbox_scholar = "[value='Scholarship']"
     checkbox_partner = "[value='Partnership']"
-    checkboxes = [checkbox_intern, checkbox_partner, checkbox_contract, checkbox_volunteer, checkbox_scholar, checkbox_full, checkbox_part]
+
+    # Checkboxes Work Arrangement
+    checkbox_hybrid = "[value='Hybrid']"
+    checkbox_on_site = "[value='On-site']"
+    checkbox_remote = "[value='Remote']"
 
     # Sort section
     sort_control = "xpath=(//div[@class='ant-select-selector'])[5]"
