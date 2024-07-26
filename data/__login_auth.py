@@ -1,43 +1,49 @@
+import os
 from playwright.sync_api import sync_playwright
+from pages.login_page import LoginPage
 
 
-class AuthStateManager:
-    def __init__(self, browser_type="chromium", headless=True):
+class AuthManager:
+    def __init__(self, browser_type="chromium"):
         self.browser_type = browser_type
-        self.headless = headless
         self.browser = None
         self.context = None
         self.page = None
 
     def _launch_browser(self):
         playwright = sync_playwright().start()
-        self.browser = getattr(playwright, self.browser_type).launch(headless=self.headless)
+        self.browser = getattr(playwright, self.browser_type).launch(headless=True)
         self.context = self.browser.new_context()
         self.page = self.context.new_page()
 
     def _close_browser(self):
         self.browser.close()
 
-    def login_and_save_state(self, login_url, username, password, state_path):
+    def login_and_save_state(self, username, password, state_path):
         self._launch_browser()
-        self.page.goto(login_url)
+        login = LoginPage(self.page)
+        print("Initiating the create session . . .\n")
 
-        # Perform login
-        self.page.get_by_label("Username or email address").fill(username)
-        self.page.get_by_label("Password").fill(password)
-        self.page.get_by_role("button", name="Sign in").click()
+        # Open login page and perform login
+        login.open_login_page(), print("Opening Login Page")
+        login.email_insert(username), print("Providing Valid Credentials")
+        login.next_button_click()
+        login.pass_insert(password)
+        login.next_button_click()
+        login.success_attempt(), print("Login Success, Creating the file . . .")
+
+        # Ensure the directory exists
+        os.makedirs(os.path.dirname(state_path), exist_ok=True)
 
         # Save authenticated state
         self.context.storage_state(path=state_path)
 
         self._close_browser()
 
-
 if __name__ == "__main__":
-    auth_manager = AuthStateManager(headless=False)
+    auth_manager = AuthManager()
     auth_manager.login_and_save_state(
-        login_url='https://github.com/login',
-        username='your_username',
-        password='your_password',
-        state_path='playwright/.auth/state.json'
+        username='simbah.test01@gmail.com',
+        password='germa069',
+        state_path='.auth/session.json'
     )
