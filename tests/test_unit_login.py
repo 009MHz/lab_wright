@@ -37,3 +37,13 @@ class TestSmokeLoginPage:
             login.sign_up_info_presence()
             login.google_button_presence()
 
+    def test_login_with_email(self, login):
+        with allure.step("1. Insert a valid email account"):
+            login.email_insert("simbah.test01@gmail.com")
+        with allure.step("2. Click on the 'Berikutnya' button"):
+            login.next_button_click()
+        with allure.step("3. Insert a valid email password"):
+            login.pass_insert("germa069")
+        with allure.step("4. Click on the 'Masuk' button"):
+            login.next_button_click()
+            login.success_attempt()
