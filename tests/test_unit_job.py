@@ -12,7 +12,7 @@ def job_page(page):
 
 @allure.epic("Job Page")
 @allure.story("Job Page Smoke Test")
-class TestJobPageSmoke:
+class TestSmokeJobPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Sorting Control Test Validation")
