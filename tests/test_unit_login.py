@@ -24,3 +24,16 @@ class TestSmokeLoginPage:
             login.next_button_presence()
             login.google_button_presence()
 
+    def test_password_init(self, login):
+        with allure.step("1. Insert a valid email account"):
+            login.email_insert("simbah.test01@gmail.com")
+        with allure.step("2. Click on the 'Berikutnya' button"):
+            login.next_button_click()
+        with allure.step("3. Verify the password component"):
+            login.pass_field_presence()
+            login.pass_reveal_presence()
+            login.forgot_pass_presence()
+            login.enter_button_presence()
+            login.sign_up_info_presence()
+            login.google_button_presence()
+
