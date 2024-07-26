@@ -33,8 +33,7 @@ class LoginPage(BasePage):
         expect(self._find(LogIn.button_submit)).to_have_text("Berikutnya")
 
     def next_button_click(self):
-        self._look(LogIn.button_submit)
-        self._click(LogIn.button_submit)
+        self._force(LogIn.button_submit)
         expect(self._find(LogIn.button_submit)).to_be_focused()
 
     def google_button_presence(self):
