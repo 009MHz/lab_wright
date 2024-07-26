@@ -19,10 +19,10 @@ class AuthManager:
     def _close_browser(self):
         self.browser.close()
 
-    def login_and_save_state(self, username, password, state_path):
+    def create_session(self, username, password, state_path):
         self._launch_browser()
         login = LoginPage(self.page)
-        print("Initiating the create session . . .\n")
+        print("Initiating create session . . .\n")
 
         # Open login page and perform login
         login.open_login_page(), print("Opening Login Page")
@@ -40,10 +40,11 @@ class AuthManager:
 
         self._close_browser()
 
+
 if __name__ == "__main__":
     auth_manager = AuthManager()
-    auth_manager.login_and_save_state(
+    auth_manager.create_session(
         username='simbah.test01@gmail.com',
         password='germa069',
-        state_path='data/.auth/session.json'
+        state_path='../data/.auth/session.json'
     )
