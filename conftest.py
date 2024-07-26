@@ -3,6 +3,7 @@ import pytest
 from playwright.sync_api import sync_playwright
 import allure
 
+
 def pytest_addoption(parser):
     """ pytest --option variables from shell
     --env:
