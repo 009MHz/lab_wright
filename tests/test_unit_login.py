@@ -15,8 +15,8 @@ def login(page):
 class TestSmokeLoginPage:
     @pytest.mark.positive
     @pytest.mark.smoke
-    @allure.title("Main Login Page Validation")
-    @allure.feature("Login, Email, Google")
+    @allure.title("First State Login Page Validation")
+    @allure.feature("Login", "Email", "Google")
     def test_login_init(self, login):
         with allure.step("1. Verify the login init page components"):
             login.main_title_presence()
@@ -24,6 +24,10 @@ class TestSmokeLoginPage:
             login.next_button_presence()
             login.google_button_presence()
 
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Second State Login Page Validation")
+    @allure.feature("Login", "Email", "Password")
     def test_password_init(self, login):
         with allure.step("1. Insert a valid email account"):
             login.email_insert("simbah.test01@gmail.com")
@@ -37,6 +41,10 @@ class TestSmokeLoginPage:
             login.sign_up_info_presence()
             login.google_button_presence()
 
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Valid email login validation")
+    @allure.feature("Login", "Email", "Password")
     def test_login_with_email(self, login):
         with allure.step("1. Insert a valid email account"):
             login.email_insert("simbah.test01@gmail.com")
