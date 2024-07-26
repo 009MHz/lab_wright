@@ -32,5 +32,5 @@ class BasePage:
 
     def _force(self, locator: str, timeout: int = 10000):
         self._look(locator, timeout)
-        self._find(locator).click(force=True)
+        self._find(locator).click(force=True, delay=500)
 
