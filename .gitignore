@@ -180,3 +180,4 @@ dmypy.json
 /log/
 
 reports
+data/.auth
