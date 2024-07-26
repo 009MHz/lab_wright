@@ -45,5 +45,5 @@ if __name__ == "__main__":
     auth_manager.login_and_save_state(
         username='simbah.test01@gmail.com',
         password='germa069',
-        state_path='.auth/session.json'
+        state_path='data/.auth/session.json'
     )
