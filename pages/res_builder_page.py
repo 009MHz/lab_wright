@@ -7,7 +7,18 @@ class Builder(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
 
-    # Todo 1: Informasi Resume Section
+    def load_page(self):
+        self.page.goto(BuildLoc.url)
+
+    """Informasi Resume Section"""
+    def page_title_presence(self):
+        self._look(BuildLoc.page_info_title)
+        expect(self._find(BuildLoc.page_info_title)).to_have_text("Buat Resume Terbaikmu")
+
+    def info_resume_title_presence(self):
+        self._look(BuildLoc.main_info_title)
+        expect(self._find(BuildLoc.main_info_title)).to_have_text("Informasi Resume")
+
     # Todo 2: Data Diri Section
     # Todo 3: Riwayat Pendidikan Section
     # Todo 4: Riwayat Pekerjaan Section
