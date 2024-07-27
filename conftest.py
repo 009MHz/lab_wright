@@ -117,6 +117,22 @@ def ses_checker(session_file):
         return False
 
 
+@pytest.fixture(scope='function')
+def auth_page(page):
+    auth_manager = AuthManager(browser_type="chromium")
+
+    if not os.path.exists(SESSION_FILE) or not ses_checker(SESSION_FILE):
+        auth_manager.create_session(
+            username='simbah.test01@gmail.com',
+            password='germa069',
+            state_path=SESSION_FILE
+        )
+
+    page.context.storage_state(path=SESSION_FILE)
+
+    yield page
+
+
 def _file_naming(page):
     title = re.sub(r'[^a-zA-Z0-9_\-]', '_', page.title())
     if not title:
