@@ -1,10 +1,15 @@
-import logging
+import json
+import time
 import os
 import pytest
 from playwright.sync_api import sync_playwright
 import allure
 from datetime import datetime
 import re
+from data.__login_auth import AuthManager
+
+
+SESSION_FILE = "data/.auth/session.json"
 
 
 def pytest_addoption(parser):
@@ -95,6 +100,21 @@ def page(browser):
         page.video.save_as(video_path)
 
     context.close()
+
+
+def ses_checker(session_file):
+    """Check if the session data contains non-expired cookies."""
+    try:
+        with open(session_file, 'r') as source:
+            data = json.load(source)
+        cookies = data.get("cookies", [])
+        current_time = time.time()
+        for cookie in cookies:
+            if cookie.get("expires", 0) < current_time:
+                return False
+        return True
+    except (json.JSONDecodeError, FileNotFoundError):
+        return False
 
 
 def _file_naming(page):
