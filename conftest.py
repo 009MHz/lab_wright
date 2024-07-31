@@ -2,12 +2,15 @@ import json
 import time
 import os
 import pytest
-from playwright.sync_api import sync_playwright
+from playwright.async_api import async_playwright
 import allure
 from datetime import datetime
 import re
+import logging
 from data.__login_auth import AuthManager
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 SESSION_FILE = "data/.auth/session.json"
 
@@ -35,13 +38,14 @@ def pytest_configure(config):
 
 
 @pytest.fixture(scope='session')
-def playwright_instance():
-    with sync_playwright() as playwright:
+async def playwright_instance():
+    logger.info("Initializing Playwright instance")
+    async with async_playwright() as playwright:
         yield playwright
 
 
 @pytest.fixture(scope='class')
-def browser(playwright_instance):
+async def browser(playwright_instance):
     browser_type = os.getenv("BROWSER", "chromium")
     mode = os.getenv("mode")
     headless = os.getenv("headless") == "True"
@@ -55,51 +59,48 @@ def browser(playwright_instance):
         "args": ["--start-maximized"]
     }
 
+    logger.info(f"Launching browser in {mode} mode")
     if mode == 'pipeline':
-        browser = playwright_instance[browser_type].launch(**launch_args)
+        browser = await playwright_instance[browser_type].launch(**launch_args)
     elif mode == 'local':
-        browser = playwright_instance[browser_type].launch(**launch_args)
+        browser = await playwright_instance[browser_type].launch(**launch_args)
     elif mode == 'grid':
         server_url = "http://remote-playwright-server:4444"
-        browser = playwright_instance[browser_type].connect(server_url)
+        browser = await playwright_instance[browser_type].connect(server_url)
     else:
         raise ValueError(f"Unsupported execution type: {mode}")
 
     yield browser
-    browser.close()
+    logger.info("Closing browser")
+    await browser.close()
 
 
 @pytest.fixture(scope='function')
-def page(browser):
+async def page(browser):
     video_option = os.getenv("video", "retain-on-failure")
     screenshot_option = os.getenv("screenshot", "only-on-failure")
     full_page_screenshot = os.getenv("full_page_screenshot", "off") == "on"
     headless = os.getenv("headless") == "True"
 
-    if headless:
-        context = browser.new_context(
-            viewport={"width": 1920, "height": 1080},
-            record_video_dir="reports/videos" if video_option != "off" else None
-        )
-    else:
-        context = browser.new_context(
-            no_viewport=True,
-            record_video_dir="reports/videos" if video_option != "off" else None
-        )
+    logger.info("Creating browser context")
+    context = await browser.new_context(
+        viewport={"width": 1920, "height": 1080} if headless else None,
+        record_video_dir="reports/videos" if video_option != "off" else None
+    )
 
-    page = context.new_page()
+    page = await context.new_page()
     yield page
 
+    logger.info("Taking screenshots and saving videos if necessary")
     if screenshot_option != "off":
-        screenshot_path = f"reports/screenshots/{_file_naming(page)}_screenshot.png"
-        page.screenshot(path=screenshot_path, full_page=full_page_screenshot)
+        screenshot_path = f"reports/screenshots/{await _file_naming(page)}_screenshot.png"
+        await page.screenshot(path=screenshot_path, full_page=full_page_screenshot)
 
     if video_option == "retain-on-failure" and hasattr(page, "video"):
-        video_path = f"reports/videos/{_file_naming(page)}_test_failed_video.webm"
-        page.close()
-        page.video.save_as(video_path)
+        video_path = f"reports/videos/{await _file_naming(page)}_test_failed_video.webm"
+        await page.video.save_as(video_path)
 
-    context.close()
+    await context.close()
 
 
 def ses_checker(session_file):
@@ -118,42 +119,45 @@ def ses_checker(session_file):
 
 
 @pytest.fixture(scope='function')
-def auth_page(page):
+async def auth_page(page):
     auth_manager = AuthManager(browser_type="chromium")
 
     if not os.path.exists(SESSION_FILE) or not ses_checker(SESSION_FILE):
-        auth_manager.create_session(
+        logger.info("Creating new session")
+        await auth_manager.create_session(
             username='simbah.test01@gmail.com',
             password='germa069',
             state_path=SESSION_FILE
         )
 
-    page.context.storage_state(path=SESSION_FILE)
-
+    await page.context.storage_state(path=SESSION_FILE)
     yield page
 
 
-def _file_naming(page):
-    title = re.sub(r'[^a-zA-Z0-9_\-]', '_', page.title())
+async def _file_naming(page):
+    title = re.sub(r'[^a-zA-Z0-9_\-]', '_', await page.title())
     if not title:
-        title = "Untitled"  # Fallback if title is empty after sanitization
+        title = "Untitled"
     timestamp = datetime.now().strftime("%d%m%y_%H%M%S")
     return f"{title}-{timestamp}"
 
 
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    if call.when == "call":
+    outcome = yield
+    report = outcome.get_result()
+    if report.when == "call" and report.failed:
         if "page" in item.funcargs:
             page = item.funcargs["page"]
             module_name = item.module.__name__.split('.')[-1]
             timestamp = datetime.now().strftime("%d%m%y_%H%M%S")
 
             screenshot_path = f"reports/screenshots/{module_name}-{timestamp}.png"
-            page.screenshot(path=screenshot_path, full_page=True)
+            page.loop.run_until_complete(page.screenshot(path=screenshot_path, full_page=True))
             allure.attach.file(screenshot_path, name=f"{module_name}-{timestamp}",
                                attachment_type=allure.attachment_type.PNG)
 
             if os.getenv("video") != "off" and hasattr(page, "video"):
-                video_path = page.video.path()
+                video_path = page.loop.run_until_complete(page.video.path())
                 allure.attach.file(video_path, name=f"{module_name}-{timestamp}",
                                    attachment_type=allure.attachment_type.WEBM)
