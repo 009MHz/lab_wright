@@ -1,6 +1,7 @@
 from pages.__base import BasePage
 from elements.__login import LogInLoc as LogIn
-from playwright.async_api import Page, expect
+from playwright.async_api import Page, expect, async_playwright
+
 
 class LoginPage(BasePage):
     def __init__(self, page: Page):
@@ -80,3 +81,20 @@ class LoginPage(BasePage):
     async def success_attempt(self):
         print(await self.page.title())
         await expect(self.page).not_to_have_url("login")
+
+
+# async def main():
+#     async with async_playwright() as p:
+#         browser = await p.chromium.launch(headless=False)
+#         context = await browser.new_context()
+#         page = await context.new_page()
+#
+#         login_page = LoginPage(page)
+#         await login_page.open_login_page()
+#         await login_page.main_title_presence()
+#
+#         await browser.close()
+#
+#
+# if __name__ == "__main__":
+#     asyncio.run(main())
