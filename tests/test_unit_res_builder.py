@@ -4,9 +4,9 @@ import allure
 
 
 @pytest.fixture(scope='function')
-def builder(auth_page):
-    builder = Builder(auth_page)
-    builder.load_page()
+async def builder(load_sess):
+    builder = Builder(load_sess)
+    await builder.load_page()
     return builder
 
 
@@ -17,6 +17,6 @@ class TestSmokeLoginPage:
     @pytest.mark.smoke
     @allure.title("Informasi Resume Validation")
     @allure.feature("Resume Builder", "Input Text", "Dropdown")
-    def test_informasi_resume_section(self, builder):
-        builder.page_title_presence()
-        builder.info_resume_title_presence()
+    async def test_informasi_resume_section(self, builder):
+        await builder.page_title_presence()
+        await builder.info_resume_title_presence()
