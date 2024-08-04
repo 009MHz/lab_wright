@@ -37,10 +37,8 @@ def pytest_configure(config):
 
 @pytest.fixture()
 async def playwright():
-    logger.debug("Starting Playwright")
     async with async_playwright() as playwright:
         yield playwright
-    logger.debug("Stopping Playwright")
 
 
 @pytest.fixture()
@@ -48,10 +46,6 @@ async def browser(playwright: Playwright):
     browser_type = os.getenv("BROWSER", "chromium")
     mode = os.getenv("mode")
     headless = os.getenv("headless") == "True"
-
-    # video_dir = "reports/videos"
-    # if not os.path.exists(video_dir):
-    #     os.makedirs(video_dir)
 
     launch_args = {
         "headless": headless,
@@ -76,6 +70,9 @@ async def browser(playwright: Playwright):
 
 @pytest.fixture()
 async def context(browser):
+    # video_dir = "reports/videos"
+    # if not os.path.exists(video_dir):
+    #     os.makedirs(video_dir)
     headless = os.getenv("headless")
 
     logger.info("Creating browser context")
