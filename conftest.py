@@ -1,9 +1,10 @@
+from playwright.async_api import async_playwright, Playwright
 import pytest
-import re
+import logging
 from datetime import datetime
 import os
-import logging
-from playwright.async_api import async_playwright, Playwright
+import allure
+import re
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
@@ -26,7 +27,7 @@ def pytest_addoption(parser):
     """
     parser.addoption('--env', action='store', default='test', help='')
     parser.addoption('--mode', help='', default='local')
-    parser.addoption('--headless', action='store_true', default="--headed", help='Run tests in headless mode')
+    parser.addoption('--headless', action='store_true', default=False, help='Run tests in headless mode')
 
 
 def pytest_configure(config):
@@ -64,58 +65,54 @@ async def browser(playwright: Playwright):
         raise ValueError(f"Unsupported execution type: {mode}")
 
     yield browser
-    logger.info("Closing browser")
     await browser.close()
 
 
 @pytest.fixture()
 async def context(browser):
-    # video_dir = "reports/videos"
-    # if not os.path.exists(video_dir):
-    #     os.makedirs(video_dir)
-    headless = os.getenv("headless")
+    headless = os.getenv("headless") == "True"
+    video_option = os.getenv("video", "retain-on-failure")
 
-    logger.info("Creating browser context")
-    if headless:
-        context_options = {
-            "viewport": {"width": 1920, "height": 1080}
-            # "record_video_dir": "reports/videos" if video_option != "off" else None
-        }
-    else:
-        context_options = {
-            "no_viewport": True
-            # "record_video_dir": "reports/videos" if video_option != "off" else None
-        }
+    context_options = {
+        "viewport": {"width": 1920, "height": 1080} if headless else None,
+        "no_viewport": not headless
+    }
+
+    if video_option != "off":
+        context_options["record_video_dir"] = "reports/videos"
+
     context = await browser.new_context(**context_options)
-    logger.info("Browser context created")
     yield context
-    pass
+    await context.close()
 
 
 @pytest.fixture()
 async def page(context):
-    video_option = os.getenv("video", "retain-on-failure")
     screenshot_option = os.getenv("screenshot", "only-on-failure")
     full_page_screenshot = os.getenv("full_page_screenshot", "off") == "on"
+
     page = await context.new_page()
     yield page
 
-    # logger.info("Taking screenshots and saving videos if necessary")
     # if screenshot_option != "off":
     #     screenshot_path = f"reports/screenshots/{await _file_naming(page)}_screenshot.png"
     #     await page.screenshot(path=screenshot_path, full_page=full_page_screenshot)
     #
+    # video_option = os.getenv("video", "retain-on-failure")
     # if video_option == "retain-on-failure" and hasattr(page, "video"):
     #     video_path = f"reports/videos/{await _file_naming(page)}_test_failed_video.webm"
     #     await page.video.save_as(video_path)
+
     await page.close()
 
+
 # async def _file_naming(page):
-#     title = re.sub(r'[^a-zA-Z0-9_\-]', '_', await page.title())
-#     if not title:
-#         title = "Untitled"
-#     timestamp = datetime.now().strftime("%d%m%y_%H%M%S")
-#     return f"{title}-{timestamp}"
+#     title = await page.title()
+#     title = re.sub(r'[^\w\s-]', '', title)
+#     title = re.sub(r'[-\s]+', '-', title).strip('-')
+#     timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+#     return f"{title}_{timestamp}"
+
 
 # @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 # def pytest_runtest_makereport(item, call):
@@ -125,14 +122,4 @@ async def page(context):
 #         if "page" in item.funcargs:
 #             page = item.funcargs["page"]
 #             module_name = item.module.__name__.split('.')[-1]
-#             timestamp = datetime.now().strftime("%d%m%y_%H%M%S")
-#
-#             screenshot_path = f"reports/screenshots/{module_name}-{timestamp}.png"
-#             page.loop.run_until_complete(page.screenshot(path=screenshot_path, full_page=True))
-#             allure.attach.file(screenshot_path, name=f"{module_name}-{timestamp}",
-#                                attachment_type=allure.attachment_type.PNG)
-#
-#             if os.getenv("video") != "off" and hasattr(page, "video"):
-#                 video_path = page.loop.run_until_complete(page.video.path())
-#                 allure.attach.file(video_path, name=f"{module_name}-{timestamp}",
-#                                    attachment_type=allure.attachment_type.WEBM)
+
