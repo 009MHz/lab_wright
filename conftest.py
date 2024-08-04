@@ -1,10 +1,7 @@
-from playwright.async_api import async_playwright, Playwright
 import pytest
+from playwright.async_api import async_playwright
 import logging
-from datetime import datetime
 import os
-import allure
-import re
 
 # Set up logging
 # logging.basicConfig(level=logging.DEBUG)
@@ -71,15 +68,10 @@ async def browser(playwright):
 @pytest.fixture()
 async def context(browser):
     headless = os.getenv("headless") == "True"
-    video_option = os.getenv("video", "retain-on-failure")
-
     context_options = {
         "viewport": {"width": 1920, "height": 1080} if headless else None,
         "no_viewport": not headless
     }
-
-    if video_option != "off":
-        context_options["record_video_dir"] = "reports/videos"
 
     context = await browser.new_context(**context_options)
     yield context
@@ -88,10 +80,6 @@ async def context(browser):
 
 @pytest.fixture()
 async def page(context):
-    screenshot_option = os.getenv("screenshot", "only-on-failure")
-    full_page_screenshot = os.getenv("full_page_screenshot", "off") == "on"
-
     page = await context.new_page()
     yield page
-
     await page.close()
