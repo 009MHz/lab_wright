@@ -94,32 +94,4 @@ async def page(context):
     page = await context.new_page()
     yield page
 
-    # if screenshot_option != "off":
-    #     screenshot_path = f"reports/screenshots/{await _file_naming(page)}_screenshot.png"
-    #     await page.screenshot(path=screenshot_path, full_page=full_page_screenshot)
-    #
-    # video_option = os.getenv("video", "retain-on-failure")
-    # if video_option == "retain-on-failure" and hasattr(page, "video"):
-    #     video_path = f"reports/videos/{await _file_naming(page)}_test_failed_video.webm"
-    #     await page.video.save_as(video_path)
-
     await page.close()
-
-
-# async def _file_naming(page):
-#     title = await page.title()
-#     title = re.sub(r'[^\w\s-]', '', title)
-#     title = re.sub(r'[-\s]+', '-', title).strip('-')
-#     timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
-#     return f"{title}_{timestamp}"
-
-
-# @pytest.hookimpl(tryfirst=True, hookwrapper=True)
-# def pytest_runtest_makereport(item, call):
-#     outcome = yield
-#     report = outcome.get_result()
-#     if report.when == "call" and report.failed:
-#         if "page" in item.funcargs:
-#             page = item.funcargs["page"]
-#             module_name = item.module.__name__.split('.')[-1]
-
