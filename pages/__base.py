@@ -1,11 +1,12 @@
+import logging
 from playwright.async_api import Page
 
 
 class BasePage:
-    def __init__(self, page: Page):
+    def __init__(self, page:Page):
         self.page = page
 
-    async def _find(self, locator: str):
+    def _find(self, locator: str):
         return self.page.locator(locator)
 
     async def _look(self, locator: str, timeout: int = 10000):
