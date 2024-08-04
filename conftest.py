@@ -7,7 +7,7 @@ import allure
 import re
 
 # Set up logging
-logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 SESSION_FILE = "data/.auth/session.json"
@@ -43,7 +43,7 @@ async def playwright():
 
 
 @pytest.fixture()
-async def browser(playwright: Playwright):
+async def browser(playwright):
     browser_type = os.getenv("BROWSER", "chromium")
     mode = os.getenv("mode")
     headless = os.getenv("headless") == "True"
@@ -53,7 +53,7 @@ async def browser(playwright: Playwright):
         "args": ["--start-maximized"]
     }
 
-    logger.info(f"Launching browser in {mode} mode")
+    # logger.info(f"Launching browser in {mode} mode")
     if mode == 'pipeline':
         browser = await playwright[browser_type].launch(**launch_args)
     elif mode == 'local':
