@@ -11,6 +11,7 @@ async def login(page):
 @allure.epic("Login Page")
 @allure.story("Login Page Smoke Test")
 class TestSmokeLoginPage:
+    @pytest.mark.asyncio
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("First State Login Page Validation")
@@ -22,6 +23,7 @@ class TestSmokeLoginPage:
             await login.next_button_presence()
             await login.google_button_presence()
 
+    @pytest.mark.asyncio
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Second State Login Page Validation")
@@ -39,6 +41,7 @@ class TestSmokeLoginPage:
             await login.sign_up_info_presence()
             await login.google_button_presence()
 
+    @pytest.mark.asyncio
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Valid email login validation")
