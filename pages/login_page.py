@@ -81,6 +81,7 @@ class LoginPage(BasePage):
     async def success_attempt(self):
         print(await self.page.title())
         await expect(self.page).not_to_have_url("login")
+        await self._look(LogIn.side_dashboard)
 
 
 # async def main():

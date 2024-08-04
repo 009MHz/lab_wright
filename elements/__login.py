@@ -22,3 +22,5 @@ class LogInLoc:
     new_account_cta = f"{new_account_message}//a"
 
     btn_google_sso = "//button[contains(@class, 'google')]"
+
+    side_dashboard = "//a[contains(@class, 'SideMenu') and contains(text(), 'Dasbor')]"
