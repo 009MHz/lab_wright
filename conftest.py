@@ -111,9 +111,9 @@ async def auth_context(browser):
 
 
 @pytest.fixture()
-async def auth_page(auth_context):
+async def page(context):
     screenshot_option = os.getenv("screenshot")
-    page = await auth_context.new_page()
+    page = await context.new_page()
     yield page
     if screenshot_option != "off":
         screenshot_path = f"reports/screenshots/{await page.title()}.png"
@@ -122,9 +122,9 @@ async def auth_page(auth_context):
 
 
 @pytest.fixture()
-async def page(context):
+async def auth_page(auth_context):
     screenshot_option = os.getenv("screenshot")
-    page = await context.new_page()
+    page = await auth_context.new_page()
     yield page
     if screenshot_option != "off":
         screenshot_path = f"reports/screenshots/{await page.title()}.png"
