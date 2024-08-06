@@ -96,7 +96,7 @@ class LoginPage(BasePage):
         logger.info("Providing Valid Emails")
         await self.pass_insert(password)
         await self.next_button_click()
-        logger.info("Providing Valid Emails")
+        logger.info("Providing Valid Password")
         await self.success_attempt()
 
 
