@@ -2,6 +2,8 @@ import pytest
 from playwright.async_api import async_playwright
 import logging
 import os
+import json
+import time
 from pages.login_page import LoginPage
 
 
@@ -9,7 +11,6 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 SESSION_FILE = "data/.auth/session.json"
 SESSION_DIR = os.path.dirname(SESSION_FILE)
-
 
 def pytest_addoption(parser):
     """
@@ -51,7 +52,6 @@ async def browser(playwright):
         "args": ["--start-maximized"]
     }
 
-    # logger.info(f"Launching browser in {mode} mode")
     if mode == 'pipeline':
         browser = await playwright[browser_type].launch(**launch_args)
     elif mode == 'local':
@@ -86,12 +86,28 @@ async def page(context):
     await page.close()
 
 
+def session_checker(session_file):
+    """Check if the session file contains expired cookies."""
+    if not os.path.exists(session_file):
+        return True
+
+    with open(session_file, "r") as file:
+        session_data = json.load(file)
+
+    current_time = time.time()
+    for cookie in session_data.get("cookies", []):
+        if cookie.get("expires", 0) <= current_time:
+            return True
+
+    return False
+
+
 @pytest.fixture()
 async def auth_context(browser):
-    if not os.path.exists(SESSION_FILE):
-        if not os.path.exists(SESSION_DIR):
-            os.makedirs(SESSION_DIR)
+    if not os.path.exists(SESSION_DIR):
+        os.makedirs(SESSION_DIR)
 
+    if not os.path.exists(SESSION_FILE) or session_checker(SESSION_FILE):
         context_options = {
             "viewport": {"width": 1920, "height": 1080} if os.getenv("headless") == "True" else None,
             "no_viewport": os.getenv("headless") != "True",
