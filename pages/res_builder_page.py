@@ -9,7 +9,6 @@ class Builder(BasePage):
 
     async def load_page(self):
         await self.page.goto(BuildLoc.url)
-        await self.page.reload()
 
     """Informasi Resume Section"""
     async def page_title_presence(self):
