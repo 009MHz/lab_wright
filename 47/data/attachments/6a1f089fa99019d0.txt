@@ -1,0 +1,4 @@
+INFO     pages.login_page:login_page.py:93 Opening Login Page
+INFO     pages.login_page:login_page.py:96 Providing Valid Emails
+INFO     pages.login_page:login_page.py:99 Providing Valid Password
+INFO     root:conftest.py:98 Login Success, Creating the file . . .
