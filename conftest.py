@@ -1,5 +1,4 @@
 import pytest
-from playwright.async_api import async_playwright
 import logging
 import os
 import json
@@ -7,6 +6,7 @@ import time
 import allure
 import asyncio
 from pages.login_page import LoginPage
+from playwright.async_api import async_playwright
 
 SESSION_FILE = "data/.auth/session.json"
 SESSION_DIR = os.path.dirname(SESSION_FILE)
@@ -99,7 +99,6 @@ async def auth_context(browser):
         await context.storage_state(path=SESSION_FILE)
         await context.close()
 
-    # Create a context with the session file
     headless = os.getenv("headless") == "True"
     context_options = {
         "viewport": {"width": 1920, "height": 1080} if headless else None,
@@ -147,12 +146,6 @@ def session_checker(session_file):
             return True
 
     return False
-
-
-
-
-
-
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
