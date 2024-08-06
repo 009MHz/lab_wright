@@ -4,10 +4,10 @@ import logging
 import os
 import json
 import time
+import allure
 from pages.login_page import LoginPage
 
-
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig()
 logger = logging.getLogger(__name__)
 SESSION_FILE = "data/.auth/session.json"
 SESSION_DIR = os.path.dirname(SESSION_FILE)
@@ -82,8 +82,12 @@ async def context(browser):
 
 @pytest.fixture()
 async def page(context):
+    screenshot_option = os.getenv("screenshot", "only-on-failure")
     page = await context.new_page()
     yield page
+    if screenshot_option != "off":
+        screenshot_path = f"reports/screenshots/{await page.title()}.png"
+        await page.screenshot(path=screenshot_path, full_page=True)
     await page.close()
 
 
@@ -140,3 +144,29 @@ async def auth(auth_context):
     page = await auth_context.new_page()
     yield page
     await page.close()
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+
+    if rep.when == "call" and rep.failed:
+        screenshot_path = os.path.join("reports/screenshots", f"{item.name}.png")
+        os.makedirs(os.path.dirname(screenshot_path), exist_ok=True)
+
+        # Attach the screenshot to the allure report
+        try:
+            page = item.funcargs.get('page')
+            if page:
+                # Await the screenshot coroutine
+                screenshot_path = f"reports/screenshots/{item.name}.png"
+                page.screenshot(path=screenshot_path, full_page=True)
+                allure.attach(
+                    page.screenshot(full_page=True),
+                    name='screenshot',
+                    attachment_type=allure.attachment_type.PNG
+                )
+                # allure.attach.file(screenshot_path, name="Screenshot", attachment_type=allure.attachment_type.PNG)
+        except Exception as e:
+            print(f"Failed to take screenshot: {e}")
