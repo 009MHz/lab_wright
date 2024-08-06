@@ -4,11 +4,11 @@ import logging
 import os
 from pages.login_page import LoginPage
 
-# Set up logging
-# logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
 
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 SESSION_FILE = "data/.auth/session.json"
+SESSION_DIR = os.path.dirname(SESSION_FILE)
 
 
 def pytest_addoption(parser):
@@ -87,27 +87,44 @@ async def page(context):
 
 
 @pytest.fixture()
-async def sess_init(browser):
-    context = await browser.new_context()
-    # Open new page
-    page = await context.new_page()
-    sess = LoginPage(page)
-    await sess.open_login_page()
-    print("Opening Login Page")
-    await sess.email_insert('simbah.test01@gmail.com')
-    print("Providing Valid Credentials")
-    await sess.next_button_click()
-    await sess.pass_insert('germa069')
-    await sess.next_button_click()
-    await sess.success_attempt()
-    print("Login Success, Creating the file . . .")
-    await context.storage_state(path=SESSION_FILE)
+async def auth_context(browser):
+    if not os.path.exists(SESSION_FILE):
+        if not os.path.exists(SESSION_DIR):
+            os.makedirs(SESSION_DIR)
+
+        context_options = {
+            "viewport": {"width": 1920, "height": 1080} if os.getenv("headless") == "True" else None,
+            "no_viewport": os.getenv("headless") != "True",
+        }
+        context = await browser.new_context(**context_options)
+        page = await context.new_page()
+        sess = LoginPage(page)
+        await sess.open_login_page()
+        logger.info("Opening Login Page")
+        await sess.email_insert('simbah.test01@gmail.com')
+        logger.info("Providing Valid Credentials")
+        await sess.next_button_click()
+        await sess.pass_insert('germa069')
+        await sess.next_button_click()
+        await sess.success_attempt()
+        logger.info("Login Success, Creating the file . . .")
+        await context.storage_state(path=SESSION_FILE)
+        await context.close()
+
+    # Create a context with the session file
+    headless = os.getenv("headless") == "True"
+    context_options = {
+        "viewport": {"width": 1920, "height": 1080} if headless else None,
+        "no_viewport": not headless,
+        "storage_state": SESSION_FILE,
+    }
+    context = await browser.new_context(**context_options)
     yield context
+    await context.close()
 
 
 @pytest.fixture()
-async def load_sess(sess_init, browser):
-    context = await browser.new_context(storage_state=SESSION_FILE)
-    page = await context.new_page()
+async def auth(auth_context):
+    page = await auth_context.new_page()
     yield page
-    await context.close()
+    await page.close()
