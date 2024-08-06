@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 SESSION_FILE = "data/.auth/session.json"
 SESSION_DIR = os.path.dirname(SESSION_FILE)
 
+
 def pytest_addoption(parser):
     """
     pytest --option variables from shell
@@ -115,14 +116,9 @@ async def auth_context(browser):
         context = await browser.new_context(**context_options)
         page = await context.new_page()
         sess = LoginPage(page)
-        await sess.open_login_page()
-        logger.info("Opening Login Page")
-        await sess.email_insert('simbah.test01@gmail.com')
-        logger.info("Providing Valid Credentials")
-        await sess.next_button_click()
-        await sess.pass_insert('germa069')
-        await sess.next_button_click()
-        await sess.success_attempt()
+        await sess.create_session(
+            'simbah.test01@gmail.com',
+            'germa069')
         logger.info("Login Success, Creating the file . . .")
         await context.storage_state(path=SESSION_FILE)
         await context.close()

@@ -1,6 +1,10 @@
 from pages.__base import BasePage
 from elements.__login import LogInLoc as LogIn
 from playwright.async_api import Page, expect, async_playwright
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 
 class LoginPage(BasePage):
@@ -82,6 +86,18 @@ class LoginPage(BasePage):
         print(await self.page.title())
         await expect(self.page).not_to_have_url("login")
         await self._look(LogIn.side_dashboard)
+        
+    """Initiating the Login Action"""
+    async def create_session(self, email: str, password: str):
+        await self.open_login_page()
+        logger.info("Opening Login Page")
+        await self.email_insert(email)
+        await self.next_button_click()
+        logger.info("Providing Valid Emails")
+        await self.pass_insert(password)
+        await self.next_button_click()
+        logger.info("Providing Valid Emails")
+        await self.success_attempt()
 
 
 # async def main():
