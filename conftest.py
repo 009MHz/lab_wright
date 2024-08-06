@@ -8,8 +8,6 @@ import allure
 import asyncio
 from pages.login_page import LoginPage
 
-logging.basicConfig()
-logger = logging.getLogger(__name__)
 SESSION_FILE = "data/.auth/session.json"
 SESSION_DIR = os.path.dirname(SESSION_FILE)
 
@@ -82,6 +80,49 @@ async def context(browser):
 
 
 @pytest.fixture()
+async def auth_context(browser):
+    if not os.path.exists(SESSION_DIR):
+        os.makedirs(SESSION_DIR)
+
+    if not os.path.exists(SESSION_FILE) or session_checker(SESSION_FILE):
+        context_options = {
+            "viewport": {"width": 1920, "height": 1080} if os.getenv("headless") == "True" else None,
+            "no_viewport": os.getenv("headless") != "True",
+        }
+        context = await browser.new_context(**context_options)
+        page = await context.new_page()
+        sess = LoginPage(page)
+        await sess.create_session(
+            'simbah.test01@gmail.com',
+            'germa069')
+        logging.info("Login Success, Creating the file . . .")
+        await context.storage_state(path=SESSION_FILE)
+        await context.close()
+
+    # Create a context with the session file
+    headless = os.getenv("headless") == "True"
+    context_options = {
+        "viewport": {"width": 1920, "height": 1080} if headless else None,
+        "no_viewport": not headless,
+        "storage_state": SESSION_FILE,
+    }
+    context = await browser.new_context(**context_options)
+    yield context
+    await context.close()
+
+
+@pytest.fixture()
+async def auth_page(auth_context):
+    screenshot_option = os.getenv("screenshot")
+    page = await auth_context.new_page()
+    yield page
+    if screenshot_option != "off":
+        screenshot_path = f"reports/screenshots/{await page.title()}.png"
+        await page.screenshot(path=screenshot_path, full_page=True)
+    await page.close()
+
+
+@pytest.fixture()
 async def page(context):
     screenshot_option = os.getenv("screenshot")
     page = await context.new_page()
@@ -108,47 +149,10 @@ def session_checker(session_file):
     return False
 
 
-@pytest.fixture()
-async def auth_context(browser):
-    if not os.path.exists(SESSION_DIR):
-        os.makedirs(SESSION_DIR)
-
-    if not os.path.exists(SESSION_FILE) or session_checker(SESSION_FILE):
-        context_options = {
-            "viewport": {"width": 1920, "height": 1080} if os.getenv("headless") == "True" else None,
-            "no_viewport": os.getenv("headless") != "True",
-        }
-        context = await browser.new_context(**context_options)
-        page = await context.new_page()
-        sess = LoginPage(page)
-        await sess.create_session(
-            'simbah.test01@gmail.com',
-            'germa069')
-        logger.info("Login Success, Creating the file . . .")
-        await context.storage_state(path=SESSION_FILE)
-        await context.close()
-
-    # Create a context with the session file
-    headless = os.getenv("headless") == "True"
-    context_options = {
-        "viewport": {"width": 1920, "height": 1080} if headless else None,
-        "no_viewport": not headless,
-        "storage_state": SESSION_FILE,
-    }
-    context = await browser.new_context(**context_options)
-    yield context
-    await context.close()
 
 
-@pytest.fixture()
-async def auth(auth_context):
-    screenshot_option = os.getenv("screenshot")
-    page = await auth_context.new_page()
-    yield page
-    if screenshot_option != "off":
-        screenshot_path = f"reports/screenshots/{await page.title()}.png"
-        await page.screenshot(path=screenshot_path, full_page=True)
-    await page.close()
+
+
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
