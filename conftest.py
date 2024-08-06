@@ -5,6 +5,7 @@ import os
 import json
 import time
 import allure
+import asyncio
 from pages.login_page import LoginPage
 
 logging.basicConfig()
@@ -82,7 +83,7 @@ async def context(browser):
 
 @pytest.fixture()
 async def page(context):
-    screenshot_option = os.getenv("screenshot", "only-on-failure")
+    screenshot_option = os.getenv("screenshot")
     page = await context.new_page()
     yield page
     if screenshot_option != "off":
@@ -141,8 +142,12 @@ async def auth_context(browser):
 
 @pytest.fixture()
 async def auth(auth_context):
+    screenshot_option = os.getenv("screenshot")
     page = await auth_context.new_page()
     yield page
+    if screenshot_option != "off":
+        screenshot_path = f"reports/screenshots/{await page.title()}.png"
+        await page.screenshot(path=screenshot_path, full_page=True)
     await page.close()
 
 
@@ -151,22 +156,20 @@ def pytest_runtest_makereport(item, call):
     outcome = yield
     rep = outcome.get_result()
 
-    if rep.when == "call" and rep.failed:
+    if rep.when == "call": #  if rep.when == "call" and rep.failed: # config on fail only
         screenshot_path = os.path.join("reports/screenshots", f"{item.name}.png")
         os.makedirs(os.path.dirname(screenshot_path), exist_ok=True)
 
-        # Attach the screenshot to the allure report
         try:
             page = item.funcargs.get('page')
             if page:
-                # Await the screenshot coroutine
-                screenshot_path = f"reports/screenshots/{item.name}.png"
-                page.screenshot(path=screenshot_path, full_page=True)
-                allure.attach(
-                    page.screenshot(full_page=True),
-                    name='screenshot',
-                    attachment_type=allure.attachment_type.PNG
-                )
-                # allure.attach.file(screenshot_path, name="Screenshot", attachment_type=allure.attachment_type.PNG)
+                loop = asyncio.get_event_loop()
+                loop.run_until_complete(page.screenshot(path=screenshot_path, full_page=True))
+                with open(screenshot_path, "rb") as image_file:
+                    allure.attach(
+                        image_file.read(),
+                        name="screenshot",
+                        attachment_type=allure.attachment_type.PNG
+                    )
         except Exception as e:
             print(f"Failed to take screenshot: {e}")
