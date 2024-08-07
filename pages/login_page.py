@@ -94,6 +94,7 @@ class LoginPage(BasePage):
         await self.open_login_page()
         logger.info("Opening Login Page")
         await self.email_insert(email)
+        await self.next_button_presence()
         await self.next_button_click()
         logger.info("Providing Valid Emails")
         await self.pass_insert(password)
