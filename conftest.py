@@ -10,6 +10,7 @@ from playwright.async_api import async_playwright
 
 SESSION_FILE = "data/.auth/session.json"
 SESSION_DIR = os.path.dirname(SESSION_FILE)
+logging.getLogger('asyncio').setLevel(logging.WARNING)
 
 
 def pytest_addoption(parser):
