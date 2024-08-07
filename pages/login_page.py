@@ -15,6 +15,7 @@ class LoginPage(BasePage):
         await self.page.goto(LogIn.url)
 
     """First Login State - Email """
+
     async def main_title_presence(self):
         await self._look(LogIn.main_title)
         await expect(self._find(LogIn.main_title)).to_be_visible()
@@ -46,6 +47,7 @@ class LoginPage(BasePage):
         await expect(self._find(LogIn.btn_google_sso)).to_have_text("Google")
 
     """Second Login State - Password"""
+
     async def pass_field_presence(self):
         await self._look(LogIn.pass_label)
         await expect(self._find(LogIn.pass_label)).to_have_text("Kata Sandi")
@@ -99,19 +101,3 @@ class LoginPage(BasePage):
         logger.info("Providing Valid Password")
         await self.success_attempt()
 
-
-# async def main():
-#     async with async_playwright() as p:
-#         browser = await p.chromium.launch(headless=False)
-#         context = await browser.new_context()
-#         page = await context.new_page()
-#
-#         login_page = LoginPage(page)
-#         await login_page.open_login_page()
-#         await login_page.main_title_presence()
-#
-#         await browser.close()
-#
-#
-# if __name__ == "__main__":
-#     asyncio.run(main())
