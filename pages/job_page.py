@@ -11,6 +11,7 @@ class JobPage(BasePage):
         await self.page.goto(JobLoc.url)
 
     """Job List Sorting Control"""
+
     async def sort_control_presence(self):
         await self._look(JobLoc.sort_control)
         await expect(self._find(JobLoc.sort_control)).to_be_visible()
@@ -49,7 +50,8 @@ class JobPage(BasePage):
     async def _card_component(self, locator, component_name, index):
         locator = f"({locator})[{index}]"
         await self._look(locator)
-        await expect(self._find(locator)).to_be_visible(timeout=3000), f"{component_name} is not visible for card {index}"
+        await expect(self._find(locator)).to_be_visible(
+            timeout=3000), f"{component_name} is not visible for card {index}"
 
     async def job_cards_logo_presence(self):
         await self._look(JobLoc.body_cards)
@@ -316,7 +318,7 @@ class JobPage(BasePage):
     async def on_site_uncheck(self):
         await self._click(JobLoc.checkbox_on_site)
         await expect(self._find(JobLoc.checkbox_on_site)).not_to_be_checked()
-        
+
     async def remote_presence(self):
         await self._look(JobLoc.checkbox_remote)
         await expect(self._find(JobLoc.checkbox_remote)).to_be_visible()
@@ -397,7 +399,6 @@ class JobPage(BasePage):
         await expect(self._find(JobLoc.checkbox_04_yr)).not_to_be_checked()
 
     """Pagination Section"""
-
     async def prev_chevron_presence(self):
         await self._look(JobLoc.page_previous)
         await expect(self._find(JobLoc.page_previous)).to_be_visible()
