@@ -1,43 +1,115 @@
-# Pre requisites
-Before getting started, make sure your local IDE & config follow the repository criteria.
-Run this command to install required dependencies
+# Guides
+
+### 1. Setting Up Your Environment
+
+#### Install Python
+Make sure you have Python installed on your machine. You can download it from [python.org](https://www.python.org/).
+
+#### Create a Virtual Environment
+It's good practice to use a virtual environment for your project.
+
 ```bash
-pip install -r requirements.txt
+python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 ```
 
-# Directory Structure:
-- `resources`: store the required assets from each test execution
-  - `/persona`: store any assets, locators / credentials for each account type
-  - `/landing`: store any assets/locators related to the main landing page testfile (https://www.karirlab.co/job)
-  - `/job`: store any assets/locators related to the main landing page testfile (https://www.karirlab.co/job)
-  - `/resume_builder`: store any assets/locators related to the main landing page testfile (https://www.karirlab.co/resume-builder)
+### 2. Install Playwright and Allure
 
+#### Install Playwright
+You can install Playwright using pip.
 
-- `tests`: store the created test scripts that will be collected into each feature/page directory:
-  - `tests/landing`: store any test cases related to the main landing page
-  - `tests/job`: store any test cases related to the JOB page
-  - `tests/resume_builder`: store any test cases related to the resume builder feature
+```bash
+pip install playwright
+```
 
-# Git Pattern
-### Branch Naming: 
-- `main`: main source branch
-- `beta`: in development branch, unpublished to *Production/main* <br>
-=> `beta__{page/feature_name}` => `beta__resume_builder`
+#### Install Allure Pytest
+Allure Pytest is required for generating the reports.
 
-### Commit pattern:
--  `{PARENT_JOB}-{subTaskName}-{subTaskName}: Action Name` <br>
-  => `JOB-listJob-filter: Define element locator`
+```bash
+pip install allure-pytest
+```
 
-## Guidance Template
-This is the simplest template to start from.
+#### Install Allure Command Line
+Follow the instructions to install Allure Command Line from [the official Allure website](https://docs.qameta.io/allure/#_get_started).
 
-- Get started from a simple task template in `tasks.robot`.
-  - Uses [Robot Framework](https://robocorp.com/docs/languages-and-frameworks/robot-framework/basics) syntax.
-- You can configure your robot `robot.yaml`.
-- You can configure dependencies in `conda.yaml`.
+For example, on macOS using Homebrew:
 
-## Learning materials
+```bash
+brew install allure
+```
 
-- [Robocorp Developer Training Courses](https://robocorp.com/docs/courses)
-- [Documentation links on Robot Framework](https://robocorp.com/docs/languages-and-frameworks/robot-framework)
-- [Example bots in Robocorp Portal](https://robocorp.com/portal)
+On Windows, download the binary from the [official site](https://docs.qameta.io/allure/#_get_started) and add it to your PATH.
+
+### 3. Initialize Playwright
+
+You need to install the necessary browser binaries.
+
+```bash
+python -m playwright install
+```
+
+### 4. Write Your First Test
+
+Create a new directory for your tests, e.g., `tests`. Inside this directory, create a file called `test_example.py` with the following content:
+
+```python
+import pytest
+from playwright.sync_api import sync_playwright
+
+@pytest.fixture(scope="session")
+def browser():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False)
+        yield browser
+        browser.close()
+
+def test_example(browser):
+    page = browser.new_page()
+    page.goto("https://example.com")
+    assert page.title() == "Example Domain"
+```
+
+### 5. Configure Allure
+
+Create a file named `pytest.ini` in your project root with the following content:
+
+```ini
+[pytest]
+addopts = --alluredir=allure-results
+```
+
+### 6. Run Your Tests
+
+Run your tests using pytest. This will generate the results for Allure.
+
+```bash
+pytest
+```
+
+### 7. Generate and Open Allure Report
+
+Generate the Allure report using the following command:
+
+```bash
+allure serve allure-results
+```
+
+This will start a local server and open the Allure report in your default web browser.
+
+### Summary
+
+1. **Set up Python environment:**
+   - Create a virtual environment.
+   - Install Playwright and Allure Pytest using pip.
+   - Install Allure Command Line.
+
+2. **Initialize Playwright:**
+   - Install necessary browser binaries.
+
+3. **Write test cases:**
+   - Use Playwright's API to create and run browser tests.
+   - Configure Allure to generate test reports.
+
+4. **Run tests and generate reports:**
+   - Use pytest to run tests.
+   - Use Allure to generate and view reports.
