@@ -4,8 +4,8 @@ import allure
 
 
 @pytest.fixture(scope='function')
-async def builder(load_sess):
-    builder = Builder(load_sess)
+async def builder(auth_page):
+    builder = Builder(auth_page)
     await builder.load_page()
     return builder
 
