@@ -36,6 +36,10 @@ def pytest_configure(config):
     os.environ["headless"] = str(config.getoption('headless'))
 
 
+def is_headless():
+    return os.getenv("headless") == "True"
+
+
 @pytest.fixture()
 async def playwright():
     async with async_playwright() as playwright:
@@ -46,7 +50,7 @@ async def playwright():
 async def browser(playwright):
     browser_type = os.getenv("BROWSER", "chromium")
     mode = os.getenv("mode")
-    headless = os.getenv("headless") == "True"
+    headless = is_headless()
 
     launch_args = {
         "headless": headless,
@@ -67,70 +71,55 @@ async def browser(playwright):
     await browser.close()
 
 
-@pytest.fixture()
-async def context(browser):
-    headless = os.getenv("headless") == "True"
+async def context_init(browser, storage_state=None):
+    headless = is_headless()
     context_options = {
         "viewport": {"width": 1920, "height": 1080} if headless else None,
         "no_viewport": not headless,
     }
 
-    context = await browser.new_context(**context_options)
-    yield context
-    await context.close()
+    if storage_state:
+        if not os.path.exists(SESSION_DIR):
+            os.makedirs(SESSION_DIR)
+
+        if not os.path.exists(SESSION_FILE) or session_checker(SESSION_FILE):
+            context = await browser.new_context(**context_options)
+            page = await context.new_page()
+            sess = LoginPage(page)
+            await sess.create_session('simbah.test01@gmail.com', 'germa069')
+            logging.info("Login Success, Creating the file . . .")
+            await context.storage_state(path=SESSION_FILE)
+            await context.close()
+
+        context_options["storage_state"] = SESSION_FILE
+
+    return await browser.new_context(**context_options)
 
 
 @pytest.fixture()
-async def auth_context(browser):
-    if not os.path.exists(SESSION_DIR):
-        os.makedirs(SESSION_DIR)
-
-    if not os.path.exists(SESSION_FILE) or session_checker(SESSION_FILE):
-        context_options = {
-            "viewport": {"width": 1920, "height": 1080} if os.getenv("headless") == "True" else None,
-            "no_viewport": os.getenv("headless") != "True",
-        }
-        context = await browser.new_context(**context_options)
-        page = await context.new_page()
-        sess = LoginPage(page)
-        await sess.create_session(
-            'simbah.test01@gmail.com',
-            'germa069')
-        logging.info("Login Success, Creating the file . . .")
-        await context.storage_state(path=SESSION_FILE)
-        await context.close()
-
-    headless = os.getenv("headless") == "True"
-    context_options = {
-        "viewport": {"width": 1920, "height": 1080} if headless else None,
-        "no_viewport": not headless,
-        "storage_state": SESSION_FILE,
-    }
-    context = await browser.new_context(**context_options)
-    yield context
-    await context.close()
-
-
-@pytest.fixture()
-async def page(context):
-    screenshot_option = os.getenv("screenshot")
+async def page(browser):
+    context = await context_init(browser)
     page = await context.new_page()
     yield page
-    if screenshot_option != "off":
-        screenshot_path = f"reports/screenshots/{await page.title()}.png"
-        await page.screenshot(path=screenshot_path, full_page=True)
+    await capture_handler(page)
     await page.close()
 
 
 @pytest.fixture()
-async def auth_page(auth_context):
-    screenshot_option = os.getenv("screenshot")
-    page = await auth_context.new_page()
+async def auth_page(browser):
+    context = await context_init(browser, storage_state=SESSION_FILE)
+    page = await context.new_page()
     yield page
+    await capture_handler(page)
+    await page.close()
+
+
+async def capture_handler(page):
+    screenshot_option = os.getenv("screenshot")
     if screenshot_option != "off":
         screenshot_path = f"reports/screenshots/{await page.title()}.png"
+        os.makedirs(os.path.dirname(screenshot_path), exist_ok=True)
         await page.screenshot(path=screenshot_path, full_page=True)
-    await page.close()
 
 
 def session_checker(session_file):
