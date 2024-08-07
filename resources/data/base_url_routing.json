@@ -1,0 +1,56 @@
+[
+    {"karirlab":[
+        {"prod":[
+            {"user": "https://karirlab.co"},
+            {"admin": "https://karirlab.co/admin"}
+        ]},
+        {"staging": [
+            {"user": "https://staging.karirlab.co"},
+            {"admin": "https://staging.karirlab.co/admin"}
+        ]},
+        {"dev": [
+            {"user": "https://dev.karirlab.co"},
+            {"admin": "https://dev.karirlab.co/admin"}
+        ]},
+        {"dev-a": [
+            {"user": "https://dev-a.karirlab.co"},
+            {"admin": "https://dev-a.karirlab.co/admin"}
+        ]},
+        {"dev-b": [
+            {"user": "https://dev-b.karirlab.co"},
+            {"admin": "https://dev-b.karirlab.co/admin"}
+        ]},
+        {"dev-c": [
+            {"user": "https://dev-c.karirlab.co"},
+            {"admin": "https://dev-c.karirlab.co/admin"}
+        ]}
+        ]
+    },
+    {"employers":[
+        {"prod":[
+            {"user": "https://employer.karirlab.co"},
+            {"admin": ""}
+        ]},
+        {"staging": [
+            {"user": "https://employer.staging.karirlab.co"},
+            {"admin": ""}
+        ]},
+        {"dev": [
+            {"user": "https://employer.dev.karirlab.co"},
+            {"admin": ""}
+        ]},
+        {"dev-a": [
+            {"user": "https://employer.dev-a.karirlab.co"},
+            {"admin": ""}
+        ]},
+        {"dev-b": [
+            {"user": "https://employer.dev-c.karirlab.co"},
+            {"admin": ""}
+        ]},
+        {"dev-c": [
+            {"user": "https://employer.dev-c.karirlab.co"},
+            {"admin": ""}
+        ]}
+        ]
+    }
+]

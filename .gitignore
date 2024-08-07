@@ -139,6 +139,8 @@ dist
 
 # Test Report
 reports/
+reports
+/reports/
 
 
 # Pycharm Config extension
@@ -155,7 +157,7 @@ reports/
 /.idea/runConfigurations/install_selenium_webdriver_jest_supertest___save_dev.xml
 
 # Selenium Cache
-/data
+#/data
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -295,7 +297,13 @@ dmypy.json
 .vscode/
 /test/reports/
 /reports/report.html
+/reports/log.html
+/reports/output.xml
 /reports/assets/style.css
 .vscode/settings.json
 *.pkl
 /log/
+
+# ParallelBot runner config
+.pabotsuitenames
+resources/data/account/credentials.jsona

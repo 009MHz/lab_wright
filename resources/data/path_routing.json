@@ -1,0 +1,47 @@
+[
+    {"karirlab":[
+        {"user": [
+            {"home": ""},
+            {"education": "/education-platform"},
+            {"about": "/about-us"},
+            {"resume_builder": "/resume-builder"},
+            {"resume_evaluation": "dashboard/upload-new-resume"},
+            {"event": "/event"},
+            {"job": "/job"},
+            {"company": "/company"},
+            {"event": "/event"},
+            {"article": "/article"},
+            {"dashboard": "/dashboard"},
+            {"contact": "/contact-us"},
+            {"career": "/company/karirlab"},
+            {"policy": "/privacy-policy"},
+            {"faq": "/faq"}
+            ]},
+        {"admin": [
+            {"dashboard": ""},
+            {"statistics": "/statistics"},
+            {"resume_builder": "/resume-builder"},
+            {"resume_evaluation": "/resume-review"},
+            {"article": "/articles"},
+            {"company": "/company"},
+            {"job": "/jobs"},
+            {"employer": "/employer"},
+            {"institution": "/institution"},
+            {"site_setting": "/site-setting"},
+            {"user": "/users"},
+            {"subs_employer": "/employer-subscription"},
+            {"subs_insitution": "/institution-subscription"},
+            {"subs_package": "/subscription-package"},
+            {"subs_feature": "/features"},
+            {"vouchers": "/vouchers"},
+            {"packages": "/packages"},
+            {"meta_industry": "/industry"},
+            {"meta_job_": "/job-function"},
+            {"meta_role": "/roles"},
+            {"meta_suggest": "/suggestions"},
+            {"profile": "/profile"},
+            {"logout": "/logout"}
+        ]}
+    ]},
+    {"employers":""}
+]

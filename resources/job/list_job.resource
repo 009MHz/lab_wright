@@ -33,7 +33,7 @@ ${sorter_name_desc}         xpath://div[@title='Nama (Z to A)']
 @{sort_options}     ${sorter_date_asc}     ${sorter_date_desc}    ${sorter_name_asc}     ${sorter_name_desc}
 
 # Page Body
-${body_cards}               xpath://div[contains(@class, 'jobCard__41hUw')]
+${body_cards}               xpath://div[contains(@class,'md-12')]
 ${body_logo}                //img[contains(@class, 'jobCard__image')]
 ${body_company_name}        //div[contains(@class, 'jobCard__content')]/span[contains(@class, 'secondary')]
 ${body_job_title}           //div[contains(@class, 'jobCard__content')]/h4
@@ -53,29 +53,34 @@ ${page_container}           //li[contains(@class, 'ant-pagination-item')]
 
 
 *** Keywords ***
-Retrieve all pages locator
-	${total_pages}=     Get Element Count    xpath:${page_container}
-	${pages}=   Create List
+Collect locators as array
+	${total_pages}=         Get Element Count       xpath:${page_container}
+	${pages}=               Create List
 	FOR    ${counter}    IN RANGE    ${total_pages}
-	    ${current_index}=    Convert To String   xpath:(${page_container})[${counter+1}]
-	    Append To List    ${pages}      ${current_index}
+	    ${current_index}=   Convert To String       xpath:(${page_container})[${counter+1}]
+	    Append To List      ${pages}                ${current_index}
 	END
-	[Return]    ${pages}
+	[Return]                ${pages}
 
-Retrieve job card component
-    ${card_index}=        Get Element Count    ${body_cards}
-    ${card_data}=        Create List
-    FOR    ${counter}    IN RANGE    ${card_index}
-        ${current_card}=        Create Dictionary
-        ${card_logo}=           Convert To String    xpath:(${body_logo})[${counter+1}]
-        ${card_company}=        Convert To String    xpath:(${body_company_name})[${counter+1}]
-        ${card_title}=          Convert To String    xpath:(${body_job_title})[${counter+1}]
-        ${card_location}=       Convert To String    xpath:(${body_job_location})[${counter+1}]
-        ${card_description}=    Convert To String    xpath:(${body_job_description})[${counter+1}]
-        ${card_industry}=       Convert To String    xpath:(${body_job_industry})[${counter+1}]
-        ${card_type}=           Convert To String    xpath:(${body_job_type})[${counter+1}]
-        ${card_daycount}=       Convert To String    xpath:(${body_job_daycount})[${counter+1}]
-        ${card_easy_apply}=     Convert To String    xpath:(${body_job_easy_apply})[${counter+1}]
+
+Whole cards counter
+    ${carousel_count}=      Get Element Count       ${body_cards}
+    [Return]                ${carousel_count}
+
+Create all job card locators
+    [Arguments]             ${total_items}
+    ${card_data}=           Create List
+    FOR    ${counter}    IN RANGE    ${total_items}
+        ${current_card}=    Create Dictionary
+        ${card_logo}=       Convert To String       xpath:(${body_logo})[${counter+1}]
+        ${card_company}=    Convert To String       xpath:(${body_company_name})[${counter+1}]
+        ${card_title}=      Convert To String       xpath:(${body_job_title})[${counter+1}]
+        ${card_location}=   Convert To String       xpath:(${body_job_location})[${counter+1}]
+        ${card_description}=    Convert To String   xpath:(${body_job_description})[${counter+1}]
+        ${card_industry}=   Convert To String       xpath:(${body_job_industry})[${counter+1}]
+        ${card_type}=       Convert To String       xpath:(${body_job_type})[${counter+1}]
+        ${card_daycount}=   Convert To String       xpath:(${body_job_daycount})[${counter+1}]
+        ${card_easy_apply}=     Convert To String   xpath:(${body_job_easy_apply})[${counter+1}]
 
         Set To Dictionary    ${current_card}    logo=${card_logo}
         Set To Dictionary    ${current_card}    company=${card_company}
@@ -89,6 +94,22 @@ Retrieve job card component
         Append To List      ${card_data}    ${current_card}
     END
     [Return]            ${card_data}
+
+Retrieve job card component
+    ${collected_cards}=     Create List
+    FOR    ${attempt}    IN RANGE    4
+        ${counter}=         Whole cards counter
+        IF  ${attempt} > 2
+            Fail            Unable to retrieve the elements after 3 attempts
+        ELSE IF    ${counter} != 0
+            ${collected_cards}=    Create all job card locators    ${counter}
+            Exit For Loop
+        ELSE    
+            Log    Attempt ${attempt + 1} failed. Retrying...    
+        END
+    END
+    [Return]    ${collected_cards}
+
 
 Check job card
 	[Arguments]        ${source}
