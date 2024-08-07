@@ -87,15 +87,6 @@ def test_example(browser):
     assert page.title() == "Example Domain"
 ```
 
-### Configure Allure
-
-Create a file named `pytest.ini` in your project root with the following content:
-
-```ini
-[pytest]
-addopts = --alluredir=allure-results
-```
-
 ## 4. Run Your Tests
 
 Run your tests using pytest. This will generate the results for Allure.
@@ -109,7 +100,7 @@ pytest -command-line1 --command-line2 --command-line3
 Generate the Allure report using the following command:
 
 ```bash
-allure serve allure-results
+allure serve <directory-name>
 ```
 
 This will start a local server and open the Allure report in your default web browser.
