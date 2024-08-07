@@ -156,11 +156,14 @@ pytest --headless --alluredir=reports
 
 *Running the test on headless mode using as much as possible worker, with 2x retry attempts with 3seconds delay, then extract the report*
 ```bash
-pytest --headless --alluredir=reports -n=auto --reruns=2 --reruns-delay=3 
+pytest --headless -n=auto --reruns=2 --reruns-delay=3 --alluredir=reports 
 ```
 
-
-**Running the tests on firefox headless and only capture the attachment when the test is failed**
+*Running the test on headless mode using as much as possible worker, with 2x retry attempts with 3seconds delay, with attachment captured avery test session cleared, then extract the report*
+```bash
+pytest --headless -n=auto --reruns=2 --reruns-delay=3 --screenshot=on --alluredir=reports 
+```
+**Running the tests on firefox headless and only capture the attachment when the test is failed*
 ```bash
 pytest --headless --browser=firefox --video=retain-on-failure --screenshot=only-on-failure --full-page-screenshot=on
 ```
