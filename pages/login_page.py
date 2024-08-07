@@ -38,6 +38,7 @@ class LoginPage(BasePage):
         await expect(self._find(LogIn.button_submit)).to_have_text("Berikutnya")
 
     async def next_button_click(self):
+        await self._touch(LogIn.button_submit)
         await self._force(LogIn.button_submit)
         await expect(self._find(LogIn.button_submit)).to_be_focused()
 
