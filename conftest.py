@@ -158,7 +158,7 @@ def pytest_runtest_makereport(item, call):
         os.makedirs(os.path.dirname(screenshot_path), exist_ok=True)
 
         try:
-            page = item.funcargs.get('page') or item.funcargs.get('auth')
+            page = item.funcargs.get('page') or item.funcargs.get('auth_page')
             if page:
                 loop = asyncio.get_event_loop()
                 loop.run_until_complete(page.screenshot(path=screenshot_path, full_page=True))
