@@ -55,5 +55,5 @@ jobs:
       if: always()
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: reporter
+        publish_branch: gh_pages
         publish_dir: allure-history
