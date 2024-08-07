@@ -30,5 +30,6 @@ async def test_get_started_link(page: Page):
 
 async def test_karirlab_title_page(page: Page):
     await page.goto("https://staging.karirlab.co/")
-    title = page.title()
+    # title = await page.title() # passed test
+    title = page.title()  # Intentional Fail
     assert title == "Awali Cerita Karirmu! | Mulai dari KarirLab | Tips Karir Terlengkap!"
