@@ -1,4 +1,4 @@
-name: Playwright Pipeline Test
+name: Pipeline Test
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   pages: write
 
 jobs:
-  test:
+  test-execution:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
