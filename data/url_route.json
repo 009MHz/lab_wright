@@ -1,0 +1,32 @@
+[
+    {"karirlab":[
+        {"prod":[
+            {"user": "https://karirlab.co"},
+            {"admin": "https://karirlab.co/admin"}
+        ]},
+        {"staging": [
+            {"user": "https://staging.karirlab.co"},
+            {"admin": "https://staging.karirlab.co/admin"}
+        ]},
+        {"dev": [
+            {"user": "https://dev.karirlab.co"},
+            {"admin": "https://dev.karirlab.co/admin"}
+        ]}
+      ]
+    },
+    {"employers":[
+        {"prod":[
+            {"user": "https://employer.karirlab.co"},
+            {"admin": ""}
+        ]},
+        {"staging": [
+            {"user": "https://employer.staging.karirlab.co"},
+            {"admin": ""}
+        ]},
+        {"dev": [
+            {"user": "https://employer.dev.karirlab.co"},
+            {"admin": ""}
+        ]}
+      ]
+    }
+]
