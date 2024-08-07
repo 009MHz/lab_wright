@@ -40,11 +40,11 @@ You can install Playwright using pip.
 pip install playwright
 ```
 
-### Install Allure Pytest
-Allure Pytest is required for generating the reports.
+### Install Package requirements
+Install defined requirements on the current repository 
 
 ```bash
-pip install allure-pytest
+pip install -r requirements.txt
 ```
 
 ### Install Allure Command Line
