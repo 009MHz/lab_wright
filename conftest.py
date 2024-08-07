@@ -1,14 +1,13 @@
 import pytest
-from playwright.async_api import async_playwright
 import logging
 import os
 import json
 import time
+import allure
+import asyncio
 from pages.login_page import LoginPage
+from playwright.async_api import async_playwright
 
-
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
 SESSION_FILE = "data/.auth/session.json"
 SESSION_DIR = os.path.dirname(SESSION_FILE)
 
@@ -81,9 +80,55 @@ async def context(browser):
 
 
 @pytest.fixture()
+async def auth_context(browser):
+    if not os.path.exists(SESSION_DIR):
+        os.makedirs(SESSION_DIR)
+
+    if not os.path.exists(SESSION_FILE) or session_checker(SESSION_FILE):
+        context_options = {
+            "viewport": {"width": 1920, "height": 1080} if os.getenv("headless") == "True" else None,
+            "no_viewport": os.getenv("headless") != "True",
+        }
+        context = await browser.new_context(**context_options)
+        page = await context.new_page()
+        sess = LoginPage(page)
+        await sess.create_session(
+            'simbah.test01@gmail.com',
+            'germa069')
+        logging.info("Login Success, Creating the file . . .")
+        await context.storage_state(path=SESSION_FILE)
+        await context.close()
+
+    headless = os.getenv("headless") == "True"
+    context_options = {
+        "viewport": {"width": 1920, "height": 1080} if headless else None,
+        "no_viewport": not headless,
+        "storage_state": SESSION_FILE,
+    }
+    context = await browser.new_context(**context_options)
+    yield context
+    await context.close()
+
+
+@pytest.fixture()
 async def page(context):
+    screenshot_option = os.getenv("screenshot")
     page = await context.new_page()
     yield page
+    if screenshot_option != "off":
+        screenshot_path = f"reports/screenshots/{await page.title()}.png"
+        await page.screenshot(path=screenshot_path, full_page=True)
+    await page.close()
+
+
+@pytest.fixture()
+async def auth_page(auth_context):
+    screenshot_option = os.getenv("screenshot")
+    page = await auth_context.new_page()
+    yield page
+    if screenshot_option != "off":
+        screenshot_path = f"reports/screenshots/{await page.title()}.png"
+        await page.screenshot(path=screenshot_path, full_page=True)
     await page.close()
 
 
@@ -103,40 +148,25 @@ def session_checker(session_file):
     return False
 
 
-@pytest.fixture()
-async def auth_context(browser):
-    if not os.path.exists(SESSION_DIR):
-        os.makedirs(SESSION_DIR)
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
 
-    if not os.path.exists(SESSION_FILE) or session_checker(SESSION_FILE):
-        context_options = {
-            "viewport": {"width": 1920, "height": 1080} if os.getenv("headless") == "True" else None,
-            "no_viewport": os.getenv("headless") != "True",
-        }
-        context = await browser.new_context(**context_options)
-        page = await context.new_page()
-        sess = LoginPage(page)
-        await sess.create_session(
-            'simbah.test01@gmail.com',
-            'germa069')
-        logger.info("Login Success, Creating the file . . .")
-        await context.storage_state(path=SESSION_FILE)
-        await context.close()
+    if rep.when == "call": #  if rep.when == "call" and rep.failed: # config on fail only
+        screenshot_path = os.path.join("reports/screenshots", f"{item.name}.png")
+        os.makedirs(os.path.dirname(screenshot_path), exist_ok=True)
 
-    # Create a context with the session file
-    headless = os.getenv("headless") == "True"
-    context_options = {
-        "viewport": {"width": 1920, "height": 1080} if headless else None,
-        "no_viewport": not headless,
-        "storage_state": SESSION_FILE,
-    }
-    context = await browser.new_context(**context_options)
-    yield context
-    await context.close()
-
-
-@pytest.fixture()
-async def auth(auth_context):
-    page = await auth_context.new_page()
-    yield page
-    await page.close()
+        try:
+            page = item.funcargs.get('page') or item.funcargs.get('auth')
+            if page:
+                loop = asyncio.get_event_loop()
+                loop.run_until_complete(page.screenshot(path=screenshot_path, full_page=True))
+                with open(screenshot_path, "rb") as image_file:
+                    allure.attach(
+                        image_file.read(),
+                        name="screenshot",
+                        attachment_type=allure.attachment_type.PNG
+                    )
+        except Exception as e:
+            print(f"Failed to take screenshot: {e}")
