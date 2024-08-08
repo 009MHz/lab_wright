@@ -33,7 +33,7 @@ class Builder(BasePage):
 
     async def info_resume_lang_input_presence(self):
         await self._touch(BuildLoc.info_lang_input)
-        await expect(self._find(BuildLoc.info_lang_input)).to_be_enabled()
+        await expect(self._find(BuildLoc.info_lang_input)).to_have_text("Bahasa Indonesia")
 
     async def info_resume_goal_title_presence(self):
         await self._touch(BuildLoc.info_goal_label)
@@ -50,6 +50,40 @@ class Builder(BasePage):
     async def info_resume_import_data_presence(self):
         await self._touch(BuildLoc.info_import_btn)
         await expect(self._find(BuildLoc.info_import_btn)).to_have_text(" Impor Data")
+
+    """Informasi Resume Section Interaction"""
+    async def info_resume_name_insert(self, text):
+        await self._touch(BuildLoc.info_name_input)
+        await self._type(BuildLoc.info_name_input, text)
+        await expect(self._find(BuildLoc.info_name_input)).to_have_value(text)
+
+    async def info_resume_lang_click(self):
+        await self._touch(BuildLoc.info_lang_input)
+        await self._force(BuildLoc.info_lang_input)
+        await expect(self._find(BuildLoc.info_lang_ID)).to_be_attached()
+        await expect(self._find(BuildLoc.info_lang_EN)).to_be_attached()
+
+    async def info_resume_select_bahasa(self):
+        await self._click(BuildLoc.info_lang_ID)
+        await expect(self._find(BuildLoc.info_lang_input)).to_contain_text("Bahasa Indonesia")
+
+    async def info_resume_select_language(self):
+        await self._click(BuildLoc.info_lang_EN)
+        await expect(self._find(BuildLoc.info_lang_input)).to_contain_text("Bahasa Inggris")
+
+    async def info_resume_goal_click(self):
+        await self._force(BuildLoc.info_goal_input)
+        await expect(self._find(BuildLoc.info_goal_lists)).to_be_attached()
+
+    async def info_resume_goal_items_interact(self):
+        total_goals = await self._find(BuildLoc.info_goal_items).count()
+        for index in range(1, total_goals + 1):
+            option = f"{BuildLoc.info_goal_items}[{index}]"
+            opt_label = await self._find(option).get_attribute('title')
+            print(f"Selecting: {opt_label}")
+            await self._click(option)
+            await expect(self._find(BuildLoc.info_goal_content)).to_have_attribute('title', opt_label)
+            await self.info_resume_goal_click()
 
     # Todo 2: Data Diri Section
     # Todo 3: Riwayat Pendidikan Section
