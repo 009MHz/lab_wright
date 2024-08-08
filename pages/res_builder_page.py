@@ -93,7 +93,63 @@ class Builder(BasePage):
         await self._click(BuildLoc.info_import_btn)
         await expect(self._find(BuildLoc.info_import_btn)).to_be_focused()
 
-    # Todo 2: Data Diri Section
+    """Informasi Resume Section Existence"""
+    async def self_info_title_presence(self):
+        await self._look(BuildLoc.self_info_title)
+        await expect(self._find(BuildLoc.self_info_title)).to_have_text("Data Diri")
+
+    async def self_info_main_form_presence(self):
+        await self._look(BuildLoc.self_info_main_form)
+        await expect(self._find(BuildLoc.self_info_main_form)).to_be_visible()
+
+    async def self_info_main_hints_presence(self):
+        await self._look(BuildLoc.self_info_main_hint)
+        await expect(self._find(BuildLoc.self_info_main_hint)).to_be_visible()
+
+    async def self_info_hints_title_presence(self):
+        await self._look(BuildLoc.self_info_hint_title)
+        await expect(self._find(BuildLoc.self_info_hint_title)).to_have_text('Tips Professional')
+
+    async def self_info_hints_desc_presence(self):
+        await self._look(BuildLoc.self_info_hint_desc)
+        await expect(self._find(BuildLoc.self_info_hint_desc)).to_have_text('Cantumkan informasi yang benar dan terbaru.')
+
+    async def self_info_hints_toggle_presence(self):
+        await self._look(BuildLoc.self_info_hint_btn)
+        await expect(self._find(BuildLoc.self_info_hint_btn)).to_be_enabled()
+
+    async def self_info_first_name_presence(self):
+        await self._look(BuildLoc.self_info_first_name_label)
+        await expect(self._find(BuildLoc.self_info_first_name_label)).to_have_text("Nama Depan")
+
+        await self._touch(BuildLoc.self_info_first_name_input)
+        await expect(self._find(BuildLoc.self_info_first_name_input)).to_be_empty()
+        await expect(self._find(BuildLoc.self_info_first_name_input)).to_have_attribute("placeholder", "John")
+        
+    async def self_info_last_name_presence(self):
+        await self._look(BuildLoc.self_info_last_name_label)
+        await expect(self._find(BuildLoc.self_info_last_name_label)).to_have_text("Nama Belakang")
+
+        await self._touch(BuildLoc.self_info_last_name_input)
+        await expect(self._find(BuildLoc.self_info_last_name_input)).to_be_empty()
+        await expect(self._find(BuildLoc.self_info_last_name_input)).to_have_attribute("placeholder", "Doe")
+        
+    async def self_info_email_presence(self):
+        await self._look(BuildLoc.self_info_email_label)
+        await expect(self._find(BuildLoc.self_info_email_label)).to_have_text("Email")
+
+        await self._touch(BuildLoc.self_info_email_input)
+        await expect(self._find(BuildLoc.self_info_email_input)).to_be_empty()
+        await expect(self._find(BuildLoc.self_info_email_input)).to_have_attribute("placeholder", "johndoe@gmail.com")
+        
+    async def self_info_phone_presence(self):
+        await self._look(BuildLoc.self_info_phone_label)
+        await expect(self._find(BuildLoc.self_info_phone_label)).to_have_text("No. Telepon")
+
+        await self._touch(BuildLoc.self_info_phone_input)
+        await expect(self._find(BuildLoc.self_info_phone_input)).to_be_empty()
+        await expect(self._find(BuildLoc.self_info_phone_input)).to_have_attribute("placeholder", "081234567890")
+
     # Todo 3: Riwayat Pendidikan Section
     # Todo 4: Riwayat Pekerjaan Section
     # Todo 5: Keahlian
