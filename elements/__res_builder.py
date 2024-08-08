@@ -26,11 +26,12 @@ class BuildLoc:
     # Modal Import Data - Resume Data
 
     # Section - Personal Information [empty]
-    self_info_toggle = "#selfInfoToggle"
     self_info_title = "#selfInfoTitle"
 
-    self_info_hint = "#selfInfoHint"
+    self_info_main_form = "#selfInfoToggle"
+    self_info_main_hint = "#selfInfoHint"
     self_info_hint_btn = "#selfInfoHintBtn"
+    self_info_hint_title = "(//span[@class='ant-typography']//strong)[1]"
     self_info_hint_desc = "#selfInfoHintDesc"
 
     self_info_first_name_label = "#selfInfoFirstNameLabel"
