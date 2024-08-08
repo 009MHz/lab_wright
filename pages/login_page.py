@@ -39,6 +39,7 @@ class LoginPage(BasePage):
 
     async def next_button_click(self):
         await self._force(LogIn.button_submit)
+        await self._force(LogIn.button_submit)
         await expect(self._find(LogIn.button_submit)).to_be_focused()
 
     async def google_button_presence(self):
@@ -94,6 +95,7 @@ class LoginPage(BasePage):
         await self.open_login_page()
         logger.info("Opening Login Page")
         await self.email_insert(email)
+        await self.next_button_presence()
         await self.next_button_click()
         logger.info("Providing Valid Emails")
         await self.pass_insert(password)
