@@ -16,7 +16,7 @@ class TestSmokeLoginPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Informasi Resume Existence Validation")
-    @allure.feature("Resume Builder", "Informasi Resume", "Input Text", "Dropdown")
+    @allure.feature("Resume Builder", "Informasi Resume")
     async def test_informasi_resume_existence(self, builder):
         await builder.page_title_presence()
         await builder.info_section_title_presence()
@@ -31,7 +31,7 @@ class TestSmokeLoginPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Informasi Resume Interaction Check")
-    @allure.feature("Resume Builder", "Informasi Resume", "Input Text", "Dropdown")
+    @allure.feature("Resume Builder", "Informasi Resume")
     async def test_informasi_resume_interaction(self, builder):
         with allure.step('Insert Text on the Nama Resume Input Field'):
             await builder.info_resume_name_insert("Written from playwright")
@@ -47,4 +47,22 @@ class TestSmokeLoginPage:
             await builder.info_resume_import_data_click()
             await builder.import_data_modal_presence()
 
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Data Diri Existence Validation")
+    @allure.feature("Resume Builder", "Data Diri")
+    async def test_data_diri_form_existence(self, builder):
+        await builder.self_info_title_presence()
+        await builder.self_info_first_name_presence()
+        await builder.self_info_last_name_presence()
+        await builder.self_info_email_presence()
+        await builder.self_info_phone_presence()
 
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Informasi Resume Existence Hints Validation")
+    @allure.feature("Resume Builder", "Data Diri", "Hints")
+    async def test_data_diri_hints_existence(self, builder):
+        await builder.self_info_hints_title_presence()
+        await builder.self_info_hints_desc_presence()
+        await builder.self_info_hints_toggle_presence()
