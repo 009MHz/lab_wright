@@ -1,13 +1,15 @@
-class resumeBuilderLoc:
+class BuildLoc:
     url = 'https://staging.karirlab.co/resume-builder'
 
     # Section Resume Information
-    info_title = "#resInfoTitle"
+    page_info_title = "//h3[contains(@class, 'FormLayout')]"
+    main_info_title = "#resInfoTitle"
     info_name_label = "#resInfoNameTitle"
     info_name_input = "#resInfoNameField"
     info_lang_label = "#resInfoLangTitle"
     info_lang_input = "#resInfoLangField"
     info_goal_label = "#resInfoGoalTitle"
+    info_goal_desc = "#resInfoGoalDesc"
     info_goal_input = "#resInfoGoalField"
     info_import_btn = "#resInfoImportBtn"
 
@@ -148,8 +150,6 @@ class resumeBuilderLoc:
     occu_company_name_label = "#companyNameLabel"
     occu_company_name_input = "#companyNameInput"
 
-    occu_company_name_label = "#companyNameLabel"
-    occu_company_name_input = "#companyNameInput"
 
     occu_company_country_label = "#companyCountryLabel"
     occu_company_country_select = "#companyCountrySelect"
