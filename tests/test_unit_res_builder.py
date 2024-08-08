@@ -43,5 +43,8 @@ class TestSmokeLoginPage:
         with allure.step('Select each Tujuan Pekerjaan Option'):
             await builder.info_resume_goal_click()
             await builder.info_resume_goal_items_interact()
+        with allure.step('Click on Impor Data button'):
+            await builder.info_resume_import_data_click()
+            await builder.import_data_modal_presence()
 
 

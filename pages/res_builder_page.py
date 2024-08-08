@@ -51,6 +51,10 @@ class Builder(BasePage):
         await self._touch(BuildLoc.info_import_btn)
         await expect(self._find(BuildLoc.info_import_btn)).to_have_text(" Impor Data")
 
+    async def import_data_modal_presence(self):
+        await self._look(BuildLoc.info_import_modal)
+        await expect(self._find(BuildLoc.info_import_modal)).to_be_visible()
+
     """Informasi Resume Section Interaction"""
     async def info_resume_name_insert(self, text):
         await self._touch(BuildLoc.info_name_input)
@@ -84,6 +88,10 @@ class Builder(BasePage):
             await self._click(option)
             await expect(self._find(BuildLoc.info_goal_content)).to_have_attribute('title', opt_label)
             await self.info_resume_goal_click()
+
+    async def info_resume_import_data_click(self):
+        await self._click(BuildLoc.info_import_btn)
+        await expect(self._find(BuildLoc.info_import_btn)).to_be_focused()
 
     # Todo 2: Data Diri Section
     # Todo 3: Riwayat Pendidikan Section
