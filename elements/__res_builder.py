@@ -7,11 +7,16 @@ class BuildLoc:
     info_name_label = "#resInfoNameTitle"
     info_name_input = "#resInfoNameField"
     info_lang_label = "#resInfoLangTitle"
-    info_lang_input = "#resInfoLangField"
+    info_lang_input = "[overlayid='resInfoLangLists']"
+    info_lang_ID = "#resInfoLangID"
+    info_lang_EN = "[title='Bahasa Inggris']"
     info_goal_label = "#resInfoGoalTitle"
     info_goal_desc = "#resInfoGoalDesc"
     info_goal_input = "#resInfoGoalField"
     info_import_btn = "#resInfoImportBtn"
+    info_goal_content = "//div[@overlayid='resInfoGoalLists']//div//span[contains(@class, 'item')]"
+    info_goal_lists = "#resInfoGoalLists"
+    info_goal_items = "(//div[contains(@class,'GoalItem')])"
 
     # Modal Import Data - My Profile
 
