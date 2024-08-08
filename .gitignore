@@ -161,14 +161,6 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
 # Jetbrain Configuration
 *.idea/
 *.iml
@@ -180,4 +172,5 @@ dmypy.json
 /log/
 
 reports
-data/.auth
+data/
+tests/reports
