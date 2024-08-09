@@ -11,12 +11,13 @@ class BuildLoc:
     info_lang_label = "#resInfoLangTitle"
     info_lang_input = "[overlayid='resInfoLangLists']"
     info_lang_ID = "#resInfoLangID"
-    info_lang_EN = "[title='Bahasa Inggris']"
+    info_lang_EN = "#resInfoLangEN"
 
     info_goal_label = "#resInfoGoalTitle"
     info_goal_desc = "#resInfoGoalDesc"
     info_goal_input = "#resInfoGoalField"
-    info_goal_content = "//div[@overlayid='resInfoGoalLists']//div//span[contains(@class, 'item')]"
+    info_goal_content_empty = "div[overlayid='resInfoGoalLists'] .ant-select-selection-placeholder"
+    info_goal_content_selected = "div[overlayid='resInfoGoalLists'] .ant-select-selection-item"
     info_goal_lists = "#resInfoGoalLists"
     info_goal_items = "(//div[contains(@class,'GoalItem')])"
 
@@ -47,11 +48,14 @@ class BuildLoc:
     self_info_phone_input = "#selfInfoPhoneInput"
 
     self_info_country_label = "#selfInfoCountryLabel"
-    self_info_country_input = "#selfInfoCountryInput"
+    self_info_country_input = "[name='country']"
+    self_info_country_content = "div[name='country'] .ant-select-selection-item"
     self_info_country_lists = "#selfInfoCountryLists"
 
     self_info_province_label = "#selfInfoProvinceLabel"
-    # belom ada self_info_province_input = "#selfInfoProvinceInput"  ----------------------
+    self_info_province_input = "[name='province']"
+    self_info_province_empty = "//div[@name='province']//span[contains(@class,'placeholder')]"
+    self_info_province_selected = "//div[@name='province']//span[contains(@class,'item')]"
     self_info_province_lists = "#selfInfoProvinceList"
 
     self_info_city_label = "#selfInfoCityLabel"
@@ -158,7 +162,6 @@ class BuildLoc:
 
     occu_company_name_label = "#companyNameLabel"
     occu_company_name_input = "#companyNameInput"
-
 
     occu_company_country_label = "#companyCountryLabel"
     occu_company_country_select = "#companyCountrySelect"

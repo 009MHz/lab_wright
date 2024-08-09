@@ -70,8 +70,8 @@ class TestSmokeLoginPage:
             await builder.self_info_phone_presence()
         with allure.step('Validating Negara'):
             await builder.self_info_country_presence()
-        # with allure.step('Validating Provinsi'):
-        #     await builder.self_info_prov_presence()
+        with allure.step('Validating Provinsi'):
+            await builder.self_info_prov_presence()
 
 
 

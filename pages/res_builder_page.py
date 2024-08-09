@@ -45,7 +45,7 @@ class Builder(BasePage):
 
     async def info_resume_goal_input_presence(self):
         await self._touch(BuildLoc.info_goal_input)
-        await expect(self._find(BuildLoc.info_goal_input)).to_be_enabled()
+        await expect(self._find(BuildLoc.info_goal_content_empty)).to_have_text('Pilih kategori pekerjaan')
 
     async def info_resume_import_data_presence(self):
         await self._touch(BuildLoc.info_import_btn)
@@ -86,7 +86,7 @@ class Builder(BasePage):
             opt_label = await self._find(option).get_attribute('title')
             print(f"Selecting: {opt_label}")
             await self._click(option)
-            await expect(self._find(BuildLoc.info_goal_content)).to_have_attribute('title', opt_label)
+            await expect(self._find(BuildLoc.info_goal_content_selected)).to_have_attribute('title', opt_label)
             await self.info_resume_goal_click()
 
     async def info_resume_import_data_click(self):
@@ -149,6 +149,20 @@ class Builder(BasePage):
         await self._touch(BuildLoc.self_info_phone_input)
         await expect(self._find(BuildLoc.self_info_phone_input)).to_be_empty()
         await expect(self._find(BuildLoc.self_info_phone_input)).to_have_attribute("placeholder", "081234567890")
+
+    async def self_info_country_presence(self):
+        await self._look(BuildLoc.self_info_country_label)
+        await expect(self._find(BuildLoc.self_info_country_label)).to_have_text("Negara")
+
+        await self._touch(BuildLoc.self_info_country_input)
+        await expect(self._find(BuildLoc.self_info_country_content)).to_have_attribute("title", "Indonesia")
+
+    async def self_info_prov_presence(self):
+        await self._look(BuildLoc.self_info_province_label)
+        await expect(self._find(BuildLoc.self_info_province_label)).to_have_text("Provinsi")
+
+        await self._touch(BuildLoc.self_info_country_input)
+        await expect(self._find(BuildLoc.self_info_province_empty)).to_have_text("Banten")
 
     # Todo 3: Riwayat Pendidikan Section
     # Todo 4: Riwayat Pekerjaan Section
