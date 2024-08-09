@@ -93,7 +93,7 @@ class Builder(BasePage):
         await self._click(BuildLoc.info_import_btn)
         await expect(self._find(BuildLoc.info_import_btn)).to_be_focused()
 
-    """Informasi Resume Section Existence"""
+    """Data Diri Section Existence"""
     async def self_info_title_presence(self):
         await self._look(BuildLoc.self_info_title)
         await expect(self._find(BuildLoc.self_info_title)).to_have_text("Data Diri")
@@ -200,6 +200,28 @@ class Builder(BasePage):
     async def self_info_simpan_btn_presence(self):
         await self._look(BuildLoc.self_info_submit_btn)
         await expect(self._find(BuildLoc.self_info_submit_btn)).to_be_enabled()
+
+    """Data Diri Section Interaction"""
+    async def self_info_collapse_form(self):
+        await self._click(BuildLoc.self_info_title)
+        await self._conceal(BuildLoc.self_info_main_hint)
+        await expect(self._find(BuildLoc.self_info_form_state)).to_have_attribute('aria-expanded', 'false')
+
+    async def self_info_expand_form(self):
+        await self._click(BuildLoc.self_info_title)
+        await self._look(BuildLoc.self_info_main_hint)
+        await expect(self._find(BuildLoc.self_info_form_state)).to_have_attribute('aria-expanded', 'true')
+
+    async def self_info_hints_click_show(self):
+        await self._click(BuildLoc.self_info_hint_btn)
+        await expect(self._find(BuildLoc.self_info_hint_btn)).to_have_attribute('aria-checked', 'true')
+        await expect(self._find(BuildLoc.self_info_hint_desc)).not_to_be_hidden()
+
+    async def self_info_hints_click_hide(self):
+        await self._click(BuildLoc.self_info_hint_btn)
+        await expect(self._find(BuildLoc.self_info_hint_btn)).to_have_attribute('aria-checked', 'false')
+        await expect(self._find(BuildLoc.self_info_hint_desc)).to_be_hidden()
+
 
     # Todo 3: Riwayat Pendidikan Section
     # Todo 4: Riwayat Pekerjaan Section

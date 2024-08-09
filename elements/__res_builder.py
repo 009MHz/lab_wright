@@ -30,6 +30,7 @@ class BuildLoc:
     self_info_title = "#selfInfoTitle"
 
     self_info_main_form = "#selfInfoToggle"
+    self_info_form_state = "#selfInfoToggle .ant-collapse-header"
     self_info_main_hint = "#selfInfoHint"
     self_info_hint_btn = "#selfInfoHintBtn"
     self_info_hint_title = "(//span[@class='ant-typography']//strong)[1]"
