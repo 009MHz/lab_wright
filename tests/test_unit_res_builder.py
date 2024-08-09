@@ -72,6 +72,15 @@ class TestSmokeLoginPage:
             await builder.self_info_country_presence()
         with allure.step('Validating Provinsi'):
             await builder.self_info_prov_presence()
+        with allure.step('Validating Kota'):
+            await builder.self_info_city_presence()
+        with allure.step('Validating Alamat'):
+            await builder.self_info_address_presence()
+        with allure.step('Validating Linkedin'):
+            await builder.self_info_linkedin_presence()
+        with allure.step('Validating Linkedin'):
+            await builder.self_info_portfolio_presence()
+
 
 
 

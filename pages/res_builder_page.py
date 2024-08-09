@@ -161,8 +161,41 @@ class Builder(BasePage):
         await self._look(BuildLoc.self_info_province_label)
         await expect(self._find(BuildLoc.self_info_province_label)).to_have_text("Provinsi")
 
-        await self._touch(BuildLoc.self_info_country_input)
+        await self._touch(BuildLoc.self_info_province_input)
+        await expect(self._find(BuildLoc.self_info_province_input)).to_be_empty()
         await expect(self._find(BuildLoc.self_info_province_empty)).to_have_text("Banten")
+        
+    async def self_info_city_presence(self):
+        await self._look(BuildLoc.self_info_city_label)
+        await expect(self._find(BuildLoc.self_info_city_label)).to_have_text("Kota")
+
+        await self._touch(BuildLoc.self_info_city_input)
+        await expect(self._find(BuildLoc.self_info_city_input)).to_be_empty()
+        await expect(self._find(BuildLoc.self_info_city_empty)).to_have_text("Tangerang")
+        
+    async def self_info_address_presence(self):
+        await self._look(BuildLoc.self_info_address_label)
+        await expect(self._find(BuildLoc.self_info_address_label)).to_have_text("Alamat")
+
+        await self._touch(BuildLoc.self_info_address_input)
+        await expect(self._find(BuildLoc.self_info_address_input)).to_be_empty()
+        await expect(self._find(BuildLoc.self_info_address_input)).to_have_attribute('placeholder', 'Gambir, 10150')
+        
+    async def self_info_linkedin_presence(self):
+        await self._look(BuildLoc.self_info_linkedin_label)
+        await expect(self._find(BuildLoc.self_info_linkedin_label)).to_have_text("LinkedIn")
+
+        await self._touch(BuildLoc.self_info_linkedin_input)
+        await expect(self._find(BuildLoc.self_info_linkedin_input)).to_be_empty()
+        await expect(self._find(BuildLoc.self_info_linkedin_input)).to_have_attribute('placeholder', "https://www.linkedin.com/in/johndoe/")
+        
+    async def self_info_portfolio_presence(self):
+        await self._look(BuildLoc.self_info_portfolio_label)
+        await expect(self._find(BuildLoc.self_info_portfolio_label)).to_have_text("Portofolio")
+
+        await self._touch(BuildLoc.self_info_portfolio_input)
+        await expect(self._find(BuildLoc.self_info_portfolio_input)).to_be_empty()
+        await expect(self._find(BuildLoc.self_info_portfolio_input)).to_have_attribute('placeholder', 'https://portofoliokamu.com')
 
     # Todo 3: Riwayat Pendidikan Section
     # Todo 4: Riwayat Pekerjaan Section
