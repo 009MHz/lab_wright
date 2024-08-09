@@ -10,8 +10,8 @@ async def builder(auth_page):
     return builder
 
 
-@allure.epic("Resume Builder Page")
-@allure.story("Resume Builder Smoke Test")
+@allure.epic("Resume Builder")
+@allure.story("Resume Builder/ Smoke Test")
 class TestSmokeLoginPage:
     @pytest.mark.positive
     @pytest.mark.smoke
@@ -68,29 +68,29 @@ class TestSmokeLoginPage:
             await builder.self_info_title_presence()
             await builder.self_info_collapse_form()
             await builder.self_info_expand_form()
-        # with allure.step('Validating Nama Depan'):
-        #     await builder.self_info_first_name_presence()
-        # with allure.step('Validating Nama Belakang'):
-        #     await builder.self_info_last_name_presence()
-        # with allure.step('Validating Email'):
-        #     await builder.self_info_email_presence()
-        # with allure.step('Validating No. Telepon'):
-        #     await builder.self_info_phone_presence()
-        # with allure.step('Validating Negara'):
-        #     await builder.self_info_country_presence()
-        # with allure.step('Validating Provinsi'):
-        #     await builder.self_info_prov_presence()
-        # with allure.step('Validating Kota'):
-        #     await builder.self_info_city_presence()
-        # with allure.step('Validating Alamat'):
-        #     await builder.self_info_address_presence()
-        # with allure.step('Validating Linkedin'):
-        #     await builder.self_info_linkedin_presence()
-        # with allure.step('Validating Linkedin'):
-        #     await builder.self_info_portfolio_presence()
-        # with allure.step('Validating Simpan Button'):
-        #     await builder.self_info_simpan_btn_presence()
-        #
-        #
-        #
-        #
+        with allure.step('Validating Nama Depan'):
+            await builder.self_info_first_name_presence()
+        with allure.step('Validating Nama Belakang'):
+            await builder.self_info_last_name_presence()
+        with allure.step('Validating Email'):
+            await builder.self_info_email_presence()
+        with allure.step('Validating No. Telepon'):
+            await builder.self_info_phone_presence()
+        with allure.step('Validating Negara'):
+            await builder.self_info_country_presence()
+        with allure.step('Validating Provinsi'):
+            await builder.self_info_prov_presence()
+        with allure.step('Validating Kota'):
+            await builder.self_info_city_presence()
+        with allure.step('Validating Alamat'):
+            await builder.self_info_address_presence()
+        with allure.step('Validating Linkedin'):
+            await builder.self_info_linkedin_presence()
+        with allure.step('Validating Linkedin'):
+            await builder.self_info_portfolio_presence()
+        with allure.step('Validating Simpan Button'):
+            await builder.self_info_simpan_btn_presence()
+
+
+
+

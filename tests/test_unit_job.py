@@ -10,8 +10,8 @@ async def job_page(page):
     return job_page
 
 
-@allure.epic("Job Page")
-@allure.story("Job Page Smoke Test")
+@allure.epic("Job")
+@allure.story("Job Page/ Smoke Test")
 class TestSmokeJobPage:
     @pytest.mark.positive
     @pytest.mark.smoke

@@ -10,8 +10,8 @@ async def login(page):
     return login
 
 
-@allure.epic("Login Page")
-@allure.story("Login Page Smoke Test")
+@allure.epic("Login")
+@allure.story("Login Page/ Smoke Test")
 class TestSmokeLoginPage:
     @pytest.mark.positive
     @pytest.mark.smoke
