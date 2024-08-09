@@ -48,18 +48,20 @@ class BuildLoc:
     self_info_phone_input = "#selfInfoPhoneInput"
 
     self_info_country_label = "#selfInfoCountryLabel"
-    self_info_country_input = "[name='country']"
+    self_info_country_input = "#selfInfoCountryInput"
     self_info_country_content = "div[name='country'] .ant-select-selection-item"
     self_info_country_lists = "#selfInfoCountryLists"
 
     self_info_province_label = "#selfInfoProvinceLabel"
-    self_info_province_input = "[name='province']"
+    self_info_province_input = "#rc_select_3"
     self_info_province_empty = "//div[@name='province']//span[contains(@class,'placeholder')]"
     self_info_province_selected = "//div[@name='province']//span[contains(@class,'item')]"
     self_info_province_lists = "#selfInfoProvinceList"
 
     self_info_city_label = "#selfInfoCityLabel"
     self_info_city_input = "#selfInfoCityInput"
+    self_info_city_empty = "//div[@name='city']//span[contains(@class,'placeholder')]"
+    self_info_city_selected = "//div[@name='city']//span[contains(@class,'item')]"
     self_info_city_lists = "#selfInfoCityList"
 
     self_info_address_label = "#selfInfoAddressLabel"
