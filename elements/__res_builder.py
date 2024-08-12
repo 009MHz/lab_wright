@@ -1,262 +1,154 @@
 class BuildLoc:
     url = 'https://staging.karirlab.co/resume-builder'
 
-    # Section Resume Information
-    page_info_title = "//h3[contains(@class, 'FormLayout')]"
-    main_info_title = "#resInfoTitle"
-
-    info_name_label = "#resInfoNameTitle"
-    info_name_input = "#resInfoNameField"
-
-    info_lang_label = "#resInfoLangTitle"
-    info_lang_input = "[overlayid='resInfoLangLists']"
-    info_lang_ID = "#resInfoLangID"
-    info_lang_EN = "#resInfoLangEN"
-
-    info_goal_label = "#resInfoGoalTitle"
-    info_goal_desc = "#resInfoGoalDesc"
-    info_goal_input = "#resInfoGoalField"
-    info_goal_content_empty = "div[overlayid='resInfoGoalLists'] .ant-select-selection-placeholder"
-    info_goal_content_selected = "div[overlayid='resInfoGoalLists'] .ant-select-selection-item"
-    info_goal_lists = "#resInfoGoalLists"
-    info_goal_items = "(//div[contains(@class,'GoalItem')])"
-
-    info_import_btn = "#resInfoImportBtn"
-    info_import_modal = "//div[contains(@class, 'importDataModal')]"
-    # Modal Import Data - My Profile
-    # Modal Import Data - Resume Data
-
-    # Section - Personal Information [empty]
-    self_info_title = "#selfInfoTitle"
-
-    self_info_main_form = "#selfInfoToggle"
-    self_info_form_state = "#selfInfoToggle .ant-collapse-header"
-    self_info_main_hint = "#selfInfoHint"
-    self_info_hint_btn = "#selfInfoHintBtn"
-    self_info_hint_title = "(//span[@class='ant-typography']//strong)[1]"
-    self_info_hint_desc = "#selfInfoHintDesc"
-
-    self_info_first_name_label = "#selfInfoFirstNameLabel"
-    self_info_first_name_input = "#selfInfoFirstNameInput"
-
-    self_info_last_name_label = "#selfInfoLastNameLabel"
-    self_info_last_name_input = "#selfInfoLastNameInput"
-
-    self_info_email_label = "#selfInfoEmailLabel"
-    self_info_email_input = "#selfInfoEmailInput"
-
-    self_info_phone_label = "#selfInfoPhoneLabel"
-    self_info_phone_input = "#selfInfoPhoneInput"
-
-    self_info_country_label = "#selfInfoCountryLabel"
-    self_info_country_input = "[name='country']"
-    self_info_country_content = "div[name='country'] .ant-select-selection-item"
-    self_info_country_lists = "#selfInfoCountryLists"
-    self_info_country_WNI = "#selfInfoCountryIndo"
-    self_info_country_WNA = "#selfInfoCountryNonIndo"
-
-    self_info_province_label = "#selfInfoProvinceLabel"
-    self_info_province_input = "//div[@name='province']//input"
-    self_info_province_empty = "//div[@name='province']//span[contains(@class,'placeholder')]"
-    self_info_province_selected = "//div[@name='province']//span[contains(@class,'item')]"
-    self_info_province_lists = "(//div[contains(@class,'holder-inner')])[2]"
-    self_info_province_item = "((//div[contains(@class,'holder-inner')])[2]//div[contains(@class,'item')])"
-
-    self_info_city_label = "#selfInfoCityLabel"
-    self_info_city_input = "#selfInfoCityInput"
-    self_info_city_empty = "//div[@name='city']//span[contains(@class,'placeholder')]"
-    self_info_city_selected = "//div[@name='city']//span[contains(@class,'item')]"
-    # self_info_city_lists = "//div[@id='selfInfoCityInput_list']// .rc-virtual-list-holder-inner"
-    # self_info_city_lists = "//div[@id='selfInfoCityInput_list']//div[@class='rc-virtual-list']"
-    self_info_city_lists = "(//div[contains(@class,'holder-inner')])[2]"
-    self_info_city_item = ""
-
-    self_info_address_label = "#selfInfoAddressLabel"
-    self_info_address_input = "#selfInfoAddressInput"
-
-    self_info_linkedin_label = "#selfInfoLinkedinLabel"
-    self_info_linkedin_input = "#selfInfoLinkedinInput"
-
-    self_info_portfolio_label = "#selfInfoPortfolioLabel"
-    self_info_portfolio_input = "#selfInfoPortfolioInput"
-
-    self_info_submit_btn = "#selfInfoSubmitBtn"
-
-    # Section - Personal Information [fill]
-    # belum_ada self_info_first_name_fill = "#selfInfoFirstNameFill"
-    # belum_ada self_info_last_name_fill = "#selfInfoLastNameFill"
-    # belum_ada self_info_email_fill = "#selfInfoEmailFill"
-    # belum_ada self_info_phone_fill = "#selfInfoPhoneFill"
-    # belum_ada self_info_country_fill = "#selfInfoCountryFill"
-    # belum_ada self_info_province_fill = "#selfInfoProvinceFill"
-    # belum_ada self_info_city_fill = "#selfInfoCityFill"
-    # belum_ada self_info_address_fill = "#selfInfoAddressFill"
-    # belum_ada self_info_linkedin_check_fill = "#selfInfoLinkedinFill"
-    # belum_ada self_info_portfolio_check_fill = "#selfInfoPortfolioFill"
-
-    # Section - Education History [empty]
-    edu_add_btn = "#educationAdd"
-
-    edu_toggle = "#educationToggle"
-    edu_title = "#educationTitle"
-
-    edu_hint_btn = "#educationHintBtn"
-    edu_hint_desc = "#educationHintDesc"
-
-    edu_degree_label = "#educationDegreeLabel"
-    edu_degree_input = "#educationDegreeInput"
-
-    edu_name_label = "#educationNameLabel"
-    edu_name_input = "#educationNameInput"
-
-    edu_faculty_label = "#educationFacultyLabel"
-    edu_faculty_input = "#educationFacultyInput"
-
-    edu_final_score_label = "#educationFinalScoreLabel"
-    edu_final_score_input = "#educationFinalScoreInput"
-
-    edu_max_final_score_label = "#educationMaxFinalScoreLabel"
-    edu_max_final_score_input = "#educationMaxFinalScoreInput"
-
-    edu_country_label = "#educationCountryLabel"
-    edu_country_input = "#educationCountryInput"
-    edu_country_lists = "#educationCountryList"
-
-    edu_province_label = "#educationProvinceLabel"
-    edu_province_input = "#educationProvinceInput"
-    edu_province_lists = "#educationProvinceList"
-
-    edu_city_label = "#educationCityLabel"
-    edu_city_input = "#educationCityInput"
-    edu_city_lists = "#educationCityList"
-
-    edu_start_label = "#educationStartLabel"
-    edu_start_input = "#educationStartInput"
-
-    edu_end_label = "#educationEndLabel"
-    edu_end_input = "#educationEndInput"
-
-    # belum_ada edu_active_checkbox = "#educationActiveCheckbox" --------------
-
-    edu_form_save_btn = "#educationFormSave"
-    edu_form_cancel_btn = "#educationFormCancel"
-
-    # Section - Education History [fill]
-    # belum_ada edu_item_fill = "#educationItemFill"
-    # belum_ada edu_item_check_fill = "#educationItemCheckFill"
-    # belum_ada edu_degree_fill = "#educationDegreeFill"
-    # belum_ada edu_name_fill = "#educationNameFill"
-    # belum_ada edu_faculty_fill = "#educationFacultyFill"
-    # belum_ada edu_score_check_fill = "#educationScoreCheckFill"
-    # belum_ada edu_final_score_fill = "#educationFinalScoreFill"
-    # belum_ada edu_max_final_score_fill = "#educationMaxFinalScoreFill"
-    # belum_ada edu_start_fill = "#educationStartFill"
-    # belum_ada edu_end_fill = "#educationEndFill"
-    # belum_ada edu_country_fill = "#educationCountryFill"
-    # belum_ada edu_province_fill = "#educationProvinceFill"
-    # belum_ada edu_city_fill = "#educationCityFill"
-
-    # Section - Occupation History [empty]
-    # belum_ada occu_add_btn = "#occuAdd" --------------------
-
-    # belum_ada occu_toggle = "#occuToggle" -----------------
-    # belum_ada occu_title = "#occuTitle" ------------------
-
-    occu_hint = "#occupationHint"
-    occu_hint_btn = "#occupationHintBtn"
-    occu_hint_desc = "#occupationHintDesc"
-
-    # belum_ada occu_position_label = "#occupationPositionLabel" -------------------
-    occu_position_input = "#occupationPositionInput"
-
-    occu_company_name_label = "#companyNameLabel"
-    occu_company_name_input = "#companyNameInput"
-
-    occu_company_country_label = "#companyCountryLabel"
-    occu_company_country_select = "#companyCountrySelect"
-    occu_company_country_lists = "#companyCountryList"
-
-    occu_company_province_label = "#companyProvinceLabel"
-    occu_company_province_input = "#companyProvinceInput"
-    occu_company_province_lists = "#companyProvinceList"
-
-    occu_company_city_label = "#companyCityLabel"
-    occu_company_city_input = "#companyCityInput"
-    occu_company_city_lists = "#companyCityList"
-
-    occu_status_label = "#occupationStatusLabel"
-    occu_status_input = "#occupationStatusInput"
-    occu_status_lists = "#occupationStatusList"
-
-    occu_start_label = "#occupationStartLabel"
-    occu_start_input = "#occupationStartInput"
-
-    occu_end_label = "#occupationEndLabel"
-    occu_end_input = "#occupationEndInput"
-    # belum_ada occu_active_checkbox = "#occupationActiveCheckbox" -----------------
-
-    occu_form_cancel = "#occupationFormCancel"
-    occu_form_save = "#occupationFormSave"
-
-    # Section - Occupation History [fill]
-
-    # Section - Proficiencies
-    # belum_ada proficiency_add_btn = "#proficiencyAdd" -------------------
-    # belum_ada proficiency_toggle = "#proficiencyToggle" -------------------
-    # belum_ada proficiency_title = "#proficiencyTitle" -------------------
-
-    proficiency_hint_btn = "#proficiencyHintBtn"
-    proficiency_hint_desc = "#proficiencyHintDesc"
-
-    proficiency_name_label = "#proficiencyNameLabel"
-    proficiency_name_input = "#proficiencyNameInput"
-
-    proficiency_level_label = "#proficiencyLevelLabel"
-    proficiency_level_input = "#proficiencyLevelInput"
-    proficiency_level_lists = "#proficiencyLevelLists"
-
-    proficiency_level_item_pemula = "//div[@id='proficiencyLevelItem' and @title='Pemula']"
-    proficiency_level_item_menengah = "//div[@id='proficiencyLevelItem' and @title='Menengah']"
-    proficiency_level_item_lanjut = "//div[@id='proficiencyLevelItem' and @title='Lanjut']"
-
-    proficiency_form_cancel = "#proficiencyFormCancel"
-    proficiency_form_save = "#proficiencyFormSave"
-
-    # Section - Achievements
-    # belum_ada achievement_add_btn = "#achievementAdd" -------------------
-
-    # belum_ada achievement_toggle = "#achievementToggle" -------------------
-    # belum_ada achievement_title = "#achievementTitle" -------------------
-
-    achievement_hint_btn = "#achievementHintBtn"
-    achievement_hint_desc = "#achievementHintDesc"
-
-    achievement_year_label = "#achievementYearLabel"
-    achievement_year_input = "#achievementYearInput"
-
-    achievement_name_label = "#achievementNameLabel"
-    achievement_name_input = "#achievementNameInput"
-
-    achievement_form_cancel = "#achievementFormCancel"
-    achievement_form_save = "#achievementFormSave"
-
-    # Section - Hobby
-    # belum_ada hobby_toggle = "#hobbyToggle" -------------------
-    # belum_ada hobby_title = "#hobbyTitle" -------------------
-
-    hobby_hint_btn = "#hobbyHintBtn"
-    hobby_hint_desc = "#hobbyHintDesc"
-
-    hobby_name_label = "#hobbyNameLabel"
-    hobby_name_input = "#hobbyNameInput"
-
-    hobby_form_cancel = "#hobbyFormCancel"
-    hobby_form_save = "#hobbyFormSave"
-
-    # Section Score & Information
-
-    # Section Styling
-
-    # Section - Resume Preview
-
-    # Section - Save Button
+    class PageInfo:
+        title = "//h3[contains(@class, 'FormLayout')]"
+        main_title = "#resInfoTitle"
+
+    class ResumeInfo:
+        name_label = "#resInfoNameTitle"
+        name_input = "#resInfoNameField"
+        lang_label = "#resInfoLangTitle"
+        lang_input = "[overlayid='resInfoLangLists']"
+        lang_id = "#resInfoLangID"
+        lang_en = "#resInfoLangEN"
+        goal_label = "#resInfoGoalTitle"
+        goal_desc = "#resInfoGoalDesc"
+        goal_input = "#resInfoGoalField"
+        goal_content_empty = "div[overlayid='resInfoGoalLists'] .ant-select-selection-placeholder"
+        goal_content_selected = "div[overlayid='resInfoGoalLists'] .ant-select-selection-item"
+        goal_lists = "#resInfoGoalLists"
+        goal_items = "(//div[contains(@class,'GoalItem')])"
+        import_btn = "#resInfoImportBtn"
+        import_modal = "//div[contains(@class, 'importDataModal')]"
+
+    class DataDiri:
+        title = "#selfInfoTitle"
+        main_form = "#selfInfoToggle"
+        form_state = "#selfInfoToggle .ant-collapse-header"
+        main_hint = "#selfInfoHint"
+        hint_btn = "#selfInfoHintBtn"
+        hint_title = "(//span[@class='ant-typography']//strong)[1]"
+        hint_desc = "#selfInfoHintDesc"
+        first_name_label = "#selfInfoFirstNameLabel"
+        first_name_input = "#selfInfoFirstNameInput"
+        last_name_label = "#selfInfoLastNameLabel"
+        last_name_input = "#selfInfoLastNameInput"
+        email_label = "#selfInfoEmailLabel"
+        email_input = "#selfInfoEmailInput"
+        phone_label = "#selfInfoPhoneLabel"
+        phone_input = "#selfInfoPhoneInput"
+        country_label = "#selfInfoCountryLabel"
+        country_input = "[name='country']"
+        country_content = "div[name='country'] .ant-select-selection-item"
+        country_lists = "#selfInfoCountryLists"
+        country_wni = "#selfInfoCountryIndo"
+        country_wna = "#selfInfoCountryNonIndo"
+        province_label = "#selfInfoProvinceLabel"
+        province_input = "//div[@name='province']//input"
+        province_empty = "//div[@name='province']//span[contains(@class,'placeholder')]"
+        province_selected = "//div[@name='province']//span[contains(@class,'item')]"
+        province_lists = "(//div[contains(@class,'holder-inner')])[2]"
+        province_item = "((//div[contains(@class,'holder-inner')])[2]//div[contains(@class,'item')])"
+        city_label = "#selfInfoCityLabel"
+        city_input = "#selfInfoCityInput"
+        city_empty = "//div[@name='city']//span[contains(@class,'placeholder')]"
+        city_selected = "//div[@name='city']//span[contains(@class,'item')]"
+        city_lists = "(//div[contains(@class,'holder-inner')])[2]"
+        address_label = "#selfInfoAddressLabel"
+        address_input = "#selfInfoAddressInput"
+        linkedin_label = "#selfInfoLinkedinLabel"
+        linkedin_input = "#selfInfoLinkedinInput"
+        portfolio_label = "#selfInfoPortfolioLabel"
+        portfolio_input = "#selfInfoPortfolioInput"
+        submit_btn = "#selfInfoSubmitBtn"
+
+    class EduHistory:
+        add_btn = "#educationAdd"
+        toggle = "#educationToggle"
+        title = "#educationTitle"
+        hint_btn = "#educationHintBtn"
+        hint_desc = "#educationHintDesc"
+        degree_label = "#educationDegreeLabel"
+        degree_input = "#educationDegreeInput"
+        name_label = "#educationNameLabel"
+        name_input = "#educationNameInput"
+        faculty_label = "#educationFacultyLabel"
+        faculty_input = "#educationFacultyInput"
+        final_score_label = "#educationFinalScoreLabel"
+        final_score_input = "#educationFinalScoreInput"
+        max_final_score_label = "#educationMaxFinalScoreLabel"
+        max_final_score_input = "#educationMaxFinalScoreInput"
+        country_label = "#educationCountryLabel"
+        country_input = "#educationCountryInput"
+        country_lists = "#educationCountryList"
+        province_label = "#educationProvinceLabel"
+        province_input = "#educationProvinceInput"
+        province_lists = "#educationProvinceList"
+        city_label = "#educationCityLabel"
+        city_input = "#educationCityInput"
+        city_lists = "#educationCityList"
+        start_label = "#educationStartLabel"
+        start_input = "#educationStartInput"
+        end_label = "#educationEndLabel"
+        end_input = "#educationEndInput"
+        form_save_btn = "#educationFormSave"
+        form_cancel_btn = "#educationFormCancel"
+
+    class JobHistory:
+        hint = "#occupationHint"
+        hint_btn = "#occupationHintBtn"
+        hint_desc = "#occupationHintDesc"
+        position_input = "#occupationPositionInput"
+        company_name_label = "#companyNameLabel"
+        company_name_input = "#companyNameInput"
+        company_country_label = "#companyCountryLabel"
+        company_country_select = "#companyCountrySelect"
+        company_country_lists = "#companyCountryList"
+        company_province_label = "#companyProvinceLabel"
+        company_province_input = "#companyProvinceInput"
+        company_province_lists = "#companyProvinceList"
+        company_city_label = "#companyCityLabel"
+        company_city_input = "#companyCityInput"
+        company_city_lists = "#companyCityList"
+        status_label = "#occupationStatusLabel"
+        status_input = "#occupationStatusInput"
+        status_lists = "#occupationStatusList"
+        start_label = "#occupationStartLabel"
+        start_input = "#occupationStartInput"
+        end_label = "#occupationEndLabel"
+        end_input = "#occupationEndInput"
+        form_cancel = "#occupationFormCancel"
+        form_save = "#occupationFormSave"
+
+    class Proficiency:
+        hint_btn = "#proficiencyHintBtn"
+        hint_desc = "#proficiencyHintDesc"
+        name_label = "#proficiencyNameLabel"
+        name_input = "#proficiencyNameInput"
+        level_label = "#proficiencyLevelLabel"
+        level_input = "#proficiencyLevelInput"
+        level_lists = "#proficiencyLevelLists"
+        level_item_pemula = "//div[@id='proficiencyLevelItem' and @title='Pemula']"
+        level_item_menengah = "//div[@id='proficiencyLevelItem' and @title='Menengah']"
+        level_item_lanjut = "//div[@id='proficiencyLevelItem' and @title='Lanjut']"
+        form_cancel = "#proficiencyFormCancel"
+        form_save = "#proficiencyFormSave"
+
+    class Achievements:
+        hint_btn = "#achievementHintBtn"
+        hint_desc = "#achievementHintDesc"
+        year_label = "#achievementYearLabel"
+        year_input = "#achievementYearInput"
+        name_label = "#achievementNameLabel"
+        name_input = "#achievementNameInput"
+        form_cancel = "#achievementFormCancel"
+        form_save = "#achievementFormSave"
+
+    class Hobby:
+        hint_btn = "#hobbyHintBtn"
+        hint_desc = "#hobbyHintDesc"
+        name_label = "#hobbyNameLabel"
+        name_input = "#hobbyNameInput"
+        form_cancel = "#hobbyFormCancel"
+        form_save = "#hobbyFormSave"
