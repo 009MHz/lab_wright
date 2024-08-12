@@ -17,7 +17,7 @@ class TestSmokeLoginPage:
     @pytest.mark.smoke
     @allure.title("Informasi Resume Existence Validation")
     @allure.feature("Informasi Resume")
-    async def test_informasi_resume_existence(self, builder):
+    async def test_informasi_resume_section(self, builder):
         with allure.step('1. Validating Page Header'):
             await builder.page_title_presence()
         with allure.step('2. Validating Section Header'):
@@ -47,7 +47,7 @@ class TestSmokeLoginPage:
     @pytest.mark.smoke
     @allure.title("Informasi Resume Hints Existence")
     @allure.feature("Data Diri", "Hints")
-    async def test_data_diri_hints_existence(self, builder):
+    async def test_data_diri_section_hints(self, builder):
         with allure.step('Validating Hints Component'):
             await builder.self_info_hints_title_presence()
             await builder.self_info_hints_desc_presence()
@@ -60,7 +60,7 @@ class TestSmokeLoginPage:
     @pytest.mark.smoke
     @allure.title("Data Diri Existence Validation")
     @allure.feature("Data Diri")
-    async def test_data_diri_form_existence(self, builder):
+    async def test_data_diri_section(self, builder):
         with allure.step('Validating Main Form Existence'):
             await builder.self_info_main_form_presence()
             await builder.self_info_main_hints_presence()
@@ -70,26 +70,42 @@ class TestSmokeLoginPage:
             await builder.self_info_expand_form()
         with allure.step('Validating Nama Depan'):
             await builder.self_info_first_name_presence()
+            await builder.self_info_first_name_insert('Mr. John')
         with allure.step('Validating Nama Belakang'):
             await builder.self_info_last_name_presence()
+            await builder.self_info_last_name_insert('Doe ,M.Sc')
         with allure.step('Validating Email'):
             await builder.self_info_email_presence()
+            await builder.self_info_email_insert('ali.nA_p3tr|nK0vA@yahoo.us')
         with allure.step('Validating No. Telepon'):
             await builder.self_info_phone_presence()
+            await builder.self_info_phone_insert('08987654321')
         with allure.step('Validating Negara'):
             await builder.self_info_country_presence()
+            await builder.self_info_click_country()
+            await builder.self_info_select_wna()
+            await builder.self_info_click_country()
+            await builder.self_info_select_wni()
         with allure.step('Validating Provinsi'):
             await builder.self_info_prov_presence()
+            await builder.self_info_prov_insert('Pap')
+            await builder.self_info_prov_click_all_prov()
         with allure.step('Validating Kota'):
             await builder.self_info_city_presence()
+            await builder.self_info_city_insert('Jakarta')
+            await builder.self_info_city_click_all_city()
         with allure.step('Validating Alamat'):
             await builder.self_info_address_presence()
+            await builder.self_info_address_insert("Jl. Belawan No.16, RT.18/RW.1, Cideng")
         with allure.step('Validating Linkedin'):
             await builder.self_info_linkedin_presence()
+            await builder.self_info_linkedin_insert("https://www.linkedin.com/company/karirlab")
         with allure.step('Validating Linkedin'):
             await builder.self_info_portfolio_presence()
+            await builder.self_info_portfolio_insert('https://github.com/microsoft/playwright')
         with allure.step('Validating Simpan Button'):
             await builder.self_info_simpan_btn_presence()
+            await builder.self_info_click_simpan()
 
 
 

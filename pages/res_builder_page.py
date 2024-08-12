@@ -222,6 +222,77 @@ class Builder(BasePage):
         await expect(self._find(BuildLoc.self_info_hint_btn)).to_have_attribute('aria-checked', 'false')
         await expect(self._find(BuildLoc.self_info_hint_desc)).to_be_hidden()
 
+    async def self_info_first_name_insert(self, text: str):
+        await self._type(BuildLoc.self_info_first_name_input, text)
+        await expect(self._find(BuildLoc.self_info_first_name_input)).to_be_focused()
+        await expect(self._find(BuildLoc.self_info_first_name_input)).to_have_value(text)
+        
+    async def self_info_last_name_insert(self, text: str):
+        await self._type(BuildLoc.self_info_last_name_input, text)
+        await expect(self._find(BuildLoc.self_info_last_name_input)).to_be_focused()
+        await expect(self._find(BuildLoc.self_info_last_name_input)).to_have_value(text)
+        
+    async def self_info_email_insert(self, text: str):
+        await self._type(BuildLoc.self_info_email_input, text)
+        await expect(self._find(BuildLoc.self_info_email_input)).to_be_focused()
+        await expect(self._find(BuildLoc.self_info_email_input)).to_have_value(text)
+        
+    async def self_info_phone_insert(self, text: str):
+        await self._type(BuildLoc.self_info_phone_input, text)
+        await expect(self._find(BuildLoc.self_info_phone_input)).to_be_focused()
+        await expect(self._find(BuildLoc.self_info_phone_input)).to_have_value(text)
+
+    async def self_info_click_country(self):
+        await self._click(BuildLoc.self_info_country_input)
+        await expect(self._find(BuildLoc.self_info_country_lists)).to_be_visible()
+
+    async def self_info_select_wni(self):
+        await self._force(BuildLoc.self_info_country_WNI)
+        await expect(self._find(BuildLoc.self_info_country_content)).to_have_attribute('title', 'Indonesia')
+
+    async def self_info_select_wna(self):
+        await self._force(BuildLoc.self_info_country_WNA)
+        await expect(self._find(BuildLoc.self_info_country_content)).to_have_attribute('title', 'Luar Indonesia')
+
+    async def self_info_prov_insert(self, text: str):
+        await self._type(BuildLoc.self_info_province_input, text)
+        await expect(self._find(BuildLoc.self_info_province_input)).to_have_value(text)
+        await expect(self._find(BuildLoc.self_info_province_lists)).to_be_visible()
+
+    async def self_info_prov_click_all_prov(self):
+        pass
+        # await self._look(BuildLoc.self_info_province_lists)
+        # choices = await self._find(BuildLoc.self_info_province_item).get_attribute('title')
+        # print(f"Collected Province Item: {choices}")
+        
+    async def self_info_city_insert(self, text: str):
+        await self._type(BuildLoc.self_info_city_input, text)
+        await expect(self._find(BuildLoc.self_info_city_input)).to_have_value(text)
+        await expect(self._find(BuildLoc.self_info_city_lists)).to_be_visible()
+
+    async def self_info_city_click_all_city(self):
+        pass
+        # await self._look(BuildLoc.self_info_city_lists)
+        # choices = await self._find(BuildLoc.self_info_city_item).get_attribute('title')
+        # print(f"Collected city Item: {choices}")
+    
+    async def self_info_address_insert(self, text: str):
+        await self._type(BuildLoc.self_info_address_input, text)
+        await expect(self._find(BuildLoc.self_info_address_input)).to_have_value(text)
+        
+    async def self_info_linkedin_insert(self, text: str):
+        await self._type(BuildLoc.self_info_linkedin_input, text)
+        await expect(self._find(BuildLoc.self_info_linkedin_input)).to_have_value(text)
+        
+    async def self_info_portfolio_insert(self, text: str):
+        await self._type(BuildLoc.self_info_portfolio_input, text)
+        await expect(self._find(BuildLoc.self_info_portfolio_input)).to_have_value(text)
+
+    async def self_info_click_simpan(self):
+        await self._click(BuildLoc.self_info_submit_btn)
+        await expect(self._find(BuildLoc.self_info_submit_btn)).to_be_focused()
+
+
 
     # Todo 3: Riwayat Pendidikan Section
     # Todo 4: Riwayat Pekerjaan Section
