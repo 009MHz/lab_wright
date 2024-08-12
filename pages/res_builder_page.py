@@ -261,7 +261,7 @@ class Builder(BasePage):
 
     async def self_info_prov_click_all_prov(self):
         pass
-        # await self._look(BuildLoc.self_info_province_lists)
+        await self._look(BuildLoc.self_info_province_lists)
         # choices = await self._find(BuildLoc.self_info_province_item).get_attribute('title')
         # print(f"Collected Province Item: {choices}")
         
@@ -272,7 +272,7 @@ class Builder(BasePage):
 
     async def self_info_city_click_all_city(self):
         pass
-        # await self._look(BuildLoc.self_info_city_lists)
+        await self._look(BuildLoc.self_info_city_lists)
         # choices = await self._find(BuildLoc.self_info_city_item).get_attribute('title')
         # print(f"Collected city Item: {choices}")
     
@@ -292,9 +292,50 @@ class Builder(BasePage):
         await self._click(BuildLoc.self_info_submit_btn)
         await expect(self._find(BuildLoc.self_info_submit_btn)).to_be_focused()
 
+    """Riwayat Pendidikan Section"""
+    # Todo 3a: Header Existence Validation
+    # Todo 3b: Header Interaction
+    # Todo 3c: Main Form Content validation after add new form
+    # Todo 3d: Validate Main content state & existence
+    # Todo 3e: Validate Hints Existence & Interaction
+    # Todo 3f: Validate Hints Existence
+    # Todo 3g: Validate Jenjang Pendidikan Existence
+    # Todo 3g.a: Jenjang Pendidikan Show Option
+    # Todo 3g.b: Jenjang Pendidikan Select Options
+    # Todo 3h: Validate Nama Instititusi Existence
+    # Todo 3h.a: Nama Instititusi Insert Keyword & validate option lists
+    # Todo 3h.b: Nama Instititusi Select option based on keyword
+    # Todo 3i: Validate Jurusan Existence
+    # Todo 3i.a: Jurusan Insert Keyword & validate option lists
+    # Todo 3i.b: Jurusan Select option based on keyword
+    # Todo 3j: Validate IPK Existence
+    # Todo 3j.a: IPK Insert Value action
+    # Todo 3j.b: IPK Value Warning validation
+    # Todo 3k: Validate max IPK Existence
+    # Todo 3k.a: max IPK Insert Value action
+    # Todo 3k.b: IPK Warning validation
+    # Todo 3l: Validate Negara Institusi
+    # Todo 3l.a: Negara Institusi interaction
+    # Todo 3m: Validate Provinsi Instititusi Existence
+    # Todo 3m.a: Provinsi Instititusi Insert Keyword & validate option lists
+    # Todo 3m.b: Provinsi Instititusi Select option based on keyword
+    # Todo 3n: Validate Provinsi Instititusi Existence
+    # Todo 3n.a: Kota Instititusi Insert Keyword & validate option lists
+    # Todo 3n.b: Kota Instititusi Select option based on keyword
+    # Todo 3o: Validate Waktu Mulai existence
+    # Todo 3o.a: Validate Waktu Mulai datepicker
+    # Todo 3o.b: Waktu Mulai select date action
+    # Todo 3o.c: Waktu Mulai clear date selection
+    # Todo 3o.d: Waktu Mulai pass manual date value
+    # Todo 3p: Validate Waktu Lulus existence
+    # Todo 3p.a: Validate Waktu Lulus datepicker
+    # Todo 3p.b: Waktu Lulus select date action
+    # Todo 3p.c: Waktu Lulus clear date selection
+    # Todo 3p.d: Waktu Lulus pass manual date value
+    # Todo 3q: Validate Riwayat Pendidikan Main button existence
+    # Todo 3q.a: Validate Riwayat Pendidikan Main button action
 
 
-    # Todo 3: Riwayat Pendidikan Section
     # Todo 4: Riwayat Pekerjaan Section
     # Todo 5: Keahlian
     # Todo 6: Prestasi & Penghargaan

@@ -107,6 +107,17 @@ class TestSmokeLoginPage:
             await builder.self_info_simpan_btn_presence()
             await builder.self_info_click_simpan()
 
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Riwayat Pendidikan Hints Existence")
+    @allure.feature("Riwayat Pendidikan", "Hints")
+    async def test_education_section_hints(self, builder):
+        pass
 
-
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Riwayat Pendidikan Existence Validation")
+    @allure.feature("Riwayat Pendidikan")
+    async def test_education_section(self, builder):
+        pass
 
