@@ -119,5 +119,7 @@ class TestSmokeLoginPage:
     @allure.title("Riwayat Pendidikan Existence Validation")
     @allure.feature("Riwayat Pendidikan")
     async def test_education_section(self, builder):
+        await builder.edu_title_presence()
+        await builder.edu_title_click_collapse()
         pass
 
