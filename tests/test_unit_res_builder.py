@@ -61,65 +61,94 @@ class TestSmokeLoginPage:
     @allure.title("Data Diri Existence Validation")
     @allure.feature("Data Diri")
     async def test_data_diri_section(self, builder):
-        with allure.step('Validating Main Form Existence'):
+        with allure.step('1. Validating Main Form Existence'):
             await builder.self_info_main_form_presence()
             await builder.self_info_main_hints_presence()
-        with allure.step('Validating Section Header'):
+        with allure.step('2. Validating Section Header'):
             await builder.self_info_title_presence()
             await builder.self_info_collapse_form()
             await builder.self_info_expand_form()
-        with allure.step('Validating Nama Depan'):
+        with allure.step('3. Validating Nama Depan'):
             await builder.self_info_first_name_presence()
             await builder.self_info_first_name_insert('Mr. John')
-        with allure.step('Validating Nama Belakang'):
+        with allure.step('4. Validating Nama Belakang'):
             await builder.self_info_last_name_presence()
             await builder.self_info_last_name_insert('Doe ,M.Sc')
-        with allure.step('Validating Email'):
+        with allure.step('5. Validating Email'):
             await builder.self_info_email_presence()
             await builder.self_info_email_insert('ali.nA_p3tr|nK0vA@yahoo.us')
-        with allure.step('Validating No. Telepon'):
+        with allure.step('6. Validating No. Telepon'):
             await builder.self_info_phone_presence()
             await builder.self_info_phone_insert('08987654321')
-        with allure.step('Validating Negara'):
+        with allure.step('7. Validating Negara'):
             await builder.self_info_country_presence()
             await builder.self_info_click_country()
             await builder.self_info_select_wna()
             await builder.self_info_click_country()
             await builder.self_info_select_wni()
-        with allure.step('Validating Provinsi'):
+        with allure.step('8. Validating Provinsi'):
             await builder.self_info_prov_presence()
             await builder.self_info_prov_insert('Pap')
             await builder.self_info_prov_click_all_prov()
-        with allure.step('Validating Kota'):
+        with allure.step('9. Validating Kota'):
             await builder.self_info_city_presence()
             await builder.self_info_city_insert('Jakarta')
             await builder.self_info_city_click_all_city()
-        with allure.step('Validating Alamat'):
+        with allure.step('10. Validating Alamat'):
             await builder.self_info_address_presence()
             await builder.self_info_address_insert("Jl. Belawan No.16, RT.18/RW.1, Cideng")
-        with allure.step('Validating Linkedin'):
+        with allure.step('11. Validating Linkedin'):
             await builder.self_info_linkedin_presence()
             await builder.self_info_linkedin_insert("https://www.linkedin.com/company/karirlab")
-        with allure.step('Validating Linkedin'):
+        with allure.step('12. Validating Linkedin'):
             await builder.self_info_portfolio_presence()
             await builder.self_info_portfolio_insert('https://github.com/microsoft/playwright')
-        with allure.step('Validating Simpan Button'):
+        with allure.step('13. Validating Simpan Button'):
             await builder.self_info_simpan_btn_presence()
             await builder.self_info_click_simpan()
 
     @pytest.mark.positive
     @pytest.mark.smoke
-    @allure.title("Riwayat Pendidikan Hints Existence")
-    @allure.feature("Riwayat Pendidikan", "Hints")
-    async def test_education_section_hints(self, builder):
-        pass
-
-    @pytest.mark.positive
-    @pytest.mark.smoke
-    @allure.title("Riwayat Pendidikan Existence Validation")
+    @allure.title("Riwayat Pendidikan Existence")
     @allure.feature("Riwayat Pendidikan")
     async def test_education_section(self, builder):
-        await builder.edu_title_presence()
-        await builder.edu_title_click_collapse()
-        pass
-
+        with allure.step('1. Validate the section default state'):
+            await builder.edu_title_presence()
+            await builder.edu_desc_presence()
+            await builder.edu_add_form_button_presence()
+            await builder.edu_title_click_collapse()
+            await builder.edu_title_click_expand()
+        with allure.step('2. Click on the Add Riwayat Pendidikan Form button'):
+            await builder.edu_click_add_form()
+        with allure.step('3. Validate the empty state form'):
+            pass
+        with allure.step('4. Validate Hints'):
+            pass
+        with allure.step('5. Validate Jenjang Pendidikan'):
+            pass
+        with allure.step('6. Validate Nama Institusi'):
+            pass
+        with allure.step('7. Validate Jurusan'):
+            pass
+        with allure.step('8. Validate IPK atau Nilai'):
+            pass
+        with allure.step('9. Validate IPK atau Nilai'):
+            pass
+        with allure.step('10. Validate Skala Maximum'):
+            pass
+        with allure.step('11. Validate Negara Institusi'):
+            pass
+        with allure.step('12. Validate Provinsi Institusi'):
+            pass
+        with allure.step('13. Validate Kota Institusi'):
+            pass
+        with allure.step('14. Validate Waktu Mulai'):
+            pass
+        with allure.step('15. Validate Waktu Lulus'):
+            pass
+        with allure.step('16. Click on Simpan button'):
+            pass
+        with allure.step('17. Click on Add form button'):
+            pass
+        with allure.step('18. Click on Batal button'):
+            pass
