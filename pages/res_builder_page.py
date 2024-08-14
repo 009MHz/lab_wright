@@ -491,10 +491,27 @@ class Builder(BasePage):
         await self._click(EduHistory.degree_course)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Kursus & Pelatihan')
 
-    # Todo 3g.b: Degree Select Options
+    async def edu_institution_insert(self, text):
+        await self._type(EduHistory.name_input, text)
+        await expect(self._find(EduHistory.name_lists)).to_be_visible(timeout=15000)
+        await expect(self._find(EduHistory.name_list_add)).to_contain_text(text)
 
-    # Todo 3h.a: Institution Name Insert Keyword & validate option lists
-    # Todo 3h.b: Institution Name Select option based on keyword
+    async def edu_institution_click_empty(self):
+        await self._click(EduHistory.name_input)
+        await expect(self._find(EduHistory.name_input)).to_be_focused()
+
+    async def edu_institution_click_filled(self):
+        await self._click(EduHistory.name_selected)
+        await expect(self._find(EduHistory.name_input)).to_be_focused()
+        await expect(self._find(EduHistory.name_lists)).to_be_visible()
+
+    async def edu_institution_select_all_option(self, text):
+        await self.edu_institution_insert(text)
+        count = await self._find(EduHistory.name_list_item).count()
+        for x in range(1, count):
+            await self._click(f"{EduHistory.name_list_item}[{x+1}]")
+            await self._click(".ant-layout-content")
+            await self.edu_institution_click_filled()
 
     # Todo 3i.a: Faculty Insert Keyword & validate option lists
     # Todo 3i.b: Faculty Select option based on keyword
