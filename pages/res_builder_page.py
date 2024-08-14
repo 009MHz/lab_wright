@@ -19,19 +19,17 @@ class Builder(BasePage):
         await self._look(ResumeInfo.title)
         await expect(self._find(ResumeInfo.title)).to_have_text("Informasi Resume")
 
-    async def info_resume_name_title_presence(self):
+    async def info_resume_name_presence(self):
         await self._look(ResumeInfo.name_label)
         await expect(self._find(ResumeInfo.name_label)).to_have_text("Nama Resume")
-
-    async def info_resume_name_input_presence(self):
+        
         await self._touch(ResumeInfo.name_input)
-        await expect(self._find(ResumeInfo.name_input)).to_have_attribute("placeholder","Yoga 2 Januari 2023")
+        await expect(self._find(ResumeInfo.name_input)).to_have_attribute("placeholder", "Yoga 2 Januari 2023")
 
-    async def info_resume_lang_title_presence(self):
+    async def info_resume_language_presence(self):
         await self._touch(ResumeInfo.lang_label)
         await expect(self._find(ResumeInfo.lang_label)).to_have_text("Bahasa Resume")
 
-    async def info_resume_lang_input_presence(self):
         await self._touch(ResumeInfo.lang_input)
         await expect(self._find(ResumeInfo.lang_input)).to_have_text("Bahasa Indonesia")
 
@@ -39,11 +37,10 @@ class Builder(BasePage):
         await self._touch(ResumeInfo.goal_label)
         await expect(self._find(ResumeInfo.goal_label)).to_have_text('Tujuan Pekerjaan')
 
-    async def info_resume_goal_desc_presence(self):
+    async def info_resume_tujuan_presence(self):
         await self._touch(ResumeInfo.goal_desc)
         await expect(self._find(ResumeInfo.goal_desc)).to_contain_text('memberikan rekomendasi')
 
-    async def info_resume_goal_input_presence(self):
         await self._touch(ResumeInfo.goal_input)
         await expect(self._find(ResumeInfo.goal_content_empty)).to_have_text('Pilih kategori pekerjaan')
 
@@ -87,8 +84,7 @@ class Builder(BasePage):
             opt_label = await self._find(option).get_attribute('title')
             print(f"Selecting: {opt_label}")
             await self._click(option)
-            await expect(self._find(ResumeInfo.goal_content_selected)).to_have_attribute('title',
-                                                                                                  opt_label)
+            await expect(self._find(ResumeInfo.goal_content_selected)).to_have_attribute('title', opt_label)
             await self.info_resume_goal_click()
 
     async def info_resume_import_data_click(self):
@@ -144,8 +140,7 @@ class Builder(BasePage):
 
         await self._touch(DataDiri.email_input)
         await expect(self._find(DataDiri.email_input)).to_be_empty()
-        await expect(self._find(DataDiri.email_input)).to_have_attribute("placeholder",
-                                                                                             "johndoe@gmail.com")
+        await expect(self._find(DataDiri.email_input)).to_have_attribute("placeholder", "johndoe@gmail.com")
 
     async def self_info_phone_presence(self):
         await self._look(DataDiri.phone_label)
@@ -153,8 +148,7 @@ class Builder(BasePage):
 
         await self._touch(DataDiri.phone_input)
         await expect(self._find(DataDiri.phone_input)).to_be_empty()
-        await expect(self._find(DataDiri.phone_input)).to_have_attribute("placeholder",
-                                                                                             "081234567890")
+        await expect(self._find(DataDiri.phone_input)).to_have_attribute("placeholder", "081234567890")
 
     async def self_info_country_presence(self):
         await self._look(DataDiri.country_label)
@@ -185,8 +179,7 @@ class Builder(BasePage):
 
         await self._touch(DataDiri.address_input)
         await expect(self._find(DataDiri.address_input)).to_be_empty()
-        await expect(self._find(DataDiri.address_input)).to_have_attribute('placeholder',
-                                                                                               'Gambir, 10150')
+        await expect(self._find(DataDiri.address_input)).to_have_attribute('placeholder', 'Gambir, 10150')
 
     async def self_info_linkedin_presence(self):
         await self._look(DataDiri.linkedin_label)
@@ -195,7 +188,7 @@ class Builder(BasePage):
         await self._touch(DataDiri.linkedin_input)
         await expect(self._find(DataDiri.linkedin_input)).to_be_empty()
         await expect(self._find(DataDiri.linkedin_input)).to_have_attribute('placeholder',
-                                                                                                "https://www.linkedin.com/in/johndoe/")
+                                                                            "https://www.linkedin.com/in/johndoe/")
 
     async def self_info_portfolio_presence(self):
         await self._look(DataDiri.portfolio_label)
@@ -204,7 +197,7 @@ class Builder(BasePage):
         await self._touch(DataDiri.portfolio_input)
         await expect(self._find(DataDiri.portfolio_input)).to_be_empty()
         await expect(self._find(DataDiri.portfolio_input)).to_have_attribute('placeholder',
-                                                                                                 'https://portofoliokamu.com')
+                                                                             'https://portofoliokamu.com')
 
     async def self_info_simpan_btn_presence(self):
         await self._look(DataDiri.submit_btn)
@@ -262,8 +255,7 @@ class Builder(BasePage):
 
     async def self_info_select_wna(self):
         await self._force(DataDiri.country_wna)
-        await expect(self._find(DataDiri.country_content)).to_have_attribute('title',
-                                                                                                 'Luar Indonesia')
+        await expect(self._find(DataDiri.country_content)).to_have_attribute('title', 'Luar Indonesia')
 
     async def self_info_prov_insert(self, text: str):
         await self._type(DataDiri.province_input, text)
@@ -304,34 +296,161 @@ class Builder(BasePage):
         await expect(self._find(DataDiri.submit_btn)).to_be_focused()
 
     """Education History Existence"""
-    # Header Existence Validation
     async def edu_title_presence(self):
         await self._look(EduHistory.title)
         await expect(self._find(EduHistory.title)).to_have_text("Riwayat Pendidikan")
 
+    async def edu_desc_presence(self):
+        await self._look(EduHistory.description)
+        await expect(self._find(EduHistory.description)).to_contain_text("membantu perusahaan mengenalimu.")
+
+    async def edu_main_hints_presence(self):
+        await self._look(EduHistory.hint_main)
+        await expect(self._find(EduHistory.hint_main)).to_be_visible()
+
+    async def edu_hints_title_presence(self):
+        await self._look(EduHistory.hint_title)
+        await expect(self._find(EduHistory.hint_title)).to_have_text('Tips Professional')
+
+    async def edu_hints_desc_presence(self):
+        await self._look(EduHistory.hint_desc)
+        await expect(self._find(EduHistory.hint_desc)).to_contain_text('Sertakan pendidikan terakhir')
+
+    async def edu_add_form_button_presence(self):
+        await self._touch(EduHistory.add_btn)
+        await expect(self._find(EduHistory.add_btn)).to_have_text("Riwayat Pendidikan")
+
+    async def edu_degree_presence(self):
+        await self._look(EduHistory.degree_label)
+        await expect(self._find(EduHistory.degree_label)).to_have_text("Jenjang Pendidikan")
+
+        await self._touch(EduHistory.degree_input)
+        await expect(self._find(EduHistory.degree_content)).to_have_attribute("title", 'Sarjana (S1)')
+
+    async def edu_institution_presence(self):
+        await self._look(EduHistory.name_label)
+        await expect(self._find(EduHistory.name_label)).to_have_text("Nama Institusi")
+
+        await self._touch(EduHistory.name_input)
+        await expect(self._find(EduHistory.name_input)).to_be_empty()
+        await expect(self._find(EduHistory.name_empty)).to_have_text("Universitas Cirebon")
+
+    async def edu_faculty_presence(self):
+        await self._look(EduHistory.faculty_label)
+        await expect(self._find(EduHistory.faculty_label)).to_have_text("Jurusan")
+
+        await self._touch(EduHistory.faculty_input)
+        await expect(self._find(EduHistory.faculty_input)).to_be_empty()
+        await expect(self._find(EduHistory.faculty_empty)).to_have_text("Hukum")
+
+    async def edu_gpa_presence(self):
+        await self._look(EduHistory.gpa_label)
+        await expect(self._find(EduHistory.gpa_label)).to_have_text("IPK atau Nilai")
+
+        await self._touch(EduHistory.gpa_input)
+        await expect(self._find(EduHistory.gpa_input)).to_have_value('0')
+
+        await expect(self._find(EduHistory.gpa_increase)).to_be_enabled()
+        await expect(self._find(EduHistory.gpa_decrease)).to_be_enabled()
+
+    async def edu_max_score_presence(self):
+        await self._look(EduHistory.max_gpa_label)
+        await expect(self._find(EduHistory.max_gpa_label)).to_have_text("Skala Maximum")
+
+        await self._touch(EduHistory.max_gpa_input)
+        await expect(self._find(EduHistory.max_gpa_input)).to_have_value('0')
+
+        await expect(self._find(EduHistory.max_gpa_increase)).to_be_enabled()
+        await expect(self._find(EduHistory.max_gpa_decrease)).to_be_enabled()
+
+    async def edu_country_presence(self):
+        await self._look(EduHistory.country_label)
+        await expect(self._find(EduHistory.country_label)).to_have_text("Negara Institusi")
+
+        await self._touch(EduHistory.country_input)
+        await expect(self._find(EduHistory.country_content)).to_have_attribute("title", "Indonesia")
+
+    async def edu_prov_presence(self):
+        await self._look(EduHistory.province_label)
+        await expect(self._find(EduHistory.province_label)).to_have_text("Provinsi Institusi")
+
+        await self._touch(EduHistory.province_input)
+        await expect(self._find(EduHistory.province_input)).to_be_empty()
+        await expect(self._find(EduHistory.province_empty)).to_have_text("Jawa Barat")
+
+    async def edu_city_presence(self):
+        await self._look(EduHistory.city_label)
+        await expect(self._find(EduHistory.city_label)).to_have_text("Kota Institusi")
+
+        await self._touch(EduHistory.city_input)
+        await expect(self._find(EduHistory.city_input)).to_be_empty()
+        await expect(self._find(EduHistory.city_empty)).to_have_text("Cirebon")
+
+    async def edu_start_presence(self):
+        await self._look(EduHistory.start_label)
+        await expect(self._find(EduHistory.start_label)).to_have_text("Waktu Mulai")
+
+        await self._touch(EduHistory.start_input)
+        await expect(self._find(EduHistory.start_input)).to_be_empty()
+        await expect(self._find(EduHistory.start_input)).to_have_attribute("placeholder", "Pilih Waktu Mulai")
+
+    async def edu_end_presence(self):
+        await self._look(EduHistory.end_label)
+        await expect(self._find(EduHistory.end_label)).to_have_text("Waktu Lulus")
+
+        await self._touch(EduHistory.end_input)
+        await expect(self._find(EduHistory.end_input)).to_be_empty()
+        await expect(self._find(EduHistory.end_input)).to_have_attribute("placeholder", "Masih Aktif")
+
+        await self._touch(EduHistory.end_status)
+        await expect(self._find(EduHistory.end_status)).to_have_text("Pendidikan masih aktif")
+        await expect(self._find(EduHistory.end_status_check)).to_be_checked()
+
+    async def edu_cancel_form_btn_presence(self):
+        await self._touch(EduHistory.cancel_btn)
+        await expect(self._find(EduHistory.cancel_btn)).to_have_text("Batal")
+
+    async def edu_save_form_btn_presence(self):
+        await self._touch(EduHistory.save_btn)
+        await expect(self._find(EduHistory.save_btn)).to_have_text("Simpan")
+
     """Education History Interaction"""
     async def edu_title_click_collapse(self):
-        await self._touch(EduHistory.title)
-        await self._force(EduHistory.title)
-        await expect(self._find(ResumeInfo.lang_id)).to_be_attached()
-        await expect(self._find(ResumeInfo.lang_en)).to_be_attached()
-    # Todo 3c: Main Form Content validation after add new form
-    # Todo 3d: Validate Main content state & existence
-    # Todo 3e: Validate Hints Existence & Interaction
-    # Todo 3f: Validate Hints Existence
-    # Todo 3g: Validate Degree Existence
+        await self._click(EduHistory.toggle)
+        await expect(self._find(EduHistory.add_btn)).to_be_hidden()
+        await expect(self._find(EduHistory.toggle)).to_have_attribute('aria-expanded', 'false')
+
+    async def edu_title_click_expand(self):
+        await self._click(EduHistory.toggle)
+        await expect(self._find(EduHistory.add_btn)).to_be_visible()
+        await expect(self._find(EduHistory.toggle)).to_have_attribute('aria-expanded', 'true')
+
+    async def edu_click_add_form(self):
+        await self._click(EduHistory.add_btn)
+        await expect(self._find(EduHistory.add_btn)).to_be_focused()
+
+    async def edu_hints_click_show(self):
+        await self._click(EduHistory.hint_btn)
+        await expect(self._find(EduHistory.hint_btn)).to_have_attribute('aria-checked', 'true')
+        await expect(self._find(EduHistory.hint_desc)).not_to_be_hidden()
+
+    async def edu_hints_click_hide(self):
+        await self._click(EduHistory.hint_btn)
+        await expect(self._find(EduHistory.hint_btn)).to_have_attribute('aria-checked', 'false')
+        await expect(self._find(EduHistory.hint_desc)).to_be_hidden()
+
     # Todo 3g.a: Degree Show Option
     # Todo 3g.b: Degree Select Options
-    # Todo 3h: Validate Institution Name Existence
+
     # Todo 3h.a: Institution Name Insert Keyword & validate option lists
     # Todo 3h.b: Institution Name Select option based on keyword
-    # Todo 3i: Validate Faculty Existence
+
     # Todo 3i.a: Faculty Insert Keyword & validate option lists
     # Todo 3i.b: Faculty Select option based on keyword
-    # Todo 3j: Validate Final Score Existence
+
     # Todo 3j.a: Final Score Insert Value action
     # Todo 3j.b: Final Score Warning validation
-    # Todo 3k: Validate Max Final Score Existence
+
     # Todo 3k.a: Max Final Score Insert Value action
     # Todo 3k.b: Max Final Score Warning validation
     # Todo 3l: Validate Institution Country
