@@ -62,6 +62,17 @@ class DataDiri:
     portfolio_label = "#selfInfoPortfolioLabel"
     portfolio_input = "#selfInfoPortfolioInput"
     submit_btn = "#selfInfoSubmitBtn"
+    fill_datadiri_wrapper = "|BELUM|#DataProfInfoSelfDataWrapper"
+    fill_name = "|BELUM|#DataProfInfoSelfDataName"
+    fill_email = "|BELUM|#DataProfInfoSelfDataEmail"
+    fill_phone = "|BELUM|#DataProfInfoSelfDataPhone"
+    fill_province = "|BELUM|#DataProfInfoSelfDataProvince"
+    fill_city = "|BELUM|#DataProfInfoSelfDataCity"
+    fill_address = "|BELUM|#DataProfInfoSelfDataAddress"
+    fill_linkedin = "|BELUM|#DataProfInfoSelfDataLinkedin"
+    fill_linkedin_checkbox = "|BELUM|#DataProfInfoSelfDataLinkedin-checkbox-fill"
+    fill_portfolio = "|BELUM|#DataProfInfoSelfDataPortfolio"
+    fill_portfolio_checkbox = "|BELUM|#DataProfInfoSelfDataPortfolio-checkbox-fill"
 
 
 class EduHistory:
@@ -95,6 +106,20 @@ class EduHistory:
     end_input = "#educationEndInput"
     form_save_btn = "#educationFormSave"
     form_cancel_btn = "#educationFormCancel"
+    fill_education_item = "//div[contains(@class,'education-item')]"
+    fill_name = "#dataProfInfoEduName"
+    fill_country = "#dataProfInfoEduLocCountry"
+    fill_province = "#dataProfInfoEduLocProvince"
+    fill_city = "#dataProfInfoEduLocCity"
+    fill_degree = "#dataProfInfoEduDetailsDegree"
+    fill_faculty = "#dataProfInfoEduDetailsFaculty"
+    fill_start = "#dataProfInfoEduDetailsStart"
+    fill_end = "#dataProfInfoEduDetailsEnd"
+    fill_score_checkbox = "#dataProfInfoEduScoreCheckBox"
+    fill_final_score = "#dataProfInfoEduFinalScore"
+    fill_max_score = "#dataProfInfoEduMaxScore"
+    fill_education_description_item = "//div[contains(@class,'education-description-item')]"
+    fill_education_description_add = "#educationDescriptionAdd"
 
 
 class JobHistory:
