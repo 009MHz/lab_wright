@@ -145,34 +145,47 @@ class TestSmokeLoginPage:
             await builder.edu_end_presence()
             await builder.edu_cancel_form_btn_presence()
             await builder.edu_save_form_btn_presence()
+        with allure.step('4. Validate Jenjang Pendidikan'):
+            degree_options = [
+                builder.edu_click_degree_sma,
+                builder.edu_click_degree_d1,
+                builder.edu_click_degree_d2,
+                builder.edu_click_degree_d3,
+                builder.edu_click_degree_d4,
+                builder.edu_click_degree_s1,
+                builder.edu_click_degree_s2,
+                builder.edu_click_degree_s3,
+                builder.edu_click_degree_course
+            ]
 
-        with allure.step('4. Validate Hints'):
+            for select_degree in degree_options:
+                await builder.edu_click_degree()
+                await select_degree()
+                print(f"Click on: {select_degree.__name__}")
+
+        with allure.step('5. Validate Nama Institusi'):
             pass
-        with allure.step('5. Validate Jenjang Pendidikan'):
+        with allure.step('6. Validate Jurusan'):
             pass
-        with allure.step('6. Validate Nama Institusi'):
-            pass
-        with allure.step('7. Validate Jurusan'):
+        with allure.step('7. Validate IPK atau Nilai'):
             pass
         with allure.step('8. Validate IPK atau Nilai'):
             pass
-        with allure.step('9. Validate IPK atau Nilai'):
+        with allure.step('9. Validate Skala Maximum'):
             pass
-        with allure.step('10. Validate Skala Maximum'):
+        with allure.step('10. Validate Negara Institusi'):
             pass
-        with allure.step('11. Validate Negara Institusi'):
+        with allure.step('11. Validate Provinsi Institusi'):
             pass
-        with allure.step('12. Validate Provinsi Institusi'):
+        with allure.step('12. Validate Kota Institusi'):
             pass
-        with allure.step('13. Validate Kota Institusi'):
+        with allure.step('13. Validate Waktu Mulai'):
             pass
-        with allure.step('14. Validate Waktu Mulai'):
+        with allure.step('14. Validate Waktu Lulus'):
             pass
-        with allure.step('15. Validate Waktu Lulus'):
+        with allure.step('15. Click on Simpan button'):
             pass
-        with allure.step('16. Click on Simpan button'):
+        with allure.step('16. Click on Add form button'):
             pass
-        with allure.step('17. Click on Add form button'):
-            pass
-        with allure.step('18. Click on Batal button'):
+        with allure.step('17. Click on Batal button'):
             pass
