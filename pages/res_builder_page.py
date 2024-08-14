@@ -1,3 +1,5 @@
+import time
+
 from pages.__base import BasePage
 from elements.__res_builder import *
 from playwright.async_api import Page, expect
@@ -440,6 +442,55 @@ class Builder(BasePage):
         await expect(self._find(EduHistory.hint_desc)).to_be_hidden()
 
     # Todo 3g.a: Degree Show Option
+    async def edu_click_degree(self):
+        await self._force(EduHistory.degree_input)
+        await expect(self._find(EduHistory.degree_lists)).to_be_visible()
+
+    async def edu_click_degree_sma(self):
+        await self._look(EduHistory.degree_lists)
+        await self._click(EduHistory.degree_sma)
+        await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'SMA/SMK/Sederajat')
+
+    async def edu_click_degree_d1(self):
+        await self._look(EduHistory.degree_lists)
+        await self._click(EduHistory.degree_d1)
+        await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Ahli Pratama (D1)')
+
+    async def edu_click_degree_d2(self):
+        await self._look(EduHistory.degree_lists)
+        await self._click(EduHistory.degree_d2)
+        await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Ahli Muda (D2)')
+        
+    async def edu_click_degree_d3(self):
+        await self._look(EduHistory.degree_lists)
+        await self._click(EduHistory.degree_d3)
+        await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Ahli Madya (D3)')
+        
+    async def edu_click_degree_d4(self):
+        await self._look(EduHistory.degree_lists)
+        await self._click(EduHistory.degree_d4)
+        await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Sarjana Sains Terapan (D4)')
+        
+    async def edu_click_degree_s1(self):
+        await self._look(EduHistory.degree_lists)
+        await self._click(EduHistory.degree_s1)
+        await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Sarjana (S1)')
+        
+    async def edu_click_degree_s2(self):
+        await self._look(EduHistory.degree_lists)
+        await self._click(EduHistory.degree_s2)
+        await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Magister (S2)')
+        
+    async def edu_click_degree_s3(self):
+        await self._look(EduHistory.degree_lists)
+        await self._click(EduHistory.degree_s3)
+        await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Doktor (S3)')
+        
+    async def edu_click_degree_course(self):
+        await self._look(EduHistory.degree_lists)
+        await self._click(EduHistory.degree_course)
+        await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Kursus & Pelatihan')
+
     # Todo 3g.b: Degree Select Options
 
     # Todo 3h.a: Institution Name Insert Keyword & validate option lists
@@ -453,25 +504,25 @@ class Builder(BasePage):
 
     # Todo 3k.a: Max Final Score Insert Value action
     # Todo 3k.b: Max Final Score Warning validation
-    # Todo 3l: Validate Institution Country
+
     # Todo 3l.a: Institution Country interaction
-    # Todo 3m: Validate Institution Province Existence
+
     # Todo 3m.a: Institution Province Insert Keyword & validate option lists
     # Todo 3m.b: Institution Province Select option based on keyword
-    # Todo 3n: Validate Institution City Existence
+
     # Todo 3n.a: Institution City Insert Keyword & validate option lists
     # Todo 3n.b: Institution City Select option based on keyword
-    # Todo 3o: Validate Start Date existence
+
     # Todo 3o.a: Validate Start Date datepicker
     # Todo 3o.b: Start Date select date action
     # Todo 3o.c: Start Date clear date selection
     # Todo 3o.d: Start Date pass manual date value
-    # Todo 3p: Validate Graduation Date existence
+
     # Todo 3p.a: Validate Graduation Date datepicker
     # Todo 3p.b: Graduation Date select date action
     # Todo 3p.c: Graduation Date clear date selection
     # Todo 3p.d: Graduation Date pass manual date value
-    # Todo 3q: Validate Education History Main button existence
+
     # Todo 3q.a: Validate Education History Main button action
 
     # Todo 4: Occupation History Section
