@@ -1,6 +1,3 @@
-import asyncio
-import time
-
 from pages.__base import BasePage
 from elements.__res_builder import *
 from playwright.async_api import Page, expect
@@ -530,8 +527,6 @@ class Builder(BasePage):
 
     async def faculty_select_option_within(self, text):
         await self.edu_faculty_insert(text)
-        count = await self._find(EduHistory.faculty_item).count()
-        print(f"Retrieved item: {count}")
         for x in range(1, 5):
             await self._click(f"{EduHistory.faculty_item}[{x+1}]")
             await self._click(".ant-layout-content")
@@ -570,17 +565,18 @@ class Builder(BasePage):
         for x in range(step):
             await self._click(EduHistory.max_gpa_decrease)
         await expect(self._find(EduHistory.max_gpa_input)).to_have_value(str(current_score - step))
+        
+    async def edu_click_country(self):
+        await self._click(EduHistory.country_input)
+        await expect(self._find(EduHistory.country_lists)).to_be_visible()
 
-    # Todo 3i.a: Faculty Insert Keyword & validate option lists
-    # Todo 3i.b: Faculty Select option based on keyword
+    async def edu_select_wni(self):
+        await self._click(EduHistory.country_wni)
+        await expect(self._find(EduHistory.country_content)).to_have_attribute('title', 'Indonesia')
 
-    # Todo 3j.a: Final Score Insert Value action
-    # Todo 3j.b: Final Score Warning validation
-
-    # Todo 3k.a: Max Final Score Insert Value action
-    # Todo 3k.b: Max Final Score Warning validation
-
-    # Todo 3l.a: Institution Country interaction
+    async def edu_select_wna(self):
+        await self._click(EduHistory.country_wna)
+        await expect(self._find(EduHistory.country_content)).to_have_attribute('title', 'Luar Indonesia')
 
     # Todo 3m.a: Institution Province Insert Keyword & validate option lists
     # Todo 3m.b: Institution Province Select option based on keyword
