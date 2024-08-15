@@ -19,43 +19,22 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Set up Python
+    - name: Set up Runner
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        python -m playwright install --with-deps
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Install playwright browsers
-      run: python -m playwright install --with-deps
-
     - name: Test execution
       run: |
-        pytest --env=test --mode=pipeline --headless --alluredir=allure-results -n=auto --reruns=2 --reruns-delay=3 --screenshot=only-on-failure --video=retain-on-failure
+        pytest --env=test --mode=pipeline --headless --alluredir=allure-results -n=auto --reruns=2 --reruns-delay=4 --screenshot=only-on-failure --video=retain-on-failure
 
-    - name: Load test report history
-      uses: actions/checkout@v4
-      if: always()
-      continue-on-error: true
-      with:
-        ref: gh_pages
-        path: gh_pages
+    - name: Publishing the report
+      run: |
+        git clone --branch=gh_pages --single-branch https://github.com/${{ github.repository }} gh_pages || true
+        simple-elf/allure-report-action@v1.7 --gh_pages gh_pages --allure_history allure-history --allure_results allure-results
+        peaceiris/actions-gh-pages@v3 --github_token ${{ secrets.GITHUB_TOKEN }} --publish_branch gh_pages --publish_dir allure-history
 
-    - name: Build test report
-      uses: simple-elf/allure-report-action@v1.7
-      if: always()
-      with:
-        gh_pages: gh_pages
-        allure_history: allure-history
-        allure_results: allure-results
-
-    - name: Publish test report
-      uses: peaceiris/actions-gh-pages@v3
-      if: always()
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: gh_pages
-        publish_dir: allure-history
