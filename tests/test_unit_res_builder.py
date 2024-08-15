@@ -160,11 +160,12 @@ class TestSmokeLoginPage:
             for select_degree in degree_options:
                 await builder.edu_click_degree()
                 await select_degree()
-        with allure.step('5. Validate Nama Institusi'):
+        with allure.step('5. Validate Nama Institusi'): # possibility fail
             await builder.edu_institution_click_empty()
-            await builder.edu_institution_select_all_option("Akademi")
+            await builder.edu_institution_select_all_option("Univ")
         with allure.step('6. Validate Jurusan'):
-            pass
+            await builder.edu_faculty_click_empty()
+            await builder.faculty_select_all_option('Bis')
         with allure.step('7. Validate IPK atau Nilai'):
             pass
         with allure.step('8. Validate IPK atau Nilai'):

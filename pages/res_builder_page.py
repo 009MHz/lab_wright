@@ -493,8 +493,8 @@ class Builder(BasePage):
 
     async def edu_institution_insert(self, text):
         await self._type(EduHistory.name_input, text)
-        await expect(self._find(EduHistory.name_lists)).to_be_visible(timeout=15000)
-        await expect(self._find(EduHistory.name_list_add)).to_contain_text(text)
+        await expect(self._find(EduHistory.name_list)).to_be_visible(timeout=20000)
+        await expect(self._find(EduHistory.name_add)).to_contain_text(text)
 
     async def edu_institution_click_empty(self):
         await self._click(EduHistory.name_input)
@@ -503,15 +503,38 @@ class Builder(BasePage):
     async def edu_institution_click_filled(self):
         await self._click(EduHistory.name_selected)
         await expect(self._find(EduHistory.name_input)).to_be_focused()
-        await expect(self._find(EduHistory.name_lists)).to_be_visible()
+        await expect(self._find(EduHistory.name_list)).to_be_visible()
 
     async def edu_institution_select_all_option(self, text):
         await self.edu_institution_insert(text)
-        count = await self._find(EduHistory.name_list_item).count()
+        count = await self._find(EduHistory.name_item).count()
         for x in range(1, count):
-            await self._click(f"{EduHistory.name_list_item}[{x+1}]")
+            await self._click(f"{EduHistory.name_item}[{x + 1}]")
             await self._click(".ant-layout-content")
             await self.edu_institution_click_filled()
+            
+    async def edu_faculty_insert(self, text):
+        await self._type(EduHistory.faculty_input, text)
+        await expect(self._find(EduHistory.faculty_list)).to_be_visible(timeout=20000)
+        await expect(self._find(EduHistory.faculty_add)).to_contain_text(text)
+
+    async def edu_faculty_click_empty(self):
+        await self._click(EduHistory.faculty_input)
+        await expect(self._find(EduHistory.faculty_input)).to_be_focused()
+
+    async def edu_faculty_click_filled(self):
+        await self._force(EduHistory.faculty_selected)
+        await expect(self._find(EduHistory.faculty_input)).to_be_focused()
+        await expect(self._find(EduHistory.faculty_list)).to_be_visible()
+
+    async def faculty_select_all_option(self, text):
+        await self.edu_faculty_insert(text)
+        count = await self._find(EduHistory.faculty_item).count()
+        print(f"Retrieved item: {count}")
+        for x in range(1, 5):
+            await self._click(f"{EduHistory.faculty_item}[{x+1}]")
+            await self._click(".ant-layout-content")
+            await self.edu_faculty_click_filled()
 
     # Todo 3i.a: Faculty Insert Keyword & validate option lists
     # Todo 3i.b: Faculty Select option based on keyword
