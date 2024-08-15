@@ -1,3 +1,4 @@
+import asyncio
 import time
 
 from pages.__base import BasePage
@@ -552,6 +553,23 @@ class Builder(BasePage):
         for x in range(step):
             await self._click(EduHistory.gpa_decrease)
         await expect(self._find(EduHistory.gpa_input)).to_have_value(str(current_score - step))
+        
+    async def faculty_max_gpa_insert(self, text: str):
+        await self._type(EduHistory.max_gpa_input, text)
+        await expect(self._find(EduHistory.max_gpa_input)).to_be_focused()
+        await expect(self._find(EduHistory.max_gpa_input)).to_have_value(text)
+
+    async def faculty_max_gpa_score_increase(self, step: int):
+        current_score = float(await self._find(EduHistory.max_gpa_input).get_attribute('value'))
+        for x in range(step):
+            await self._click(EduHistory.max_gpa_increase)
+        await expect(self._find(EduHistory.max_gpa_input)).to_have_value(str(current_score + step))
+
+    async def faculty_max_gpa_score_decrease(self, step: int):
+        current_score = float(await self._find(EduHistory.max_gpa_input).get_attribute('value'))
+        for x in range(step):
+            await self._click(EduHistory.max_gpa_decrease)
+        await expect(self._find(EduHistory.max_gpa_input)).to_have_value(str(current_score - step))
 
     # Todo 3i.a: Faculty Insert Keyword & validate option lists
     # Todo 3i.b: Faculty Select option based on keyword

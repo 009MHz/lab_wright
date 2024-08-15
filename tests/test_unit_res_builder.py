@@ -171,23 +171,23 @@ class TestSmokeLoginPage:
             await builder.faculty_gpa_insert('3.8')
             await builder.faculty_gpa_score_increase(3)
             await builder.faculty_gpa_score_decrease(2)
-        with allure.step('8. Validate IPK atau Nilai'):
+        with allure.step('8. Validate Skala Maximum'):
+            await builder.faculty_max_gpa_insert('4.2')
+            await builder.faculty_max_gpa_score_increase(2)
+            await builder.faculty_max_gpa_score_decrease(3)
+        with allure.step('9. Validate Negara Institusi'):
             pass
-        with allure.step('9. Validate Skala Maximum'):
+        with allure.step('10. Validate Provinsi Institusi'):
             pass
-        with allure.step('10. Validate Negara Institusi'):
+        with allure.step('11. Validate Kota Institusi'):
             pass
-        with allure.step('11. Validate Provinsi Institusi'):
+        with allure.step('12. Validate Waktu Mulai'):
             pass
-        with allure.step('12. Validate Kota Institusi'):
+        with allure.step('13. Validate Waktu Lulus'):
             pass
-        with allure.step('13. Validate Waktu Mulai'):
+        with allure.step('14. Click on Simpan button'):
             pass
-        with allure.step('14. Validate Waktu Lulus'):
+        with allure.step('15. Click on Add form button'):
             pass
-        with allure.step('15. Click on Simpan button'):
-            pass
-        with allure.step('16. Click on Add form button'):
-            pass
-        with allure.step('17. Click on Batal button'):
+        with allure.step('16. Click on Batal button'):
             pass
