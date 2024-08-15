@@ -12,6 +12,7 @@ async def builder(auth_page):
 
 @allure.epic("Resume Builder")
 @allure.story("Resume Builder/ Smoke Test")
+@allure.t
 class TestSmokeLoginPage:
     @pytest.mark.positive
     @pytest.mark.smoke
@@ -176,7 +177,10 @@ class TestSmokeLoginPage:
             await builder.faculty_max_gpa_score_increase(2)
             await builder.faculty_max_gpa_score_decrease(3)
         with allure.step('9. Validate Negara Institusi'):
-            pass
+            await builder.edu_click_country()
+            await builder.edu_select_wna()
+            await builder.edu_click_country()
+            await builder.edu_select_wni()
         with allure.step('10. Validate Provinsi Institusi'):
             pass
         with allure.step('11. Validate Kota Institusi'):
