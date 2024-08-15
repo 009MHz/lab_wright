@@ -505,7 +505,7 @@ class Builder(BasePage):
         await expect(self._find(EduHistory.name_input)).to_be_focused()
         await expect(self._find(EduHistory.name_list)).to_be_visible()
 
-    async def edu_institution_select_all_option(self, text):
+    async def edu_institution_select_option_within(self, text):
         await self.edu_institution_insert(text)
         count = await self._find(EduHistory.name_item).count()
         for x in range(1, count):
@@ -527,7 +527,7 @@ class Builder(BasePage):
         await expect(self._find(EduHistory.faculty_input)).to_be_focused()
         await expect(self._find(EduHistory.faculty_list)).to_be_visible()
 
-    async def faculty_select_all_option(self, text):
+    async def faculty_select_option_within(self, text):
         await self.edu_faculty_insert(text)
         count = await self._find(EduHistory.faculty_item).count()
         print(f"Retrieved item: {count}")
@@ -535,6 +535,23 @@ class Builder(BasePage):
             await self._click(f"{EduHistory.faculty_item}[{x+1}]")
             await self._click(".ant-layout-content")
             await self.edu_faculty_click_filled()
+            
+    async def faculty_gpa_insert(self, text: str):
+        await self._type(EduHistory.gpa_input, text)
+        await expect(self._find(EduHistory.gpa_input)).to_be_focused()
+        await expect(self._find(EduHistory.gpa_input)).to_have_value(text)
+
+    async def faculty_gpa_score_increase(self, step: int):
+        current_score = float(await self._find(EduHistory.gpa_input).get_attribute('value'))
+        for x in range(step):
+            await self._click(EduHistory.gpa_increase)
+        await expect(self._find(EduHistory.gpa_input)).to_have_value(str(current_score + step))
+
+    async def faculty_gpa_score_decrease(self, step: int):
+        current_score = float(await self._find(EduHistory.gpa_input).get_attribute('value'))
+        for x in range(step):
+            await self._click(EduHistory.gpa_decrease)
+        await expect(self._find(EduHistory.gpa_input)).to_have_value(str(current_score - step))
 
     # Todo 3i.a: Faculty Insert Keyword & validate option lists
     # Todo 3i.b: Faculty Select option based on keyword
