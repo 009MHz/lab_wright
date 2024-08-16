@@ -10,13 +10,13 @@ async def login(page):
     return login
 
 
-@allure.epic("Login Page")
-@allure.story("Login Page Smoke Test")
+@allure.epic("Login")
+@allure.story("Login Page/ Smoke Test")
 class TestSmokeLoginPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("First State Login Page Validation")
-    @allure.feature("Login", "Email", "Google")
+    @allure.feature("Email", "Google")
     async def test_login_init(self, login):
         with allure.step("1. Verify the login init page components"):
             await login.main_title_presence()
@@ -27,7 +27,7 @@ class TestSmokeLoginPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Second State Login Page Validation")
-    @allure.feature("Login", "Email", "Password")
+    @allure.feature("Email", "Password")
     async def test_password_init(self, login):
         with allure.step("1. Insert a valid email account"):
             await login.email_insert("simbah.test01@gmail.com")

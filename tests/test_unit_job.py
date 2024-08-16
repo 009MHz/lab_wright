@@ -10,8 +10,8 @@ async def job_page(page):
     return job_page
 
 
-@allure.epic("Job Page")
-@allure.story("Job Page Smoke Test")
+@allure.epic("Job")
+@allure.story("Job Page/ Smoke Test")
 class TestSmokeJobPage:
     @pytest.mark.positive
     @pytest.mark.smoke
@@ -58,20 +58,20 @@ class TestSmokeJobPage:
         with allure.step("1. Check each input field availability"):
             await job_page.position_input_presence()
             await job_page.company_input_presence()
-            await job_page.industri_input_presence()
-            await job_page.lokasi_input_presence()
+            await job_page.industry_input_presence()
+            await job_page.location_input_presence()
             await job_page.skill_input_presence()
         with allure.step("2. Insert text on each input field"):
             await job_page.position_input_type("Written from playwright, on Posisi field")
             await job_page.company_input_type("Written from playwright, on Company field")
-            await job_page.industri_input_type("Written from playwright, on Industri field")
-            await job_page.lokasi_input_type("Written from playwright, on Lokasi field")
+            await job_page.industry_input_type("Written from playwright, on Industri field")
+            await job_page.location_input_type("Written from playwright, on Lokasi field")
             await job_page.skill_input_type("Written from playwright, on Kemampuan field")
         with allure.step("3. Clear the text from each input field"):
             await job_page.position_input_clear()
             await job_page.company_input_clear()
-            await job_page.industri_input_clear()
-            await job_page.lokasi_input_clear()
+            await job_page.industry_input_clear()
+            await job_page.location_input_clear()
             await job_page.skill_input_clear()
 
     @pytest.mark.positive
@@ -82,27 +82,27 @@ class TestSmokeJobPage:
         with allure.step("1. Check each Tipe Pekerjaan Checkbox availability"):
             await job_page.full_time_presence()
             await job_page.part_time_presence()
-            await job_page.intern_presence()
+            await job_page.internship_presence()
             await job_page.volunteer_presence()
             await job_page.contract_presence()
-            await job_page.scholar_presence()
-            await job_page.partner_presence()
+            await job_page.scholarship_presence()
+            await job_page.partnership_presence()
         with allure.step("2. Click on each checkboxes"):
             await job_page.full_time_check()
             await job_page.part_time_check()
-            await job_page.intern_check()
+            await job_page.internship_check()
             await job_page.volunteer_check()
             await job_page.contract_check()
-            await job_page.scholar_check()
-            await job_page.partner_check()
+            await job_page.scholarship_check()
+            await job_page.partnership_check()
         with allure.step("3. Uncheck all checkboxes"):
             await job_page.full_time_uncheck()
             await job_page.part_time_uncheck()
-            await job_page.intern_uncheck()
+            await job_page.internship_uncheck()
             await job_page.volunteer_uncheck()
             await job_page.contract_uncheck()
-            await job_page.scholar_uncheck()
-            await job_page.partner_uncheck()
+            await job_page.scholarship_uncheck()
+            await job_page.partnership_uncheck()
 
     @pytest.mark.positive
     @pytest.mark.smoke
