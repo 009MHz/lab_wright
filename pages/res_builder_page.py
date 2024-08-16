@@ -622,15 +622,51 @@ class Builder(BasePage):
             await self._click(".ant-layout-content")
             await self.edu_city_click_filled()
 
-    # Todo 3o.a: Validate Start Date datepicker
-    # Todo 3o.b: Start Date select date action
-    # Todo 3o.c: Start Date clear date selection
-    # Todo 3o.d: Start Date pass manual date value
+    async def edu_start_date_insert(self, month: str, year: int):
+        await self._click(EduHistory.start_input)
+        await expect(self._find(EduHistory.start_input)).to_be_focused()
 
-    # Todo 3p.a: Validate Graduation Date datepicker
-    # Todo 3p.b: Graduation Date select date action
+        await self._type(EduHistory.start_input, f"{month} - {year}")
+        await self._find(EduHistory.start_input).press("Enter")
+        await expect(self._find(EduHistory.start_input)).to_have_value(f"{month} - {year}")
+
+    # Todo 3o.c: Start Date clear date selection
+    async def edu_start_date_clear(self):
+        await self._click(EduHistory.start_input)
+        await expect(self._find(EduHistory.start_input)).to_be_focused()
+
+        await self._find(EduHistory.start_input).clear()
+        await expect(self._find(EduHistory.start_input)).to_have_value("")
+
+    async def edu_end_date_insert(self, month: str, year: int):
+        await self._click(EduHistory.end_input)
+        await expect(self._find(EduHistory.end_input)).to_be_focused()
+
+        await self._type(EduHistory.end_input, f"{month} - {year}")
+        await self._find(EduHistory.end_input).press("Enter")
+        await expect(self._find(EduHistory.end_input)).to_have_value(f"{month} - {year}")
+
+    async def edu_end_active_checking(self):
+        await expect(self._find(EduHistory.end_status_check)).not_to_be_checked()
+
+        await self._click(EduHistory.end_status_check)
+        await expect(self._find(EduHistory.end_status_check)).to_be_checked()
+        await expect(self._find(EduHistory.end_input)).to_be_disabled()
+
+    async def edu_end_active_unchecking(self):
+        await expect(self._find(EduHistory.end_status_check)).to_be_checked()
+
+        await self._click(EduHistory.end_status_check)
+        await expect(self._find(EduHistory.end_status_check)).not_to_be_checked()
+        await expect(self._find(EduHistory.end_input)).to_be_enabled()
+
     # Todo 3p.c: Graduation Date clear date selection
-    # Todo 3p.d: Graduation Date pass manual date value
+    async def edu_end_date_clear(self):
+        await self._click(EduHistory.end_input)
+        await expect(self._find(EduHistory.end_input)).to_be_focused()
+
+        await self._find(EduHistory.start_input).clear()
+        await expect(self._find(EduHistory.start_input)).to_have_value("")
 
     # Todo 3q.a: Validate Education History Main button action
 
