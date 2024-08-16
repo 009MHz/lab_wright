@@ -168,22 +168,22 @@ class TestSmokeLoginPage:
             await builder.edu_cancel_form_btn_presence()
             await builder.edu_save_form_btn_presence()
 
-        # with allure.step('4. Validate Jenjang Pendidikan'):
-        #     degree_options = [
-        #         builder.edu_click_degree_sma,
-        #         builder.edu_click_degree_d1,
-        #         builder.edu_click_degree_d2,
-        #         builder.edu_click_degree_d3,
-        #         builder.edu_click_degree_d4,
-        #         builder.edu_click_degree_s1,
-        #         builder.edu_click_degree_s2,
-        #         builder.edu_click_degree_s3,
-        #         builder.edu_click_degree_course,
-        #         builder.edu_click_degree_s1]
-        #
-        #     for select_degree in degree_options:
-        #         await builder.edu_click_degree()
-        #         await select_degree()
+        with allure.step('4. Validate Jenjang Pendidikan'):
+            degree_options = [
+                builder.edu_click_degree_sma,
+                builder.edu_click_degree_d1,
+                builder.edu_click_degree_d2,
+                builder.edu_click_degree_d3,
+                builder.edu_click_degree_d4,
+                builder.edu_click_degree_s1,
+                builder.edu_click_degree_s2,
+                builder.edu_click_degree_s3,
+                builder.edu_click_degree_course,
+                builder.edu_click_degree_s1]
+
+            for select_degree in degree_options:
+                await builder.edu_click_degree()
+                await select_degree()
 
         with allure.step('5. Validate Nama Institusi'):
             await builder.edu_institution_click_empty()
