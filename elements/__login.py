@@ -3,14 +3,14 @@ class LogInLoc:
 
     main_title = "//div//h3"
     email_label = "[for='username']"
-    email_input = "#username"
+    email_input = "#emailInput"
     email_blank_warning = ""
     email_unregistered_warning = ""
     email_unregistered_cta = ""
     email_invalid_warning = ""
 
     pass_label = "[for='password']"
-    pass_input = "#password"
+    pass_input = "#passwordInput"
     pass_eye_icon = "//span[contains(@class, 'eye')]"
 
     pass_blank_warning = ""
