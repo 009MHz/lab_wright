@@ -599,7 +599,28 @@ class Builder(BasePage):
             await self.edu_prov_click_filled()
 
     # Todo 3n.a: Institution City Insert Keyword & validate option lists
+    async def edu_city_click_empty(self):
+        await self._click(EduHistory.city_input)
+        await expect(self._find(EduHistory.city_input)).to_be_focused()
+
+    async def edu_city_click_filled(self):
+        await self._force(EduHistory.city_selected)
+        await expect(self._find(EduHistory.city_input)).to_be_focused()
+        await expect(self._find(EduHistory.city_lists)).to_be_visible()
+
+    async def edu_city_insert(self, text: str):
+        await self._type(EduHistory.city_input, text)
+        await expect(self._find(EduHistory.city_input)).to_have_value(text)
+        await expect(self._find(EduHistory.city_item)).to_be_visible()
+
     # Todo 3n.b: Institution City Select option based on keyword
+    async def edu_city_select_option_within(self, city_keyword):
+        await self.edu_city_insert(city_keyword)
+        items = self._find(EduHistory.city_item).count()
+        for x in range(1, items + 1):
+            await self._click(f"{EduHistory.city_item}[{x + 1}]")
+            await self._click(".ant-layout-content")
+            await self.edu_city_click_filled()
 
     # Todo 3o.a: Validate Start Date datepicker
     # Todo 3o.b: Start Date select date action

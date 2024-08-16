@@ -132,19 +132,19 @@ class TestSmokeLoginPage:
             await builder.edu_title_click_expand()
         with allure.step('2. Click on the Add Riwayat Pendidikan Form button'):
             await builder.edu_click_add_form()
-        # with allure.step('3. Validate the empty state form'):
-        #     await builder.edu_degree_presence()
-        #     await builder.edu_institution_presence()
-        #     await builder.edu_faculty_presence()
-        #     await builder.edu_gpa_presence()
-        #     await builder.edu_max_score_presence()
-        #     await builder.edu_country_presence()
-        #     await builder.edu_prov_presence()
-        #     await builder.edu_city_presence()
-        #     await builder.edu_start_presence()
-        #     await builder.edu_end_presence()
-        #     await builder.edu_cancel_form_btn_presence()
-        #     await builder.edu_save_form_btn_presence()
+        with allure.step('3. Validate the empty state form'):
+            await builder.edu_degree_presence()
+            await builder.edu_institution_presence()
+            await builder.edu_faculty_presence()
+            await builder.edu_gpa_presence()
+            await builder.edu_max_score_presence()
+            await builder.edu_country_presence()
+            await builder.edu_prov_presence()
+            await builder.edu_city_presence()
+            await builder.edu_start_presence()
+            await builder.edu_end_presence()
+            await builder.edu_cancel_form_btn_presence()
+            await builder.edu_save_form_btn_presence()
         # with allure.step('4. Validate Jenjang Pendidikan'):
         #     degree_options = [
         #         builder.edu_click_degree_sma,
@@ -164,17 +164,17 @@ class TestSmokeLoginPage:
         with allure.step('5. Validate Nama Institusi'):
             await builder.edu_institution_click_empty()
             await builder.edu_institution_select_option_within("Univ")
-        # with allure.step('6. Validate Jurusan'):
-        #     await builder.edu_faculty_click_empty()
-        #     await builder.faculty_select_option_within('Bis')
-        # with allure.step('7. Validate IPK atau Nilai'):
-        #     await builder.faculty_gpa_insert('3.8')
-        #     await builder.faculty_gpa_score_increase(3)
-        #     await builder.faculty_gpa_score_decrease(2)
-        # with allure.step('8. Validate Skala Maximum'):
-        #     await builder.faculty_max_gpa_insert('4.2')
-        #     await builder.faculty_max_gpa_score_increase(2)
-        #     await builder.faculty_max_gpa_score_decrease(3)
+        with allure.step('6. Validate Jurusan'):
+            await builder.edu_faculty_click_empty()
+            await builder.faculty_select_option_within('Bis')
+        with allure.step('7. Validate IPK atau Nilai'):
+            await builder.faculty_gpa_insert('3.8')
+            await builder.faculty_gpa_score_increase(3)
+            await builder.faculty_gpa_score_decrease(2)
+        with allure.step('8. Validate Skala Maximum'):
+            await builder.faculty_max_gpa_insert('4.2')
+            await builder.faculty_max_gpa_score_increase(2)
+            await builder.faculty_max_gpa_score_decrease(3)
         with allure.step('9. Validate Negara Institusi'):
             await builder.edu_click_country()
             await builder.edu_select_wna()
@@ -187,6 +187,10 @@ class TestSmokeLoginPage:
             # await builder.edu_prov_select_option_within('Pap')
         with allure.step('11. Validate Kota Institusi'):
             pass
+            # Todo: Need to switch on after locator fixed
+            # await builder.edu_prov_click_filled()
+            # await builder.edu_prov_select_option_within('Jakarta')
+            # await builder.edu_city_select_option_within('Jak')
         with allure.step('12. Validate Waktu Mulai'):
             pass
         with allure.step('13. Validate Waktu Lulus'):
