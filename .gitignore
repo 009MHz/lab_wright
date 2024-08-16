@@ -172,5 +172,5 @@ cython_debug/
 /log/
 
 reports
-data/
+data/.auth
 tests/reports
