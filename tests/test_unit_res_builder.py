@@ -233,10 +233,7 @@ class TestSmokeLoginPage:
             await builder.edu_end_active_checking()
 
         with allure.step('14. Click on Simpan button'):
-            pass
+            await builder.edu_save_btn_click()
 
-        with allure.step('15. Click on Add form button'):
-            pass
-
-        with allure.step('16. Click on Batal button'):
-            pass
+        with allure.step('15. Click on Batal button'):
+            await builder.edu_cancel_btn_click()

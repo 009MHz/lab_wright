@@ -613,7 +613,6 @@ class Builder(BasePage):
         await expect(self._find(EduHistory.city_input)).to_have_value(text)
         await expect(self._find(EduHistory.city_item)).to_be_visible()
 
-    # Todo 3n.b: Institution City Select option based on keyword
     async def edu_city_select_option_within(self, city_keyword):
         await self.edu_city_insert(city_keyword)
         items = self._find(EduHistory.city_item).count()
@@ -630,7 +629,6 @@ class Builder(BasePage):
         await self._find(EduHistory.start_input).press("Enter")
         await expect(self._find(EduHistory.start_input)).to_have_value(f"{month} - {year}")
 
-    # Todo 3o.c: Start Date clear date selection
     async def edu_start_date_clear(self):
         await self._click(EduHistory.start_input)
         await expect(self._find(EduHistory.start_input)).to_be_focused()
@@ -660,7 +658,6 @@ class Builder(BasePage):
         await expect(self._find(EduHistory.end_status_check)).not_to_be_checked()
         await expect(self._find(EduHistory.end_input)).to_be_enabled()
 
-    # Todo 3p.c: Graduation Date clear date selection
     async def edu_end_date_clear(self):
         await self._click(EduHistory.end_input)
         await expect(self._find(EduHistory.end_input)).to_be_focused()
@@ -669,6 +666,16 @@ class Builder(BasePage):
         await expect(self._find(EduHistory.start_input)).to_have_value("")
 
     # Todo 3q.a: Validate Education History Main button action
+    async def edu_save_btn_click(self):
+        await self._click(EduHistory.save_btn)
+        await expect(self._find(EduHistory.save_btn)).to_be_focused()
+
+    async def edu_cancel_btn_click(self):
+        await self._click(EduHistory.cancel_btn)
+
+        await expect(self._find(EduHistory.cancel_btn)).not_to_be_attached()
+        await expect(self._find(EduHistory.hint_desc)).not_to_be_attached()
+        await expect(self._find(EduHistory.description)).to_be_visible()
 
     # Todo 4: Occupation History Section
     # Todo 5: Proficiencies
