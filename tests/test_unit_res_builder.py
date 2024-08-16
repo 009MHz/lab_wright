@@ -12,7 +12,6 @@ async def builder(auth_page):
 
 @allure.epic("Resume Builder")
 @allure.story("Resume Builder/ Smoke Test")
-@allure.t
 class TestSmokeLoginPage:
     @pytest.mark.positive
     @pytest.mark.smoke
