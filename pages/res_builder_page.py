@@ -263,7 +263,6 @@ class Builder(BasePage):
         await expect(self._find(DataDiri.province_lists)).to_be_visible()
 
     async def self_info_prov_click_all_prov(self):
-        pass
         await self._look(DataDiri.province_lists)
         # choices = await self._find(PersonalInformation.province_item).get_attribute('title')
         # print(f"Collected Province Item: {choices}")
@@ -439,7 +438,6 @@ class Builder(BasePage):
         await expect(self._find(EduHistory.hint_btn)).to_have_attribute('aria-checked', 'false')
         await expect(self._find(EduHistory.hint_desc)).to_be_hidden()
 
-    # Todo 3g.a: Degree Show Option
     async def edu_click_degree(self):
         await self._force(EduHistory.degree_input)
         await expect(self._find(EduHistory.degree_lists)).to_be_visible()
@@ -513,7 +511,7 @@ class Builder(BasePage):
             
     async def edu_faculty_insert(self, text):
         await self._type(EduHistory.faculty_input, text)
-        await expect(self._find(EduHistory.faculty_list)).to_be_visible(timeout=20000)
+        await expect(self._find(EduHistory.faculty_list)).to_be_visible()
         await expect(self._find(EduHistory.faculty_add)).to_contain_text(text)
 
     async def edu_faculty_click_empty(self):
@@ -578,8 +576,27 @@ class Builder(BasePage):
         await self._click(EduHistory.country_wna)
         await expect(self._find(EduHistory.country_content)).to_have_attribute('title', 'Luar Indonesia')
 
-    # Todo 3m.a: Institution Province Insert Keyword & validate option lists
-    # Todo 3m.b: Institution Province Select option based on keyword
+    async def edu_prov_click_empty(self):
+        await self._click(EduHistory.province_input)
+        await expect(self._find(EduHistory.province_input)).to_be_focused()
+
+    async def edu_prov_click_filled(self):
+        await self._force(EduHistory.province_selected)
+        await expect(self._find(EduHistory.province_input)).to_be_focused()
+        await expect(self._find(EduHistory.province_lists)).to_be_visible()
+
+    async def edu_prov_insert(self, text: str):
+        await self._type(EduHistory.province_input, text)
+        await expect(self._find(EduHistory.province_input)).to_have_value(text)
+        await expect(self._find(EduHistory.province_item)).to_be_visible()
+
+    async def edu_prov_select_option_within(self, province_keyword):
+        await self.edu_prov_insert(province_keyword)
+        items = self._find(EduHistory.province_item).count()
+        for x in range(1, items + 1):
+            await self._click(f"{EduHistory.province_item}[{x + 1}]")
+            await self._click(".ant-layout-content")
+            await self.edu_prov_click_filled()
 
     # Todo 3n.a: Institution City Insert Keyword & validate option lists
     # Todo 3n.b: Institution City Select option based on keyword
