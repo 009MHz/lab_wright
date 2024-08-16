@@ -5,8 +5,8 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-#  repository_dispatch:
-#    types: [ karirlab-frontend-trigger ]
+  repository_dispatch:
+    types: [ karirlab-frontend-trigger ]
 
 permissions:
   contents: write
