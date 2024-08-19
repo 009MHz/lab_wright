@@ -118,7 +118,7 @@ class EduHistory:
     fill_score_checkbox = "#dataProfInfoEduScoreCheckBox"
     fill_final_score = "#dataProfInfoEduFinalScore"
     fill_max_score = "#dataProfInfoEduMaxScore"
-    fill_education_description_item = "//div[contains(@class,'education-description-item')]"
+    fill_education_description_item = "//div[contains(@class,'DataProfInfoJobDescItem')]"
     fill_education_description_add = "#educationDescriptionAdd"
 
 
