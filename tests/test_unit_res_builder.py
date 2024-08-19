@@ -23,20 +23,17 @@ class TestSmokeLoginPage:
         with allure.step('2. Validating Section Header'):
             await builder.info_section_title_presence()
         with allure.step('3. Validating Nama resume'):
-            await builder.info_resume_name_title_presence()
-            await builder.info_resume_name_input_presence()
+            await builder.info_resume_name_presence()
             await builder.info_resume_name_insert("Written from playwright")
         with allure.step('4. Validating Bahasa Resume'):
-            await builder.info_resume_lang_title_presence()
-            await builder.info_resume_lang_input_presence()
+            await builder.info_resume_language_presence()
             await builder.info_resume_lang_click()
             await builder.info_resume_select_bahasa()
             await builder.info_resume_lang_click()
             await builder.info_resume_select_language()
         with allure.step('5. Validating Tujuan Pekerjaan'):
             await builder.info_resume_goal_title_presence()
-            await builder.info_resume_goal_desc_presence()
-            await builder.info_resume_goal_input_presence()
+            await builder.info_resume_tujuan_presence()
             await builder.info_resume_goal_click()
             await builder.info_resume_goal_items_interact()
         with allure.step('6. Validating Import Data'):
@@ -109,6 +106,21 @@ class TestSmokeLoginPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
+    @allure.title("Riwayat Pendidikan Hints Existence")
+    @allure.feature("Riwayat Pendidikan", "Hints")
+    async def test_education_section_hints(self, builder):
+        with allure.step('1. Click on the Add Riwayat Pendidikan Form button'):
+            await builder.edu_click_add_form()
+        with allure.step('2. Validate the Hints section after form is added'):
+            await builder.edu_main_hints_presence()
+            await builder.edu_hints_title_presence()
+            await builder.edu_hints_desc_presence()
+        with allure.step('3. Interact with Riwayat Pendidikan hint toggle'):
+            await builder.edu_hints_click_hide()
+            await builder.edu_hints_click_show()
+
+    @pytest.mark.positive
+    @pytest.mark.smoke
     @allure.title("Riwayat Pendidikan Existence")
     @allure.feature("Riwayat Pendidikan")
     async def test_education_section(self, builder):
@@ -121,34 +133,58 @@ class TestSmokeLoginPage:
         with allure.step('2. Click on the Add Riwayat Pendidikan Form button'):
             await builder.edu_click_add_form()
         with allure.step('3. Validate the empty state form'):
-            pass
-        with allure.step('4. Validate Hints'):
-            pass
-        with allure.step('5. Validate Jenjang Pendidikan'):
-            pass
-        with allure.step('6. Validate Nama Institusi'):
-            pass
-        with allure.step('7. Validate Jurusan'):
+            await builder.edu_degree_presence()
+            await builder.edu_institution_presence()
+            await builder.edu_faculty_presence()
+            await builder.edu_gpa_presence()
+            await builder.edu_max_score_presence()
+            await builder.edu_country_presence()
+            await builder.edu_prov_presence()
+            await builder.edu_city_presence()
+            await builder.edu_start_presence()
+            await builder.edu_end_presence()
+            await builder.edu_cancel_form_btn_presence()
+            await builder.edu_save_form_btn_presence()
+        with allure.step('4. Validate Jenjang Pendidikan'):
+            degree_options = [
+                builder.edu_click_degree_sma,
+                builder.edu_click_degree_d1,
+                builder.edu_click_degree_d2,
+                builder.edu_click_degree_d3,
+                builder.edu_click_degree_d4,
+                builder.edu_click_degree_s1,
+                builder.edu_click_degree_s2,
+                builder.edu_click_degree_s3,
+                builder.edu_click_degree_course]
+
+            for select_degree in degree_options:
+                await builder.edu_click_degree()
+                await select_degree()
+        with allure.step('5. Validate Nama Institusi'): # possibility fail
+            await builder.edu_institution_click_empty()
+            await builder.edu_institution_select_all_option("Univ")
+        with allure.step('6. Validate Jurusan'):
+            await builder.edu_faculty_click_empty()
+            await builder.faculty_select_all_option('Bis')
+        with allure.step('7. Validate IPK atau Nilai'):
             pass
         with allure.step('8. Validate IPK atau Nilai'):
             pass
-        with allure.step('9. Validate IPK atau Nilai'):
+        with allure.step('9. Validate Skala Maximum'):
             pass
-        with allure.step('10. Validate Skala Maximum'):
+        with allure.step('10. Validate Negara Institusi'):
             pass
-        with allure.step('11. Validate Negara Institusi'):
+        with allure.step('11. Validate Provinsi Institusi'):
             pass
-        with allure.step('12. Validate Provinsi Institusi'):
+        with allure.step('12. Validate Kota Institusi'):
             pass
-        with allure.step('13. Validate Kota Institusi'):
+        with allure.step('13. Validate Waktu Mulai'):
             pass
-        with allure.step('14. Validate Waktu Mulai'):
+        with allure.step('14. Validate Waktu Lulus'):
             pass
-        with allure.step('15. Validate Waktu Lulus'):
+        with allure.step('15. Click on Simpan button'):
             pass
-        with allure.step('16. Click on Simpan button'):
+        with allure.step('16. Click on Add form button'):
             pass
-        with allure.step('17. Click on Add form button'):
-            pass
-        with allure.step('18. Click on Batal button'):
+        with allure.step('17. Click on Batal button'):
             pass

@@ -86,7 +86,7 @@ async def context_init(browser, storage_state=None):
             context = await browser.new_context(**context_options)
             page = await context.new_page()
             sess = LoginPage(page)
-            await sess.create_session('simbah.test01@gmail.com', 'germa069')
+            await sess.create_session('simbah.test03@gmail.com', 'germa069')
             logging.info("Login Success, Creating the file . . .")
             await context.storage_state(path=SESSION_FILE)
             await context.close()
