@@ -1,6 +1,7 @@
 import pytest
 from pages.res_builder_page import Builder
 import allure
+from allure import severity_level as severity
 
 
 @pytest.fixture(scope='function')
@@ -15,8 +16,9 @@ async def builder(auth_page):
 class TestSmokeLoginPage:
     @pytest.mark.positive
     @pytest.mark.smoke
-    @allure.title("Informasi Resume Existence Validation")
+    @allure.title("Informasi Resume Validation")
     @allure.feature("Informasi Resume")
+    @allure.severity(severity.CRITICAL)
     async def test_informasi_resume_section(self, builder):
         with allure.step('1. Validating Page Header'):
             await builder.page_title_presence()
@@ -49,6 +51,7 @@ class TestSmokeLoginPage:
     @pytest.mark.smoke
     @allure.title("Informasi Resume Hints Existence")
     @allure.feature("Data Diri", "Hints")
+    @allure.severity(severity.MINOR)
     async def test_data_diri_section_hints(self, builder):
         with allure.step('Validating Hints Component'):
             await builder.self_info_hints_title_presence()
@@ -63,6 +66,7 @@ class TestSmokeLoginPage:
     @pytest.mark.smoke
     @allure.title("Data Diri Existence Validation")
     @allure.feature("Data Diri")
+    @allure.severity(severity.CRITICAL)
     async def test_data_diri_section(self, builder):
         with allure.step('1. Validating The Form Existence'):
             await builder.self_info_main_form_presence()
@@ -122,6 +126,7 @@ class TestSmokeLoginPage:
     @pytest.mark.smoke
     @allure.title("Riwayat Pendidikan Hints Existence")
     @allure.feature("Riwayat Pendidikan", "Hints")
+    @allure.severity(severity.NORMAL)
     async def test_education_section_hints(self, builder):
         with allure.step('1. Click on the Add Riwayat Pendidikan Form button'):
             await builder.edu_click_add_form()
@@ -137,8 +142,9 @@ class TestSmokeLoginPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
-    @allure.title("Riwayat Pendidikan Existence")
+    @allure.title("Riwayat Pendidikan Validation")
     @allure.feature("Riwayat Pendidikan")
+    @allure.severity(severity.CRITICAL)
     async def test_education_section(self, builder):
         with allure.step('1. Validate the section default state'):
             await builder.edu_title_presence()
@@ -232,6 +238,7 @@ class TestSmokeLoginPage:
     @pytest.mark.smoke
     @allure.title("Riwayat Pekerjaan Hints Existence")
     @allure.feature("Riwayat Pekerjaan", "Hints")
+    @allure.severity(severity.MINOR)
     async def test_occupation_section_hints(self, builder):
         with allure.step('1. Click on the Add Riwayat Pekerjaan Form button'):
             await builder.job_click_add_form()
@@ -249,6 +256,7 @@ class TestSmokeLoginPage:
     @pytest.mark.smoke
     @allure.title("Riwayat Pekerjaan Existence")
     @allure.feature("Riwayat Pekerjaan")
+    @allure.severity(severity.CRITICAL)
     async def test_occupation_section(self, builder):
         with allure.step('1. Validate the section default state'):
             await builder.job_title_presence()

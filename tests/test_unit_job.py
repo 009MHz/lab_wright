@@ -1,6 +1,7 @@
 import pytest
 from pages.job_page import JobPage
 import allure
+from allure import severity_level as severity
 
 
 @pytest.fixture(scope='function')
@@ -17,6 +18,7 @@ class TestSmokeJobPage:
     @pytest.mark.smoke
     @allure.title("Sorting Control Test Validation")
     @allure.feature("Sort")
+    @allure.severity(severity.NORMAL)
     async def test_sort_control(self, job_page):
         with allure.step("1. Interact & validate the sort control"):
             await job_page.sort_control_presence()
@@ -27,6 +29,7 @@ class TestSmokeJobPage:
     @pytest.mark.smoke
     @allure.feature("Filter", "Main", "Easy Apply", "MSIB")
     @allure.title("Main Filter button Validation")
+    @allure.severity(severity.CRITICAL)
     async def test_main_filter(self, job_page):
         with allure.step("1. Interact with Main Filter"):
             await job_page.click_easy_apply()
@@ -38,6 +41,7 @@ class TestSmokeJobPage:
     @pytest.mark.smoke
     @allure.feature("Carousel", "Job Card")
     @allure.title("Main Job Card Validation")
+    @allure.severity(severity.NORMAL)
     async def test_job_cards(self, job_page):
         with allure.step("1. Check each job cards element availability"):
             await job_page.job_cards_logo_presence()
@@ -54,6 +58,7 @@ class TestSmokeJobPage:
     @pytest.mark.smoke
     @allure.feature("Filter", "Auto Complete", "Input")
     @allure.title("Input Field Search Validation")
+    @allure.severity(severity.CRITICAL)
     async def test_input_search(self, job_page):
         with allure.step("1. Check each input field availability"):
             await job_page.position_input_presence()
@@ -78,6 +83,7 @@ class TestSmokeJobPage:
     @pytest.mark.smoke
     @allure.feature("Filter", "Checkbox")
     @allure.title("'Tipe Pekerjaan' Check Validation")
+    @allure.severity(severity.CRITICAL)
     async def test_job_type_checkboxes(self, job_page):
         with allure.step("1. Check each Tipe Pekerjaan Checkbox availability"):
             await job_page.full_time_presence()
@@ -108,6 +114,7 @@ class TestSmokeJobPage:
     @pytest.mark.smoke
     @allure.feature("Filter", "Checkbox")
     @allure.title("'Tipe Pengaturan Kerja' Check Validation")
+    @allure.severity(severity.CRITICAL)
     async def test_arrangement_checkboxes(self, job_page):
         with allure.step("1. Check each Tipe Pengaturan Kerja Checkbox availability"):
             await job_page.hybrid_presence()
@@ -126,6 +133,7 @@ class TestSmokeJobPage:
     @pytest.mark.smoke
     @allure.feature("Filter", "Checkbox")
     @allure.title("'Pengalaman Kerja' Check Validation")
+    @allure.severity(severity.CRITICAL)
     async def test_experience_checkboxes(self, job_page):
         with allure.step("1. Check each Pengalaman Kerja Checkbox availability"):
             await job_page.no_exp_presence()
@@ -150,6 +158,7 @@ class TestSmokeJobPage:
     @pytest.mark.smoke
     @allure.feature("Pagination")
     @allure.title("Pagination Section Validation")
+    @allure.severity(severity.NORMAL)
     async def test_pagination(self, job_page):
         with allure.step("1. The Pagination Component should be exist"):
             await job_page.next_chevron_presence()
