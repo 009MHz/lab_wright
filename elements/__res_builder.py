@@ -159,10 +159,14 @@ class EduHistory:
 
 
 class JobHistory:
+    add_btn = "|BELUM|#occupationAdd"
+    toggle = "|BELUM|div[id='occupationToggle'] div[role='button']"
+    title = "|BELUM|#occupationTitle"
     hint = "#occupationHint"
     hint_btn = "#occupationHintBtn"
     hint_desc = "#occupationHintDesc"
-    wrapper = "|Belum|//div[contains(@class, 'wrapper-occupation')]"
+    wrapper = "|BELUM|//div[contains(@class, 'wrapper-occupation')]"
+    position_label = "|BELUM|#occupationPositionLabel"
     position_input = "#occupationPositionInput"
     company_name_label = "#companyNameLabel"
     company_name_input = "#companyNameInput"
@@ -182,6 +186,7 @@ class JobHistory:
     start_input = "#occupationStartInput"
     end_label = "#occupationEndLabel"
     end_input = "#occupationEndInput"
+    end_status_check = "//div[contains(@class, 'OccupationForm')]//input[@name='is_present']"
     form_cancel = "#occupationFormCancel"
     form_save = "#occupationFormSave"
 
@@ -207,9 +212,12 @@ class JobHistory:
 
 
 class Proficiency:
+    wrapper = "|BELUM|//div[contains(@class, 'wrapper-proficiency')]"
+    add_btn = "|BELUM|#proficiencyAdd"
+    title = "|BELUM|#proficiencyTitle"
+    toggle = "|BELUM||div[id='proficiencyToggle'] div[role='button']"
     hint_btn = "#proficiencyHintBtn"
     hint_desc = "#proficiencyHintDesc"
-    wrapper = "|Belum|//div[contains(@class, 'wrapper-proficiency')]"
     name_label = "#proficiencyNameLabel"
     name_input = "#proficiencyNameInput"
     level_label = "#proficiencyLevelLabel"
@@ -227,9 +235,12 @@ class Proficiency:
     fill_level = "|BELUM|#dataProfInfoSkillLevel"
 
 class Achievements:
+    wrapper = "|Belum|//div[contains(@class, 'wrapper-achievement')]"
+    add_btn = "|BELUM|#achievementAdd"
+    title = "|BELUM|#achievementTitle"
+    toggle = "|BELUM||div[id='achievementToggle'] div[role='button']"
     hint_btn = "#achievementHintBtn"
     hint_desc = "#achievementHintDesc"
-    wrapper = "|Belum|//div[contains(@class, 'wrapper-achievement')]"
     year_label = "#achievementYearLabel"
     year_input = "#achievementYearInput"
     name_label = "#achievementNameLabel"
@@ -243,9 +254,12 @@ class Achievements:
     fill_level = "|BELUM|#dataProfInfoAwardYear"
 
 class Hobby:
+    wrapper = "|Belum|//div[contains(@class, 'wrapper-hobby')]"
+    add_btn = "|BELUM|#hobbyAdd"
+    title = "|BELUM|#hobbyTitle"
+    toggle = "|BELUM||div[id='hobbyToggle'] div[role='button']"
     hint_btn = "#hobbyHintBtn"
     hint_desc = "#hobbyHintDesc"
-    wrapper = "|Belum|//div[contains(@class, 'wrapper-hobby')]"
     name_label = "#hobbyNameLabel"
     name_input = "#hobbyNameInput"
     form_cancel = "#hobbyFormCancel"
