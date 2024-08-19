@@ -22,7 +22,7 @@ class Builder(BasePage):
     async def info_resume_name_presence(self):
         await self._look(ResumeInfo.name_label)
         await expect(self._find(ResumeInfo.name_label)).to_have_text("Nama Resume")
-        
+
         await self._touch(ResumeInfo.name_input)
         await expect(self._find(ResumeInfo.name_input)).to_have_attribute("placeholder", "Yoga 2 Januari 2023")
 
@@ -188,7 +188,7 @@ class Builder(BasePage):
         await self._touch(EmptyDataDiri.linkedin_input)
         await expect(self._find(EmptyDataDiri.linkedin_input)).to_be_empty()
         await expect(self._find(EmptyDataDiri.linkedin_input)).to_have_attribute('placeholder',
-                                                                            "https://www.linkedin.com/in/johndoe/")
+                                                                                 "https://www.linkedin.com/in/johndoe/")
 
     async def self_info_portfolio_presence(self):
         await self._look(EmptyDataDiri.portfolio_label)
@@ -197,7 +197,7 @@ class Builder(BasePage):
         await self._touch(EmptyDataDiri.portfolio_input)
         await expect(self._find(EmptyDataDiri.portfolio_input)).to_be_empty()
         await expect(self._find(EmptyDataDiri.portfolio_input)).to_have_attribute('placeholder',
-                                                                             'https://portofoliokamu.com')
+                                                                                  'https://portofoliokamu.com')
 
     async def self_info_simpan_btn_presence(self):
         await self._look(EmptyDataDiri.submit_btn)
@@ -250,31 +250,62 @@ class Builder(BasePage):
         await expect(self._find(EmptyDataDiri.country_lists)).to_be_visible()
 
     async def self_info_select_wni(self):
+        await self.self_info_click_country()
         await self._force(EmptyDataDiri.country_wni)
         await expect(self._find(EmptyDataDiri.country_content)).to_have_attribute('title', 'Indonesia')
 
     async def self_info_select_wna(self):
+        await self.self_info_click_country()
         await self._force(EmptyDataDiri.country_wna)
         await expect(self._find(EmptyDataDiri.country_content)).to_have_attribute('title', 'Luar Indonesia')
 
     async def self_info_prov_insert(self, text: str):
         await self._type(EmptyDataDiri.province_input, text)
         await expect(self._find(EmptyDataDiri.province_input)).to_have_value(text)
+        await expect(self._find(EmptyDataDiri.province_lists)).to_be_attached()
+
+    async def self_info_prov_click_filled(self):
+        await self._click(EmptyDataDiri.province_selected)
+        await expect(self._find(EmptyDataDiri.province_input)).to_be_focused()
         await expect(self._find(EmptyDataDiri.province_lists)).to_be_visible()
 
-    async def self_info_prov_click_all_prov(self):
-        await self._look(EmptyDataDiri.province_lists)
-        choices = await self._find(EmptyDataDiri.province_item).get_attribute('title')
-        print(f"Collected Province Item: {choices}")
+    async def self_info_prov_select_option_within(self, text):
+        await self.self_info_prov_insert(text)
+        count = await self._find(EmptyDataDiri.province_item).count()
+
+        for x in range(1, count + 1):
+            await self._click(f"{EmptyDataDiri.province_item}[{x}]")
+            await self._click(".ant-layout-content")  # Unclick the input field
+            if x != count:
+                await self.self_info_prov_click_filled()
+            else:
+                await self._click(".ant-layout-content")
+
+        await expect(self._find(EmptyDataDiri.province_lists)).not_to_be_visible()
+        await expect(self._find(EmptyDataDiri.city_input)).to_be_enabled()
 
     async def self_info_city_insert(self, text: str):
         await self._type(EmptyDataDiri.city_input, text)
         await expect(self._find(EmptyDataDiri.city_input)).to_have_value(text)
+        await expect(self._find(EmptyDataDiri.city_lists)).to_be_attached()
+
+    async def self_info_city_click_filled(self):
+        await self._click(EmptyDataDiri.city_selected)
+        await expect(self._find(EmptyDataDiri.city_input)).to_be_focused()
         await expect(self._find(EmptyDataDiri.city_lists)).to_be_visible()
 
-    async def self_info_city_click_all_city(self):
-        await self._look(EmptyDataDiri.city_lists)
-        choices = await self._find(EmptyDataDiri.city_item).get_attribute('title')
+    async def self_info_city_select_option_within(self, text):
+        await self.self_info_city_insert(text)
+        count = await self._find(EmptyDataDiri.city_item).count()
+        for x in range(1, count + 1):
+            await self._click(f"{EmptyDataDiri.city_item}[{x}]")
+            await self._click(".ant-layout-content")  # Unclick input field
+            if x != count:
+                await self.self_info_city_click_filled()
+            else:
+                await self._click(".ant-layout-content")
+
+        await expect(self._find(EmptyDataDiri.city_lists)).not_to_be_visible()
 
     async def self_info_address_insert(self, text: str):
         await self._type(EmptyDataDiri.address_input, text)
@@ -290,7 +321,6 @@ class Builder(BasePage):
 
     async def self_info_click_simpan(self):
         await self._click(EmptyDataDiri.submit_btn)
-        await expect(self._find(EmptyDataDiri.submit_btn)).to_be_focused()
 
     """Education History Validation"""
     async def edu_title_presence(self):
@@ -460,42 +490,42 @@ class Builder(BasePage):
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_d2)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Ahli Muda (D2)')
-        
+
     async def edu_click_degree_d3(self):
         await self.edu_click_degree()
 
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_d3)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Ahli Madya (D3)')
-        
+
     async def edu_click_degree_d4(self):
         await self.edu_click_degree()
 
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_d4)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Sarjana Sains Terapan (D4)')
-        
+
     async def edu_click_degree_s1(self):
         await self.edu_click_degree()
 
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_s1)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Sarjana (S1)')
-        
+
     async def edu_click_degree_s2(self):
         await self.edu_click_degree()
 
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_s2)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Magister (S2)')
-        
+
     async def edu_click_degree_s3(self):
         await self.edu_click_degree()
 
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_s3)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Doktor (S3)')
-        
+
     async def edu_click_degree_course(self):
         await self.edu_click_degree()
 
@@ -524,7 +554,7 @@ class Builder(BasePage):
             await self._click(f"{EduHistory.name_item}[{x + 1}]")
             await self._click(".ant-layout-content")
             await self.edu_institution_click_filled()
-            
+
     async def edu_faculty_insert(self, text):
         await self._type(EduHistory.faculty_input, text)
         await expect(self._find(EduHistory.faculty_list)).to_be_visible()
@@ -545,7 +575,7 @@ class Builder(BasePage):
             await self._click(f"{EduHistory.faculty_item}[{x + 1}]")
             await self._click(".ant-layout-content")
             await self.edu_faculty_click_filled()
-            
+
     async def faculty_gpa_insert(self, text: str):
         await self._type(EduHistory.gpa_input, text)
         await expect(self._find(EduHistory.gpa_input)).to_be_focused()
@@ -562,7 +592,7 @@ class Builder(BasePage):
         for x in range(step):
             await self._click(EduHistory.gpa_decrease)
         await expect(self._find(EduHistory.gpa_input)).to_have_value(str(current_score - step))
-        
+
     async def faculty_max_gpa_insert(self, text: str):
         await self._type(EduHistory.max_gpa_input, text)
         await expect(self._find(EduHistory.max_gpa_input)).to_be_focused()
@@ -579,7 +609,7 @@ class Builder(BasePage):
         for x in range(step):
             await self._click(EduHistory.max_gpa_decrease)
         await expect(self._find(EduHistory.max_gpa_input)).to_have_value(str(current_score - step))
-        
+
     async def edu_click_country(self):
         await self._click(EduHistory.country_input)
         await expect(self._find(EduHistory.country_lists)).to_be_visible()
@@ -755,7 +785,7 @@ class Builder(BasePage):
         await self._touch(JobHistory.city_input)
         await expect(self._find(JobHistory.city_input)).to_be_empty()
         await expect(self._find(JobHistory.city_empty)).to_have_text("Cirebon")
-        
+
     async def job_status_presence(self):
         await self._look(JobHistory.status_label)
         await expect(self._find(JobHistory.status_label)).to_have_text("Status Pekerjaan")
