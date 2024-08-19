@@ -799,6 +799,173 @@ class Builder(BasePage):
         await expect(self._find(JobHistory.hint_btn)).to_have_attribute('aria-checked', 'false')
         await expect(self._find(JobHistory.hint_desc)).to_be_hidden()
 
+    async def job_position_click_empty(self):
+        await self._click(JobHistory.pos_input)
+        await expect(self._find(JobHistory.pos_input)).to_be_focused()
+
+    async def job_position_insert(self, text):
+        await self._type(JobHistory.pos_input, text)
+        await expect(self._find(JobHistory.pos_list)).to_be_visible()
+        await expect(self._find(JobHistory.pos_add)).to_contain_text(text)
+
+    async def job_position_click_filled(self):
+        await self._click(JobHistory.pos_selected)
+        await expect(self._find(JobHistory.pos_input)).to_be_focused()
+        await expect(self._find(JobHistory.pos_list)).to_be_visible()
+
+    async def job_position_select_option_within(self, text):
+        await self.job_position_insert(text)
+        count = await self._find(JobHistory.pos_item.count())
+        for x in range(1, count):
+            await self._click(f"{JobHistory.pos_item}[{x + 1}]")
+            await self._click(".ant-layout-content")
+            await self.job_position_click_filled()
+
+    async def job_company_name_insert(self, text: str):
+        await self._type(JobHistory.company_input, text)
+        await expect(self._find(JobHistory.company_input)).to_be_focused()
+        await expect(self._find(JobHistory.company_input)).to_have_value(text)
+
+    async def job_click_country(self):
+        await self._click(JobHistory.country_input)
+        await expect(self._find(JobHistory.country_lists)).to_be_visible()
+
+    async def job_select_wni(self):
+        await self._force(JobHistory.country_wni)
+        await expect(self._find(JobHistory.country_content)).to_have_attribute('title', 'Indonesia')
+
+    async def job_select_wna(self):
+        await self._force(JobHistory.country_wna)
+        await expect(self._find(JobHistory.country_content)).to_have_attribute('title', 'Luar Indonesia')
+
+    async def job_prov_click_empty(self):
+        await self._click(JobHistory.province_input)
+        await expect(self._find(JobHistory.province_input)).to_be_focused()
+
+    async def job_prov_click_filled(self):
+        await self._force(JobHistory.province_selected)
+        await expect(self._find(JobHistory.province_input)).to_be_focused()
+        await expect(self._find(JobHistory.province_lists)).to_be_visible()
+
+    async def job_prov_insert(self, text: str):
+        await self._type(JobHistory.province_input, text)
+        await expect(self._find(JobHistory.province_input)).to_have_value(text)
+        await expect(self._find(JobHistory.province_item)).to_be_visible()
+
+    async def job_prov_select_option_within(self, province_keyword):
+        await self.job_prov_insert(province_keyword)
+        items = self._find(JobHistory.province_item).count()
+        for x in range(1, items + 1):
+            await self._click(f"{JobHistory.province_item}[{x + 1}]")
+            await self._click(".ant-layout-content")
+            await self.job_prov_click_filled()
+
+    async def job_city_click_empty(self):
+        await self._click(JobHistory.city_input)
+        await expect(self._find(JobHistory.city_input)).to_be_focused()
+
+    async def job_city_click_filled(self):
+        await self._force(JobHistory.city_selected)
+        await expect(self._find(JobHistory.city_input)).to_be_focused()
+        await expect(self._find(JobHistory.city_lists)).to_be_visible()
+
+    async def job_city_insert(self, text: str):
+        await self._type(JobHistory.city_input, text)
+        await expect(self._find(JobHistory.city_input)).to_have_value(text)
+        await expect(self._find(JobHistory.city_item)).to_be_visible()
+
+    async def job_city_select_option_within(self, city_keyword):
+        await self.job_city_insert(city_keyword)
+        items = self._find(JobHistory.city_item).count()
+        for x in range(1, items + 1):
+            await self._click(f"{JobHistory.city_item}[{x + 1}]")
+            await self._click(".ant-layout-content")
+            await self.edu_city_click_filled()
+
+    async def job_click_status(self):
+        await self._force(JobHistory.status_input)
+        await expect(self._find(JobHistory.status_lists)).to_be_visible()
+
+    async def job_click_status_full(self):
+        await self._look(JobHistory.status_lists)
+        await self._click(JobHistory.status_full)
+        await expect(self._find(JobHistory.status_content)).to_have_attribute('title', 'Purnawaktu')
+
+    async def job_click_status_part(self):
+        await self._look(JobHistory.status_lists)
+        await self._click(JobHistory.status_part)
+        await expect(self._find(JobHistory.status_content)).to_have_attribute('title', 'Paruh Waktu')
+
+    async def job_click_status_freelance(self):
+        await self._look(JobHistory.status_lists)
+        await self._click(JobHistory.status_freelance)
+        await expect(self._find(JobHistory.status_content)).to_have_attribute('title', 'Pekerja Lepas')
+
+    async def job_click_status_internship(self):
+        await self._look(JobHistory.status_lists)
+        await self._click(JobHistory.status_intern)
+        await expect(self._find(JobHistory.status_content)).to_have_attribute('title', 'Magang')
+
+    async def job_click_status_volunteer(self):
+        await self._look(JobHistory.status_lists)
+        await self._click(JobHistory.status_volunteer)
+        await expect(self._find(JobHistory.status_content)).to_have_attribute('title', 'Sukarela')
+
+    async def job_start_date_insert(self, month: str, year: int):
+        await self._click(JobHistory.start_input)
+        await expect(self._find(JobHistory.start_input)).to_be_focused()
+
+        await self._type(JobHistory.start_input, f"{month} - {year}")
+        await self._find(JobHistory.start_input).press("Enter")
+        await expect(self._find(JobHistory.start_input)).to_have_value(f"{month} - {year}")
+
+    async def job_start_date_clear(self):
+        await self._click(JobHistory.start_input)
+        await expect(self._find(JobHistory.start_input)).to_be_focused()
+
+        await self._find(JobHistory.start_input).clear()
+        await expect(self._find(JobHistory.start_input)).to_have_value("")
+
+    async def job_end_date_insert(self, month: str, year: int):
+        await self._click(JobHistory.end_input)
+        await expect(self._find(JobHistory.end_input)).to_be_focused()
+
+        await self._type(JobHistory.end_input, f"{month} - {year}")
+        await self._find(JobHistory.end_input).press("Enter")
+        await expect(self._find(JobHistory.end_input)).to_have_value(f"{month} - {year}")
+
+    async def job_end_active_checking(self):
+        await expect(self._find(JobHistory.end_status_check)).not_to_be_checked()
+
+        await self._click(JobHistory.end_status_check)
+        await expect(self._find(JobHistory.end_status_check)).to_be_checked()
+        await expect(self._find(JobHistory.end_input)).to_be_disabled()
+
+    async def job_end_active_unchecking(self):
+        await expect(self._find(JobHistory.end_status_check)).to_be_checked()
+
+        await self._click(JobHistory.end_status_check)
+        await expect(self._find(JobHistory.end_status_check)).not_to_be_checked()
+        await expect(self._find(JobHistory.end_input)).to_be_enabled()
+
+    async def job_end_date_clear(self):
+        await self._click(JobHistory.end_input)
+        await expect(self._find(JobHistory.end_input)).to_be_focused()
+
+        await self._find(JobHistory.start_input).clear()
+        await expect(self._find(JobHistory.start_input)).to_have_value("")
+
+    async def job_save_btn_click(self):
+        await self._click(JobHistory.form_save)
+        await expect(self._find(JobHistory.form_save)).to_be_focused()
+
+    async def job_cancel_btn_click(self):
+        await self._click(JobHistory.form_cancel)
+
+        await expect(self._find(JobHistory.form_cancel)).not_to_be_attached()
+        await expect(self._find(JobHistory.hint_desc)).not_to_be_attached()
+        await expect(self._find(JobHistory.description)).to_be_visible()
+
     # Todo 5: Proficiencies
     # Todo 6: Achievements
     # Todo 7: Achievements

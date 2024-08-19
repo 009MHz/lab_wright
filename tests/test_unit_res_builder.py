@@ -282,73 +282,57 @@ class TestSmokeLoginPage:
             await builder.job_end_presence()
             await builder.job_cancel_form_btn_presence()
             await builder.job_save_form_btn_presence()
+
+        with allure.step('4. Validate Posisi'):
+            await builder.job_position_click_empty()
+            await builder.job_position_select_option_within("Test")
+
+        with allure.step('5. Validate Nama Perusahaan input'):
+            await builder.job_company_name_insert('KarirLab')
+
+        with allure.step('6. Validate Negara Perusahaan/ Organisasi'):
+            await builder.job_click_country()
+            await builder.job_select_wna()
+            await builder.job_click_country()
+            await builder.job_select_wni()
+
+        with allure.step('10. Validate Provinsi Institusi'):
+            pass
+            # Todo: Waiting for Pekerjaan Province list wrapper ID
+            # await builder.job_prov_click_empty()
+            # await builder.job_prov_select_option_within('Pap')
         #
-        # with allure.step('4. Validate Jenjang Pekerjaan'):
-        #     degree_options = [
-        #         builder.job_click_degree_sma,
-        #         builder.job_click_degree_d1,
-        #         builder.job_click_degree_d2,
-        #         builder.job_click_degree_d3,
-        #         builder.job_click_degree_d4,
-        #         builder.job_click_degree_s1,
-        #         builder.job_click_degree_s2,
-        #         builder.job_click_degree_s3,
-        #         builder.job_click_degree_course,
-        #         builder.job_click_degree_s1]
-        #
-        #     for select_degree in degree_options:
-        #         await builder.job_click_degree()
-        #         await select_degree()
-        #
-        # with allure.step('5. Validate Nama Institusi'):
-        #     await builder.job_institution_click_empty()
-        #     await builder.job_institution_select_option_within("Univ")
-        #
-        # with allure.step('6. Validate Jurusan'):
-        #     await builder.job_faculty_click_empty()
-        #     await builder.faculty_select_option_within('Bis')
-        #
-        # with allure.step('7. Validate IPK atau Nilai'):
-        #     await builder.faculty_gpa_insert('3.8')
-        #     await builder.faculty_gpa_score_increase(3)
-        #     await builder.faculty_gpa_score_decrease(2)
-        #
-        # with allure.step('8. Validate Skala Maximum'):
-        #     await builder.faculty_max_gpa_insert('4.2')
-        #     await builder.faculty_max_gpa_score_increase(2)
-        #     await builder.faculty_max_gpa_score_decrease(3)
-        #
-        # with allure.step('9. Validate Negara Institusi'):
-        #     await builder.job_click_country()
-        #     await builder.job_select_wna()
-        #     await builder.job_click_country()
-        #     await builder.job_select_wni()
-        #
-        # with allure.step('10. Validate Provinsi Institusi'):
-        #     pass
-        #     # Todo: Need to switch on after locator fixed
-        #     # await builder.job_prov_click_empty()
-        #     # await builder.job_prov_select_option_within('Pap')
-        #
-        # with allure.step('11. Validate Kota Institusi'):
-        #     pass
-        #     # Todo: Need to switch on after locator fixed
-        #     # await builder.job_prov_click_filled()
-        #     # await builder.job_prov_select_option_within('Jakarta')
-        #     # await builder.job_city_select_option_within('Jak')
-        #
-        # with allure.step('12. Validate Waktu Mulai'):
-        #     await builder.job_start_date_insert("August", 2016)
-        #     await builder.job_start_date_clear()
-        #
-        # with allure.step('13. Validate Waktu Lulus'):
-        #     await builder.job_end_active_unchecking()
-        #     await builder.job_end_date_insert("December", 2021)
-        #     await builder.job_end_date_clear()
-        #     await builder.job_end_active_checking()
-        #
-        # with allure.step('14. Click on Simpan button'):
-        #     await builder.job_save_btn_click()
-        #
-        # with allure.step('15. Click on Batal button'):
-        #     await builder.job_cancel_btn_click()
+        with allure.step('11. Validate Kota Institusi'):
+            pass
+            # Todo: Waiting for Pekerjaan City list wrapper ID
+            # await builder.job_prov_click_filled()
+            # await builder.job_prov_select_option_within('Jakarta')
+            # await builder.job_city_select_option_within('Jak')
+
+        with allure.step('4. Validate Status Pekerjaan'):
+            status_options = [
+                builder.job_click_status_full,
+                builder.job_click_status_part,
+                builder.job_click_status_freelance,
+                builder.job_click_status_internship,
+                builder.job_click_status_volunteer]
+
+            for job_status in status_options:
+                await builder.job_click_status()
+                await job_status()
+
+        with allure.step('12. Validate Waktu Mulai'):
+            await builder.job_start_date_insert("January", 2022)
+            await builder.job_start_date_clear()
+
+        with allure.step('13. Validate Waktu Selesai'):
+            await builder.job_end_active_unchecking()
+            await builder.job_end_date_insert("December", 2022)
+            await builder.job_end_date_clear()
+            await builder.job_end_active_checking()
+
+        with allure.step('14. Click on Simpan button'):
+            await builder.job_save_btn_click()
+
+        with allure.step('15. Click on Batal button'):
+            await builder.job_cancel_btn_click()

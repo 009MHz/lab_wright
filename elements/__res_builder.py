@@ -181,6 +181,7 @@ class JobHistory:
     pos_selected = ""
     pos_list = ""
     pos_add = ""
+    pos_item = ""
     company_label = "#companyNameLabel"
     company_input = "#companyNameInput"
     country_label = "#companyCountryLabel"
