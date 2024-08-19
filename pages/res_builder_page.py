@@ -441,46 +441,64 @@ class Builder(BasePage):
         await expect(self._find(EduHistory.degree_lists)).to_be_visible()
 
     async def edu_click_degree_sma(self):
+        await self.edu_click_degree()
+
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_sma)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'SMA/SMK/Sederajat')
 
     async def edu_click_degree_d1(self):
+        await self.edu_click_degree()
+
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_d1)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Ahli Pratama (D1)')
 
     async def edu_click_degree_d2(self):
+        await self.edu_click_degree()
+
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_d2)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Ahli Muda (D2)')
         
     async def edu_click_degree_d3(self):
+        await self.edu_click_degree()
+
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_d3)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Ahli Madya (D3)')
         
     async def edu_click_degree_d4(self):
+        await self.edu_click_degree()
+
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_d4)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Sarjana Sains Terapan (D4)')
         
     async def edu_click_degree_s1(self):
+        await self.edu_click_degree()
+
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_s1)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Sarjana (S1)')
         
     async def edu_click_degree_s2(self):
+        await self.edu_click_degree()
+
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_s2)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Magister (S2)')
         
     async def edu_click_degree_s3(self):
+        await self.edu_click_degree()
+
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_s3)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Doktor (S3)')
         
     async def edu_click_degree_course(self):
+        await self.edu_click_degree()
+
         await self._look(EduHistory.degree_lists)
         await self._click(EduHistory.degree_course)
         await expect(self._find(EduHistory.degree_content)).to_have_attribute('title', 'Kursus & Pelatihan')

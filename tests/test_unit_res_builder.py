@@ -171,21 +171,16 @@ class TestSmokeLoginPage:
             await builder.edu_save_form_btn_presence()
 
         with allure.step('4. Validate Jenjang Pendidikan'):
-            degree_options = [
-                builder.edu_click_degree_sma,
-                builder.edu_click_degree_d1,
-                builder.edu_click_degree_d2,
-                builder.edu_click_degree_d3,
-                builder.edu_click_degree_d4,
-                builder.edu_click_degree_s1,
-                builder.edu_click_degree_s2,
-                builder.edu_click_degree_s3,
-                builder.edu_click_degree_course,
-                builder.edu_click_degree_s1]
-
-            for select_degree in degree_options:
-                await builder.edu_click_degree()
-                await select_degree()
+            await builder.edu_click_degree_sma()
+            await builder.edu_click_degree_d1()
+            await builder.edu_click_degree_d2()
+            await builder.edu_click_degree_d3()
+            await builder.edu_click_degree_d4()
+            await builder.edu_click_degree_s1()
+            await builder.edu_click_degree_s2()
+            await builder.edu_click_degree_s3()
+            await builder.edu_click_degree_course()
+            await builder.edu_click_degree_s1()
 
         with allure.step('5. Validate Nama Institusi'):
             await builder.edu_institution_click_empty()
@@ -214,13 +209,13 @@ class TestSmokeLoginPage:
         with allure.step('10. Validate Provinsi Institusi'):
             pass
             # Todo: Waiting for Pendidikan Province list wrapper ID
-            await builder.edu_prov_click_empty()
+            # await builder.edu_prov_click_empty()
             # await builder.edu_prov_select_option_within('Pap')
 
         with allure.step('11. Validate Kota Institusi'):
             pass
             # Todo: Waiting for Pendidikan City list wrapper ID
-            await builder.edu_city_click_empty()
+            # await builder.edu_city_click_empty()
             # await builder.edu_city_select_option_within('Jak')
 
         with allure.step('12. Validate Waktu Mulai'):
