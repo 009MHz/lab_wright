@@ -22,7 +22,7 @@ class ResumeInfo:
     import_modal = "//div[contains(@class, 'importDataModal')]"
 
 
-class DataDiri:
+class EmptyDataDiri:
     title = "#selfInfoTitle"
     main_form = "#selfInfoToggle"
     form_state = "#selfInfoToggle .ant-collapse-header"
@@ -63,6 +63,8 @@ class DataDiri:
     portfolio_label = "#selfInfoPortfolioLabel"
     portfolio_input = "#selfInfoPortfolioInput"
     submit_btn = "#selfInfoSubmitBtn"
+
+    """Filled State"""
     fill_datadiri_wrapper = "|BELUM|#DataProfInfoSelfDataWrapper"
     fill_name = "|BELUM|#DataProfInfoSelfDataName"
     fill_email = "|BELUM|#DataProfInfoSelfDataEmail"
@@ -146,6 +148,8 @@ class EduHistory:
     end_status_check = "//div[contains(@class, 'EducationForm')]//input[@name='is_present']"
     save_btn = "#educationFormSave"
     cancel_btn = "#educationFormCancel"
+
+    """Filled State"""
     fill_education_item = "//div[contains(@class,'education-item')]"
     fill_name = "#dataProfInfoEduName"
     fill_country = "#dataProfInfoEduLocCountry"
@@ -193,14 +197,25 @@ class JobHistory:
     province_item = ""
     city_label = "#companyCityLabel"
     city_input = "#companyCityInput"
-    city_lists = "#companyCityList"
+    city_empty = "//div[@name='company_city']//span[contains(@class,'placeholder')]"
+    city_selected = "div[name='company_city'] .ant-select-selection-item"
+    city_lists = ""
+    city_item = ""
     status_label = "#occupationStatusLabel"
     status_input = "#occupationStatusInput"
+    status_content = "div[overlayid='occupationStatusList'] .ant-select-selection-item"
     status_lists = "#occupationStatusList"
+    status_full = "//div[@id='occupationStatusItem' and contains(@title,'Purnawaktu')]"
+    status_part = "//div[@id='occupationStatusItem' and contains(@title,'Paruh Waktu')]"
+    status_freelance = "//div[@id='occupationStatusItem' and contains(@title,'Pekerja Lepas')]"
+    status_intern = "//div[@id='occupationStatusItem' and contains(@title,'Magang')]"
+    status_volunteer = "//div[@id='occupationStatusItem' and contains(@title,'Sukarela')]"
     start_label = "#occupationStartLabel"
     start_input = "#occupationStartInput"
     end_label = "#occupationEndLabel"
     end_input = "#occupationEndInput"
+    end_status = "//div[contains(@class, 'OccupationForm')]"
+    end_status_check = "//div[contains(@class, 'OccupationForm')]//input[@id='id1']"
     form_cancel = "#occupationFormCancel"
     form_save = "#occupationFormSave"
 

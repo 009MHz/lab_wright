@@ -273,14 +273,15 @@ class TestSmokeLoginPage:
 
         with allure.step('3. Validate the empty state form'):
             await builder.job_position_presence()
-        #     await builder.job_company_name_presence()
-        #     await builder.job_country_presence()
-        #     await builder.job_prov_presence()
-        #     await builder.job_city_presence()
-        #     await builder.job_start_presence()
-        #     await builder.job_end_presence()
-        #     await builder.job_cancel_form_btn_presence()
-        #     await builder.job_save_form_btn_presence()
+            await builder.job_company_name_presence()
+            await builder.job_country_presence()
+            await builder.job_prov_presence()
+            await builder.job_city_presence()
+            await builder.job_status_presence()
+            await builder.job_start_presence()
+            await builder.job_end_presence()
+            await builder.job_cancel_form_btn_presence()
+            await builder.job_save_form_btn_presence()
         #
         # with allure.step('4. Validate Jenjang Pekerjaan'):
         #     degree_options = [
