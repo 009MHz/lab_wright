@@ -64,64 +64,58 @@ class TestSmokeLoginPage:
     @allure.title("Data Diri Existence Validation")
     @allure.feature("Data Diri")
     async def test_data_diri_section(self, builder):
-        with allure.step('1. Validating Main Form Existence'):
+        with allure.step('1. Validating The Form Existence'):
             await builder.self_info_main_form_presence()
             await builder.self_info_main_hints_presence()
-
-        with allure.step('2. Validating Section Header'):
             await builder.self_info_title_presence()
+            await builder.self_info_first_name_presence()
+            await builder.self_info_last_name_presence()
+            await builder.self_info_email_presence()
+            await builder.self_info_phone_presence()
+            await builder.self_info_country_presence()
+            await builder.self_info_prov_presence()
+            await builder.self_info_city_presence()
+            await builder.self_info_address_presence()
+            await builder.self_info_linkedin_presence()
+            await builder.self_info_portfolio_presence()
+            await builder.self_info_simpan_btn_presence()
+
+        with allure.step('2. Interact the section header accordion'):
             await builder.self_info_collapse_form()
             await builder.self_info_expand_form()
 
-        with allure.step('3. Validating Nama Depan'):
-            await builder.self_info_first_name_presence()
-            await builder.self_info_first_name_insert('Mr. John')
+        with allure.step('3. Insert any text on the Nama Depan Field'):
+            await builder.self_info_first_name_insert('Mr. John ')
 
-        with allure.step('4. Validating Nama Belakang'):
-            await builder.self_info_last_name_presence()
-            await builder.self_info_last_name_insert('Doe ,M.Sc')
+        with allure.step('4. Insert any text on the Nama Belakang Field'):
+            await builder.self_info_last_name_insert('Toryono ,M.Sc')
 
-        with allure.step('5. Validating Email'):
-            await builder.self_info_email_presence()
+        with allure.step('5. Insert any text on the Email Field'):
             await builder.self_info_email_insert('ali.nA_p3tr|nK0vA@yahoo.us')
 
-        with allure.step('6. Validating No. Telepon'):
-            await builder.self_info_phone_presence()
+        with allure.step('6. Insert a valid phone number on the No. Telepon field'):
             await builder.self_info_phone_insert('08987654321')
 
-        with allure.step('7. Validating Negara'):
-            await builder.self_info_country_presence()
-            await builder.self_info_click_country()
+        with allure.step('7. Click on the Negara option'):
             await builder.self_info_select_wna()
-            await builder.self_info_click_country()
             await builder.self_info_select_wni()
 
-        with allure.step('8. Validating Provinsi'):
-            await builder.self_info_prov_presence()
-            await builder.self_info_prov_insert('Pap')
-            # Todo: Waiting for Data Diri Province list wrapper ID
-            # await builder.self_info_prov_click_all_prov()
+        with allure.step('8. Select displayed province from the input keyword'):
+            await builder.self_info_prov_select_option_within('Jawa')
 
-        with allure.step('9. Validating Kota'):
-            await builder.self_info_city_presence()
-            await builder.self_info_city_insert('Jakarta')
-            # Todo: Waiting for Data Diri City list wrapper ID
-            # await builder.self_info_city_click_all_city()
+        with allure.step('9. Select displayed city from the input keyword'):
+            await builder.self_info_city_select_option_within('Ban')
 
-        with allure.step('10. Validating Alamat'):
-            await builder.self_info_address_presence()
+        with allure.step('10. Insert any text on the Alamat Field'):
             await builder.self_info_address_insert("Jl. Belawan No.16, RT.18/RW.1, Cideng")
 
-        with allure.step('11. Validating Linkedin'):
-            await builder.self_info_linkedin_presence()
+        with allure.step('11. Insert a valid Linkedin url'):
             await builder.self_info_linkedin_insert("https://www.linkedin.com/company/karirlab")
 
-        with allure.step('12. Validating Linkedin'):
-            await builder.self_info_portfolio_presence()
+        with allure.step('12. Insert a valid url on the portfolio field'):
             await builder.self_info_portfolio_insert('https://github.com/microsoft/playwright')
 
-        with allure.step('13. Validating Simpan Button'):
-            await builder.self_info_simpan_btn_presence()
+        with allure.step('13. Click on the simpan button'):
             await builder.self_info_click_simpan()
 
     @pytest.mark.positive
