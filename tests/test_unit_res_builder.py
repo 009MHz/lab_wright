@@ -99,12 +99,14 @@ class TestSmokeLoginPage:
         with allure.step('8. Validating Provinsi'):
             await builder.self_info_prov_presence()
             await builder.self_info_prov_insert('Pap')
-            await builder.self_info_prov_click_all_prov()
+            # Todo: Waiting for Data Diri Province list wrapper ID
+            # await builder.self_info_prov_click_all_prov()
 
         with allure.step('9. Validating Kota'):
             await builder.self_info_city_presence()
             await builder.self_info_city_insert('Jakarta')
-            await builder.self_info_city_click_all_city()
+            # Todo: Waiting for Data Diri City list wrapper ID
+            # await builder.self_info_city_click_all_city()
 
         with allure.step('10. Validating Alamat'):
             await builder.self_info_address_presence()
@@ -211,15 +213,14 @@ class TestSmokeLoginPage:
 
         with allure.step('10. Validate Provinsi Institusi'):
             pass
-            # Todo: Need to switch on after locator fixed
-            # await builder.edu_prov_click_empty()
+            # Todo: Waiting for Pendidikan Province list wrapper ID
+            await builder.edu_prov_click_empty()
             # await builder.edu_prov_select_option_within('Pap')
 
         with allure.step('11. Validate Kota Institusi'):
             pass
-            # Todo: Need to switch on after locator fixed
-            # await builder.edu_prov_click_filled()
-            # await builder.edu_prov_select_option_within('Jakarta')
+            # Todo: Waiting for Pendidikan City list wrapper ID
+            await builder.edu_city_click_empty()
             # await builder.edu_city_select_option_within('Jak')
 
         with allure.step('12. Validate Waktu Mulai'):
