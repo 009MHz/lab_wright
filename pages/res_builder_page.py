@@ -905,26 +905,36 @@ class Builder(BasePage):
         await expect(self._find(JobHistory.status_lists)).to_be_visible()
 
     async def job_click_status_full(self):
+        await self.job_click_status()
+
         await self._look(JobHistory.status_lists)
         await self._click(JobHistory.status_full)
         await expect(self._find(JobHistory.status_content)).to_have_attribute('title', 'Purnawaktu')
 
     async def job_click_status_part(self):
+        await self.job_click_status()
+
         await self._look(JobHistory.status_lists)
         await self._click(JobHistory.status_part)
         await expect(self._find(JobHistory.status_content)).to_have_attribute('title', 'Paruh Waktu')
 
     async def job_click_status_freelance(self):
+        await self.job_click_status()
+
         await self._look(JobHistory.status_lists)
         await self._click(JobHistory.status_freelance)
         await expect(self._find(JobHistory.status_content)).to_have_attribute('title', 'Pekerja Lepas')
 
     async def job_click_status_internship(self):
+        await self.job_click_status()
+
         await self._look(JobHistory.status_lists)
         await self._click(JobHistory.status_intern)
         await expect(self._find(JobHistory.status_content)).to_have_attribute('title', 'Magang')
 
     async def job_click_status_volunteer(self):
+        await self.job_click_status()
+
         await self._look(JobHistory.status_lists)
         await self._click(JobHistory.status_volunteer)
         await expect(self._find(JobHistory.status_content)).to_have_attribute('title', 'Sukarela')

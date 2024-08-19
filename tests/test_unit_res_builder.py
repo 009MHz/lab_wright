@@ -305,16 +305,11 @@ class TestSmokeLoginPage:
             # await builder.job_city_select_option_within('Jak')
 
         with allure.step('4. Validate Status Pekerjaan'):
-            status_options = [
-                builder.job_click_status_full,
-                builder.job_click_status_part,
-                builder.job_click_status_freelance,
-                builder.job_click_status_internship,
-                builder.job_click_status_volunteer]
-
-            for job_status in status_options:
-                await builder.job_click_status()
-                await job_status()
+            await builder.job_click_status_full()
+            await builder.job_click_status_part()
+            await builder.job_click_status_freelance()
+            await builder.job_click_status_internship()
+            await builder.job_click_status_volunteer()
 
         with allure.step('12. Validate Waktu Mulai'):
             await builder.job_start_date_insert("January", 2022)
