@@ -320,10 +320,13 @@ class TestSmokeLoginPage:
             await builder.skill_click_add_form()
 
         with allure.step('2. Validate the Keahlian Hints section after form is added'):
-            pass
+            await builder.skill_main_hints_presence()
+            await builder.skill_hints_title_presence()
+            await builder.skill_hints_desc_presence()
 
         with allure.step('3. Interact with Keahlian hint toggle'):
-            pass
+            await builder.skill_hints_click_hide()
+            await builder.skill_hints_click_show()
 
     @pytest.mark.positive
     @pytest.mark.smoke
@@ -335,6 +338,7 @@ class TestSmokeLoginPage:
             await builder.skill_main_form_presence()
             await builder.skill_title_presence()
             await builder.skill_desc_presence()
+            await builder.skill_add_button_presence()
             await builder.skill_title_click_collapse()
             await builder.skill_title_click_expand()
 

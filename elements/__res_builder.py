@@ -226,7 +226,14 @@ class JobHistory:
 
 
 class Proficiency:
+    title = "#proficiencyTitle"
+    toggle = "div[id='proficiencyToggle'] div[role='button']"
+    add_btn = "#addProficiency"
+    description = "#addProficiencyText"
+    form = "#proficiencyToggle"
+    hint_main = "#proficiencyHint"
     hint_btn = "#proficiencyHintBtn"
+    hint_title = "div[id='proficiencyHint'] strong"
     hint_desc = "#proficiencyHintDesc"
     name_label = "#proficiencyNameLabel"
     name_input = "#proficiencyNameInput"
