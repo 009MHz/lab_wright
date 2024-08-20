@@ -68,7 +68,7 @@ class TestSmokeLoginPage:
     @allure.feature("Data Diri")
     @allure.severity(severity.CRITICAL)
     async def test_data_diri_section(self, builder):
-        with allure.step('1. Validating The Form Existence'):
+        with allure.step('1. Validating each input field completeness'):
             await builder.self_info_main_form_presence()
             await builder.self_info_main_hints_presence()
             await builder.self_info_title_presence()
@@ -146,7 +146,7 @@ class TestSmokeLoginPage:
     @allure.feature("Riwayat Pendidikan")
     @allure.severity(severity.CRITICAL)
     async def test_education_section(self, builder):
-        with allure.step('1. Validate the section default state'):
+        with allure.step('1. Validate riwayat pendidikan default state'):
             await builder.edu_title_presence()
             await builder.edu_desc_presence()
             await builder.edu_add_form_button_presence()
@@ -156,7 +156,7 @@ class TestSmokeLoginPage:
         with allure.step('2. Click on the Add Riwayat Pendidikan Form button'):
             await builder.edu_click_add_form()
 
-        with allure.step('3. Validate the empty state form'):
+        with allure.step('3. Validating each input field completeness'):
             await builder.edu_degree_presence()
             await builder.edu_institution_presence()
             await builder.edu_faculty_presence()
@@ -170,7 +170,7 @@ class TestSmokeLoginPage:
             await builder.edu_cancel_form_btn_presence()
             await builder.edu_save_form_btn_presence()
 
-        with allure.step('4. Validate Jenjang Pendidikan'):
+        with allure.step('4. Click on each Jenjang Pendidikan option'):
             await builder.edu_click_degree_sma()
             await builder.edu_click_degree_d1()
             await builder.edu_click_degree_d2()
@@ -182,41 +182,32 @@ class TestSmokeLoginPage:
             await builder.edu_click_degree_course()
             await builder.edu_click_degree_s1()
 
-        with allure.step('5. Validate Nama Institusi'):
-            await builder.edu_institution_click_empty()
+        with allure.step('5. Interact with displayed Institution from the input keyword'):
             await builder.edu_institution_select_option_within("Univ")
 
-        with allure.step('6. Validate Jurusan'):
-            await builder.edu_faculty_click_empty()
+        with allure.step('6. Select displayed faculty from the input keyword'):
             await builder.faculty_select_option_within('Bis')
 
-        with allure.step('7. Validate IPK atau Nilai'):
+        with allure.step('7. Interact with the GPA input field'):
             await builder.faculty_gpa_insert('3.8')
             await builder.faculty_gpa_score_increase(3)
             await builder.faculty_gpa_score_decrease(2)
 
-        with allure.step('8. Validate Skala Maximum'):
+        with allure.step('8. Interact with the max score input field'):
             await builder.faculty_max_gpa_insert('4.2')
             await builder.faculty_max_gpa_score_increase(2)
             await builder.faculty_max_gpa_score_decrease(3)
 
-        with allure.step('9. Validate Negara Institusi'):
-            await builder.edu_click_country()
+        with allure.step('9. Select all options from Negara institusi'):
             await builder.edu_select_wna()
-            await builder.edu_click_country()
             await builder.edu_select_wni()
 
-        with allure.step('10. Validate Provinsi Institusi'):
+        with allure.step('10. Select displayed province from the input keyword'):
             pass
-            # Todo: Waiting for Pendidikan Province list wrapper ID
-            # await builder.edu_prov_click_empty()
-            # await builder.edu_prov_select_option_within('Pap')
+            await builder.edu_prov_select_option_within('Sum')
 
         with allure.step('11. Validate Kota Institusi'):
-            pass
-            # Todo: Waiting for Pendidikan City list wrapper ID
-            # await builder.edu_city_click_empty()
-            # await builder.edu_city_select_option_within('Jak')
+            await builder.edu_city_select_option_within('tan')
 
         with allure.step('12. Validate Waktu Mulai'):
             await builder.edu_start_date_insert("August", 2016)
@@ -245,7 +236,7 @@ class TestSmokeLoginPage:
 
         with allure.step('2. Validate the Hints section after form is added'):
             await builder.job_main_hints_presence()
-            # await builder.job_hints_title_presence()
+            await builder.job_hints_title_presence()
             await builder.job_hints_desc_presence()
 
         with allure.step('3. Interact with Riwayat Pendidikan hint toggle'):
@@ -268,7 +259,7 @@ class TestSmokeLoginPage:
         with allure.step('2. Click on the Add Riwayat Pekerjaan Form button'):
             await builder.job_click_add_form()
 
-        with allure.step('3. Validate the empty state form'):
+        with allure.step('3. Validating each input field completeness'):
             await builder.job_position_presence()
             await builder.job_company_name_presence()
             await builder.job_country_presence()
@@ -280,31 +271,21 @@ class TestSmokeLoginPage:
             await builder.job_cancel_form_btn_presence()
             await builder.job_save_form_btn_presence()
 
-        with allure.step('4. Validate Posisi'):
-            await builder.job_position_click_empty()
-            await builder.job_position_select_option_within("Test")
+        with allure.step('4. Interact with displayed position from the input keyword'):
+            await builder.job_position_select_option_within("Engine")
 
-        with allure.step('5. Validate Nama Perusahaan input'):
+        with allure.step('5. Insert a valid text on Perusahaan input'):
             await builder.job_company_name_insert('KarirLab')
 
-        with allure.step('6. Validate Negara Perusahaan/ Organisasi'):
-            await builder.job_click_country()
+        with allure.step('6. Select all options from Negara Perusahaan'):
             await builder.job_select_wna()
-            await builder.job_click_country()
             await builder.job_select_wni()
 
-        with allure.step('10. Validate Provinsi Institusi'):
-            pass
-            # Todo: Waiting for Pekerjaan Province list wrapper ID
-            # await builder.job_prov_click_empty()
-            # await builder.job_prov_select_option_within('Pap')
-        #
+        with allure.step('10. Interact with displayed Province from the input keyword'):
+            await builder.job_prov_select_option_within('Jak')
+
         with allure.step('11. Validate Kota Institusi'):
-            pass
-            # Todo: Waiting for Pekerjaan City list wrapper ID
-            # await builder.job_prov_click_filled()
-            # await builder.job_prov_select_option_within('Jakarta')
-            # await builder.job_city_select_option_within('Jak')
+            await builder.job_city_select_option_within('Jakarta')
 
         with allure.step('4. Validate Status Pekerjaan'):
             await builder.job_click_status_full()

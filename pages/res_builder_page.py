@@ -53,7 +53,6 @@ class Builder(BasePage):
         await expect(self._find(ResumeInfo.import_modal)).to_be_visible()
 
     """Resume Information Section Interaction"""
-
     async def info_resume_name_insert(self, text):
         await self._touch(ResumeInfo.name_input)
         await self._type(ResumeInfo.name_input, text)
@@ -92,7 +91,6 @@ class Builder(BasePage):
         await expect(self._find(ResumeInfo.import_btn)).to_be_focused()
 
     """Personal Information Section Validation"""
-
     async def self_info_title_presence(self):
         await self._look(EmptyDataDiri.title)
         await expect(self._find(EmptyDataDiri.title)).to_have_text("Data Diri")
@@ -204,7 +202,6 @@ class Builder(BasePage):
         await expect(self._find(EmptyDataDiri.submit_btn)).to_be_enabled()
 
     """Personal Information Section Interaction"""
-
     async def self_info_collapse_form(self):
         await self._click(EmptyDataDiri.title)
         await self._conceal(EmptyDataDiri.main_hint)
@@ -538,10 +535,6 @@ class Builder(BasePage):
         await expect(self._find(EduHistory.name_list)).to_be_visible(timeout=20000)
         await expect(self._find(EduHistory.name_add)).to_contain_text(text)
 
-    async def edu_institution_click_empty(self):
-        await self._click(EduHistory.name_input)
-        await expect(self._find(EduHistory.name_input)).to_be_focused()
-
     async def edu_institution_click_filled(self):
         await self._click(EduHistory.name_selected)
         await expect(self._find(EduHistory.name_input)).to_be_focused()
@@ -550,8 +543,8 @@ class Builder(BasePage):
     async def edu_institution_select_option_within(self, text):
         await self.edu_institution_insert(text)
         count = await self._find(EduHistory.name_item).count()
-        for x in range(1, count):
-            await self._click(f"{EduHistory.name_item}[{x + 1}]")
+        for x in range(1, count+1):
+            await self._click(f"{EduHistory.name_item}[{x}]")
             await self._click(".ant-layout-content")
             await self.edu_institution_click_filled()
 
@@ -560,10 +553,6 @@ class Builder(BasePage):
         await expect(self._find(EduHistory.faculty_list)).to_be_visible()
         await expect(self._find(EduHistory.faculty_add)).to_contain_text(text)
 
-    async def edu_faculty_click_empty(self):
-        await self._click(EduHistory.faculty_input)
-        await expect(self._find(EduHistory.faculty_input)).to_be_focused()
-
     async def edu_faculty_click_filled(self):
         await self._force(EduHistory.faculty_selected)
         await expect(self._find(EduHistory.faculty_input)).to_be_focused()
@@ -571,8 +560,8 @@ class Builder(BasePage):
 
     async def faculty_select_option_within(self, text):
         await self.edu_faculty_insert(text)
-        for x in range(1, 5):
-            await self._click(f"{EduHistory.faculty_item}[{x + 1}]")
+        for x in range(1, 6):
+            await self._click(f"{EduHistory.faculty_item}[{x}]")
             await self._click(".ant-layout-content")
             await self.edu_faculty_click_filled()
 
@@ -615,16 +604,16 @@ class Builder(BasePage):
         await expect(self._find(EduHistory.country_lists)).to_be_visible()
 
     async def edu_select_wni(self):
+        await self.edu_click_country()
+
         await self._click(EduHistory.country_wni)
         await expect(self._find(EduHistory.country_content)).to_have_attribute('title', 'Indonesia')
 
     async def edu_select_wna(self):
+        await self.edu_click_country()
+
         await self._click(EduHistory.country_wna)
         await expect(self._find(EduHistory.country_content)).to_have_attribute('title', 'Luar Indonesia')
-
-    async def edu_prov_click_empty(self):
-        await self._click(EduHistory.province_input)
-        await expect(self._find(EduHistory.province_input)).to_be_focused()
 
     async def edu_prov_click_filled(self):
         await self._force(EduHistory.province_selected)
@@ -634,19 +623,22 @@ class Builder(BasePage):
     async def edu_prov_insert(self, text: str):
         await self._type(EduHistory.province_input, text)
         await expect(self._find(EduHistory.province_input)).to_have_value(text)
-        await expect(self._find(EduHistory.province_item)).to_be_visible()
+        await expect(self._find(EduHistory.province_lists)).to_be_visible()
 
-    async def edu_prov_select_option_within(self, province_keyword):
-        await self.edu_prov_insert(province_keyword)
-        items = self._find(EduHistory.province_item).count()
-        for x in range(1, items + 1):
-            await self._click(f"{EduHistory.province_item}[{x + 1}]")
-            await self._click(".ant-layout-content")
-            await self.edu_prov_click_filled()
+    async def edu_prov_select_option_within(self, text):
+        await self.edu_prov_insert(text)
+        count = await self._find(EduHistory.province_item).count()
 
-    async def edu_city_click_empty(self):
-        await self._click(EduHistory.city_input)
-        await expect(self._find(EduHistory.city_input)).to_be_focused()
+        for x in range(1, count + 1):
+            await self._click(f"{EduHistory.province_item}[{x}]")
+            await self._click(".ant-layout-content")  # Unclick the input field
+            if x != count:
+                await self.edu_prov_click_filled()
+            else:
+                await self._click(".ant-layout-content")
+
+        await expect(self._find(EduHistory.province_lists)).not_to_be_visible()
+        await expect(self._find(EduHistory.city_input)).to_be_enabled()
 
     async def edu_city_click_filled(self):
         await self._force(EduHistory.city_selected)
@@ -656,15 +648,20 @@ class Builder(BasePage):
     async def edu_city_insert(self, text: str):
         await self._type(EduHistory.city_input, text)
         await expect(self._find(EduHistory.city_input)).to_have_value(text)
-        await expect(self._find(EduHistory.city_item)).to_be_visible()
+        await expect(self._find(EduHistory.city_lists)).to_be_visible()
 
-    async def edu_city_select_option_within(self, city_keyword):
-        await self.edu_city_insert(city_keyword)
-        items = self._find(EduHistory.city_item).count()
-        for x in range(1, items + 1):
-            await self._click(f"{EduHistory.city_item}[{x + 1}]")
-            await self._click(".ant-layout-content")
-            await self.edu_city_click_filled()
+    async def edu_city_select_option_within(self, text):
+        await self.edu_city_insert(text)
+        count = await self._find(EduHistory.city_item).count()
+        for x in range(1, count + 1):
+            await self._click(f"{EduHistory.city_item}[{x}]")
+            await self._click(".ant-layout-content")  # Unclick input field
+            if x != count:
+                await self.edu_city_click_filled()
+            else:
+                await self._click(".ant-layout-content")
+
+        await expect(self._find(EduHistory.city_lists)).not_to_be_visible()
 
     async def edu_start_date_insert(self, month: str, year: int):
         await self._click(EduHistory.start_input)
@@ -675,11 +672,8 @@ class Builder(BasePage):
         await expect(self._find(EduHistory.start_input)).to_have_value(f"{month} - {year}")
 
     async def edu_start_date_clear(self):
-        await self._click(EduHistory.start_input)
+        await self._click(EduHistory.start_clear)
         await expect(self._find(EduHistory.start_input)).to_be_focused()
-
-        await self._find(EduHistory.start_input).clear()
-        await expect(self._find(EduHistory.start_input)).to_have_value("")
 
     async def edu_end_date_insert(self, month: str, year: int):
         await self._click(EduHistory.end_input)
@@ -704,10 +698,7 @@ class Builder(BasePage):
         await expect(self._find(EduHistory.end_input)).to_be_enabled()
 
     async def edu_end_date_clear(self):
-        await self._click(EduHistory.end_input)
-        await expect(self._find(EduHistory.end_input)).to_be_focused()
-
-        await self._find(EduHistory.start_input).clear()
+        await self._force(EduHistory.end_clear)
         await expect(self._find(EduHistory.start_input)).to_have_value("")
 
     async def edu_save_btn_click(self):
@@ -723,7 +714,6 @@ class Builder(BasePage):
 
     # Todo 4: Occupation History Section
     """Work History Validation"""
-
     async def job_title_presence(self):
         await self._look(JobHistory.title)
         await expect(self._find(JobHistory.title)).to_have_text("Riwayat Pekerjaan")
@@ -803,7 +793,7 @@ class Builder(BasePage):
 
     async def job_end_presence(self):
         await self._look(JobHistory.end_label)
-        await expect(self._find(JobHistory.end_label)).to_have_text("Waktu Lulus")
+        await expect(self._find(JobHistory.end_label)).to_have_text("Waktu Selesai")
 
         await self._touch(JobHistory.end_input)
         await expect(self._find(JobHistory.end_input)).to_be_empty()
@@ -847,10 +837,6 @@ class Builder(BasePage):
         await expect(self._find(JobHistory.hint_btn)).to_have_attribute('aria-checked', 'false')
         await expect(self._find(JobHistory.hint_desc)).to_be_hidden()
 
-    async def job_position_click_empty(self):
-        await self._click(JobHistory.pos_input)
-        await expect(self._find(JobHistory.pos_input)).to_be_focused()
-
     async def job_position_insert(self, text):
         await self._type(JobHistory.pos_input, text)
         await expect(self._find(JobHistory.pos_list)).to_be_visible()
@@ -863,8 +849,8 @@ class Builder(BasePage):
 
     async def job_position_select_option_within(self, text):
         await self.job_position_insert(text)
-        count = await self._find(JobHistory.pos_item.count())
-        for x in range(1, count):
+        jobs = await self._find(JobHistory.pos_item).count()
+        for x in range(1, jobs):
             await self._click(f"{JobHistory.pos_item}[{x + 1}]")
             await self._click(".ant-layout-content")
             await self.job_position_click_filled()
@@ -879,16 +865,14 @@ class Builder(BasePage):
         await expect(self._find(JobHistory.country_lists)).to_be_visible()
 
     async def job_select_wni(self):
+        await self.job_click_country()
         await self._force(JobHistory.country_wni)
         await expect(self._find(JobHistory.country_content)).to_have_attribute('title', 'Indonesia')
 
     async def job_select_wna(self):
+        await self.job_click_country()
         await self._force(JobHistory.country_wna)
         await expect(self._find(JobHistory.country_content)).to_have_attribute('title', 'Luar Indonesia')
-
-    async def job_prov_click_empty(self):
-        await self._click(JobHistory.province_input)
-        await expect(self._find(JobHistory.province_input)).to_be_focused()
 
     async def job_prov_click_filled(self):
         await self._force(JobHistory.province_selected)
@@ -898,19 +882,22 @@ class Builder(BasePage):
     async def job_prov_insert(self, text: str):
         await self._type(JobHistory.province_input, text)
         await expect(self._find(JobHistory.province_input)).to_have_value(text)
-        await expect(self._find(JobHistory.province_item)).to_be_visible()
+        await expect(self._find(JobHistory.province_lists)).to_be_visible()
+            
+    async def job_prov_select_option_within(self, text):
+        await self.job_prov_insert(text)
+        count = await self._find(JobHistory.province_item).count()
 
-    async def job_prov_select_option_within(self, province_keyword):
-        await self.job_prov_insert(province_keyword)
-        items = self._find(JobHistory.province_item).count()
-        for x in range(1, items + 1):
-            await self._click(f"{JobHistory.province_item}[{x + 1}]")
-            await self._click(".ant-layout-content")
-            await self.job_prov_click_filled()
+        for x in range(1, count + 1):
+            await self._click(f"{JobHistory.province_item}[{x}]")
+            await self._click(".ant-layout-content")  # Unclick the input field
+            if x != count:
+                await self.job_prov_click_filled()
+            else:
+                await self._click(".ant-layout-content")
 
-    async def job_city_click_empty(self):
-        await self._click(JobHistory.city_input)
-        await expect(self._find(JobHistory.city_input)).to_be_focused()
+        await expect(self._find(JobHistory.province_lists)).not_to_be_visible()
+        await expect(self._find(JobHistory.city_input)).to_be_enabled()
 
     async def job_city_click_filled(self):
         await self._force(JobHistory.city_selected)
@@ -920,15 +907,20 @@ class Builder(BasePage):
     async def job_city_insert(self, text: str):
         await self._type(JobHistory.city_input, text)
         await expect(self._find(JobHistory.city_input)).to_have_value(text)
-        await expect(self._find(JobHistory.city_item)).to_be_visible()
+        await expect(self._find(JobHistory.city_lists)).to_be_visible()
 
-    async def job_city_select_option_within(self, city_keyword):
-        await self.job_city_insert(city_keyword)
-        items = self._find(JobHistory.city_item).count()
-        for x in range(1, items + 1):
-            await self._click(f"{JobHistory.city_item}[{x + 1}]")
-            await self._click(".ant-layout-content")
-            await self.edu_city_click_filled()
+    async def job_city_select_option_within(self, text):
+        await self.job_city_insert(text)
+        count = await self._find(JobHistory.city_item).count()
+        for x in range(1, count + 1):
+            await self._click(f"{JobHistory.city_item}[{x}]")
+            await self._click(".ant-layout-content")  # Unclick input field
+            if x != count:
+                await self.job_city_click_filled()
+            else:
+                await self._click(".ant-layout-content")
+
+        await expect(self._find(JobHistory.city_lists)).not_to_be_visible()
 
     async def job_click_status(self):
         await self._force(JobHistory.status_input)
@@ -978,10 +970,7 @@ class Builder(BasePage):
         await expect(self._find(JobHistory.start_input)).to_have_value(f"{month} - {year}")
 
     async def job_start_date_clear(self):
-        await self._click(JobHistory.start_input)
-        await expect(self._find(JobHistory.start_input)).to_be_focused()
-
-        await self._find(JobHistory.start_input).clear()
+        await self._force(JobHistory.start_clear)
         await expect(self._find(JobHistory.start_input)).to_have_value("")
 
     async def job_end_date_insert(self, month: str, year: int):
@@ -1007,15 +996,11 @@ class Builder(BasePage):
         await expect(self._find(JobHistory.end_input)).to_be_enabled()
 
     async def job_end_date_clear(self):
-        await self._click(JobHistory.end_input)
-        await expect(self._find(JobHistory.end_input)).to_be_focused()
-
-        await self._find(JobHistory.start_input).clear()
+        await self._force(JobHistory.end_clear)
         await expect(self._find(JobHistory.start_input)).to_have_value("")
 
     async def job_save_btn_click(self):
         await self._click(JobHistory.form_save)
-        await expect(self._find(JobHistory.form_save)).to_be_focused()
 
     async def job_cancel_btn_click(self):
         await self._click(JobHistory.form_cancel)
