@@ -1010,6 +1010,12 @@ class Builder(BasePage):
         await expect(self._find(JobHistory.description)).to_be_visible()
 
     # Todo 5: Proficiencies
+    """Keahlian Section Validation"""
+
+
+    """Keahlian Section Interaction"""
+
+
     # Todo 6: Achievements
     # Todo 7: Achievements
     # Todo 8: Hobbies

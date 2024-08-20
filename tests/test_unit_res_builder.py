@@ -309,3 +309,21 @@ class TestSmokeLoginPage:
 
         with allure.step('15. Click on Batal button'):
             await builder.job_cancel_btn_click()
+
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Keahlian Hints Existence")
+    @allure.feature("Keahlian", "Hints")
+    @allure.severity(severity.MINOR)
+    async def test_proficient_section_hints(self, builder):
+        with allure.step('1. '):
+            pass
+
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Keahlian Section Validation")
+    @allure.feature("Keahlian")
+    @allure.severity(severity.CRITICAL)
+    async def test_education_section(self, builder):
+        with allure.step('1.'):
+            pass
