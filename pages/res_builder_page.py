@@ -1085,6 +1085,49 @@ class Builder(BasePage):
         await self._click(Proficiency.hint_btn)
         await expect(self._find(Proficiency.hint_btn)).to_have_attribute('aria-checked', 'false')
         await expect(self._find(Proficiency.hint_desc)).to_be_hidden()
+        
+    async def skill_name_insert(self, text: str):
+        await self._type(Proficiency.name_input, text)
+        await expect(self._find(Proficiency.name_input)).to_be_focused()
+        await expect(self._find(Proficiency.name_input)).to_have_value(text)
+
+    async def skill_name_clear_text(self):
+        await self._touch(Proficiency.name_input)
+        await expect(self._find(Proficiency.name_input)).to_be_focused()
+        await expect(self._find(Proficiency.name_input)).not_to_be_empty()
+
+        await self._find(Proficiency.name_input).clear()
+        await expect(self._find(Proficiency.name_input)).to_have_value("")
+
+    async def _skill_level_input_click(self):
+        await self._click(Proficiency.level_input)
+        await expect(self._find(Proficiency.level_lists)).to_be_visible()
+
+    async def skill_level_click_pemula(self):
+        await self._skill_level_input_click()
+        await self._force(Proficiency.level_item_pemula)
+        await expect(self._find(Proficiency.level_content)).to_have_attribute('title', 'Pemula')
+        
+    async def skill_level_click_menengah(self):
+        await self._skill_level_input_click()
+        await self._force(Proficiency.level_item_menengah)
+        await expect(self._find(Proficiency.level_content)).to_have_attribute('title', 'Menengah')
+        
+    async def skill_level_click_lanjut(self):
+        await self._skill_level_input_click()
+        await self._force(Proficiency.level_item_lanjut)
+        await expect(self._find(Proficiency.level_content)).to_have_attribute('title', 'Lanjut')
+
+    async def skill_save_form_click(self):
+        await self._click(Proficiency.form_save)
+
+    async def skill_cancel_form_click(self):
+        await self._click(Proficiency.form_cancel)
+        
+        await expect(self._find(Proficiency.form_cancel)).not_to_be_attached()
+        await expect(self._find(Proficiency.hint_desc)).not_to_be_attached()
+        await expect(self._find(Proficiency.description)).to_be_visible()
+        
 
     # Todo 6: Achievements
     # Todo 7: Achievements

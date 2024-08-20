@@ -352,15 +352,16 @@ class TestSmokeLoginPage:
             await builder.skill_save_form_btn_presence()
 
         with allure.step('4. Insert a valid skill to the Keahlian Input Field'):
-            # Todo: Insert a valid key
-            # Todo: Clear the input
-            pass
+            await builder.skill_name_insert('Adobe')
+            await builder.skill_name_clear_text()
 
         with allure.step('5. Interact with all Tingkat Keahlian options'):
-            pass
+            await builder.skill_level_click_pemula()
+            await builder.skill_level_click_menengah()
+            await builder.skill_level_click_lanjut()
 
         with allure.step('6. Click on the Save button'):
-            pass
+            await builder.skill_save_form_click()
 
         with allure.step('7. Click on the Cancel button'):
-            pass
+            await builder.skill_cancel_form_click()
