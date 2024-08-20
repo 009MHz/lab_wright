@@ -226,13 +226,21 @@ class JobHistory:
 
 
 class Proficiency:
+    title = "#proficiencyTitle"
+    toggle = "div[id='proficiencyToggle'] div[role='button']"
+    add_btn = "#addProficiency"
+    description = "#addProficiencyText"
+    form = "#proficiencyToggle"
+    hint_main = "#proficiencyHint"
     hint_btn = "#proficiencyHintBtn"
+    hint_title = "div[id='proficiencyHint'] strong"
     hint_desc = "#proficiencyHintDesc"
     name_label = "#proficiencyNameLabel"
     name_input = "#proficiencyNameInput"
     level_label = "#proficiencyLevelLabel"
-    level_input = "#proficiencyLevelInput"
-    level_lists = "#proficiencyLevelLists"
+    level_input = "[name='proficiency_level']"
+    level_content = "div[name='proficiency_level'] .ant-select-selection-item"
+    level_lists = "#proficiencyLevelList"
     level_item_pemula = "//div[@id='proficiencyLevelItem' and @title='Pemula']"
     level_item_menengah = "//div[@id='proficiencyLevelItem' and @title='Menengah']"
     level_item_lanjut = "//div[@id='proficiencyLevelItem' and @title='Lanjut']"
