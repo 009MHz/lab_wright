@@ -182,7 +182,7 @@ class TestSmokeLoginPage:
             await builder.edu_click_degree_course()
             await builder.edu_click_degree_s1()
 
-        with allure.step('5. Select displayed Institution from the input keyword'):
+        with allure.step('5. Interact with displayed Institution from the input keyword'):
             await builder.edu_institution_select_option_within("Univ")
 
         with allure.step('6. Select displayed faculty from the input keyword'):
@@ -207,8 +207,6 @@ class TestSmokeLoginPage:
             await builder.edu_prov_select_option_within('Sum')
 
         with allure.step('11. Validate Kota Institusi'):
-            pass
-            # Todo: Waiting for Pendidikan City list wrapper ID
             await builder.edu_city_select_option_within('tan')
 
         with allure.step('12. Validate Waktu Mulai'):
@@ -261,7 +259,7 @@ class TestSmokeLoginPage:
         with allure.step('2. Click on the Add Riwayat Pekerjaan Form button'):
             await builder.job_click_add_form()
 
-        with allure.step('3. Validate the empty state form'):
+        with allure.step('3. Validating each input field completeness'):
             await builder.job_position_presence()
             await builder.job_company_name_presence()
             await builder.job_country_presence()
@@ -273,27 +271,21 @@ class TestSmokeLoginPage:
             await builder.job_cancel_form_btn_presence()
             await builder.job_save_form_btn_presence()
 
-        with allure.step('4. Validate Posisi'):
+        with allure.step('4. Interact with displayed position from the input keyword'):
             await builder.job_position_select_option_within("Engine")
 
-        with allure.step('5. Validate Nama Perusahaan input'):
+        with allure.step('5. Insert a valid text on Perusahaan input'):
             await builder.job_company_name_insert('KarirLab')
 
-        with allure.step('6. Validate Negara Perusahaan/ Organisasi'):
-            await builder.job_click_country()
+        with allure.step('6. Select all options from Negara Perusahaan'):
             await builder.job_select_wna()
-            await builder.job_click_country()
             await builder.job_select_wni()
 
-        with allure.step('10. Validate Provinsi Institusi'):
-            pass
-            # Todo: Waiting for Pekerjaan Province list wrapper ID
-            await builder.job_prov_select_option_within('Suma')
-        #
+        with allure.step('10. Interact with displayed Province from the input keyword'):
+            await builder.job_prov_select_option_within('Jak')
+
         with allure.step('11. Validate Kota Institusi'):
-            pass
-            # Todo: Waiting for Pekerjaan City list wrapper ID
-            await builder.job_city_select_option_within('tan')
+            await builder.job_city_select_option_within('Jakarta')
 
         with allure.step('4. Validate Status Pekerjaan'):
             await builder.job_click_status_full()
