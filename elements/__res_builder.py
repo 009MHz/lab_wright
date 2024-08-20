@@ -30,7 +30,7 @@ class DataDiri:
     hint_btn = "#selfInfoHintBtn"
     hint_title = "div[id='selfInfoHint'] strong"
     hint_desc = "#selfInfoHintDesc"
-    wrapper = "|Belum|//div[contains(@class, 'wrapper-self-info')]"
+    wrapper = "//div[contains(@class, 'wrapper-self-info')]"
     first_name_label = "#selfInfoFirstNameLabel"
     first_name_input = "#selfInfoFirstNameInput"
     last_name_label = "#selfInfoLastNameLabel"
@@ -77,14 +77,14 @@ class DataDiri:
 
 class EduHistory:
     add_btn = "#educationAdd"
-    toggle = "div[id='educationToggle'] div[role='button']"
+    toggle = "//div[id='educationToggle'] div[role='button']"
     title = "#educationTitle"
     description = "//div[@id='educationToggle']//span[contains(@class,'secondary')]"
     hint_main = "#educationHint"
     hint_title = "div[id='educationHint'] strong"
     hint_btn = "#educationHintBtn"
     hint_desc = "#educationHintDesc"
-    wrapper = "|Belum|//div[contains(@class, 'wrapper-education')]"
+    wrapper = "//div[contains(@class, 'wrapper-education')]"
     degree_label = "#educationDegreeLabel"
     degree_input = "[overlayid='educationDegreeList']"
     degree_content = "div[overlayid='educationDegreeList'] .ant-select-selection-item"
@@ -159,13 +159,13 @@ class EduHistory:
 
 
 class JobHistory:
-    add_btn = "|BELUM|#occupationAdd"
-    toggle = "|BELUM|div[id='occupationToggle'] div[role='button']"
-    title = "|BELUM|#occupationTitle"
+    add_btn = "#addOccupation"
+    toggle = "//div[id='occupationToggle'] div[role='button']"
+    title = "#occupationTitle"
     hint = "#occupationHint"
     hint_btn = "#occupationHintBtn"
     hint_desc = "#occupationHintDesc"
-    wrapper = "|BELUM|//div[contains(@class, 'wrapper-occupation')]"
+    wrapper = "//div[contains(@class, 'wrapper-occupation')]"
     position_label = "|BELUM|#occupationPositionLabel"
     position_input = "#occupationPositionInput"
     company_name_label = "#companyNameLabel"
@@ -212,10 +212,10 @@ class JobHistory:
 
 
 class Proficiency:
-    wrapper = "|BELUM|//div[contains(@class, 'wrapper-proficiency')]"
-    add_btn = "|BELUM|#proficiencyAdd"
-    title = "|BELUM|#proficiencyTitle"
-    toggle = "|BELUM||div[id='proficiencyToggle'] div[role='button']"
+    wrapper = "//div[contains(@class, 'wrapper-proficiency')]"
+    add_btn = "#addProficiency"
+    title = "#proficiencyTitle"
+    toggle = "//div[id='proficiencyToggle'] div[role='button']"
     hint_btn = "#proficiencyHintBtn"
     hint_desc = "#proficiencyHintDesc"
     name_label = "#proficiencyNameLabel"
@@ -235,10 +235,10 @@ class Proficiency:
     fill_level = "|BELUM|#dataProfInfoSkillLevel"
 
 class Achievements:
-    wrapper = "|Belum|//div[contains(@class, 'wrapper-achievement')]"
-    add_btn = "|BELUM|#achievementAdd"
-    title = "|BELUM|#achievementTitle"
-    toggle = "|BELUM||div[id='achievementToggle'] div[role='button']"
+    wrapper = "//div[contains(@class, 'wrapper-achievement')]"
+    add_btn = "#addAchievement"
+    title = "#achievementTitle"
+    toggle = "//div[id='achievementToggle'] div[role='button']"
     hint_btn = "#achievementHintBtn"
     hint_desc = "#achievementHintDesc"
     year_label = "#achievementYearLabel"
@@ -254,10 +254,10 @@ class Achievements:
     fill_level = "|BELUM|#dataProfInfoAwardYear"
 
 class Hobby:
-    wrapper = "|Belum|//div[contains(@class, 'wrapper-hobby')]"
-    add_btn = "|BELUM|#hobbyAdd"
-    title = "|BELUM|#hobbyTitle"
-    toggle = "|BELUM||div[id='hobbyToggle'] div[role='button']"
+    wrapper = "//div[contains(@class, 'wrapper-hobby')]"
+    add_btn = "#addInterest"
+    title = "#hobbiesTitle"
+    toggle = "//div[id='hobbiesToggle'] div[role='button']"
     hint_btn = "#hobbyHintBtn"
     hint_desc = "#hobbyHintDesc"
     name_label = "#hobbyNameLabel"
