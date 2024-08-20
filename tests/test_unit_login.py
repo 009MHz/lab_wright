@@ -1,6 +1,7 @@
 import pytest
 from pages.login_page import LoginPage
 import allure
+from allure import severity_level as severity
 
 
 @pytest.fixture(scope='function')
@@ -17,6 +18,7 @@ class TestSmokeLoginPage:
     @pytest.mark.smoke
     @allure.title("First State Login Page Validation")
     @allure.feature("Email", "Google")
+    @allure.severity(severity.BLOCKER)
     async def test_login_init(self, login):
         with allure.step("1. Verify the login init page components"):
             await login.main_title_presence()
@@ -28,6 +30,7 @@ class TestSmokeLoginPage:
     @pytest.mark.smoke
     @allure.title("Second State Login Page Validation")
     @allure.feature("Email", "Password")
+    @allure.severity(severity.BLOCKER)
     async def test_password_init(self, login):
         with allure.step("1. Insert a valid email account"):
             await login.email_insert("simbah.test01@gmail.com")
@@ -45,6 +48,7 @@ class TestSmokeLoginPage:
     @pytest.mark.smoke
     @allure.title("Valid email login validation")
     @allure.feature("Login", "Email", "Password")
+    @allure.severity(severity.BLOCKER)
     async def test_login_with_email(self, login):
         with allure.step("1. Insert a valid email account"):
             await login.email_insert("simbah.test01@gmail.com")
