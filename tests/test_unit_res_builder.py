@@ -1,6 +1,7 @@
 import pytest
 from pages.res_builder_page import Builder
 import allure
+from allure import severity_level as severity
 
 
 @pytest.fixture(scope='function')
@@ -15,8 +16,9 @@ async def builder(auth_page):
 class TestSmokeLoginPage:
     @pytest.mark.positive
     @pytest.mark.smoke
-    @allure.title("Informasi Resume Existence Validation")
+    @allure.title("Informasi Resume Validation")
     @allure.feature("Informasi Resume")
+    @allure.severity(severity.CRITICAL)
     async def test_informasi_resume_section(self, builder):
         with allure.step('1. Validating Page Header'):
             await builder.page_title_presence()
@@ -49,6 +51,7 @@ class TestSmokeLoginPage:
     @pytest.mark.smoke
     @allure.title("Informasi Resume Hints Existence")
     @allure.feature("Data Diri", "Hints")
+    @allure.severity(severity.MINOR)
     async def test_data_diri_section_hints(self, builder):
         with allure.step('Validating Hints Component'):
             await builder.self_info_hints_title_presence()
@@ -63,69 +66,67 @@ class TestSmokeLoginPage:
     @pytest.mark.smoke
     @allure.title("Data Diri Existence Validation")
     @allure.feature("Data Diri")
+    @allure.severity(severity.CRITICAL)
     async def test_data_diri_section(self, builder):
-        with allure.step('1. Validating Main Form Existence'):
+        with allure.step('1. Validating The Form Existence'):
             await builder.self_info_main_form_presence()
             await builder.self_info_main_hints_presence()
-
-        with allure.step('2. Validating Section Header'):
             await builder.self_info_title_presence()
+            await builder.self_info_first_name_presence()
+            await builder.self_info_last_name_presence()
+            await builder.self_info_email_presence()
+            await builder.self_info_phone_presence()
+            await builder.self_info_country_presence()
+            await builder.self_info_prov_presence()
+            await builder.self_info_city_presence()
+            await builder.self_info_address_presence()
+            await builder.self_info_linkedin_presence()
+            await builder.self_info_portfolio_presence()
+            await builder.self_info_simpan_btn_presence()
+
+        with allure.step('2. Interact the section header accordion'):
             await builder.self_info_collapse_form()
             await builder.self_info_expand_form()
 
-        with allure.step('3. Validating Nama Depan'):
-            await builder.self_info_first_name_presence()
-            await builder.self_info_first_name_insert('Mr. John')
+        with allure.step('3. Insert any text on the Nama Depan Field'):
+            await builder.self_info_first_name_insert('Mr. John ')
 
-        with allure.step('4. Validating Nama Belakang'):
-            await builder.self_info_last_name_presence()
-            await builder.self_info_last_name_insert('Doe ,M.Sc')
+        with allure.step('4. Insert any text on the Nama Belakang Field'):
+            await builder.self_info_last_name_insert('Toryono ,M.Sc')
 
-        with allure.step('5. Validating Email'):
-            await builder.self_info_email_presence()
+        with allure.step('5. Insert any text on the Email Field'):
             await builder.self_info_email_insert('ali.nA_p3tr|nK0vA@yahoo.us')
 
-        with allure.step('6. Validating No. Telepon'):
-            await builder.self_info_phone_presence()
+        with allure.step('6. Insert a valid phone number on the No. Telepon field'):
             await builder.self_info_phone_insert('08987654321')
 
-        with allure.step('7. Validating Negara'):
-            await builder.self_info_country_presence()
-            await builder.self_info_click_country()
+        with allure.step('7. Click on the Negara option'):
             await builder.self_info_select_wna()
-            await builder.self_info_click_country()
             await builder.self_info_select_wni()
 
-        with allure.step('8. Validating Provinsi'):
-            await builder.self_info_prov_presence()
-            await builder.self_info_prov_insert('Pap')
-            await builder.self_info_prov_click_all_prov()
+        with allure.step('8. Select displayed province from the input keyword'):
+            await builder.self_info_prov_select_option_within('Jawa')
 
-        with allure.step('9. Validating Kota'):
-            await builder.self_info_city_presence()
-            await builder.self_info_city_insert('Jakarta')
-            await builder.self_info_city_click_all_city()
+        with allure.step('9. Select displayed city from the input keyword'):
+            await builder.self_info_city_select_option_within('Ban')
 
-        with allure.step('10. Validating Alamat'):
-            await builder.self_info_address_presence()
+        with allure.step('10. Insert any text on the Alamat Field'):
             await builder.self_info_address_insert("Jl. Belawan No.16, RT.18/RW.1, Cideng")
 
-        with allure.step('11. Validating Linkedin'):
-            await builder.self_info_linkedin_presence()
+        with allure.step('11. Insert a valid Linkedin url'):
             await builder.self_info_linkedin_insert("https://www.linkedin.com/company/karirlab")
 
-        with allure.step('12. Validating Linkedin'):
-            await builder.self_info_portfolio_presence()
+        with allure.step('12. Insert a valid url on the portfolio field'):
             await builder.self_info_portfolio_insert('https://github.com/microsoft/playwright')
 
-        with allure.step('13. Validating Simpan Button'):
-            await builder.self_info_simpan_btn_presence()
+        with allure.step('13. Click on the simpan button'):
             await builder.self_info_click_simpan()
 
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Riwayat Pendidikan Hints Existence")
     @allure.feature("Riwayat Pendidikan", "Hints")
+    @allure.severity(severity.NORMAL)
     async def test_education_section_hints(self, builder):
         with allure.step('1. Click on the Add Riwayat Pendidikan Form button'):
             await builder.edu_click_add_form()
@@ -141,8 +142,9 @@ class TestSmokeLoginPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
-    @allure.title("Riwayat Pendidikan Existence")
+    @allure.title("Riwayat Pendidikan Validation")
     @allure.feature("Riwayat Pendidikan")
+    @allure.severity(severity.CRITICAL)
     async def test_education_section(self, builder):
         with allure.step('1. Validate the section default state'):
             await builder.edu_title_presence()
@@ -169,21 +171,16 @@ class TestSmokeLoginPage:
             await builder.edu_save_form_btn_presence()
 
         with allure.step('4. Validate Jenjang Pendidikan'):
-            degree_options = [
-                builder.edu_click_degree_sma,
-                builder.edu_click_degree_d1,
-                builder.edu_click_degree_d2,
-                builder.edu_click_degree_d3,
-                builder.edu_click_degree_d4,
-                builder.edu_click_degree_s1,
-                builder.edu_click_degree_s2,
-                builder.edu_click_degree_s3,
-                builder.edu_click_degree_course,
-                builder.edu_click_degree_s1]
-
-            for select_degree in degree_options:
-                await builder.edu_click_degree()
-                await select_degree()
+            await builder.edu_click_degree_sma()
+            await builder.edu_click_degree_d1()
+            await builder.edu_click_degree_d2()
+            await builder.edu_click_degree_d3()
+            await builder.edu_click_degree_d4()
+            await builder.edu_click_degree_s1()
+            await builder.edu_click_degree_s2()
+            await builder.edu_click_degree_s3()
+            await builder.edu_click_degree_course()
+            await builder.edu_click_degree_s1()
 
         with allure.step('5. Validate Nama Institusi'):
             await builder.edu_institution_click_empty()
@@ -211,15 +208,14 @@ class TestSmokeLoginPage:
 
         with allure.step('10. Validate Provinsi Institusi'):
             pass
-            # Todo: Need to switch on after locator fixed
+            # Todo: Waiting for Pendidikan Province list wrapper ID
             # await builder.edu_prov_click_empty()
             # await builder.edu_prov_select_option_within('Pap')
 
         with allure.step('11. Validate Kota Institusi'):
             pass
-            # Todo: Need to switch on after locator fixed
-            # await builder.edu_prov_click_filled()
-            # await builder.edu_prov_select_option_within('Jakarta')
+            # Todo: Waiting for Pendidikan City list wrapper ID
+            # await builder.edu_city_click_empty()
             # await builder.edu_city_select_option_within('Jak')
 
         with allure.step('12. Validate Waktu Mulai'):
@@ -237,3 +233,98 @@ class TestSmokeLoginPage:
 
         with allure.step('15. Click on Batal button'):
             await builder.edu_cancel_btn_click()
+
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Riwayat Pekerjaan Hints Existence")
+    @allure.feature("Riwayat Pekerjaan", "Hints")
+    @allure.severity(severity.MINOR)
+    async def test_occupation_section_hints(self, builder):
+        with allure.step('1. Click on the Add Riwayat Pekerjaan Form button'):
+            await builder.job_click_add_form()
+
+        with allure.step('2. Validate the Hints section after form is added'):
+            await builder.job_main_hints_presence()
+            # await builder.job_hints_title_presence()
+            await builder.job_hints_desc_presence()
+
+        with allure.step('3. Interact with Riwayat Pendidikan hint toggle'):
+            await builder.job_hints_click_hide()
+            await builder.job_hints_click_show()
+
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Riwayat Pekerjaan Existence")
+    @allure.feature("Riwayat Pekerjaan")
+    @allure.severity(severity.CRITICAL)
+    async def test_occupation_section(self, builder):
+        with allure.step('1. Validate the section default state'):
+            await builder.job_title_presence()
+            await builder.job_desc_presence()
+            await builder.job_add_form_button_presence()
+            await builder.job_title_click_collapse()
+            await builder.job_title_click_expand()
+
+        with allure.step('2. Click on the Add Riwayat Pekerjaan Form button'):
+            await builder.job_click_add_form()
+
+        with allure.step('3. Validate the empty state form'):
+            await builder.job_position_presence()
+            await builder.job_company_name_presence()
+            await builder.job_country_presence()
+            await builder.job_prov_presence()
+            await builder.job_city_presence()
+            await builder.job_status_presence()
+            await builder.job_start_presence()
+            await builder.job_end_presence()
+            await builder.job_cancel_form_btn_presence()
+            await builder.job_save_form_btn_presence()
+
+        with allure.step('4. Validate Posisi'):
+            await builder.job_position_click_empty()
+            await builder.job_position_select_option_within("Test")
+
+        with allure.step('5. Validate Nama Perusahaan input'):
+            await builder.job_company_name_insert('KarirLab')
+
+        with allure.step('6. Validate Negara Perusahaan/ Organisasi'):
+            await builder.job_click_country()
+            await builder.job_select_wna()
+            await builder.job_click_country()
+            await builder.job_select_wni()
+
+        with allure.step('10. Validate Provinsi Institusi'):
+            pass
+            # Todo: Waiting for Pekerjaan Province list wrapper ID
+            # await builder.job_prov_click_empty()
+            # await builder.job_prov_select_option_within('Pap')
+        #
+        with allure.step('11. Validate Kota Institusi'):
+            pass
+            # Todo: Waiting for Pekerjaan City list wrapper ID
+            # await builder.job_prov_click_filled()
+            # await builder.job_prov_select_option_within('Jakarta')
+            # await builder.job_city_select_option_within('Jak')
+
+        with allure.step('4. Validate Status Pekerjaan'):
+            await builder.job_click_status_full()
+            await builder.job_click_status_part()
+            await builder.job_click_status_freelance()
+            await builder.job_click_status_internship()
+            await builder.job_click_status_volunteer()
+
+        with allure.step('12. Validate Waktu Mulai'):
+            await builder.job_start_date_insert("January", 2022)
+            await builder.job_start_date_clear()
+
+        with allure.step('13. Validate Waktu Selesai'):
+            await builder.job_end_active_unchecking()
+            await builder.job_end_date_insert("December", 2022)
+            await builder.job_end_date_clear()
+            await builder.job_end_active_checking()
+
+        with allure.step('14. Click on Simpan button'):
+            await builder.job_save_btn_click()
+
+        with allure.step('15. Click on Batal button'):
+            await builder.job_cancel_btn_click()
