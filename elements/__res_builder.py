@@ -239,6 +239,7 @@ class Proficiency:
     name_input = "#proficiencyNameInput"
     level_label = "#proficiencyLevelLabel"
     level_input = "#proficiencyLevelInput"
+    level_content = "div[name='proficiency_level'] .ant-select-selection-item"
     level_lists = "#proficiencyLevelLists"
     level_item_pemula = "//div[@id='proficiencyLevelItem' and @title='Pemula']"
     level_item_menengah = "//div[@id='proficiencyLevelItem' and @title='Menengah']"

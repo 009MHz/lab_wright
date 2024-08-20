@@ -1038,6 +1038,28 @@ class Builder(BasePage):
     async def skill_hints_desc_presence(self):
         await self._look(Proficiency.hint_desc)
         await expect(self._find(Proficiency.hint_desc)).to_contain_text('Sertakan skills yang relevan')
+        
+    async def skill_name_input_presence(self):
+        await self._look(Proficiency.name_label)
+        await expect(self._find(Proficiency.name_label)).to_have_text("Keahlian")
+
+        await self._touch(Proficiency.name_input)
+        await expect(self._find(Proficiency.name_input)).to_have_attribute("placeholder", "Microsoft Office")
+        
+    async def skill_level_presence(self):
+        await self._look(Proficiency.level_label)
+        await expect(self._find(Proficiency.level_label)).to_have_text("Tingkat Keahlian")
+
+        await self._touch(Proficiency.level_input)
+        await expect(self._find(Proficiency.level_content)).to_have_attribute("title", "Pemula")
+        
+    async def skill_cancel_form_btn_presence(self):
+        await self._touch(Proficiency.form_cancel)
+        await expect(self._find(Proficiency.form_cancel)).to_have_text("Batal")
+
+    async def skill_save_form_btn_presence(self):
+        await self._touch(Proficiency.form_save)
+        await expect(self._find(Proficiency.form_save)).to_have_text("Simpan")
 
     """Keahlian Section Interaction"""
     async def skill_title_click_collapse(self):

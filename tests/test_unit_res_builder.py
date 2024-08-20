@@ -346,7 +346,10 @@ class TestSmokeLoginPage:
             await builder.skill_click_add_form()
 
         with allure.step('3. Validate each input field completeness'):
-            pass
+            await builder.skill_name_input_presence()
+            await builder.skill_level_presence()
+            await builder.skill_cancel_form_btn_presence()
+            await builder.skill_save_form_btn_presence()
 
         with allure.step('4. Insert a valid skill to the Keahlian Input Field'):
             # Todo: Insert a valid key
