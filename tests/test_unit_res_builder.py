@@ -316,7 +316,13 @@ class TestSmokeLoginPage:
     @allure.feature("Keahlian", "Hints")
     @allure.severity(severity.MINOR)
     async def test_proficient_section_hints(self, builder):
-        with allure.step('1. '):
+        with allure.step('1. Click on the Add Keahlian Form button'):
+            await builder.skill_click_add_form()
+
+        with allure.step('2. Validate the Keahlian Hints section after form is added'):
+            pass
+
+        with allure.step('3. Interact with Keahlian hint toggle'):
             pass
 
     @pytest.mark.positive
@@ -325,5 +331,29 @@ class TestSmokeLoginPage:
     @allure.feature("Keahlian")
     @allure.severity(severity.CRITICAL)
     async def test_education_section(self, builder):
-        with allure.step('1.'):
+        with allure.step('1. Validate Keahlian default state'):
+            await builder.skill_main_form_presence()
+            await builder.skill_title_presence()
+            await builder.skill_desc_presence()
+            await builder.skill_title_click_collapse()
+            await builder.skill_title_click_expand()
+
+        with allure.step('2. Click on the Add Keahlian Form button'):
+            await builder.skill_click_add_form()
+
+        with allure.step('3. Validate each input field completeness'):
+            pass
+
+        with allure.step('4. Insert a valid skill to the Keahlian Input Field'):
+            # Todo: Insert a valid key
+            # Todo: Clear the input
+            pass
+
+        with allure.step('5. Interact with all Tingkat Keahlian options'):
+            pass
+
+        with allure.step('6. Click on the Save button'):
+            pass
+
+        with allure.step('7. Click on the Cancel button'):
             pass
