@@ -249,6 +249,13 @@ class Proficiency:
 
 
 class Achievements:
+    form = "#achievementToggle"
+    title = "#achievementTitle"
+    description = "#addAchievementText"
+    add_btn = "#addAchievement"
+    toggle = "div[id='achievementToggle'] div[role='button']"
+    hint_main = "#achievementHint"
+    hint_title = "div[id='achievementHint'] strong"
     hint_btn = "#achievementHintBtn"
     hint_desc = "#achievementHintDesc"
     year_label = "#achievementYearLabel"
