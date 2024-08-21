@@ -260,6 +260,7 @@ class Achievements:
     hint_desc = "#achievementHintDesc"
     year_label = "#achievementYearLabel"
     year_input = "#achievementYearInput"
+    year_clear = "//input[@id='achievementYearInput']/following-sibling::span[contains(@class, 'picker-clear')]"
     name_label = "#achievementNameLabel"
     name_input = "#achievementNameInput"
     form_cancel = "#achievementFormCancel"
