@@ -333,7 +333,7 @@ class TestSmokeLoginPage:
     @allure.title("Keahlian Section Validation")
     @allure.feature("Keahlian")
     @allure.severity(severity.CRITICAL)
-    async def test_education_section(self, builder):
+    async def test_proficient_section(self, builder):
         with allure.step('1. Validate Keahlian default state'):
             await builder.skill_main_form_presence()
             await builder.skill_title_presence()
@@ -365,3 +365,21 @@ class TestSmokeLoginPage:
 
         with allure.step('7. Click on the Cancel button'):
             await builder.skill_cancel_form_click()
+
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Prestasi Hints Existence")
+    @allure.feature("Prestasi", "Hints")
+    @allure.severity(severity.MINOR)
+    async def test_achievement_section_hints(self, builder):
+        with allure.step('1. Click on the Add Prestasi Form button'):
+            await builder.honor_click_add_form()
+
+        with allure.step('2. Validate the Prestasi Hints section after form is added'):
+            await builder.honor_main_hints_presence()
+            await builder.honor_hints_title_presence()
+            await builder.honor_hints_desc_presence()
+
+        with allure.step('3. Interact with Keahlian hint toggle'):
+            await builder.honor_hints_click_hide()
+            await builder.honor_hints_click_show()
