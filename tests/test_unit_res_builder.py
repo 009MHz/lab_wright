@@ -364,7 +364,7 @@ class TestSmokeLoginPage:
             await builder.skill_save_form_click()
 
         with allure.step('7. Click on the Cancel button'):
-            await builder.honor_cancel_form_click()
+            await builder.skill_cancel_form_click()
 
     @pytest.mark.positive
     @pytest.mark.smoke
