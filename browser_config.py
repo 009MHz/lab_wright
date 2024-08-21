@@ -63,12 +63,13 @@ class Config:
                 context = await self.browser.new_context(**context_options)
                 page = await context.new_page()
 
-                email, password = self.load_credentials(user_type)
-                sess = LoginPage(page)
-                await sess.create_session(email, password)
-                logging.info("Login Success, Creating the session file . . .")
-                await context.storage_state(path=SESSION_FILE)
-                await context.close()
+                if user_type:
+                    email, password = self.load_credentials(user_type)
+                    sess = LoginPage(page)
+                    await sess.create_session(email, password)
+                    logging.info(f"Login Success for {user_type}, Creating the session file . . .")
+                    await context.storage_state(path=SESSION_FILE)
+                    await context.close()
 
         return SESSION_FILE
 
