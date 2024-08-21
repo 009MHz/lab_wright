@@ -1127,7 +1127,62 @@ class Builder(BasePage):
         await expect(self._find(Proficiency.hint_desc)).not_to_be_attached()
         await expect(self._find(Proficiency.description)).to_be_visible()
 
-    # Todo 7: Achievements
+    """Achievements & Honor Validation"""
+    async def honor_main_form_presence(self):
+        await self._look(Achievements.form)
+        await expect(self._find(Achievements.form)).to_be_attached()
+
+    async def honor_title_presence(self):
+        await self._look(Achievements.title)
+        await expect(self._find(Achievements.title)).to_have_text("Prestasi & Penghargaan Non-akademik")
+
+    async def honor_desc_presence(self):
+        await self._look(Achievements.description)
+        await expect(self._find(Achievements.description)).to_contain_text("Tambah Prestasi dan penghargaan")
+
+    async def honor_add_button_presence(self):
+        await self._look(Achievements.add_btn)
+        await expect(self._find(Achievements.add_btn)).to_be_enabled()
+        await expect(self._find(Achievements.add_btn)).to_have_text(' Prestasi & Penghargaan')
+
+    async def honor_main_hints_presence(self):
+        await self._look(Achievements.hint_main)
+        await expect(self._find(Achievements.hint_main)).to_be_attached()
+
+    async def honor_hints_title_presence(self):
+        await self._look(Achievements.hint_title)
+        await expect(self._find(Achievements.hint_title)).to_have_text('Tips Professional')
+
+    async def honor_hints_desc_presence(self):
+        await self._look(Achievements.hint_desc)
+        await expect(self._find(Achievements.hint_desc)).to_contain_text('Pastikan penulisan award konsisten')
+
+    """Achievements & Honor Interaction"""
+
+    async def honor_title_click_collapse(self):
+        await self._click(Achievements.toggle)
+        await expect(self._find(Achievements.add_btn)).to_be_hidden()
+        await expect(self._find(Achievements.toggle)).to_have_attribute('aria-expanded', 'false')
+
+    async def honor_title_click_expand(self):
+        await self._click(Achievements.toggle)
+        await expect(self._find(Achievements.add_btn)).to_be_visible()
+        await expect(self._find(Achievements.toggle)).to_have_attribute('aria-expanded', 'true')
+
+    async def honor_click_add_form(self):
+        await self._click(Achievements.add_btn)
+        await expect(self._find(Achievements.add_btn)).to_be_focused()
+
+    async def honor_hints_click_show(self):
+        await self._click(Achievements.hint_btn)
+        await expect(self._find(Achievements.hint_btn)).to_have_attribute('aria-checked', 'true')
+        await expect(self._find(Achievements.hint_desc)).not_to_be_hidden()
+
+    async def honor_hints_click_hide(self):
+        await self._click(Achievements.hint_btn)
+        await expect(self._find(Achievements.hint_btn)).to_have_attribute('aria-checked', 'false')
+        await expect(self._find(Achievements.hint_desc)).to_be_hidden()
+        
     # Todo 8: Hobbies
     # Todo 9: Preview
     # Todo 10: Toast Result Action
