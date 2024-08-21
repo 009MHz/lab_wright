@@ -1,6 +1,6 @@
 import os
 import logging
-from sess_handler import SessionHandler
+from utils.sess_handler import SessionHandler
 
 
 class Config:
