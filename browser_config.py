@@ -9,9 +9,6 @@ SESSION_FILE = "data/.auth/session.json"
 SESSION_DIR = os.path.dirname(SESSION_FILE)
 SESSION_LOCK_FILE = f"{SESSION_FILE}.lock"
 
-logging.getLogger('asyncio').setLevel(logging.WARNING)
-logging.getLogger('filelock').setLevel(logging.CRITICAL)
-
 
 class Config:
     def __init__(self):
@@ -25,11 +22,9 @@ class Config:
         browser_type = os.getenv("BROWSER", "chromium")
         mode = os.getenv("mode")
         headless = self.is_headless()
-
         launch_args = {
             "headless": headless,
-            "args": ["--start-maximized"]
-        }
+            "args": ["--start-maximized"]}
 
         if mode == 'pipeline':
             self.browser = await playwright[browser_type].launch(**launch_args)
@@ -43,7 +38,6 @@ class Config:
 
     def load_credentials(self, user_type):
         credentials = "data/credentials.json"
-        """Load credentials from the JSON file based on the user type."""
         if not os.path.exists(credentials):
             raise FileNotFoundError(f"Credentials file not found: {credentials}")
 
@@ -56,10 +50,7 @@ class Config:
 
         raise ValueError(f"User type '{user_type}' not found in credentials file")
 
-    async def session_checker(self, user_type="user"):
-        """Check the session file. If it exists and is valid, return it.
-        If it exists but is expired, or doesn't exist, create a new session file."""
-
+    async def session_checker(self, user_type: str):
         if not os.path.exists(SESSION_DIR):
             os.makedirs(SESSION_DIR)
 
@@ -84,8 +75,7 @@ class Config:
     async def context_init(self, storage_state=None, user_type="user"):
         context_options = {
             "viewport": {"width": 1920, "height": 1080} if self.is_headless() else None,
-            "no_viewport": not self.is_headless(),
-        }
+            "no_viewport": not self.is_headless()}
 
         if storage_state:
             context_options["storage_state"] = await self.session_checker(user_type)
@@ -97,8 +87,8 @@ class Config:
         self.page = await context.new_page()
         return self.page
 
-    async def setup_auth_page(self):
-        context = await self.context_init(storage_state=True)
+    async def setup_auth_page(self, auth_mode: str):
+        context = await self.context_init(storage_state=True, user_type=auth_mode)
         self.page = await context.new_page()
         return self.page
 
@@ -123,3 +113,7 @@ class Config:
                 return True
 
         return False
+
+
+logging.getLogger('asyncio').setLevel(logging.WARNING)
+logging.getLogger('filelock').setLevel(logging.CRITICAL)
