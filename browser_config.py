@@ -2,13 +2,15 @@ import os
 import time
 import json
 import logging
+from filelock import FileLock
 from pages.login_page import LoginPage
 
 SESSION_FILE = "data/.auth/session.json"
 SESSION_DIR = os.path.dirname(SESSION_FILE)
-CREDENTIALS_FILE = "data/credentials.json"
+SESSION_LOCK_FILE = f"{SESSION_FILE}.lock"
 
 logging.getLogger('asyncio').setLevel(logging.WARNING)
+logging.getLogger('filelock').setLevel(logging.CRITICAL)
 
 
 class Config:
@@ -39,6 +41,46 @@ class Config:
         else:
             raise ValueError(f"Unsupported execution type: {mode}")
 
+    def load_credentials(self, user_type):
+        credentials = "data/credentials.json"
+        """Load credentials from the JSON file based on the user type."""
+        if not os.path.exists(credentials):
+            raise FileNotFoundError(f"Credentials file not found: {credentials}")
+
+        with open(credentials, 'r') as file:
+            credentials = json.load(file)
+
+        for cred in credentials:
+            if user_type in cred:
+                return cred[user_type]["email"], cred[user_type]["password"]
+
+        raise ValueError(f"User type '{user_type}' not found in credentials file")
+
+    async def session_checker(self, user_type="user"):
+        """Check the session file. If it exists and is valid, return it.
+        If it exists but is expired, or doesn't exist, create a new session file."""
+
+        if not os.path.exists(SESSION_DIR):
+            os.makedirs(SESSION_DIR)
+
+        with FileLock(SESSION_LOCK_FILE):
+            if not os.path.exists(SESSION_FILE) or self.is_session_expired(SESSION_FILE):
+                context_options = {
+                    "viewport": {"width": 1920, "height": 1080} if self.is_headless() else None,
+                    "no_viewport": not self.is_headless()}
+
+                context = await self.browser.new_context(**context_options)
+                page = await context.new_page()
+
+                email, password = self.load_credentials(user_type)
+                sess = LoginPage(page)
+                await sess.create_session(email, password)
+                logging.info("Login Success, Creating the session file . . .")
+                await context.storage_state(path=SESSION_FILE)
+                await context.close()
+
+        return SESSION_FILE
+
     async def context_init(self, storage_state=None, user_type="user"):
         context_options = {
             "viewport": {"width": 1920, "height": 1080} if self.is_headless() else None,
@@ -59,46 +101,6 @@ class Config:
         context = await self.context_init(storage_state=True)
         self.page = await context.new_page()
         return self.page
-
-    def load_credentials(self, user_type):
-        """Load credentials from the JSON file based on the user type."""
-        if not os.path.exists(CREDENTIALS_FILE):
-            raise FileNotFoundError(f"Credentials file not found: {CREDENTIALS_FILE}")
-
-        with open(CREDENTIALS_FILE, 'r') as file:
-            credentials = json.load(file)
-
-        for cred in credentials:
-            if user_type in cred:
-                return cred[user_type]["email"], cred[user_type]["password"]
-
-        raise ValueError(f"User type '{user_type}' not found in credentials file")
-
-    async def session_checker(self, user_type="user"):
-        """Check the session file. If it exists and is valid, return it.
-        If it exists but is expired, or doesn't exist, create a new session file."""
-
-        if not os.path.exists(SESSION_DIR):
-            os.makedirs(SESSION_DIR)
-
-        if not os.path.exists(SESSION_FILE) or self.is_session_expired(SESSION_FILE):
-            context_options = {
-                "viewport": {"width": 1920, "height": 1080} if self.is_headless() else None,
-                "no_viewport": not self.is_headless(),
-            }
-
-            # Create a new context and perform login if session file is expired or doesn't exist
-            context = await self.browser.new_context(**context_options)
-            page = await context.new_page()
-
-            email, password = self.load_credentials(user_type)
-            sess = LoginPage(page)
-            await sess.create_session(email, password)
-            logging.info("Login Success, Creating the session file . . .")
-            await context.storage_state(path=SESSION_FILE)
-            await context.close()
-
-        return SESSION_FILE
 
     async def capture_handler(self):
         screenshot_option = os.getenv("screenshot")
