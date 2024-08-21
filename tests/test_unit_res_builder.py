@@ -383,3 +383,12 @@ class TestSmokeLoginPage:
         with allure.step('3. Interact with Keahlian hint toggle'):
             await builder.honor_hints_click_hide()
             await builder.honor_hints_click_show()
+
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Prestasi Section Validation")
+    @allure.feature("Prestasi")
+    @allure.severity(severity.CRITICAL)
+    async def test_achievement_section(self, builder):
+        with allure.step('1. Validate Prestasi default state'):
+            await builder.honor_main_form_presence()
