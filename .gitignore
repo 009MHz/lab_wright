@@ -174,3 +174,4 @@ cython_debug/
 reports
 data/.auth
 tests/reports
+tests/data/

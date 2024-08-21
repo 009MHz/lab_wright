@@ -712,7 +712,6 @@ class Builder(BasePage):
         await expect(self._find(EduHistory.hint_desc)).not_to_be_attached()
         await expect(self._find(EduHistory.description)).to_be_visible()
 
-    # Todo 4: Occupation History Section
     """Work History Validation"""
     async def job_title_presence(self):
         await self._look(JobHistory.title)
@@ -1127,9 +1126,7 @@ class Builder(BasePage):
         await expect(self._find(Proficiency.form_cancel)).not_to_be_attached()
         await expect(self._find(Proficiency.hint_desc)).not_to_be_attached()
         await expect(self._find(Proficiency.description)).to_be_visible()
-        
 
-    # Todo 6: Achievements
     # Todo 7: Achievements
     # Todo 8: Hobbies
     # Todo 9: Preview
