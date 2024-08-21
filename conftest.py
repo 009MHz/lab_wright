@@ -28,7 +28,7 @@ async def playwright():
 
 @pytest.fixture()
 async def browser(playwright):
-    await runner.setup_browser(playwright)  # Ensure this is awaited
+    await runner.setup_browser(playwright)
     yield runner.browser
     await runner.browser.close()
 

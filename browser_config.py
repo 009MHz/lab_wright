@@ -1,14 +1,14 @@
 import os
-import json
 import time
+import json
 import logging
 from pages.login_page import LoginPage
 
 SESSION_FILE = "data/.auth/session.json"
 SESSION_DIR = os.path.dirname(SESSION_FILE)
+CREDENTIALS_FILE = "data/credentials.json"
 
 logging.getLogger('asyncio').setLevel(logging.WARNING)
-
 
 class Config:
     def __init__(self):
@@ -38,7 +38,20 @@ class Config:
         else:
             raise ValueError(f"Unsupported execution type: {mode}")
 
-    async def context_init(self, storage_state=None):
+    def load_credentials(self, user_type):
+        if not os.path.exists(CREDENTIALS_FILE):
+            raise FileNotFoundError(f"Credentials file not found: {CREDENTIALS_FILE}")
+
+        with open(CREDENTIALS_FILE, 'r') as file:
+            credentials = json.load(file)
+
+        for cred in credentials:
+            if user_type in cred:
+                return cred[user_type]["email"], cred[user_type]["password"]
+
+        raise ValueError(f"User type '{user_type}' not found in credentials file")
+
+    async def context_init(self, storage_state=None, user_type="user"):
         headless = self.is_headless()
         context_options = {
             "viewport": {"width": 1920, "height": 1080} if headless else None,
@@ -52,9 +65,11 @@ class Config:
             if not os.path.exists(SESSION_FILE) or self.session_checker(SESSION_FILE):
                 context = await self.browser.new_context(**context_options)
                 page = await context.new_page()
+
+                email, password = self.load_credentials(user_type)
                 sess = LoginPage(page)
-                await sess.create_session('simbah.test03@gmail.com', 'germa069')
-                logging.info("Login Success, Creating the file . . .")
+                await sess.create_session(email, password)
+                logging.info("Login Success, Creating the session file . . .")
                 await context.storage_state(path=SESSION_FILE)
                 await context.close()
 
