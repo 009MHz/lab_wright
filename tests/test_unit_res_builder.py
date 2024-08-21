@@ -333,7 +333,7 @@ class TestSmokeLoginPage:
     @allure.title("Keahlian Section Validation")
     @allure.feature("Keahlian")
     @allure.severity(severity.CRITICAL)
-    async def test_education_section(self, builder):
+    async def test_proficient_section(self, builder):
         with allure.step('1. Validate Keahlian default state'):
             await builder.skill_main_form_presence()
             await builder.skill_title_presence()
@@ -365,3 +365,58 @@ class TestSmokeLoginPage:
 
         with allure.step('7. Click on the Cancel button'):
             await builder.skill_cancel_form_click()
+
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Prestasi Hints Existence")
+    @allure.feature("Prestasi", "Hints")
+    @allure.severity(severity.MINOR)
+    async def test_achievement_section_hints(self, builder):
+        with allure.step('1. Click on the Add Prestasi Form button'):
+            await builder.honor_click_add_form()
+
+        with allure.step('2. Validate the Prestasi Hints section after form is added'):
+            await builder.honor_main_hints_presence()
+            await builder.honor_hints_title_presence()
+            await builder.honor_hints_desc_presence()
+
+        with allure.step('3. Interact with Keahlian hint toggle'):
+            await builder.honor_hints_click_hide()
+            await builder.honor_hints_click_show()
+
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Prestasi Section Validation")
+    @allure.feature("Prestasi")
+    @allure.severity(severity.CRITICAL)
+    async def test_achievement_section(self, builder):
+        with allure.step('1. Validate Prestasi form default state'):
+            await builder.honor_main_form_presence()
+            await builder.honor_title_presence()
+            await builder.honor_desc_presence()
+            await builder.honor_add_button_presence()
+            await builder.honor_title_click_collapse()
+            await builder.honor_title_click_expand()
+
+        with allure.step('2. Click on the Add Prestasi Form button'):
+            await builder.honor_click_add_form()
+
+        with allure.step('3. Validate each input field completeness'):
+            await builder.honor_year_presence()
+            await builder.honor_name_input_presence()
+            await builder.honor_cancel_form_btn_presence()
+            await builder.honor_save_form_btn_presence()
+
+        with allure.step('4. Interact with the year insert field'):
+            await builder.honor_year_insert(2005)
+            await builder.honor_year_clear()
+
+        with allure.step('5. Interact with the Achievement title insert field'):
+            await builder.honor_name_insert("UEFA Champions MVP")
+            await builder.honor_name_clear()
+
+        with allure.step('6. Click on the Save button'):
+            await builder.honor_save_form_click()
+
+        with allure.step('7. Click on the Cancel button'):
+            await builder.honor_cancel_form_click()
