@@ -5,8 +5,8 @@ from allure import severity_level as severity
 
 
 @pytest.fixture(scope='function')
-async def builder(auth_page):
-    builder = Builder(auth_page)
+async def builder(user_auth):
+    builder = Builder(user_auth)
     await builder.load_page()
     return builder
 
