@@ -10,6 +10,7 @@ CREDENTIALS_FILE = "data/credentials.json"
 
 logging.getLogger('asyncio').setLevel(logging.WARNING)
 
+
 class Config:
     def __init__(self):
         self.browser = None
@@ -38,7 +39,29 @@ class Config:
         else:
             raise ValueError(f"Unsupported execution type: {mode}")
 
+    async def context_init(self, storage_state=None, user_type="user"):
+        context_options = {
+            "viewport": {"width": 1920, "height": 1080} if self.is_headless() else None,
+            "no_viewport": not self.is_headless(),
+        }
+
+        if storage_state:
+            context_options["storage_state"] = await self.session_checker(user_type)
+
+        return await self.browser.new_context(**context_options)
+
+    async def setup_page(self):
+        context = await self.context_init()
+        self.page = await context.new_page()
+        return self.page
+
+    async def setup_auth_page(self):
+        context = await self.context_init(storage_state=True)
+        self.page = await context.new_page()
+        return self.page
+
     def load_credentials(self, user_type):
+        """Load credentials from the JSON file based on the user type."""
         if not os.path.exists(CREDENTIALS_FILE):
             raise FileNotFoundError(f"Credentials file not found: {CREDENTIALS_FILE}")
 
@@ -51,41 +74,31 @@ class Config:
 
         raise ValueError(f"User type '{user_type}' not found in credentials file")
 
-    async def context_init(self, storage_state=None, user_type="user"):
-        headless = self.is_headless()
-        context_options = {
-            "viewport": {"width": 1920, "height": 1080} if headless else None,
-            "no_viewport": not headless,
-        }
+    async def session_checker(self, user_type="user"):
+        """Check the session file. If it exists and is valid, return it.
+        If it exists but is expired, or doesn't exist, create a new session file."""
 
-        if storage_state:
-            if not os.path.exists(SESSION_DIR):
-                os.makedirs(SESSION_DIR)
+        if not os.path.exists(SESSION_DIR):
+            os.makedirs(SESSION_DIR)
 
-            if not os.path.exists(SESSION_FILE) or self.session_checker(SESSION_FILE):
-                context = await self.browser.new_context(**context_options)
-                page = await context.new_page()
+        if not os.path.exists(SESSION_FILE) or self.is_session_expired(SESSION_FILE):
+            context_options = {
+                "viewport": {"width": 1920, "height": 1080} if self.is_headless() else None,
+                "no_viewport": not self.is_headless(),
+            }
 
-                email, password = self.load_credentials(user_type)
-                sess = LoginPage(page)
-                await sess.create_session(email, password)
-                logging.info("Login Success, Creating the session file . . .")
-                await context.storage_state(path=SESSION_FILE)
-                await context.close()
+            # Create a new context and perform login if session file is expired or doesn't exist
+            context = await self.browser.new_context(**context_options)
+            page = await context.new_page()
 
-            context_options["storage_state"] = SESSION_FILE
+            email, password = self.load_credentials(user_type)
+            sess = LoginPage(page)
+            await sess.create_session(email, password)
+            logging.info("Login Success, Creating the session file . . .")
+            await context.storage_state(path=SESSION_FILE)
+            await context.close()
 
-        return await self.browser.new_context(**context_options)
-
-    async def setup_page(self):
-        context = await self.context_init()
-        self.page = await context.new_page()
-        return self.page
-
-    async def setup_auth_page(self):
-        context = await self.context_init(storage_state=SESSION_FILE)
-        self.page = await context.new_page()
-        return self.page
+        return SESSION_FILE
 
     async def capture_handler(self):
         screenshot_option = os.getenv("screenshot")
@@ -94,7 +107,7 @@ class Config:
             os.makedirs(os.path.dirname(screenshot_path), exist_ok=True)
             await self.page.screenshot(path=screenshot_path, full_page=True)
 
-    def session_checker(self, session_file):
+    def is_session_expired(self, session_file):
         """Check if the session file contains expired cookies."""
         if not os.path.exists(session_file):
             return True
