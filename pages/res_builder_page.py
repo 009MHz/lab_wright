@@ -52,6 +52,46 @@ class Builder(BasePage):
         await self._look(ResumeInfo.import_modal)
         await expect(self._find(ResumeInfo.import_modal)).to_be_visible()
 
+    """ Resume Information - Import Data Validation"""
+    async def import_data_modal_title_presence(self):
+        await self._look(ResumeInfo.ImportModal.title)
+        await expect(self._find(ResumeInfo.ImportModal.title)).to_have_text('Impor Data')
+
+    async def import_data_modal_info_presence(self):
+        await self._look(ResumeInfo.ImportModal.desc)
+        await expect(self._find(ResumeInfo.ImportModal.desc)).to_have_text('Pilih sumber data untuk di impor :')
+
+    async def import_data_modal_close_presence(self):
+        await self._look(ResumeInfo.ImportModal.close)
+        await expect(self._find(ResumeInfo.ImportModal.close)).to_be_enabled()
+
+    async def import_data_modal_myProfile_presence(self):
+        await self._touch(ResumeInfo.ImportModal.my_profile)
+        await expect(self._find(ResumeInfo.ImportModal.my_profile)).to_have_text('Impor dari profil saya')
+
+    async def import_data_modal_myResume_presence(self):
+        await self._touch(ResumeInfo.ImportModal.my_resume)
+        await expect(self._find(ResumeInfo.ImportModal.my_resume)).to_have_text('Impor dari resume saya')
+
+    """ Resume Information - Import Data Interaction"""
+    async def import_data_modal_click_close(self):
+        await self._click(ResumeInfo.ImportModal.close)
+        await expect(self._find(ResumeInfo.import_modal)).not_to_be_visible()
+
+    async def import_data_modal_click_my_profile(self):
+        await self._click(ResumeInfo.ImportModal.my_profile)
+        await expect(self._find(ResumeInfo.ImportModal.my_profile)).not_to_be_visible()
+
+    async def import_data_modal_click_my_resume(self):
+        await self._click(ResumeInfo.ImportModal.my_resume)
+        await expect(self._find(ResumeInfo.ImportModal.my_resume)).not_to_be_visible()
+
+
+
+    """ Resume Information - Import Data - Import Via Profile Validation"""
+
+    """ Resume Information - Import Data - Import Via Resume Validation"""
+
     """Resume Information Section Interaction"""
     async def info_resume_name_insert(self, text):
         await self._touch(ResumeInfo.name_input)
