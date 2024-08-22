@@ -2,7 +2,7 @@ import pytest
 import os
 import asyncio
 import allure
-from browser_config import Config
+from utils.browser_config import Config
 from playwright.async_api import async_playwright
 
 runner = Config()
