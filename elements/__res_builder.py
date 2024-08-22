@@ -268,7 +268,14 @@ class Achievements:
 
 
 class Hobby:
+    form = "#hobbiesToggle"
+    title = "#hobbiesTitle"
+    desc = "#addInterestText"
+    toggle = "div[id='hobbiesToggle'] div[role='button']"
+    add_btn = "#addInterest"
+    hint_main = "#hobbyHint"
     hint_btn = "#hobbyHintBtn"
+    hint_title = "div[id='hobbyHint'] strong"
     hint_desc = "#hobbyHintDesc"
     name_label = "#hobbyNameLabel"
     name_input = "#hobbyNameInput"
