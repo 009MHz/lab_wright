@@ -21,6 +21,16 @@ class ResumeInfo:
     import_btn = "#resInfoImportBtn"
     import_modal = "//div[contains(@class, 'importDataModal')]"
 
+    class ImportModal:
+        title = "div[id=':r0:'] h3[class='ant-typography']"
+        desc = "div[class='ant-modal-body'] span[class='ant-typography']"
+        close = "#importDataCloseBtn"
+        my_profile = "#importDataMyProfileBtn"
+        my_resume = "#importDataMyResumeBtn"
+
+        class Profile:
+            title = "DataProfTitle"
+
 
 class EmptyDataDiri:
     title = "#selfInfoTitle"
