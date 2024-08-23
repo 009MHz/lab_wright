@@ -65,11 +65,11 @@ class Builder(BasePage):
         await self._look(ResumeInfo.ImportModal.close)
         await expect(self._find(ResumeInfo.ImportModal.close)).to_be_enabled()
 
-    async def import_data_modal_myProfile_presence(self):
+    async def import_data_myProfile_carousel_presence(self):
         await self._touch(ResumeInfo.ImportModal.my_profile)
         await expect(self._find(ResumeInfo.ImportModal.my_profile)).to_have_text('Impor dari profil saya')
 
-    async def import_data_modal_myResume_presence(self):
+    async def import_data_myResume_carousel_presence(self):
         await self._touch(ResumeInfo.ImportModal.my_resume)
         await expect(self._find(ResumeInfo.ImportModal.my_resume)).to_have_text('Impor dari resume saya')
 
@@ -81,16 +81,98 @@ class Builder(BasePage):
     async def import_data_modal_click_my_profile(self):
         await self._click(ResumeInfo.ImportModal.my_profile)
         await expect(self._find(ResumeInfo.ImportModal.my_profile)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Profile.main_form)).to_be_visible()
 
     async def import_data_modal_click_my_resume(self):
         await self._click(ResumeInfo.ImportModal.my_resume)
         await expect(self._find(ResumeInfo.ImportModal.my_resume)).not_to_be_visible()
 
-
-
     """ Resume Information - Import Data - Import Via Profile Validation"""
+    async def import_profile_modal_title_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.title)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.title)).to_have_text('Impor Profile')
+
+    async def import_profile_modal_info_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.desc)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.desc)).to_contain_text('resume dari profil saya')
+
+    async def import_profile_modal_back_arrow_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.back_chevron)
+
+        await expect(self._find(ResumeInfo.ImportModal.Profile.back_chevron)).to_be_enabled()
+        await expect(self._find(ResumeInfo.ImportModal.Profile.back_chevron)).to_have_text("Kembali ke pilih sumber data")
+
+    async def import_profile_modal_form_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_main)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).to_be_visible()
+
+    async def import_profile_self_data_form_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_main)
+
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_title)).to_have_text("Data Diri")
+
+    async def import_profile_self_data_check_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_check)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_check)).to_be_enabled()
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_check)).to_be_checked()
+
+    async def import_profile_self_data_name_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_name)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_name)).not_to_have_text("")
+
+    async def import_profile_self_data_email_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_email)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_email)).not_to_have_text("")
+
+    async def import_profile_self_data_phone_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_phone)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_phone)).not_to_have_text("")
+
+    async def import_profile_self_data_province_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_prov)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_prov)).not_to_have_text("")
+        
+    async def import_profile_self_data_city_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_city)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_city)).not_to_have_text("")
 
     """ Resume Information - Import Data - Import Via Resume Validation"""
+    # async def import_data_modal_click_close(self):
+    #     await self._click(ResumeInfo.ImportModal.close)
+    #     await expect(self._find(ResumeInfo.import_modal)).not_to_be_visible()
+    #
+    # async def import_data_modal_click_my_profile(self):
+    #     await self._click(ResumeInfo.ImportModal.my_profile)
+    #     await expect(self._find(ResumeInfo.ImportModal.my_profile)).not_to_be_visible()
+    #
+    # async def import_data_modal_click_my_resume(self):
+    #     await self._click(ResumeInfo.ImportModal.my_resume)
+    #     await expect(self._find(ResumeInfo.ImportModal.my_resume)).not_to_be_visible()
+
+    """ Resume Information - Import Data - Import Via Profile Interaction"""
+    async def import_profile_modal_click_back_arrow(self):
+        await self._click(ResumeInfo.ImportModal.Profile.back_chevron)
+
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).not_to_be_visible()
+
+    async def import_profile_collapse_self_data(self):
+        await self._click(ResumeInfo.ImportModal.Profile.info_toggle)
+        await self._conceal(ResumeInfo.ImportModal.Profile.info_name)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_toggle)).to_have_attribute('aria-expanded', 'false')
+
+    async def import_profile_expand_self_data(self):
+        await self._click(ResumeInfo.ImportModal.Profile.info_toggle)
+        await self._look(ResumeInfo.ImportModal.Profile.info_name)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_toggle)).to_have_attribute('aria-expanded', 'true')
+
+    # async def import_profile_modal_click_cancel(self):
+    #     await self._click(ResumeInfo.ImportModal.Profile.cancel)
+
+
+
+
 
     """Resume Information Section Interaction"""
     async def info_resume_name_insert(self, text):

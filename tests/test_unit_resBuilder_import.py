@@ -28,8 +28,8 @@ class TestSmokeResBuildImportPage:
             await builder.import_data_modal_title_presence()
             await builder.import_data_modal_info_presence()
             await builder.import_data_modal_close_presence()
-            await builder.import_data_modal_myProfile_presence()
-            await builder.import_data_modal_myResume_presence()
+            await builder.import_data_myProfile_carousel_presence()
+            await builder.import_data_myResume_carousel_presence()
 
     @pytest.mark.positive
     @pytest.mark.smoke
@@ -45,19 +45,36 @@ class TestSmokeResBuildImportPage:
     @allure.title("Import Data Via My Profile Validation")
     @allure.feature("Informasi Resume", "Impor Data", "Profile Import")
     @allure.severity(severity.CRITICAL)
-    async def test_informasi_resume_import_modal_my_profile(self, builder):
+    async def test_informasi_resume_import_profile_modal(self, builder):
         with allure.step('1. Click on the "Impor dari profil saya" carousel'):
             await builder.import_data_modal_click_my_profile()
 
-        with allure.step('2. Validate the Import via Profile modal content'):
-            pass
+        with allure.step('2. Validate the Import via Profile mandatory content'):
+            await builder.import_profile_modal_title_presence()
+            await builder.import_profile_modal_info_presence()
+            await builder.import_profile_modal_back_arrow_presence()
+            await builder.import_profile_modal_form_presence()
+            await builder.import_profile_self_data_form_presence()
+            await builder.import_profile_self_data_check_presence()
+            await builder.import_profile_self_data_name_presence()
+            await builder.import_profile_self_data_email_presence()
+            await builder.import_profile_self_data_phone_presence()
+            await builder.import_profile_self_data_province_presence()
+            await builder.import_profile_self_data_city_presence()
+
+        with allure.step('3. Click on the {@param} action button'):
+            await builder.import_profile_collapse_self_data()
+            await builder.import_profile_expand_self_data()
+
+            await builder.import_profile_modal_click_back_arrow()
+
 
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Import Data Via My Resume Validation")
     @allure.feature("Informasi Resume", "Impor Data", "Resume Import")
     @allure.severity(severity.CRITICAL)
-    async def test_informasi_resume_import_modal_my_resume(self, builder):
+    async def test_informasi_resume_import_resume_modal(self, builder):
         with allure.step('1. Click on the "Impor dari resume saya" carousel'):
             await builder.import_data_modal_click_my_resume()
 

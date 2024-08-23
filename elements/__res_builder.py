@@ -29,7 +29,36 @@ class ResumeInfo:
         my_resume = "#importDataMyResumeBtn"
 
         class Profile:
-            title = "DataProfTitle"
+            main_form = "//div[contains(@class, 'importDataModalMain')]"
+            title = "#DataProfTitle"
+            desc = "#DataProfInfo"
+            back_chevron = "#DataProfLeftChevron"
+            cancel = "#DataProfCancelBtn"
+            save = "#DataProfSaveBtn"
+
+            """Data Diri"""
+            info_main = "#DataProfInfoSelfDataToggle"
+            info_toggle = "div[id='DataProfInfoSelfDataToggle'] div[role='button']"
+            info_check = "//label[contains(@class,'SelfDataCheck')]//input"
+            info_title = "#DataProfInfoSelfDataHeader"
+            info_name = "#dataProfInfoSelfDataName"
+            info_email = "#dataProfInfoSelfDataEmail"
+            info_phone = "#dataProfInfoSelfDataPhone"
+            info_prov = "#dataProfInfoSelfDataProvince"
+            info_city = "#dataProfInfoSelfDataCity"
+
+            """Riwayat Pendidikan"""
+            edu_main = "#DataProfInfoEduToggle"
+            edu_toggle = "div[id='DataProfInfoEduToggle'] div[role='button']"
+            edu_title = "#DataProfInfoEduHeader"
+            edu_name = "//span[contains(@id,'EduName')]"
+            edu_country = ""
+            edu_prov = ""
+            edu_city = ""
+            edu_faculty = ""
+            edu_start = ""
+            edu_end = ""
+            edu_score = ""
 
 
 class EmptyDataDiri:
