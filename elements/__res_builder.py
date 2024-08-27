@@ -61,7 +61,7 @@ class ResumeInfo:
             edu_score = ""
 
 
-class EmptyDataDiri:
+class DataDiri:
     title = "#selfInfoTitle"
     main_form = "#selfInfoToggle"
     form_state = "#selfInfoToggle .ant-collapse-header"
@@ -104,12 +104,12 @@ class EmptyDataDiri:
     submit_btn = "#selfInfoSubmitBtn"
 
     """Filled State"""
-    fill_datadiri_wrapper = "|BELUM|#DataProfInfoSelfDataWrapper"
-    fill_name = "|BELUM|#DataProfInfoSelfDataName"
-    fill_email = "|BELUM|#DataProfInfoSelfDataEmail"
-    fill_phone = "|BELUM|#DataProfInfoSelfDataPhone"
-    fill_province = "|BELUM|#DataProfInfoSelfDataProvince"
-    fill_city = "|BELUM|#DataProfInfoSelfDataCity"
+    fill_wrapper = "//div[@id='selfInfoToggle']//div[@id='DataProfInfoSelfDataWrapper']"
+    fill_name = "#dataProfInfoSelfDataName"
+    fill_email = "#dataProfInfoSelfDataEmail"
+    fill_phone = "#dataProfInfoSelfDataPhone"
+    fill_province = "#dataProfInfoSelfDataProvince"
+    fill_city = "#dataProfInfoSelfDataCity"
     fill_address = "|BELUM|#DataProfInfoSelfDataAddress"
     fill_linkedin = "|BELUM|#DataProfInfoSelfDataLinkedin"
     fill_linkedin_checkbox = "|BELUM|#DataProfInfoSelfDataLinkedin-checkbox-fill"

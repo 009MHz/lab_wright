@@ -21,7 +21,7 @@ class TestSmokeResBuildImportPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Import Data Main Validation")
-    @allure.feature("Informasi Resume", "Impor Data")
+    @allure.feature("Resume Builder", "Informasi Resume", "Impor Data")
     @allure.severity(severity.CRITICAL)
     async def test_informasi_resume_import_modal(self, builder):
         with allure.step('1. Validate the Import Data completeness'):
@@ -34,7 +34,7 @@ class TestSmokeResBuildImportPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Import Data Close Action Validation")
-    @allure.feature("Informasi Resume", "Impor Data", "Import Close")
+    @allure.feature("Resume Builder", "Informasi Resume", "Impor Data", "Import Close")
     @allure.severity(severity.CRITICAL)
     async def test_informasi_resume_import_modal_close(self, builder):
         with allure.step('1. Click on the modal close button'):
@@ -42,10 +42,18 @@ class TestSmokeResBuildImportPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
-    @allure.title("Import Data Via My Profile Validation")
-    @allure.feature("Informasi Resume", "Impor Data", "Profile Import")
+    @allure.title("Import Data Via My Profile Interaction")
     @allure.severity(severity.CRITICAL)
-    async def test_informasi_resume_import_profile_modal(self, builder):
+    @allure.feature("Resume Builder", "Informasi Resume", "Impor Data", "Profile Import")
+    @pytest.mark.parametrize("action, feature", [
+        ("toggle", "Profile Import/ Toggle"),
+        ("back_arrow", "Profile Import/ Back Chevron"),
+        ("cancel", "Profile Import/ Cancel"),
+        ("save", "Profile Import/ Save")
+    ])
+    async def test_informasi_resume_import_profile_modal(self, builder, action, feature):
+        allure.dynamic.feature(feature)
+
         with allure.step('1. Click on the "Impor dari profil saya" carousel'):
             await builder.import_data_modal_click_my_profile()
 
@@ -62,12 +70,16 @@ class TestSmokeResBuildImportPage:
             await builder.import_profile_self_data_province_presence()
             await builder.import_profile_self_data_city_presence()
 
-        with allure.step('3. Click on the {@param} action button'):
-            await builder.import_profile_collapse_self_data()
-            await builder.import_profile_expand_self_data()
-
-            await builder.import_profile_modal_click_back_arrow()
-
+        with allure.step(f'3. Click on the "{action}" action button'):
+            if action == "collapse":
+                await builder.import_profile_collapse_self_data()
+                await builder.import_profile_expand_self_data()
+            elif action == "back_arrow":
+                await builder.import_profile_modal_click_back_arrow()
+            elif action == "cancel":
+                await builder.import_profile_modal_click_cancel()
+            elif action == "save":
+                await builder.import_profile_modal_click_save()
 
     @pytest.mark.positive
     @pytest.mark.smoke
