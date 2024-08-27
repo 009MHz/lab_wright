@@ -49,7 +49,8 @@ class TestSmokeResBuildImportPage:
         ("toggle", "Profile Import/ Toggle"),
         ("back_arrow", "Profile Import/ Back Chevron"),
         ("cancel", "Profile Import/ Cancel"),
-        ("save", "Profile Import/ Save")
+        ("save", "Profile Import/ Save"),
+        ("close", "Profile Import/ Close")
     ])
     async def test_informasi_resume_import_profile_modal(self, builder, action, feature):
         allure.dynamic.feature(feature)
@@ -80,6 +81,8 @@ class TestSmokeResBuildImportPage:
                 await builder.import_profile_modal_click_cancel()
             elif action == "save":
                 await builder.import_profile_modal_click_save()
+            elif action == "close":
+                await builder.import_profile_modal_click_close()
 
     @pytest.mark.positive
     @pytest.mark.smoke
