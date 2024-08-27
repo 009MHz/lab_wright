@@ -27,9 +27,9 @@ class ResumeInfo:
         close = "#importDataCloseBtn"
         my_profile = "#importDataMyProfileBtn"
         my_resume = "#importDataMyResumeBtn"
+        main_form = "//div[contains(@class, 'importDataModalMain')]"
 
         class Profile:
-            main_form = "//div[contains(@class, 'importDataModalMain')]"
             title = "#DataProfTitle"
             desc = "#DataProfInfo"
             back_chevron = "#DataProfLeftChevron"
