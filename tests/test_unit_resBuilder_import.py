@@ -119,3 +119,37 @@ class TestSmokeResBuildImportPage:
             elif action == "close":
                 await builder.import_resume_modal_click_close()
 
+    @pytest.mark.positive
+    @pytest.mark.smoke
+    @allure.title("Import Data Via My Resume Save Action")
+    @allure.feature("Informasi Resume", "Impor Data", "Resume Import", "Resume Import/ Save")
+    @allure.severity(severity.CRITICAL)
+    async def test_informasi_resume_import_resume_save(self, builder):
+        with allure.step('1. Click on the "Impor dari resume saya" carousel'):
+            await builder.import_data_modal_click_my_resume()
+
+        with allure.step('2. Click on the Input resume name button'):
+            pass
+
+        with allure.step('3. Click on the displayed resume'):
+            # Todo: Verify resume item lists
+            # Todo: Count the item lists
+            # Todo: Click all existing items
+            pass
+
+        with allure.step('4. Verify the required information'):
+            # Todo: Verify data diri existence
+            pass
+
+        with allure.step('5. Interact with displayed action button'):
+            # Todo: Click toggle expand/collapsed
+            # Todo: Uncheck required check button
+            # Todo: Check required check button
+            pass
+
+        with allure.step('6. Click on the Save button'):
+            # Todo: Click Save button action
+            # Todo: Verify the popup is dismissed
+            # Todo: Verify the required Resume Form is not empty
+            # Todo: Verify the required Resume Form preview is match
+            pass
