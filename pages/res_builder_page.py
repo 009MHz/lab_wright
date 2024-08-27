@@ -81,10 +81,11 @@ class Builder(BasePage):
     async def import_data_modal_click_my_profile(self):
         await self._click(ResumeInfo.ImportModal.my_profile)
         await expect(self._find(ResumeInfo.ImportModal.my_profile)).not_to_be_visible()
-        await expect(self._find(ResumeInfo.ImportModal.Profile.main_form)).to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).to_be_visible()
 
     async def import_data_modal_click_my_resume(self):
         await self._click(ResumeInfo.ImportModal.my_resume)
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).to_be_visible()
         await expect(self._find(ResumeInfo.ImportModal.my_resume)).not_to_be_visible()
 
     """ Resume Information - Import Data - Import Via Profile Validation"""
@@ -100,7 +101,8 @@ class Builder(BasePage):
         await self._look(ResumeInfo.ImportModal.Profile.back_chevron)
 
         await expect(self._find(ResumeInfo.ImportModal.Profile.back_chevron)).to_be_enabled()
-        await expect(self._find(ResumeInfo.ImportModal.Profile.back_chevron)).to_have_text("Kembali ke pilih sumber data")
+        await expect(self._find(ResumeInfo.ImportModal.Profile.back_chevron)).to_have_text(
+            "Kembali ke pilih sumber data")
 
     async def import_profile_modal_form_presence(self):
         await self._look(ResumeInfo.ImportModal.Profile.info_main)
@@ -169,17 +171,17 @@ class Builder(BasePage):
     async def import_profile_modal_click_cancel(self):
         await self._click(ResumeInfo.ImportModal.Profile.cancel)
         await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).not_to_be_visible()
-        await expect(self._find(ResumeInfo.ImportModal.Profile.main_form)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
 
     async def import_profile_modal_click_save(self):
         await self._click(ResumeInfo.ImportModal.Profile.save)
         await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).not_to_be_visible()
-        await expect(self._find(ResumeInfo.ImportModal.Profile.main_form)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
 
-
-
-
-
+    async def import_profile_modal_click_close(self):
+        await self._click(ResumeInfo.ImportModal.close)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
 
     """Resume Information Section Interaction"""
     async def info_resume_name_insert(self, text):
@@ -672,7 +674,7 @@ class Builder(BasePage):
     async def edu_institution_select_option_within(self, text):
         await self.edu_institution_insert(text)
         count = await self._find(EduHistory.name_item).count()
-        for x in range(1, count+1):
+        for x in range(1, count + 1):
             await self._click(f"{EduHistory.name_item}[{x}]")
             await self._click(".ant-layout-content")
             await self.edu_institution_click_filled()
@@ -1011,7 +1013,7 @@ class Builder(BasePage):
         await self._type(JobHistory.province_input, text)
         await expect(self._find(JobHistory.province_input)).to_have_value(text)
         await expect(self._find(JobHistory.province_lists)).to_be_visible()
-            
+
     async def job_prov_select_option_within(self, text):
         await self.job_prov_insert(text)
         count = await self._find(JobHistory.province_item).count()
@@ -1203,7 +1205,7 @@ class Builder(BasePage):
     async def skill_click_add_form(self):
         await self._click(Proficiency.add_btn)
         await expect(self._find(Proficiency.add_btn)).to_be_focused()
-        
+
     async def skill_hints_click_show(self):
         await self._click(Proficiency.hint_btn)
         await expect(self._find(Proficiency.hint_btn)).to_have_attribute('aria-checked', 'true')
@@ -1213,7 +1215,7 @@ class Builder(BasePage):
         await self._click(Proficiency.hint_btn)
         await expect(self._find(Proficiency.hint_btn)).to_have_attribute('aria-checked', 'false')
         await expect(self._find(Proficiency.hint_desc)).to_be_hidden()
-        
+
     async def skill_name_insert(self, text: str):
         await self._type(Proficiency.name_input, text)
         await expect(self._find(Proficiency.name_input)).to_be_focused()
@@ -1235,12 +1237,12 @@ class Builder(BasePage):
         await self._skill_level_input_click()
         await self._force(Proficiency.level_item_pemula)
         await expect(self._find(Proficiency.level_content)).to_have_attribute('title', 'Pemula')
-        
+
     async def skill_level_click_menengah(self):
         await self._skill_level_input_click()
         await self._force(Proficiency.level_item_menengah)
         await expect(self._find(Proficiency.level_content)).to_have_attribute('title', 'Menengah')
-        
+
     async def skill_level_click_lanjut(self):
         await self._skill_level_input_click()
         await self._force(Proficiency.level_item_lanjut)
@@ -1251,7 +1253,7 @@ class Builder(BasePage):
 
     async def skill_cancel_form_click(self):
         await self._click(Proficiency.form_cancel)
-        
+
         await expect(self._find(Proficiency.form_cancel)).not_to_be_attached()
         await expect(self._find(Proficiency.hint_desc)).not_to_be_attached()
         await expect(self._find(Proficiency.description)).to_be_visible()
@@ -1285,7 +1287,7 @@ class Builder(BasePage):
     async def honor_hints_desc_presence(self):
         await self._look(Achievements.hint_desc)
         await expect(self._find(Achievements.hint_desc)).to_contain_text('Pastikan penulisan award konsisten')
-        
+
     async def honor_year_presence(self):
         await self._look(Achievements.year_label)
         await expect(self._find(Achievements.year_label)).to_have_text("Tahun")
@@ -1293,7 +1295,7 @@ class Builder(BasePage):
         await self._touch(Achievements.year_input)
         await expect(self._find(Achievements.year_input)).to_be_empty()
         await expect(self._find(Achievements.year_input)).to_have_attribute("placeholder", "2021")
-        
+
     async def honor_name_input_presence(self):
         await self._look(Achievements.name_label)
         await expect(self._find(Achievements.name_label)).to_have_text("Prestasi & Penghargaan")
@@ -1335,7 +1337,7 @@ class Builder(BasePage):
         await self._click(Achievements.hint_btn)
         await expect(self._find(Achievements.hint_btn)).to_have_attribute('aria-checked', 'false')
         await expect(self._find(Achievements.hint_desc)).to_be_hidden()
-        
+
     async def honor_year_insert(self, year: int):
         await self._click(Achievements.year_input)
         await expect(self._find(Achievements.year_input)).to_be_focused()
@@ -1343,7 +1345,7 @@ class Builder(BasePage):
         await self._type(Achievements.year_input, str(year))
         await self._find(Achievements.year_input).press("Enter")
         await expect(self._find(Achievements.year_input)).to_have_value(str(year))
-        
+
     async def honor_year_clear(self):
         await self._click(Achievements.year_clear)
         await expect(self._find(Achievements.year_input)).to_be_focused()
@@ -1361,7 +1363,7 @@ class Builder(BasePage):
 
         await expect(self._find(Achievements.name_input)).to_be_focused()
         await expect(self._find(Achievements.name_input)).to_have_value("")
-        
+
     async def honor_save_form_click(self):
         await self._click(Achievements.form_save)
         await expect(self._find(Achievements.form_save)).to_be_focused()
@@ -1372,7 +1374,7 @@ class Builder(BasePage):
         await expect(self._find(Achievements.form_cancel)).not_to_be_attached()
         await expect(self._find(Achievements.hint_desc)).not_to_be_attached()
         await expect(self._find(Achievements.description)).to_be_visible()
-        
+
     """Hobby Validation"""
     async def hobby_main_form_presence(self):
         await self._look(Hobby.form)
