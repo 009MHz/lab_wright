@@ -134,23 +134,44 @@ class Builder(BasePage):
     async def import_profile_self_data_province_presence(self):
         await self._look(ResumeInfo.ImportModal.Profile.info_prov)
         await expect(self._find(ResumeInfo.ImportModal.Profile.info_prov)).not_to_have_text("")
-        
+
     async def import_profile_self_data_city_presence(self):
         await self._look(ResumeInfo.ImportModal.Profile.info_city)
         await expect(self._find(ResumeInfo.ImportModal.Profile.info_city)).not_to_have_text("")
 
     """ Resume Information - Import Data - Import Via Resume Validation"""
-    # async def import_data_modal_click_close(self):
-    #     await self._click(ResumeInfo.ImportModal.close)
-    #     await expect(self._find(ResumeInfo.import_modal)).not_to_be_visible()
-    #
-    # async def import_data_modal_click_my_profile(self):
-    #     await self._click(ResumeInfo.ImportModal.my_profile)
-    #     await expect(self._find(ResumeInfo.ImportModal.my_profile)).not_to_be_visible()
-    #
-    # async def import_data_modal_click_my_resume(self):
-    #     await self._click(ResumeInfo.ImportModal.my_resume)
-    #     await expect(self._find(ResumeInfo.ImportModal.my_resume)).not_to_be_visible()
+    async def import_resume_modal_title_presence(self):
+        await self._look(ResumeInfo.ImportModal.Resume.title)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.title)).to_have_text('Impor Resume')
+
+    async def import_resume_modal_info_presence(self):
+        await self._look(ResumeInfo.ImportModal.Resume.desc)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.desc)).to_contain_text('dari resume yang telah kamu buat')
+
+    async def import_resume_modal_back_arrow_presence(self):
+        await self._look(ResumeInfo.ImportModal.Resume.back_chevron)
+
+        await expect(self._find(ResumeInfo.ImportModal.Resume.back_chevron)).to_be_enabled()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.back_chevron)).to_have_text(
+            "Kembali ke pilih sumber data")
+
+    async def import_resume_input_name_presence(self):
+        await self._look(ResumeInfo.ImportModal.Resume.input_name)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_name)).to_be_enabled()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_empty)).to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_empty)).to_have_text('Search by resume name')
+
+    async def import_resume_cancel_button_presence(self):
+        await self._look(ResumeInfo.ImportModal.Resume.cancel)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.cancel)).to_be_enabled()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.cancel)).to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.cancel)).to_have_text('Batal')
+
+    async def import_resume_save_button_presence(self):
+        await self._look(ResumeInfo.ImportModal.Resume.save)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.save)).to_be_disabled()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.save)).to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.save)).to_have_text('Simpan')
 
     """ Resume Information - Import Data - Import Via Profile Interaction"""
     async def import_profile_modal_click_back_arrow(self):
@@ -317,7 +338,7 @@ class Builder(BasePage):
         await self._touch(DataDiri.linkedin_input)
         await expect(self._find(DataDiri.linkedin_input)).to_be_empty()
         await expect(self._find(DataDiri.linkedin_input)).to_have_attribute('placeholder',
-                                                                                 "https://www.linkedin.com/in/johndoe/")
+                                                                            "https://www.linkedin.com/in/johndoe/")
 
     async def self_info_portfolio_presence(self):
         await self._look(DataDiri.portfolio_label)
@@ -326,7 +347,7 @@ class Builder(BasePage):
         await self._touch(DataDiri.portfolio_input)
         await expect(self._find(DataDiri.portfolio_input)).to_be_empty()
         await expect(self._find(DataDiri.portfolio_input)).to_have_attribute('placeholder',
-                                                                                  'https://portofoliokamu.com')
+                                                                             'https://portofoliokamu.com')
 
     async def self_info_simpan_btn_presence(self):
         await self._look(DataDiri.submit_btn)
@@ -1156,7 +1177,7 @@ class Builder(BasePage):
         await self._look(Proficiency.add_btn)
         await expect(self._find(Proficiency.add_btn)).to_be_enabled()
         await expect(self._find(Proficiency.add_btn)).to_have_text('Keahlian')
-        
+
     async def skill_main_hints_presence(self):
         await self._look(Proficiency.hint_main)
         await expect(self._find(Proficiency.hint_main)).to_be_attached()
@@ -1168,21 +1189,21 @@ class Builder(BasePage):
     async def skill_hints_desc_presence(self):
         await self._look(Proficiency.hint_desc)
         await expect(self._find(Proficiency.hint_desc)).to_contain_text('Sertakan skills yang relevan')
-        
+
     async def skill_name_input_presence(self):
         await self._look(Proficiency.name_label)
         await expect(self._find(Proficiency.name_label)).to_have_text("Keahlian")
 
         await self._touch(Proficiency.name_input)
         await expect(self._find(Proficiency.name_input)).to_have_attribute("placeholder", "Microsoft Office")
-        
+
     async def skill_level_presence(self):
         await self._look(Proficiency.level_label)
         await expect(self._find(Proficiency.level_label)).to_have_text("Tingkat Keahlian")
 
         await self._touch(Proficiency.level_input)
         await expect(self._find(Proficiency.level_content)).to_have_attribute("title", "Pemula")
-        
+
     async def skill_cancel_form_btn_presence(self):
         await self._touch(Proficiency.form_cancel)
         await expect(self._find(Proficiency.form_cancel)).to_have_text("Batal")
@@ -1404,7 +1425,7 @@ class Builder(BasePage):
     async def hobby_hints_desc_presence(self):
         await self._look(Hobby.hint_desc)
         await expect(self._find(Hobby.hint_desc)).to_contain_text('Pikirkan minat yang menarik')
-        
+
     async def hobby_name_input_presence(self):
         await self._look(Hobby.name_label)
         await expect(self._find(Hobby.name_label)).to_have_text("Minat")
@@ -1412,7 +1433,7 @@ class Builder(BasePage):
         await self._touch(Hobby.name_input)
         await expect(self._find(Hobby.name_input)).to_be_empty()
         await expect(self._find(Hobby.name_input)).to_have_attribute("placeholder", "Fotografi & Videografi")
-        
+
     async def hobby_cancel_form_btn_presence(self):
         await self._touch(Hobby.form_cancel)
         await expect(self._find(Hobby.form_cancel)).to_have_text("Batal")
