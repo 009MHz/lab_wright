@@ -52,6 +52,200 @@ class Builder(BasePage):
         await self._look(ResumeInfo.import_modal)
         await expect(self._find(ResumeInfo.import_modal)).to_be_visible()
 
+    """ Resume Information - Import Data Validation"""
+    async def import_data_modal_title_presence(self):
+        await self._look(ResumeInfo.ImportModal.title)
+        await expect(self._find(ResumeInfo.ImportModal.title)).to_have_text('Impor Data')
+
+    async def import_data_modal_info_presence(self):
+        await self._look(ResumeInfo.ImportModal.desc)
+        await expect(self._find(ResumeInfo.ImportModal.desc)).to_have_text('Pilih sumber data untuk di impor :')
+
+    async def import_data_modal_close_presence(self):
+        await self._look(ResumeInfo.ImportModal.close)
+        await expect(self._find(ResumeInfo.ImportModal.close)).to_be_enabled()
+
+    async def import_data_myProfile_carousel_presence(self):
+        await self._touch(ResumeInfo.ImportModal.my_profile)
+        await expect(self._find(ResumeInfo.ImportModal.my_profile)).to_have_text('Impor dari profil saya')
+
+    async def import_data_myResume_carousel_presence(self):
+        await self._touch(ResumeInfo.ImportModal.my_resume)
+        await expect(self._find(ResumeInfo.ImportModal.my_resume)).to_have_text('Impor dari resume saya')
+
+    """ Resume Information - Import Data Interaction"""
+    async def import_data_modal_click_close(self):
+        await self._click(ResumeInfo.ImportModal.close)
+        await expect(self._find(ResumeInfo.import_modal)).not_to_be_visible()
+
+    async def import_data_modal_click_my_profile(self):
+        await self._click(ResumeInfo.ImportModal.my_profile)
+        await expect(self._find(ResumeInfo.ImportModal.my_profile)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).to_be_visible()
+
+    async def import_data_modal_click_my_resume(self):
+        await self._click(ResumeInfo.ImportModal.my_resume)
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.my_resume)).not_to_be_visible()
+
+    """ Resume Information - Import Data - Import Via Profile Validation"""
+    async def import_profile_modal_title_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.title)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.title)).to_have_text('Impor Profile')
+
+    async def import_profile_modal_info_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.desc)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.desc)).to_contain_text('resume dari profil saya')
+
+    async def import_profile_modal_back_arrow_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.back_chevron)
+
+        await expect(self._find(ResumeInfo.ImportModal.Profile.back_chevron)).to_be_enabled()
+        await expect(self._find(ResumeInfo.ImportModal.Profile.back_chevron)).to_have_text(
+            "Kembali ke pilih sumber data")
+
+    async def import_profile_modal_form_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_main)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).to_be_visible()
+
+    async def import_profile_self_data_form_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_main)
+
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_title)).to_have_text("Data Diri")
+
+    async def import_profile_self_data_check_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_check)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_check)).to_be_enabled()
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_check)).to_be_checked()
+
+    async def import_profile_self_data_name_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_name)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_name)).not_to_have_text("")
+
+    async def import_profile_self_data_email_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_email)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_email)).not_to_have_text("")
+
+    async def import_profile_self_data_phone_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_phone)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_phone)).not_to_have_text("")
+
+    async def import_profile_self_data_province_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_prov)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_prov)).not_to_have_text("")
+
+    async def import_profile_self_data_city_presence(self):
+        await self._look(ResumeInfo.ImportModal.Profile.info_city)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_city)).not_to_have_text("")
+
+    """ Resume Information - Import Data - Import Via Resume Validation"""
+    async def import_resume_modal_title_presence(self):
+        await self._look(ResumeInfo.ImportModal.Resume.title)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.title)).to_have_text('Impor Resume')
+
+    async def import_resume_modal_info_presence(self):
+        await self._look(ResumeInfo.ImportModal.Resume.desc)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.desc)).to_contain_text('dari resume yang telah kamu buat')
+
+    async def import_resume_modal_back_arrow_presence(self):
+        await self._look(ResumeInfo.ImportModal.Resume.back_chevron)
+
+        await expect(self._find(ResumeInfo.ImportModal.Resume.back_chevron)).to_be_enabled()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.back_chevron)).to_have_text(
+            "Kembali ke pilih sumber data")
+
+    async def import_resume_input_name_presence(self):
+        await self._look(ResumeInfo.ImportModal.Resume.input_name)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_name)).to_be_enabled()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_empty)).to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_empty)).to_have_text('Search by resume name')
+
+    async def import_resume_cancel_button_presence(self):
+        await self._look(ResumeInfo.ImportModal.Resume.cancel)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.cancel)).to_be_enabled()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.cancel)).to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.cancel)).to_have_text('Batal')
+
+    async def import_resume_save_button_presence(self):
+        await self._look(ResumeInfo.ImportModal.Resume.save)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.save)).to_be_disabled()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.save)).to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.save)).to_have_text('Simpan')
+
+    """ Resume Information - Import Data - Import Via Profile Interaction"""
+    async def import_profile_modal_click_back_arrow(self):
+        await self._click(ResumeInfo.ImportModal.Profile.back_chevron)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.back_chevron)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).not_to_be_visible()
+
+    async def import_profile_collapse_self_data(self):
+        await self._click(ResumeInfo.ImportModal.Profile.info_toggle)
+        await self._conceal(ResumeInfo.ImportModal.Profile.info_name)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_toggle)).to_have_attribute('aria-expanded', 'false')
+
+    async def import_profile_expand_self_data(self):
+        await self._click(ResumeInfo.ImportModal.Profile.info_toggle)
+        await self._look(ResumeInfo.ImportModal.Profile.info_name)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_toggle)).to_have_attribute('aria-expanded', 'true')
+
+    async def import_profile_modal_click_cancel(self):
+        await self._click(ResumeInfo.ImportModal.Profile.cancel)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
+
+    async def import_profile_modal_click_save(self):
+        await self._click(ResumeInfo.ImportModal.Profile.save)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
+
+    async def import_profile_modal_click_close(self):
+        await self._click(ResumeInfo.ImportModal.close)
+        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
+
+    """ Resume Information - Import Data - Import Via Resume Interaction"""
+    async def import_resume_modal_click_back_arrow(self):
+        await self._click(ResumeInfo.ImportModal.Resume.back_chevron)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.back_chevron)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.title)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_name)).not_to_be_visible()
+    #
+    # async def import_resume_collapse_self_data(self):
+    #     await self._click(ResumeInfo.ImportModal.Resume.info_toggle)
+    #     await self._conceal(ResumeInfo.ImportModal.Resume.info_name)
+    #     await expect(self._find(ResumeInfo.ImportModal.Resume.info_toggle)).to_have_attribute('aria-expanded', 'false')
+    #
+    # async def import_resume_expand_self_data(self):
+    #     await self._click(ResumeInfo.ImportModal.Resume.info_toggle)
+    #     await self._look(ResumeInfo.ImportModal.Resume.info_name)
+    #     await expect(self._find(ResumeInfo.ImportModal.Resume.info_toggle)).to_have_attribute('aria-expanded', 'true')
+
+    async def _import_resume_item_count(self):
+        await self._look(ResumeInfo.ImportModal.Resume.input_lists)
+        return await self._find(ResumeInfo.ImportModal.Resume.input_item).count()
+
+    async def import_resume_modal_click_input(self):
+        await self._click(ResumeInfo.ImportModal.Resume.input_name)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_lists)).to_be_visible(timeout=12000)
+        item_collect = await self._import_resume_item_count()
+        print(f"Retrieved resume: {item_collect} items")
+
+    async def import_resume_modal_click_cancel(self):
+        await self._click(ResumeInfo.ImportModal.Resume.cancel)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_name)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
+
+    async def import_resume_modal_click_save(self):
+        await self._click(ResumeInfo.ImportModal.Resume.save)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.info_main)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
+
+    async def import_resume_modal_click_close(self):
+        await self._click(ResumeInfo.ImportModal.close)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.title)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
+    
     """Resume Information Section Interaction"""
     async def info_resume_name_insert(self, text):
         await self._touch(ResumeInfo.name_input)
@@ -92,232 +286,232 @@ class Builder(BasePage):
 
     """Personal Information Section Validation"""
     async def self_info_title_presence(self):
-        await self._look(EmptyDataDiri.title)
-        await expect(self._find(EmptyDataDiri.title)).to_have_text("Data Diri")
+        await self._look(DataDiri.title)
+        await expect(self._find(DataDiri.title)).to_have_text("Data Diri")
 
     async def self_info_main_form_presence(self):
-        await self._look(EmptyDataDiri.main_form)
-        await expect(self._find(EmptyDataDiri.main_form)).to_be_visible()
+        await self._look(DataDiri.main_form)
+        await expect(self._find(DataDiri.main_form)).to_be_visible()
 
     async def self_info_main_hints_presence(self):
-        await self._look(EmptyDataDiri.main_hint)
-        await expect(self._find(EmptyDataDiri.main_hint)).to_be_visible()
+        await self._look(DataDiri.main_hint)
+        await expect(self._find(DataDiri.main_hint)).to_be_visible()
 
     async def self_info_hints_title_presence(self):
-        await self._look(EmptyDataDiri.hint_title)
-        await expect(self._find(EmptyDataDiri.hint_title)).to_have_text('Tips Professional')
+        await self._look(DataDiri.hint_title)
+        await expect(self._find(DataDiri.hint_title)).to_have_text('Tips Professional')
 
     async def self_info_hints_desc_presence(self):
-        await self._look(EmptyDataDiri.hint_desc)
-        await expect(self._find(EmptyDataDiri.hint_desc)).to_have_text(
+        await self._look(DataDiri.hint_desc)
+        await expect(self._find(DataDiri.hint_desc)).to_have_text(
             'Cantumkan informasi yang benar dan terbaru.')
 
     async def self_info_hints_toggle_presence(self):
-        await self._look(EmptyDataDiri.hint_btn)
-        await expect(self._find(EmptyDataDiri.hint_btn)).to_be_enabled()
+        await self._look(DataDiri.hint_btn)
+        await expect(self._find(DataDiri.hint_btn)).to_be_enabled()
 
     async def self_info_first_name_presence(self):
-        await self._look(EmptyDataDiri.first_name_label)
-        await expect(self._find(EmptyDataDiri.first_name_label)).to_have_text("Nama Depan")
+        await self._look(DataDiri.first_name_label)
+        await expect(self._find(DataDiri.first_name_label)).to_have_text("Nama Depan")
 
-        await self._touch(EmptyDataDiri.first_name_input)
-        await expect(self._find(EmptyDataDiri.first_name_input)).to_be_empty()
-        await expect(self._find(EmptyDataDiri.first_name_input)).to_have_attribute("placeholder", "John")
+        await self._touch(DataDiri.first_name_input)
+        await expect(self._find(DataDiri.first_name_input)).to_be_empty()
+        await expect(self._find(DataDiri.first_name_input)).to_have_attribute("placeholder", "John")
 
     async def self_info_last_name_presence(self):
-        await self._look(EmptyDataDiri.last_name_label)
-        await expect(self._find(EmptyDataDiri.last_name_label)).to_have_text("Nama Belakang")
+        await self._look(DataDiri.last_name_label)
+        await expect(self._find(DataDiri.last_name_label)).to_have_text("Nama Belakang")
 
-        await self._touch(EmptyDataDiri.last_name_input)
-        await expect(self._find(EmptyDataDiri.last_name_input)).to_be_empty()
-        await expect(self._find(EmptyDataDiri.last_name_input)).to_have_attribute("placeholder", "Doe")
+        await self._touch(DataDiri.last_name_input)
+        await expect(self._find(DataDiri.last_name_input)).to_be_empty()
+        await expect(self._find(DataDiri.last_name_input)).to_have_attribute("placeholder", "Doe")
 
     async def self_info_email_presence(self):
-        await self._look(EmptyDataDiri.email_label)
-        await expect(self._find(EmptyDataDiri.email_label)).to_have_text("Email")
+        await self._look(DataDiri.email_label)
+        await expect(self._find(DataDiri.email_label)).to_have_text("Email")
 
-        await self._touch(EmptyDataDiri.email_input)
-        await expect(self._find(EmptyDataDiri.email_input)).to_be_empty()
-        await expect(self._find(EmptyDataDiri.email_input)).to_have_attribute("placeholder", "johndoe@gmail.com")
+        await self._touch(DataDiri.email_input)
+        await expect(self._find(DataDiri.email_input)).to_be_empty()
+        await expect(self._find(DataDiri.email_input)).to_have_attribute("placeholder", "johndoe@gmail.com")
 
     async def self_info_phone_presence(self):
-        await self._look(EmptyDataDiri.phone_label)
-        await expect(self._find(EmptyDataDiri.phone_label)).to_have_text("No. Telepon")
+        await self._look(DataDiri.phone_label)
+        await expect(self._find(DataDiri.phone_label)).to_have_text("No. Telepon")
 
-        await self._touch(EmptyDataDiri.phone_input)
-        await expect(self._find(EmptyDataDiri.phone_input)).to_be_empty()
-        await expect(self._find(EmptyDataDiri.phone_input)).to_have_attribute("placeholder", "081234567890")
+        await self._touch(DataDiri.phone_input)
+        await expect(self._find(DataDiri.phone_input)).to_be_empty()
+        await expect(self._find(DataDiri.phone_input)).to_have_attribute("placeholder", "081234567890")
 
     async def self_info_country_presence(self):
-        await self._look(EmptyDataDiri.country_label)
-        await expect(self._find(EmptyDataDiri.country_label)).to_have_text("Negara")
+        await self._look(DataDiri.country_label)
+        await expect(self._find(DataDiri.country_label)).to_have_text("Negara")
 
-        await self._touch(EmptyDataDiri.country_input)
-        await expect(self._find(EmptyDataDiri.country_content)).to_have_attribute("title", "Indonesia")
+        await self._touch(DataDiri.country_input)
+        await expect(self._find(DataDiri.country_content)).to_have_attribute("title", "Indonesia")
 
     async def self_info_prov_presence(self):
-        await self._look(EmptyDataDiri.province_label)
-        await expect(self._find(EmptyDataDiri.province_label)).to_have_text("Provinsi")
+        await self._look(DataDiri.province_label)
+        await expect(self._find(DataDiri.province_label)).to_have_text("Provinsi")
 
-        await self._touch(EmptyDataDiri.province_input)
-        await expect(self._find(EmptyDataDiri.province_input)).to_be_empty()
-        await expect(self._find(EmptyDataDiri.province_empty)).to_have_text("Banten")
+        await self._touch(DataDiri.province_input)
+        await expect(self._find(DataDiri.province_input)).to_be_empty()
+        await expect(self._find(DataDiri.province_empty)).to_have_text("Banten")
 
     async def self_info_city_presence(self):
-        await self._look(EmptyDataDiri.city_label)
-        await expect(self._find(EmptyDataDiri.city_label)).to_have_text("Kota")
+        await self._look(DataDiri.city_label)
+        await expect(self._find(DataDiri.city_label)).to_have_text("Kota")
 
-        await self._touch(EmptyDataDiri.city_input)
-        await expect(self._find(EmptyDataDiri.city_input)).to_be_empty()
-        await expect(self._find(EmptyDataDiri.city_empty)).to_have_text("Tangerang")
+        await self._touch(DataDiri.city_input)
+        await expect(self._find(DataDiri.city_input)).to_be_empty()
+        await expect(self._find(DataDiri.city_empty)).to_have_text("Tangerang")
 
     async def self_info_address_presence(self):
-        await self._look(EmptyDataDiri.address_label)
-        await expect(self._find(EmptyDataDiri.address_label)).to_have_text("Alamat")
+        await self._look(DataDiri.address_label)
+        await expect(self._find(DataDiri.address_label)).to_have_text("Alamat")
 
-        await self._touch(EmptyDataDiri.address_input)
-        await expect(self._find(EmptyDataDiri.address_input)).to_be_empty()
-        await expect(self._find(EmptyDataDiri.address_input)).to_have_attribute('placeholder', 'Gambir, 10150')
+        await self._touch(DataDiri.address_input)
+        await expect(self._find(DataDiri.address_input)).to_be_empty()
+        await expect(self._find(DataDiri.address_input)).to_have_attribute('placeholder', 'Gambir, 10150')
 
     async def self_info_linkedin_presence(self):
-        await self._look(EmptyDataDiri.linkedin_label)
-        await expect(self._find(EmptyDataDiri.linkedin_label)).to_have_text("LinkedIn")
+        await self._look(DataDiri.linkedin_label)
+        await expect(self._find(DataDiri.linkedin_label)).to_have_text("LinkedIn")
 
-        await self._touch(EmptyDataDiri.linkedin_input)
-        await expect(self._find(EmptyDataDiri.linkedin_input)).to_be_empty()
-        await expect(self._find(EmptyDataDiri.linkedin_input)).to_have_attribute('placeholder',
-                                                                                 "https://www.linkedin.com/in/johndoe/")
+        await self._touch(DataDiri.linkedin_input)
+        await expect(self._find(DataDiri.linkedin_input)).to_be_empty()
+        await expect(self._find(DataDiri.linkedin_input)).to_have_attribute('placeholder',
+                                                                            "https://www.linkedin.com/in/johndoe/")
 
     async def self_info_portfolio_presence(self):
-        await self._look(EmptyDataDiri.portfolio_label)
-        await expect(self._find(EmptyDataDiri.portfolio_label)).to_have_text("Portofolio")
+        await self._look(DataDiri.portfolio_label)
+        await expect(self._find(DataDiri.portfolio_label)).to_have_text("Portofolio")
 
-        await self._touch(EmptyDataDiri.portfolio_input)
-        await expect(self._find(EmptyDataDiri.portfolio_input)).to_be_empty()
-        await expect(self._find(EmptyDataDiri.portfolio_input)).to_have_attribute('placeholder',
-                                                                                  'https://portofoliokamu.com')
+        await self._touch(DataDiri.portfolio_input)
+        await expect(self._find(DataDiri.portfolio_input)).to_be_empty()
+        await expect(self._find(DataDiri.portfolio_input)).to_have_attribute('placeholder',
+                                                                             'https://portofoliokamu.com')
 
     async def self_info_simpan_btn_presence(self):
-        await self._look(EmptyDataDiri.submit_btn)
-        await expect(self._find(EmptyDataDiri.submit_btn)).to_be_enabled()
+        await self._look(DataDiri.submit_btn)
+        await expect(self._find(DataDiri.submit_btn)).to_be_enabled()
 
     """Personal Information Section Interaction"""
     async def self_info_collapse_form(self):
-        await self._click(EmptyDataDiri.title)
-        await self._conceal(EmptyDataDiri.main_hint)
-        await expect(self._find(EmptyDataDiri.form_state)).to_have_attribute('aria-expanded', 'false')
+        await self._click(DataDiri.title)
+        await self._conceal(DataDiri.main_hint)
+        await expect(self._find(DataDiri.form_state)).to_have_attribute('aria-expanded', 'false')
 
     async def self_info_expand_form(self):
-        await self._click(EmptyDataDiri.title)
-        await self._look(EmptyDataDiri.main_hint)
-        await expect(self._find(EmptyDataDiri.form_state)).to_have_attribute('aria-expanded', 'true')
+        await self._click(DataDiri.title)
+        await self._look(DataDiri.main_hint)
+        await expect(self._find(DataDiri.form_state)).to_have_attribute('aria-expanded', 'true')
 
     async def self_info_hints_click_show(self):
-        await self._click(EmptyDataDiri.hint_btn)
-        await expect(self._find(EmptyDataDiri.hint_btn)).to_have_attribute('aria-checked', 'true')
-        await expect(self._find(EmptyDataDiri.hint_desc)).not_to_be_hidden()
+        await self._click(DataDiri.hint_btn)
+        await expect(self._find(DataDiri.hint_btn)).to_have_attribute('aria-checked', 'true')
+        await expect(self._find(DataDiri.hint_desc)).not_to_be_hidden()
 
     async def self_info_hints_click_hide(self):
-        await self._click(EmptyDataDiri.hint_btn)
-        await expect(self._find(EmptyDataDiri.hint_btn)).to_have_attribute('aria-checked', 'false')
-        await expect(self._find(EmptyDataDiri.hint_desc)).to_be_hidden()
+        await self._click(DataDiri.hint_btn)
+        await expect(self._find(DataDiri.hint_btn)).to_have_attribute('aria-checked', 'false')
+        await expect(self._find(DataDiri.hint_desc)).to_be_hidden()
 
     async def self_info_first_name_insert(self, text: str):
-        await self._type(EmptyDataDiri.first_name_input, text)
-        await expect(self._find(EmptyDataDiri.first_name_input)).to_be_focused()
-        await expect(self._find(EmptyDataDiri.first_name_input)).to_have_value(text)
+        await self._type(DataDiri.first_name_input, text)
+        await expect(self._find(DataDiri.first_name_input)).to_be_focused()
+        await expect(self._find(DataDiri.first_name_input)).to_have_value(text)
 
     async def self_info_last_name_insert(self, text: str):
-        await self._type(EmptyDataDiri.last_name_input, text)
-        await expect(self._find(EmptyDataDiri.last_name_input)).to_be_focused()
-        await expect(self._find(EmptyDataDiri.last_name_input)).to_have_value(text)
+        await self._type(DataDiri.last_name_input, text)
+        await expect(self._find(DataDiri.last_name_input)).to_be_focused()
+        await expect(self._find(DataDiri.last_name_input)).to_have_value(text)
 
     async def self_info_email_insert(self, text: str):
-        await self._type(EmptyDataDiri.email_input, text)
-        await expect(self._find(EmptyDataDiri.email_input)).to_be_focused()
-        await expect(self._find(EmptyDataDiri.email_input)).to_have_value(text)
+        await self._type(DataDiri.email_input, text)
+        await expect(self._find(DataDiri.email_input)).to_be_focused()
+        await expect(self._find(DataDiri.email_input)).to_have_value(text)
 
     async def self_info_phone_insert(self, text: str):
-        await self._type(EmptyDataDiri.phone_input, text)
-        await expect(self._find(EmptyDataDiri.phone_input)).to_be_focused()
-        await expect(self._find(EmptyDataDiri.phone_input)).to_have_value(text)
+        await self._type(DataDiri.phone_input, text)
+        await expect(self._find(DataDiri.phone_input)).to_be_focused()
+        await expect(self._find(DataDiri.phone_input)).to_have_value(text)
 
     async def self_info_click_country(self):
-        await self._click(EmptyDataDiri.country_input)
-        await expect(self._find(EmptyDataDiri.country_lists)).to_be_visible()
+        await self._click(DataDiri.country_input)
+        await expect(self._find(DataDiri.country_lists)).to_be_visible()
 
     async def self_info_select_wni(self):
         await self.self_info_click_country()
-        await self._force(EmptyDataDiri.country_wni)
-        await expect(self._find(EmptyDataDiri.country_content)).to_have_attribute('title', 'Indonesia')
+        await self._force(DataDiri.country_wni)
+        await expect(self._find(DataDiri.country_content)).to_have_attribute('title', 'Indonesia')
 
     async def self_info_select_wna(self):
         await self.self_info_click_country()
-        await self._force(EmptyDataDiri.country_wna)
-        await expect(self._find(EmptyDataDiri.country_content)).to_have_attribute('title', 'Luar Indonesia')
+        await self._force(DataDiri.country_wna)
+        await expect(self._find(DataDiri.country_content)).to_have_attribute('title', 'Luar Indonesia')
 
     async def self_info_prov_insert(self, text: str):
-        await self._type(EmptyDataDiri.province_input, text)
-        await expect(self._find(EmptyDataDiri.province_input)).to_have_value(text)
-        await expect(self._find(EmptyDataDiri.province_lists)).to_be_attached()
+        await self._type(DataDiri.province_input, text)
+        await expect(self._find(DataDiri.province_input)).to_have_value(text)
+        await expect(self._find(DataDiri.province_lists)).to_be_attached()
 
     async def self_info_prov_click_filled(self):
-        await self._click(EmptyDataDiri.province_selected)
-        await expect(self._find(EmptyDataDiri.province_input)).to_be_focused()
-        await expect(self._find(EmptyDataDiri.province_lists)).to_be_visible()
+        await self._click(DataDiri.province_selected)
+        await expect(self._find(DataDiri.province_input)).to_be_focused()
+        await expect(self._find(DataDiri.province_lists)).to_be_visible()
 
     async def self_info_prov_select_option_within(self, text):
         await self.self_info_prov_insert(text)
-        count = await self._find(EmptyDataDiri.province_item).count()
+        count = await self._find(DataDiri.province_item).count()
 
         for x in range(1, count + 1):
-            await self._click(f"{EmptyDataDiri.province_item}[{x}]")
+            await self._click(f"{DataDiri.province_item}[{x}]")
             await self._click(".ant-layout-content")  # Unclick the input field
             if x != count:
                 await self.self_info_prov_click_filled()
             else:
                 await self._click(".ant-layout-content")
 
-        await expect(self._find(EmptyDataDiri.province_lists)).not_to_be_visible()
-        await expect(self._find(EmptyDataDiri.city_input)).to_be_enabled()
+        await expect(self._find(DataDiri.province_lists)).not_to_be_visible()
+        await expect(self._find(DataDiri.city_input)).to_be_enabled()
 
     async def self_info_city_insert(self, text: str):
-        await self._type(EmptyDataDiri.city_input, text)
-        await expect(self._find(EmptyDataDiri.city_input)).to_have_value(text)
-        await expect(self._find(EmptyDataDiri.city_lists)).to_be_attached()
+        await self._type(DataDiri.city_input, text)
+        await expect(self._find(DataDiri.city_input)).to_have_value(text)
+        await expect(self._find(DataDiri.city_lists)).to_be_attached()
 
     async def self_info_city_click_filled(self):
-        await self._click(EmptyDataDiri.city_selected)
-        await expect(self._find(EmptyDataDiri.city_input)).to_be_focused()
-        await expect(self._find(EmptyDataDiri.city_lists)).to_be_visible()
+        await self._click(DataDiri.city_selected)
+        await expect(self._find(DataDiri.city_input)).to_be_focused()
+        await expect(self._find(DataDiri.city_lists)).to_be_visible()
 
     async def self_info_city_select_option_within(self, text):
         await self.self_info_city_insert(text)
-        count = await self._find(EmptyDataDiri.city_item).count()
+        count = await self._find(DataDiri.city_item).count()
         for x in range(1, count + 1):
-            await self._click(f"{EmptyDataDiri.city_item}[{x}]")
+            await self._click(f"{DataDiri.city_item}[{x}]")
             await self._click(".ant-layout-content")  # Unclick input field
             if x != count:
                 await self.self_info_city_click_filled()
             else:
                 await self._click(".ant-layout-content")
 
-        await expect(self._find(EmptyDataDiri.city_lists)).not_to_be_visible()
+        await expect(self._find(DataDiri.city_lists)).not_to_be_visible()
 
     async def self_info_address_insert(self, text: str):
-        await self._type(EmptyDataDiri.address_input, text)
-        await expect(self._find(EmptyDataDiri.address_input)).to_have_value(text)
+        await self._type(DataDiri.address_input, text)
+        await expect(self._find(DataDiri.address_input)).to_have_value(text)
 
     async def self_info_linkedin_insert(self, text: str):
-        await self._type(EmptyDataDiri.linkedin_input, text)
-        await expect(self._find(EmptyDataDiri.linkedin_input)).to_have_value(text)
+        await self._type(DataDiri.linkedin_input, text)
+        await expect(self._find(DataDiri.linkedin_input)).to_have_value(text)
 
     async def self_info_portfolio_insert(self, text: str):
-        await self._type(EmptyDataDiri.portfolio_input, text)
-        await expect(self._find(EmptyDataDiri.portfolio_input)).to_have_value(text)
+        await self._type(DataDiri.portfolio_input, text)
+        await expect(self._find(DataDiri.portfolio_input)).to_have_value(text)
 
     async def self_info_click_simpan(self):
-        await self._click(EmptyDataDiri.submit_btn)
+        await self._click(DataDiri.submit_btn)
 
     """Education History Validation"""
     async def edu_title_presence(self):
@@ -543,7 +737,7 @@ class Builder(BasePage):
     async def edu_institution_select_option_within(self, text):
         await self.edu_institution_insert(text)
         count = await self._find(EduHistory.name_item).count()
-        for x in range(1, count+1):
+        for x in range(1, count + 1):
             await self._click(f"{EduHistory.name_item}[{x}]")
             await self._click(".ant-layout-content")
             await self.edu_institution_click_filled()
@@ -882,7 +1076,7 @@ class Builder(BasePage):
         await self._type(JobHistory.province_input, text)
         await expect(self._find(JobHistory.province_input)).to_have_value(text)
         await expect(self._find(JobHistory.province_lists)).to_be_visible()
-            
+
     async def job_prov_select_option_within(self, text):
         await self.job_prov_insert(text)
         count = await self._find(JobHistory.province_item).count()
@@ -1025,7 +1219,7 @@ class Builder(BasePage):
         await self._look(Proficiency.add_btn)
         await expect(self._find(Proficiency.add_btn)).to_be_enabled()
         await expect(self._find(Proficiency.add_btn)).to_have_text('Keahlian')
-        
+
     async def skill_main_hints_presence(self):
         await self._look(Proficiency.hint_main)
         await expect(self._find(Proficiency.hint_main)).to_be_attached()
@@ -1037,21 +1231,21 @@ class Builder(BasePage):
     async def skill_hints_desc_presence(self):
         await self._look(Proficiency.hint_desc)
         await expect(self._find(Proficiency.hint_desc)).to_contain_text('Sertakan skills yang relevan')
-        
+
     async def skill_name_input_presence(self):
         await self._look(Proficiency.name_label)
         await expect(self._find(Proficiency.name_label)).to_have_text("Keahlian")
 
         await self._touch(Proficiency.name_input)
         await expect(self._find(Proficiency.name_input)).to_have_attribute("placeholder", "Microsoft Office")
-        
+
     async def skill_level_presence(self):
         await self._look(Proficiency.level_label)
         await expect(self._find(Proficiency.level_label)).to_have_text("Tingkat Keahlian")
 
         await self._touch(Proficiency.level_input)
         await expect(self._find(Proficiency.level_content)).to_have_attribute("title", "Pemula")
-        
+
     async def skill_cancel_form_btn_presence(self):
         await self._touch(Proficiency.form_cancel)
         await expect(self._find(Proficiency.form_cancel)).to_have_text("Batal")
@@ -1074,7 +1268,7 @@ class Builder(BasePage):
     async def skill_click_add_form(self):
         await self._click(Proficiency.add_btn)
         await expect(self._find(Proficiency.add_btn)).to_be_focused()
-        
+
     async def skill_hints_click_show(self):
         await self._click(Proficiency.hint_btn)
         await expect(self._find(Proficiency.hint_btn)).to_have_attribute('aria-checked', 'true')
@@ -1084,7 +1278,7 @@ class Builder(BasePage):
         await self._click(Proficiency.hint_btn)
         await expect(self._find(Proficiency.hint_btn)).to_have_attribute('aria-checked', 'false')
         await expect(self._find(Proficiency.hint_desc)).to_be_hidden()
-        
+
     async def skill_name_insert(self, text: str):
         await self._type(Proficiency.name_input, text)
         await expect(self._find(Proficiency.name_input)).to_be_focused()
@@ -1106,12 +1300,12 @@ class Builder(BasePage):
         await self._skill_level_input_click()
         await self._force(Proficiency.level_item_pemula)
         await expect(self._find(Proficiency.level_content)).to_have_attribute('title', 'Pemula')
-        
+
     async def skill_level_click_menengah(self):
         await self._skill_level_input_click()
         await self._force(Proficiency.level_item_menengah)
         await expect(self._find(Proficiency.level_content)).to_have_attribute('title', 'Menengah')
-        
+
     async def skill_level_click_lanjut(self):
         await self._skill_level_input_click()
         await self._force(Proficiency.level_item_lanjut)
@@ -1122,7 +1316,7 @@ class Builder(BasePage):
 
     async def skill_cancel_form_click(self):
         await self._click(Proficiency.form_cancel)
-        
+
         await expect(self._find(Proficiency.form_cancel)).not_to_be_attached()
         await expect(self._find(Proficiency.hint_desc)).not_to_be_attached()
         await expect(self._find(Proficiency.description)).to_be_visible()
@@ -1156,7 +1350,7 @@ class Builder(BasePage):
     async def honor_hints_desc_presence(self):
         await self._look(Achievements.hint_desc)
         await expect(self._find(Achievements.hint_desc)).to_contain_text('Pastikan penulisan award konsisten')
-        
+
     async def honor_year_presence(self):
         await self._look(Achievements.year_label)
         await expect(self._find(Achievements.year_label)).to_have_text("Tahun")
@@ -1164,7 +1358,7 @@ class Builder(BasePage):
         await self._touch(Achievements.year_input)
         await expect(self._find(Achievements.year_input)).to_be_empty()
         await expect(self._find(Achievements.year_input)).to_have_attribute("placeholder", "2021")
-        
+
     async def honor_name_input_presence(self):
         await self._look(Achievements.name_label)
         await expect(self._find(Achievements.name_label)).to_have_text("Prestasi & Penghargaan")
@@ -1206,7 +1400,7 @@ class Builder(BasePage):
         await self._click(Achievements.hint_btn)
         await expect(self._find(Achievements.hint_btn)).to_have_attribute('aria-checked', 'false')
         await expect(self._find(Achievements.hint_desc)).to_be_hidden()
-        
+
     async def honor_year_insert(self, year: int):
         await self._click(Achievements.year_input)
         await expect(self._find(Achievements.year_input)).to_be_focused()
@@ -1214,7 +1408,7 @@ class Builder(BasePage):
         await self._type(Achievements.year_input, str(year))
         await self._find(Achievements.year_input).press("Enter")
         await expect(self._find(Achievements.year_input)).to_have_value(str(year))
-        
+
     async def honor_year_clear(self):
         await self._click(Achievements.year_clear)
         await expect(self._find(Achievements.year_input)).to_be_focused()
@@ -1232,7 +1426,7 @@ class Builder(BasePage):
 
         await expect(self._find(Achievements.name_input)).to_be_focused()
         await expect(self._find(Achievements.name_input)).to_have_value("")
-        
+
     async def honor_save_form_click(self):
         await self._click(Achievements.form_save)
         await expect(self._find(Achievements.form_save)).to_be_focused()
@@ -1243,7 +1437,7 @@ class Builder(BasePage):
         await expect(self._find(Achievements.form_cancel)).not_to_be_attached()
         await expect(self._find(Achievements.hint_desc)).not_to_be_attached()
         await expect(self._find(Achievements.description)).to_be_visible()
-        
+
     """Hobby Validation"""
     async def hobby_main_form_presence(self):
         await self._look(Hobby.form)
@@ -1273,7 +1467,7 @@ class Builder(BasePage):
     async def hobby_hints_desc_presence(self):
         await self._look(Hobby.hint_desc)
         await expect(self._find(Hobby.hint_desc)).to_contain_text('Pikirkan minat yang menarik')
-        
+
     async def hobby_name_input_presence(self):
         await self._look(Hobby.name_label)
         await expect(self._find(Hobby.name_label)).to_have_text("Minat")
@@ -1281,7 +1475,7 @@ class Builder(BasePage):
         await self._touch(Hobby.name_input)
         await expect(self._find(Hobby.name_input)).to_be_empty()
         await expect(self._find(Hobby.name_input)).to_have_attribute("placeholder", "Fotografi & Videografi")
-        
+
     async def hobby_cancel_form_btn_presence(self):
         await self._touch(Hobby.form_cancel)
         await expect(self._find(Hobby.form_cancel)).to_have_text("Batal")
