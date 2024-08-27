@@ -60,6 +60,16 @@ class ResumeInfo:
             edu_end = ""
             edu_score = ""
 
+        class Resume:
+            title = "#DataResTitle"
+            desc = "#DataResInfo"
+            back_chevron = "#DataResLeftChevron"
+            cancel = "#DataResCancelBtn"
+            save = "#DataResSaveBtn"
+            input_name = "[overlayid='DataResLists']"
+            input_empty = "div[overlayid='DataResLists'] .ant-select-selection-placeholder"
+            input_selected = "div[overlayid='DataResLists'] .ant-select-selection-item"
+
 
 class DataDiri:
     title = "#selfInfoTitle"
