@@ -69,6 +69,8 @@ class ResumeInfo:
             input_name = "[overlayid='DataResLists']"
             input_empty = "div[overlayid='DataResLists'] .ant-select-selection-placeholder"
             input_selected = "div[overlayid='DataResLists'] .ant-select-selection-item"
+            input_lists = "div[id='DataResLists'] .rc-virtual-list-holder-inner"
+            input_item = "#DataResItem"
 
 
 class DataDiri:

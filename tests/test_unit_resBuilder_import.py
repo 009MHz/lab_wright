@@ -93,7 +93,6 @@ class TestSmokeResBuildImportPage:
         ("back_chevron", "Resume Import/ Back Chevron"),
         ("input", "Resume Import/ Input Resume"),
         ("cancel", "Resume Import/ Cancel"),
-        ("save", "Resume Import/ Save"),
         ("close", "Resume Import/ Close")
     ])
     async def test_informasi_resume_import_resume_modal(self, builder, action, feature):
@@ -112,23 +111,11 @@ class TestSmokeResBuildImportPage:
 
         with allure.step(f'3. Click on the "{action}" action button'):
             if action == "back_chevron":
-                pass
-                # Todo: Click Back chevron
-                # Todo: Validate the previous input form
+                await builder.import_resume_modal_click_back_arrow()
             elif action == "input":
-                # Todo: Click Input Resume Name
-                # Todo: Validate The Resume Name List
-                pass
+                await builder.import_resume_modal_click_input()
             elif action == "cancel":
-                # Todo: Click Cancel button
-                # Todo: Validate the popup dismissed
-                pass
-            elif action == "save":
-                # Todo: Click Save button
-                # Todo: Validate the no action
-                pass
+                await builder.import_resume_modal_click_cancel()
             elif action == "close":
-                # Todo: Click Close button
-                # Todo: Validate the popup dismissed
-                pass
+                await builder.import_resume_modal_click_close()
 

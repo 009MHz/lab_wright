@@ -204,6 +204,48 @@ class Builder(BasePage):
         await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).not_to_be_visible()
         await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
 
+    """ Resume Information - Import Data - Import Via Resume Interaction"""
+    async def import_resume_modal_click_back_arrow(self):
+        await self._click(ResumeInfo.ImportModal.Resume.back_chevron)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.back_chevron)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.title)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_name)).not_to_be_visible()
+    #
+    # async def import_resume_collapse_self_data(self):
+    #     await self._click(ResumeInfo.ImportModal.Resume.info_toggle)
+    #     await self._conceal(ResumeInfo.ImportModal.Resume.info_name)
+    #     await expect(self._find(ResumeInfo.ImportModal.Resume.info_toggle)).to_have_attribute('aria-expanded', 'false')
+    #
+    # async def import_resume_expand_self_data(self):
+    #     await self._click(ResumeInfo.ImportModal.Resume.info_toggle)
+    #     await self._look(ResumeInfo.ImportModal.Resume.info_name)
+    #     await expect(self._find(ResumeInfo.ImportModal.Resume.info_toggle)).to_have_attribute('aria-expanded', 'true')
+
+    async def _import_resume_item_count(self):
+        await self._look(ResumeInfo.ImportModal.Resume.input_lists)
+        return await self._find(ResumeInfo.ImportModal.Resume.input_item).count()
+
+    async def import_resume_modal_click_input(self):
+        await self._click(ResumeInfo.ImportModal.Resume.input_name)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_lists)).to_be_visible(timeout=12000)
+        item_collect = await self._import_resume_item_count()
+        print(f"Retrieved resume: {item_collect} items")
+
+    async def import_resume_modal_click_cancel(self):
+        await self._click(ResumeInfo.ImportModal.Resume.cancel)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_name)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
+
+    async def import_resume_modal_click_save(self):
+        await self._click(ResumeInfo.ImportModal.Resume.save)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.info_main)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
+
+    async def import_resume_modal_click_close(self):
+        await self._click(ResumeInfo.ImportModal.close)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.title)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
+    
     """Resume Information Section Interaction"""
     async def info_resume_name_insert(self, text):
         await self._touch(ResumeInfo.name_input)
