@@ -12,7 +12,7 @@ async def builder(user_auth):
 
 
 @allure.epic("Resume Builder")
-@allure.story("Resume Builder/ Smoke Test")
+@allure.story("Smoke Test", "Resume Builder/ Smoke Test")
 class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
