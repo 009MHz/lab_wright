@@ -105,39 +105,39 @@ class Builder(BasePage):
             "Kembali ke pilih sumber data")
 
     async def import_profile_modal_form_presence(self):
-        await self._look(ResumeInfo.ImportModal.Profile.info_main)
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).to_be_visible()
+        await self._look(ResumeInfo.ImportModal.DataForm.info_main)
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_main)).to_be_visible()
 
     async def import_profile_self_data_form_presence(self):
-        await self._look(ResumeInfo.ImportModal.Profile.info_main)
+        await self._look(ResumeInfo.ImportModal.DataForm.info_main)
 
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).to_be_visible()
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_title)).to_have_text("Data Diri")
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_main)).to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_title)).to_have_text("Data Diri")
 
     async def import_profile_self_data_check_presence(self):
-        await self._look(ResumeInfo.ImportModal.Profile.info_check)
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_check)).to_be_enabled()
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_check)).to_be_checked()
+        await self._look(ResumeInfo.ImportModal.DataForm.info_check)
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_check)).to_be_enabled()
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_check)).to_be_checked()
 
     async def import_profile_self_data_name_presence(self):
-        await self._look(ResumeInfo.ImportModal.Profile.info_name)
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_name)).not_to_have_text("")
+        await self._look(ResumeInfo.ImportModal.DataForm.info_name)
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_name)).not_to_have_text("")
 
     async def import_profile_self_data_email_presence(self):
-        await self._look(ResumeInfo.ImportModal.Profile.info_email)
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_email)).not_to_have_text("")
+        await self._look(ResumeInfo.ImportModal.DataForm.info_email)
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_email)).not_to_have_text("")
 
     async def import_profile_self_data_phone_presence(self):
-        await self._look(ResumeInfo.ImportModal.Profile.info_phone)
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_phone)).not_to_have_text("")
+        await self._look(ResumeInfo.ImportModal.DataForm.info_phone)
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_phone)).not_to_have_text("")
 
     async def import_profile_self_data_province_presence(self):
-        await self._look(ResumeInfo.ImportModal.Profile.info_prov)
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_prov)).not_to_have_text("")
+        await self._look(ResumeInfo.ImportModal.DataForm.info_prov)
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_prov)).not_to_have_text("")
 
     async def import_profile_self_data_city_presence(self):
-        await self._look(ResumeInfo.ImportModal.Profile.info_city)
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_city)).not_to_have_text("")
+        await self._look(ResumeInfo.ImportModal.DataForm.info_city)
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_city)).not_to_have_text("")
 
     """ Resume Information - Import Data - Import Via Resume Validation"""
     async def import_resume_modal_title_presence(self):
@@ -156,8 +156,8 @@ class Builder(BasePage):
             "Kembali ke pilih sumber data")
 
     async def import_resume_input_name_presence(self):
-        await self._look(ResumeInfo.ImportModal.Resume.input_name)
-        await expect(self._find(ResumeInfo.ImportModal.Resume.input_name)).to_be_enabled()
+        await self._look(ResumeInfo.ImportModal.Resume.input_wrapper)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_wrapper)).to_be_enabled()
         await expect(self._find(ResumeInfo.ImportModal.Resume.input_empty)).to_be_visible()
         await expect(self._find(ResumeInfo.ImportModal.Resume.input_empty)).to_have_text('Search by resume name')
 
@@ -177,31 +177,31 @@ class Builder(BasePage):
     async def import_profile_modal_click_back_arrow(self):
         await self._click(ResumeInfo.ImportModal.Profile.back_chevron)
         await expect(self._find(ResumeInfo.ImportModal.Profile.back_chevron)).not_to_be_visible()
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_main)).not_to_be_visible()
 
     async def import_profile_collapse_self_data(self):
-        await self._click(ResumeInfo.ImportModal.Profile.info_toggle)
-        await self._conceal(ResumeInfo.ImportModal.Profile.info_name)
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_toggle)).to_have_attribute('aria-expanded', 'false')
+        await self._click(ResumeInfo.ImportModal.DataForm.info_toggle)
+        await self._conceal(ResumeInfo.ImportModal.DataForm.info_name)
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_toggle)).to_have_attribute('aria-expanded', 'false')
 
     async def import_profile_expand_self_data(self):
-        await self._click(ResumeInfo.ImportModal.Profile.info_toggle)
-        await self._look(ResumeInfo.ImportModal.Profile.info_name)
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_toggle)).to_have_attribute('aria-expanded', 'true')
+        await self._click(ResumeInfo.ImportModal.DataForm.info_toggle)
+        await self._look(ResumeInfo.ImportModal.DataForm.info_name)
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_toggle)).to_have_attribute('aria-expanded', 'true')
 
     async def import_profile_modal_click_cancel(self):
         await self._click(ResumeInfo.ImportModal.Profile.cancel)
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_main)).not_to_be_visible()
         await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
 
     async def import_profile_modal_click_save(self):
         await self._click(ResumeInfo.ImportModal.Profile.save)
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_main)).not_to_be_visible()
         await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
 
     async def import_profile_modal_click_close(self):
         await self._click(ResumeInfo.ImportModal.close)
-        await expect(self._find(ResumeInfo.ImportModal.Profile.info_main)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.DataForm.info_main)).not_to_be_visible()
         await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
 
     """ Resume Information - Import Data - Import Via Resume Interaction"""
@@ -209,7 +209,7 @@ class Builder(BasePage):
         await self._click(ResumeInfo.ImportModal.Resume.back_chevron)
         await expect(self._find(ResumeInfo.ImportModal.Resume.back_chevron)).not_to_be_visible()
         await expect(self._find(ResumeInfo.ImportModal.Resume.title)).not_to_be_visible()
-        await expect(self._find(ResumeInfo.ImportModal.Resume.input_name)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_wrapper)).not_to_be_visible()
     #
     # async def import_resume_collapse_self_data(self):
     #     await self._click(ResumeInfo.ImportModal.Resume.info_toggle)
@@ -226,14 +226,14 @@ class Builder(BasePage):
         return await self._find(ResumeInfo.ImportModal.Resume.input_item).count()
 
     async def import_resume_modal_click_input(self):
-        await self._click(ResumeInfo.ImportModal.Resume.input_name)
+        await self._click(ResumeInfo.ImportModal.Resume.input_wrapper)
         await expect(self._find(ResumeInfo.ImportModal.Resume.input_lists)).to_be_visible(timeout=10000)
         item_collect = await self._import_resume_item_count()
         print(f"Retrieved resume: {item_collect} items")
 
     async def import_resume_modal_click_cancel(self):
         await self._click(ResumeInfo.ImportModal.Resume.cancel)
-        await expect(self._find(ResumeInfo.ImportModal.Resume.input_name)).not_to_be_visible()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_wrapper)).not_to_be_visible()
         await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
 
     async def import_resume_modal_click_save(self):
