@@ -62,24 +62,26 @@ class TestSmokeResBuildImportPage:
             await builder.import_profile_modal_title_presence()
             await builder.import_profile_modal_info_presence()
             await builder.import_profile_modal_back_arrow_presence()
-            await builder.import_profile_modal_form_presence()
-            await builder.import_profile_self_data_form_presence()
-            await builder.import_profile_self_data_check_presence()
-            await builder.import_profile_self_data_name_presence()
-            await builder.import_profile_self_data_email_presence()
-            await builder.import_profile_self_data_phone_presence()
-            await builder.import_profile_self_data_province_presence()
-            await builder.import_profile_self_data_city_presence()
+            await builder.import_data_modal_form_presence()
+            await builder.import_form_self_data_presence()
+            await builder.import_form_self_data_check_presence()
+            await builder.import_form_self_data_name_presence()
+            await builder.import_form_self_data_email_presence()
+            await builder.import_form_self_data_phone_presence()
+            await builder.import_form_self_data_province_presence()
+            await builder.import_form_self_data_city_presence()
 
         with allure.step(f'3. Click on the "{action}" action button'):
             if action == "collapse":
-                await builder.import_profile_collapse_self_data()
-                await builder.import_profile_expand_self_data()
+                await builder.import_form_collapse_self_data()
+                await builder.import_form_expand_self_data()
             elif action == "back_arrow":
                 await builder.import_profile_modal_click_back_arrow()
             elif action == "cancel":
                 await builder.import_profile_modal_click_cancel()
             elif action == "save":
+                await builder.import_form_uncheck_self_data()
+                await builder.import_form_check_self_data()
                 await builder.import_profile_modal_click_save()
             elif action == "close":
                 await builder.import_profile_modal_click_close()
@@ -129,23 +131,26 @@ class TestSmokeResBuildImportPage:
             await builder.import_data_modal_click_my_resume()
 
         with allure.step('2. Click on the Input resume name button'):
-            pass
+            await builder.import_resume_modal_click_input()
 
         with allure.step('3. Click on the displayed resume'):
-            # Todo: Verify resume item lists
-            # Todo: Count the item lists
-            # Todo: Click all existing items
-            pass
+            await builder.import_resume_modal_click_displayed_option()
 
         with allure.step('4. Verify the required information'):
-            # Todo: Verify data diri existence
-            pass
+            await builder.import_data_modal_form_presence()
+            await builder.import_form_self_data_presence()
+            await builder.import_form_self_data_check_presence()
+            await builder.import_form_self_data_name_presence()
+            await builder.import_form_self_data_email_presence()
+            await builder.import_form_self_data_phone_presence()
+            await builder.import_form_self_data_province_presence()
+            await builder.import_form_self_data_city_presence()
 
-        with allure.step('5. Interact with displayed action button'):
-            # Todo: Click toggle expand/collapsed
-            # Todo: Uncheck required check button
-            # Todo: Check required check button
-            pass
+        with allure.step('5. Interact with the action button'):
+            await builder.import_form_collapse_self_data()
+            await builder.import_form_expand_self_data()
+            await builder.import_form_uncheck_self_data()
+            await builder.import_form_check_self_data()
 
         with allure.step('6. Click on the Save button'):
             # Todo: Click Save button action
