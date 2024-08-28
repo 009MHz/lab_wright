@@ -1,5 +1,5 @@
 import pytest
-from pages.res_builder_page import Builder
+from pages.resume_builder.res_builder_page import Builder
 import allure
 from allure import severity_level as severity
 
