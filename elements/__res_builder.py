@@ -36,6 +36,20 @@ class ResumeInfo:
             cancel = "#DataProfCancelBtn"
             save = "#DataProfSaveBtn"
 
+        class Resume:
+            title = "#DataResTitle"
+            desc = "#DataResInfo"
+            back_chevron = "#DataResLeftChevron"
+            cancel = "#DataResCancelBtn"
+            save = "#DataResSaveBtn"
+            input_wrapper = "[overlayid='DataResLists']"
+            input_name = "#DataResField"
+            input_empty = "div[overlayid='DataResLists'] .ant-select-selection-placeholder"
+            input_selected = "div[overlayid='DataResLists'] .ant-select-selection-item"
+            input_lists = "div[id='DataResLists'] .rc-virtual-list-holder-inner"
+            input_item = "(//div[@id='DataResItem'])"
+
+        class DataForm:
             """Data Diri"""
             info_main = "#DataProfInfoSelfDataToggle"
             info_toggle = "div[id='DataProfInfoSelfDataToggle'] div[role='button']"
@@ -59,18 +73,6 @@ class ResumeInfo:
             edu_start = ""
             edu_end = ""
             edu_score = ""
-
-        class Resume:
-            title = "#DataResTitle"
-            desc = "#DataResInfo"
-            back_chevron = "#DataResLeftChevron"
-            cancel = "#DataResCancelBtn"
-            save = "#DataResSaveBtn"
-            input_name = "[overlayid='DataResLists']"
-            input_empty = "div[overlayid='DataResLists'] .ant-select-selection-placeholder"
-            input_selected = "div[overlayid='DataResLists'] .ant-select-selection-item"
-            input_lists = "div[id='DataResLists'] .rc-virtual-list-holder-inner"
-            input_item = "#DataResItem"
 
 
 class DataDiri:
