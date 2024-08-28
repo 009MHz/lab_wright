@@ -183,8 +183,25 @@ class Builder(BasePage):
     async def import_resume_modal_click_input(self):
         await self._click(ResumeInfo.ImportModal.Resume.input_wrapper)
         await expect(self._find(ResumeInfo.ImportModal.Resume.input_lists)).to_be_visible(timeout=10000)
-        item_collect = await self._import_resume_item_count()
-        print(f"Retrieved resume: {item_collect} items")
+
+    async def import_resume_modal_insert(self, text: str):
+        await self._type(ResumeInfo.ImportModal.Resume.input_name, text)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_name)).to_have_value(text)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_lists)).to_be_visible(timeout=10000)
+
+    async def import_resume_modal_select_filled(self):
+        await self._click(ResumeInfo.ImportModal.Resume.input_selected)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_lists)).to_be_visible(timeout=10000)
+
+    async def import_resume_modal_click_displayed_option(self):
+        count = await self._find(ResumeInfo.ImportModal.Resume.input_item).count()
+
+        for x in range(1, count + 1):
+            await self._click(f"{ResumeInfo.ImportModal.Resume.input_item}[{x}]")
+            await self.import_resume_modal_select_filled()
+
+        await expect(self._find(DataDiri.province_lists)).not_to_be_visible()
+        await expect(self._find(DataDiri.city_input)).to_be_enabled()
 
     async def import_resume_modal_click_cancel(self):
         await self._click(ResumeInfo.ImportModal.Resume.cancel)
