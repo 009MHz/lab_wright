@@ -227,7 +227,7 @@ class Builder(BasePage):
 
     async def import_resume_modal_click_input(self):
         await self._click(ResumeInfo.ImportModal.Resume.input_name)
-        await expect(self._find(ResumeInfo.ImportModal.Resume.input_lists)).to_be_visible(timeout=12000)
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_lists)).to_be_visible(timeout=10000)
         item_collect = await self._import_resume_item_count()
         print(f"Retrieved resume: {item_collect} items")
 
