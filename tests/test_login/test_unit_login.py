@@ -1,5 +1,5 @@
 import pytest
-from pages.login_page import LoginPage
+from pages.login.login_page import LoginPage
 import allure
 from allure import severity_level as severity
 

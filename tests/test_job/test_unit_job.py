@@ -1,5 +1,5 @@
 import pytest
-from pages.job_page import JobPage
+from pages.job.job_page import JobPage
 import allure
 from allure import severity_level as severity
 
