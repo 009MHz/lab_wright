@@ -17,7 +17,6 @@ class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Keahlian Hints Existence")
-    @allure.feature("Keahlian", "Hints")
     @allure.feature("Keahlian", "Hints", "Resume Builder/ Keahlian", "Resume Builder/ Keahlian/ Hints")
     @allure.severity(severity.MINOR)
     async def test_proficient_section_hints(self, builder):
