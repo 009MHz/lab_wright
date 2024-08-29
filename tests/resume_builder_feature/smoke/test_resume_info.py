@@ -9,9 +9,6 @@ async def builder(user_auth):
     builder = Builder(user_auth)
     with allure.step("▸ Navigate the resume builder page"):
         await builder.load_page()
-    with allure.step("▸ Click on the Import Data button"):
-        await builder.info_resume_import_data_click()
-        await builder.import_data_modal_presence()
     return builder
 
 
