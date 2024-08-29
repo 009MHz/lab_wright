@@ -173,7 +173,7 @@ class PersonalInformation(BasePage):
         await self._force(DataDiri.country_wna)
         await expect(self._find(DataDiri.country_content)).to_have_attribute('title', 'Luar Indonesia')
 
-    async def insrt_province(self, text: str):
+    async def insert_province(self, text: str):
         await self._type(DataDiri.province_input, text)
         await expect(self._find(DataDiri.province_input)).to_have_value(text)
         await expect(self._find(DataDiri.province_lists)).to_be_attached()
@@ -184,7 +184,7 @@ class PersonalInformation(BasePage):
         await expect(self._find(DataDiri.province_lists)).to_be_visible()
 
     async def select_province_option_within(self, text):
-        await self.insrt_province(text)
+        await self.insert_province(text)
         count = await self._find(DataDiri.province_item).count()
 
         for x in range(1, count + 1):
