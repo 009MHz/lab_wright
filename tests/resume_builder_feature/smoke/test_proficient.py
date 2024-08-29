@@ -13,12 +13,16 @@ async def builder(user_auth):
 
 
 @allure.epic("Resume Builder")
-@allure.story("Smoke Test", "Resume Builder/ Smoke Test")
+@allure.story("Smoke Testing: Resume Builder")
+@allure.feature("Resume Builder/ Keahlian")
+@pytest.mark.res_builder
+@pytest.mark.keahlian
 class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.hints
     @allure.title("Keahlian Hints Existence")
-    @allure.feature("Keahlian", "Hints", "Resume Builder/ Keahlian", "Resume Builder/ Keahlian/ Hints")
+    @allure.feature("Resume Builder/ Keahlian/ Hints")
     @allure.severity(severity.MINOR)
     async def test_proficient_section_hints(self, builder):
         with allure.step('1. Click on the Add Keahlian Form button'):
@@ -36,7 +40,6 @@ class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Keahlian Section Validation")
-    @allure.feature("Keahlian", "Resume Builder/ Keahlian")
     @allure.severity(severity.CRITICAL)
     async def test_proficient_section(self, builder):
         with allure.step('1. Validate Keahlian default state'):
