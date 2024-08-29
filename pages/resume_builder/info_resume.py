@@ -7,13 +7,6 @@ class ResInfo(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
 
-    async def load_page(self):
-        await self.page.goto(PageInfo.url)
-
-    async def page_title_presence(self):
-        await self._look(PageInfo.title)
-        await expect(self._find(PageInfo.title)).to_have_text("Buat Resume Terbaikmu")
-
     """Resume Information Section Validation"""
     async def section_title_presence(self):
         await self._look(ResumeInfo.title)
