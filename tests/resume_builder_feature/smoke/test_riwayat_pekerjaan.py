@@ -17,7 +17,7 @@ async def vocation(user_auth):
 @allure.story("Smoke Testing: Resume Builder")
 @allure.feature("Resume Builder/ Riwayat Pekerjaan")
 @pytest.mark.res_builder
-@pytest.mark.history
+@pytest.mark.job_history
 class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke

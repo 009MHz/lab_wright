@@ -17,7 +17,7 @@ async def education(user_auth):
 @allure.story("Smoke Testing: Resume Builder")
 @allure.feature("Resume Builder/ Riwayat Pendidikan")
 @pytest.mark.res_builder
-@pytest.mark.history
+@pytest.mark.edu_history
 class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
