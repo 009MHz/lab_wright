@@ -29,20 +29,20 @@ class TestSmokeResumeBuilderPage:
 
         with allure.step('2. Validating Nama resume'):
             await res_info.name_presence()
-            await res_info.info_resume_name_insert("Written from playwright")
+            await res_info.name_insert("Written from playwright")
 
         with allure.step('3. Validating Bahasa Resume'):
             await res_info.language_presence()
-            await res_info.info_resume_lang_click()
-            await res_info.info_resume_select_bahasa()
-            await res_info.info_resume_lang_click()
-            await res_info.info_resume_select_language()
+            await res_info.lang_click()
+            await res_info.lang_select_bahasa()
+            await res_info.lang_click()
+            await res_info.lang_select_language()
 
         with allure.step('4. Validating Tujuan Pekerjaan'):
             await res_info.tujuan_pekerjaan_presence()
-            await res_info.info_resume_goal_click()
-            await res_info.info_resume_goal_items_interact()
+            await res_info.tujuan_pekerjaan_click()
+            await res_info.tujuan_items_interact()
 
         with allure.step('5. Validating Import Data'):
-            await res_info.info_resume_import_data_click()
+            await res_info.import_data_click()
             await res_info.import_data_modal_presence()
