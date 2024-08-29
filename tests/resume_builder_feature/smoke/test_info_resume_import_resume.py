@@ -67,7 +67,7 @@ class TestSmokeResBuildImportPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
-    @pytest.mark.input
+    @pytest.mark.input_field
     @pytest.mark.checkbox
     @pytest.mark.save
     @allure.title("Import Data Via My Resume Save Action")
