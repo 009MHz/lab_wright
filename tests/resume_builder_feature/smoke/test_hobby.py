@@ -13,12 +13,16 @@ async def builder(user_auth):
 
 
 @allure.epic("Resume Builder")
-@allure.story("Smoke Test", "Resume Builder/ Smoke Test")
+@allure.story("Smoke Testing: Resume Builder")
+@allure.feature("Resume Builder/ Minat")
+@pytest.mark.res_builder
+@pytest.mark.minat
 class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.hints
     @allure.title("Minat Hints Existence")
-    @allure.feature("Minat", "Hints", "Resume Builder/ Minat", "Resume Builder/ Minat/ Hints")
+    @allure.feature("Resume Builder/ Minat/ Hints")
     @allure.severity(severity.MINOR)
     async def test_minat_section_hints(self, builder):
         with allure.step('1. Click on the Add Minat Form button'):
@@ -36,7 +40,6 @@ class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Minat Section Validation")
-    @allure.feature("Minat", "Resume Builder/ Minat")
     @allure.severity(severity.CRITICAL)
     async def test_minat_section(self, builder):
         with allure.step('1. Validate Minat form default state'):
