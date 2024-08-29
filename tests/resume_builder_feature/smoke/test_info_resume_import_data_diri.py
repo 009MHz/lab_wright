@@ -9,7 +9,7 @@ from pages.resume_builder import PreCond
 async def res_info(user_auth):
     res_info = ResInfo(user_auth)
     pre_cond = PreCond(res_info.page)
-    await PreCond(res_info.page).import_data_modal()
+    await pre_cond.import_data_modal()
     return res_info
 
 
