@@ -16,9 +16,11 @@ async def builder(user_auth):
 
 
 @allure.epic("Resume Builder")
-@allure.story("Smoke Test", "Resume Builder/ Smoke Test")
-@allure.feature("Informasi Resume", "Import Data",
-                "Resume Builder/ Informasi Resume/ Import Data")
+@allure.story("Smoke Testing: Resume Builder")
+@pytest.mark.res_builder
+@pytest.mark.resume_info
+@pytest.mark.import_data
+@allure.feature("Resume Builder/ Informasi Resume/ Import Data")
 class TestSmokeResBuildImportPage:
     @pytest.mark.positive
     @pytest.mark.smoke
@@ -34,17 +36,29 @@ class TestSmokeResBuildImportPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.profile_import
     @allure.title("Import Data Via My Profile Interaction")
     @allure.severity(severity.CRITICAL)
-    @allure.feature("Profile Import", "Resume Builder/ Informasi Resume/ Import Data/ Profile Import")
+    @allure.feature("Resume Builder/ Informasi Resume/ Import Data/ Profile Import")
     @pytest.mark.parametrize("action, feature", [
-        ("toggle", "Profile Import/ Toggle"),
-        ("back_arrow", "Profile Import/ Back Chevron"),
-        ("cancel", "Profile Import/ Cancel"),
-        ("save", "Profile Import/ Save"),
-        ("close", "Profile Import/ Close")
-    ])
-    async def test_informasi_resume_import_profile_modal(self, builder, action, feature):
+        ("toggle", "Resume Builder/ Informasi Resume/ Import Data/ Profile Import/ Toggle"),
+        ("back_arrow", "Resume Builder/ Informasi Resume/ Import Data/ Profile Import/ Back Chevron"),
+        ("cancel", "Resume Builder/ Informasi Resume/ Import Data/ Profile Import/ Cancel"),
+        ("save", "Resume Builder/ Informasi Resume/ Import Data/ Profile Import/ Save"),
+        ("close", "Resume Builder/ Informasi Resume/ Import Data/ Profile Import/ Close")])
+    async def test_informasi_resume_import_profile_modal(self, builder, action, feature, request):
+        marker_mapping = {
+            "toggle": pytest.mark.toggle,
+            "back_arrow": pytest.mark.back_arrow,
+            "cancel": pytest.mark.cancel,
+            "save": pytest.mark.save,
+            "close": pytest.mark.close
+        }
+
+        marker = marker_mapping.get(action)
+        if marker:
+            request.node.add_marker(marker)
+
         allure.dynamic.feature(feature)
 
         with allure.step('1. Click on the "Impor dari profil saya" carousel'):

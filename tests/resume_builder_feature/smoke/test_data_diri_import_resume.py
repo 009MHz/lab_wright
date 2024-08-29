@@ -16,20 +16,35 @@ async def builder(user_auth):
 
 
 @allure.epic("Resume Builder")
-@allure.story("Smoke Test", "Resume Builder/ Smoke Test")
+@allure.story("Smoke Testing: Resume Builder Page")
+@allure.feature("Resume Builder/ Informasi Resume/ Import Data",
+                "Resume Builder/ Informasi Resume/ Import Data/ Resume Import")
+@pytest.mark.res_builder
+@pytest.mark.resume_info
+@pytest.mark.import_data
 class TestSmokeResBuildImportPage:
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.resume_import
     @allure.title("Import Data Via My Resume Validation")
-    @allure.feature("Informasi Resume", "Impor Data", "Resume Import")
     @allure.severity(severity.CRITICAL)
     @pytest.mark.parametrize("action, feature", [
-        ("back_chevron", "Resume Import/ Back Chevron"),
-        ("input", "Resume Import/ Input Resume"),
-        ("cancel", "Resume Import/ Cancel"),
-        ("close", "Resume Import/ Close")
-    ])
-    async def test_informasi_resume_import_resume_modal(self, builder, action, feature):
+        ("back_arrow", "Resume Builder/ Informasi Resume/ Import Data/ Resume Import/ Back Chevron"),
+        ("cancel", "Resume Builder/ Informasi Resume/ Import Data/ Resume Import/ Cancel"),
+        ("input", "Resume Builder/ Informasi Resume/ Import Data/ Resume Import/ Input"),
+        ("close", "Resume Builder/ Informasi Resume/ Import Data/ Resume Import/ Close")])
+    async def test_informasi_resume_import_resume_modal(self, builder, action, feature, request):
+        marker_mapping = {
+            "back_arrow": pytest.mark.back_arrow,
+            "cancel": pytest.mark.cancel,
+            "input": pytest.mark.input_field,
+            "close": pytest.mark.close
+        }
+
+        marker = marker_mapping.get(action)
+        if marker:
+            request.node.add_marker(marker)
+
         allure.dynamic.feature(feature)
 
         with allure.step('1. Click on the "Impor dari resume saya" carousel'):
