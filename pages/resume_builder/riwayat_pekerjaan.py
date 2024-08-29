@@ -106,13 +106,12 @@ class Profession(BasePage):
         await expect(self._find(JobHistory.form_save)).to_have_text("Simpan")
 
     """Work History Interaction"""
-
-    async def title_click_collapse(self):
+    async def click_collapse_form(self):
         await self._click(JobHistory.toggle)
         await expect(self._find(JobHistory.add_btn)).to_be_hidden()
         await expect(self._find(JobHistory.toggle)).to_have_attribute('aria-expanded', 'false')
 
-    async def title_click_expand(self):
+    async def click_expand_form(self):
         await self._click(JobHistory.toggle)
         await expect(self._find(JobHistory.add_btn)).to_be_visible()
         await expect(self._find(JobHistory.toggle)).to_have_attribute('aria-expanded', 'true')
@@ -121,50 +120,50 @@ class Profession(BasePage):
         await self._click(JobHistory.add_btn)
         await expect(self._find(JobHistory.add_btn)).to_be_focused()
 
-    async def hints_click_show(self):
+    async def click_show_hints(self):
         await self._click(JobHistory.hint_btn)
         await expect(self._find(JobHistory.hint_btn)).to_have_attribute('aria-checked', 'true')
         await expect(self._find(JobHistory.hint_desc)).not_to_be_hidden()
 
-    async def hints_click_hide(self):
+    async def click_hide_hints(self):
         await self._click(JobHistory.hint_btn)
         await expect(self._find(JobHistory.hint_btn)).to_have_attribute('aria-checked', 'false')
         await expect(self._find(JobHistory.hint_desc)).to_be_hidden()
 
-    async def position_insert(self, text):
+    async def insert_position(self, text):
         await self._type(JobHistory.pos_input, text)
         await expect(self._find(JobHistory.pos_list)).to_be_visible()
         await expect(self._find(JobHistory.pos_add)).to_contain_text(text)
 
-    async def position_click_filled(self):
+    async def click_filled_position(self):
         await self._click(JobHistory.pos_selected)
         await expect(self._find(JobHistory.pos_input)).to_be_focused()
         await expect(self._find(JobHistory.pos_list)).to_be_visible()
 
-    async def position_select_option_within(self, text):
-        await self.position_insert(text)
+    async def select_position_option_within(self, text):
+        await self.insert_position(text)
         jobs = await self._find(JobHistory.pos_item).count()
         for x in range(1, jobs):
             await self._click(f"{JobHistory.pos_item}[{x + 1}]")
             await self._click(".ant-layout-content")
-            await self.position_click_filled()
+            await self.click_filled_position()
 
-    async def company_name_insert(self, text: str):
+    async def insert_company_name(self, text: str):
         await self._type(JobHistory.company_input, text)
         await expect(self._find(JobHistory.company_input)).to_be_focused()
         await expect(self._find(JobHistory.company_input)).to_have_value(text)
 
-    async def click_country(self):
+    async def show_country_list(self):
         await self._click(JobHistory.country_input)
         await expect(self._find(JobHistory.country_lists)).to_be_visible()
 
-    async def select_wni(self):
-        await self.click_country()
+    async def country_select_wni(self):
+        await self.show_country_list()
         await self._force(JobHistory.country_wni)
         await expect(self._find(JobHistory.country_content)).to_have_attribute('title', 'Indonesia')
 
-    async def select_wna(self):
-        await self.click_country()
+    async def country_select_wna(self):
+        await self.show_country_list()
         await self._force(JobHistory.country_wna)
         await expect(self._find(JobHistory.country_content)).to_have_attribute('title', 'Luar Indonesia')
 
@@ -173,13 +172,13 @@ class Profession(BasePage):
         await expect(self._find(JobHistory.province_input)).to_be_focused()
         await expect(self._find(JobHistory.province_lists)).to_be_visible()
 
-    async def prov_insert(self, text: str):
+    async def insert_province(self, text: str):
         await self._type(JobHistory.province_input, text)
         await expect(self._find(JobHistory.province_input)).to_have_value(text)
         await expect(self._find(JobHistory.province_lists)).to_be_visible()
 
-    async def prov_select_option_within(self, text):
-        await self.prov_insert(text)
+    async def select_prov_option_within(self, text):
+        await self.insert_province(text)
         count = await self._find(JobHistory.province_item).count()
 
         for x in range(1, count + 1):
@@ -198,13 +197,13 @@ class Profession(BasePage):
         await expect(self._find(JobHistory.city_input)).to_be_focused()
         await expect(self._find(JobHistory.city_lists)).to_be_visible()
 
-    async def city_insert(self, text: str):
+    async def insert_city(self, text: str):
         await self._type(JobHistory.city_input, text)
         await expect(self._find(JobHistory.city_input)).to_have_value(text)
         await expect(self._find(JobHistory.city_lists)).to_be_visible()
 
-    async def city_select_option_within(self, text):
-        await self.city_insert(text)
+    async def select_city_option_within(self, text):
+        await self.insert_city(text)
         count = await self._find(JobHistory.city_item).count()
         for x in range(1, count + 1):
             await self._click(f"{JobHistory.city_item}[{x}]")
@@ -255,7 +254,7 @@ class Profession(BasePage):
         await self._click(JobHistory.status_volunteer)
         await expect(self._find(JobHistory.status_content)).to_have_attribute('title', 'Sukarela')
 
-    async def start_date_insert(self, month: str, year: int):
+    async def insert_start_date(self, month: str, year: int):
         await self._click(JobHistory.start_input)
         await expect(self._find(JobHistory.start_input)).to_be_focused()
 
@@ -263,11 +262,11 @@ class Profession(BasePage):
         await self._find(JobHistory.start_input).press("Enter")
         await expect(self._find(JobHistory.start_input)).to_have_value(f"{month} - {year}")
 
-    async def start_date_clear(self):
+    async def clear_start_date(self):
         await self._force(JobHistory.start_clear)
         await expect(self._find(JobHistory.start_input)).to_have_value("")
 
-    async def end_date_insert(self, month: str, year: int):
+    async def insert_end_date(self, month: str, year: int):
         await self._click(JobHistory.end_input)
         await expect(self._find(JobHistory.end_input)).to_be_focused()
 
@@ -289,14 +288,14 @@ class Profession(BasePage):
         await expect(self._find(JobHistory.end_status_check)).not_to_be_checked()
         await expect(self._find(JobHistory.end_input)).to_be_enabled()
 
-    async def end_date_clear(self):
+    async def clear_end_date(self):
         await self._force(JobHistory.end_clear)
         await expect(self._find(JobHistory.start_input)).to_have_value("")
 
-    async def save_btn_click(self):
+    async def click_simpan_form(self):
         await self._click(JobHistory.form_save)
 
-    async def cancel_btn_click(self):
+    async def click_cancel_form(self):
         await self._click(JobHistory.form_cancel)
 
         await expect(self._find(JobHistory.form_cancel)).not_to_be_attached()
