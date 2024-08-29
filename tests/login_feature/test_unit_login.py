@@ -12,12 +12,17 @@ async def login(page):
 
 
 @allure.epic("Login")
-@allure.story("Login Page/ Smoke Test")
+@allure.story("Smoke Testing: Login Page")
+@allure.feature('Login')
+@pytest.mark.login
+@pytest.mark.input_field
 class TestSmokeLoginPage:
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.email
+    @pytest.mark.google
     @allure.title("First State Login Page Validation")
-    @allure.feature("Email", "Google")
+    @allure.feature("Login/ Email", "Login/ Google")
     @allure.severity(severity.BLOCKER)
     async def test_login_init(self, login):
         with allure.step("1. Verify the login init page components"):
@@ -28,8 +33,9 @@ class TestSmokeLoginPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.password
     @allure.title("Second State Login Page Validation")
-    @allure.feature("Email", "Password")
+    @allure.feature("Login/ Password")
     @allure.severity(severity.BLOCKER)
     async def test_password_init(self, login):
         with allure.step("1. Insert a valid email account"):
@@ -46,8 +52,10 @@ class TestSmokeLoginPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.email
+    @pytest.mark.password
     @allure.title("Valid email login validation")
-    @allure.feature("Login", "Email", "Password")
+    @allure.feature("Login/ Email", "Login/ Password")
     @allure.severity(severity.BLOCKER)
     async def test_login_with_email(self, login):
         with allure.step("1. Insert a valid email account"):
