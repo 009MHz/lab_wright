@@ -36,15 +36,12 @@ class TestSmokeResBuildImportPage:
             "back_arrow": pytest.mark.back_arrow,
             "cancel": pytest.mark.cancel,
             "input": pytest.mark.input_field,
-            "close": pytest.mark.close
-        }
+            "close": pytest.mark.close}
 
         marker = marker_mapping.get(action)
         if marker:
             request.node.add_marker(marker)
-
         allure.dynamic.feature(feature)
-
         with allure.step('1. Click on the "Impor dari resume saya" carousel'):
             await res_info.import_data_modal_click_my_resume()
 
