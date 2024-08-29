@@ -13,13 +13,15 @@ async def builder(user_auth):
 
 
 @allure.epic("Resume Builder")
-@allure.story("Smoke Test", "Resume Builder/ Smoke Test")
+@allure.story("Smoke Testing: Resume Builder")
+@allure.feature("Resume Builder/ Riwayat Pendidikan")
+@pytest.mark.res_builder
+@pytest.mark.edu_history
 class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Riwayat Pendidikan Hints Existence")
-    @allure.feature("Riwayat Pendidikan", "Hints", "Resume Builder/ Riwayat Pendidikan",
-                    "Resume Builder/ Riwayat Pendidikan/ Hints")
+    @allure.feature("Resume Builder/ Riwayat Pendidikan/ Hints")
     @allure.severity(severity.NORMAL)
     async def test_education_section_hints(self, builder):
         with allure.step('1. Click on the Add Riwayat Pendidikan Form button'):
@@ -37,7 +39,6 @@ class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Riwayat Pendidikan Validation")
-    @allure.feature("Riwayat Pendidikan", "Resume Builder/ Riwayat Pendidikan")
     @allure.severity(severity.CRITICAL)
     async def test_education_section(self, builder):
         with allure.step('1. Validate riwayat pendidikan default state'):
