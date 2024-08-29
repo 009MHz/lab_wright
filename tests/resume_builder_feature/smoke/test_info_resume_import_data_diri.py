@@ -1,18 +1,16 @@
 import pytest
-from pages.resume_builder.res_builder_page import Builder
 import allure
 from allure import severity_level as severity
+from pages.resume_builder.info_resume import ResInfo
+from pages.resume_builder import PreCond
 
 
 @pytest.fixture(scope='function')
-async def builder(user_auth):
-    builder = Builder(user_auth)
-    with allure.step("▸ Navigate the resume builder page"):
-        await builder.load_page()
-    with allure.step("▸ Click on the Import Data button"):
-        await builder.info_resume_import_data_click()
-        await builder.import_data_modal_presence()
-    return builder
+async def res_info(user_auth):
+    res_info = ResInfo(user_auth)
+    pre_cond = PreCond(res_info.page)
+    await pre_cond.import_data_modal()
+    return res_info
 
 
 @allure.epic("Resume Builder")
@@ -20,19 +18,20 @@ async def builder(user_auth):
 @pytest.mark.res_builder
 @pytest.mark.resume_info
 @pytest.mark.import_data
+@pytest.mark.popup
 @allure.feature("Resume Builder/ Informasi Resume/ Import Data")
 class TestSmokeResBuildImportPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Import Data Main Validation")
     @allure.severity(severity.CRITICAL)
-    async def test_informasi_resume_import_modal(self, builder):
+    async def test_informasi_resume_import_modal(self, res_info):
         with allure.step('1. Validate the Import Data completeness'):
-            await builder.import_data_modal_title_presence()
-            await builder.import_data_modal_info_presence()
-            await builder.import_data_modal_close_presence()
-            await builder.import_data_myProfile_carousel_presence()
-            await builder.import_data_myResume_carousel_presence()
+            await res_info.import_data_modal_title_presence()
+            await res_info.import_data_modal_info_presence()
+            await res_info.import_data_modal_close_presence()
+            await res_info.import_data_myProfile_carousel_presence()
+            await res_info.import_data_myResume_carousel_presence()
 
     @pytest.mark.positive
     @pytest.mark.smoke
@@ -46,7 +45,7 @@ class TestSmokeResBuildImportPage:
         ("cancel", "Resume Builder/ Informasi Resume/ Import Data/ Profile Import/ Cancel"),
         ("save", "Resume Builder/ Informasi Resume/ Import Data/ Profile Import/ Save"),
         ("close", "Resume Builder/ Informasi Resume/ Import Data/ Profile Import/ Close")])
-    async def test_informasi_resume_import_profile_modal(self, builder, action, feature, request):
+    async def test_informasi_resume_import_profile_modal(self, res_info, action, feature, request):
         marker_mapping = {
             "toggle": pytest.mark.toggle,
             "back_arrow": pytest.mark.back_arrow,
@@ -62,32 +61,32 @@ class TestSmokeResBuildImportPage:
         allure.dynamic.feature(feature)
 
         with allure.step('1. Click on the "Impor dari profil saya" carousel'):
-            await builder.import_data_modal_click_my_profile()
+            await res_info.import_data_modal_click_my_profile()
 
         with allure.step('2. Validate the Import via Profile mandatory content'):
-            await builder.import_profile_modal_title_presence()
-            await builder.import_profile_modal_info_presence()
-            await builder.import_profile_modal_back_arrow_presence()
-            await builder.import_data_modal_form_presence()
-            await builder.import_form_self_data_presence()
-            await builder.import_form_self_data_check_presence()
-            await builder.import_form_self_data_name_presence()
-            await builder.import_form_self_data_email_presence()
-            await builder.import_form_self_data_phone_presence()
-            await builder.import_form_self_data_province_presence()
-            await builder.import_form_self_data_city_presence()
+            await res_info.import_profile_modal_title_presence()
+            await res_info.import_profile_modal_info_presence()
+            await res_info.import_profile_modal_back_arrow_presence()
+            await res_info.import_data_modal_form_presence()
+            await res_info.import_form_self_data_presence()
+            await res_info.import_form_self_data_check_presence()
+            await res_info.import_form_self_data_name_presence()
+            await res_info.import_form_self_data_email_presence()
+            await res_info.import_form_self_data_phone_presence()
+            await res_info.import_form_self_data_province_presence()
+            await res_info.import_form_self_data_city_presence()
 
         with allure.step(f'3. Click on the "{action}" action button'):
             if action == "collapse":
-                await builder.import_form_collapse_self_data()
-                await builder.import_form_expand_self_data()
+                await res_info.import_form_collapse_self_data()
+                await res_info.import_form_expand_self_data()
             elif action == "back_arrow":
-                await builder.import_profile_modal_click_back_arrow()
+                await res_info.import_profile_modal_click_back_arrow()
             elif action == "cancel":
-                await builder.import_profile_modal_click_cancel()
+                await res_info.import_profile_modal_click_cancel()
             elif action == "save":
-                await builder.import_form_uncheck_self_data()
-                await builder.import_form_check_self_data()
-                await builder.import_profile_modal_click_save()
+                await res_info.import_form_uncheck_self_data()
+                await res_info.import_form_check_self_data()
+                await res_info.import_profile_modal_click_save()
             elif action == "close":
-                await builder.import_profile_modal_click_close()
+                await res_info.import_profile_modal_click_close()
