@@ -1,5 +1,5 @@
 import pytest
-from pages.job_page import JobPage
+from pages.job.job_page import JobPage
 import allure
 from allure import severity_level as severity
 
@@ -12,22 +12,14 @@ async def job_page(page):
 
 
 @allure.epic("Job")
-@allure.story("Job Page/ Smoke Test")
+@allure.story("Smoke Testing: Job Page")
+@allure.feature("Job/ Filter")
+@pytest.mark.job_filter
 class TestSmokeJobPage:
     @pytest.mark.positive
     @pytest.mark.smoke
-    @allure.title("Sorting Control Test Validation")
-    @allure.feature("Sort")
-    @allure.severity(severity.NORMAL)
-    async def test_sort_control(self, job_page):
-        with allure.step("1. Interact & validate the sort control"):
-            await job_page.sort_control_presence()
-            await job_page.sort_control_click()
-            await job_page.sort_item_presence()
-
-    @pytest.mark.positive
-    @pytest.mark.smoke
-    @allure.feature("Filter", "Main", "Easy Apply", "MSIB")
+    @allure.tag("Direct Filter")
+    @allure.feature("Job/ Filter/ Easy Apply", "Job/ Filter/ MSIB")
     @allure.title("Main Filter button Validation")
     @allure.severity(severity.CRITICAL)
     async def test_main_filter(self, job_page):
@@ -39,24 +31,10 @@ class TestSmokeJobPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
-    @allure.feature("Carousel", "Job Card")
-    @allure.title("Main Job Card Validation")
-    @allure.severity(severity.NORMAL)
-    async def test_job_cards(self, job_page):
-        with allure.step("1. Check each job cards element availability"):
-            await job_page.job_cards_logo_presence()
-            await job_page.job_cards_company_presence()
-            await job_page.job_cards_title_presence()
-            await job_page.job_cards_location_presence()
-            await job_page.job_cards_industry_presence()
-            await job_page.job_cards_type_presence()
-            await job_page.check_job_cards_daycount()
-            await job_page.job_cards_easyapply_presence()
-            await job_page.job_cards_msib_presence()
-
-    @pytest.mark.positive
-    @pytest.mark.smoke
-    @allure.feature("Filter", "Auto Complete", "Input")
+    @pytest.mark.auto_complete
+    @pytest.mark.input_field
+    @allure.feature("Job/ Filter/ Posisi", "Job/ Filter/ Nama Perusahaan", "Job/ Filter/ Industri", 
+                    "Job/ Filter/ Lokasi", "Job/ Filter/ Kemampuan")
     @allure.title("Input Field Search Validation")
     @allure.severity(severity.CRITICAL)
     async def test_input_search(self, job_page):
@@ -81,7 +59,8 @@ class TestSmokeJobPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
-    @allure.feature("Filter", "Checkbox")
+    @pytest.mark.checkbox
+    @allure.feature("Job/ Filter/ Tipe Pekerjaan")
     @allure.title("'Tipe Pekerjaan' Check Validation")
     @allure.severity(severity.CRITICAL)
     async def test_job_type_checkboxes(self, job_page):
@@ -112,7 +91,8 @@ class TestSmokeJobPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
-    @allure.feature("Filter", "Checkbox")
+    @pytest.mark.checkbox
+    @allure.feature("Job/ Filter/ Tipe Pengaturan Kerja")
     @allure.title("'Tipe Pengaturan Kerja' Check Validation")
     @allure.severity(severity.CRITICAL)
     async def test_arrangement_checkboxes(self, job_page):
@@ -131,7 +111,8 @@ class TestSmokeJobPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
-    @allure.feature("Filter", "Checkbox")
+    @pytest.mark.checkbox
+    @allure.feature("Job/ Filter/ Pengalaman Kerja")
     @allure.title("'Pengalaman Kerja' Check Validation")
     @allure.severity(severity.CRITICAL)
     async def test_experience_checkboxes(self, job_page):
@@ -153,18 +134,3 @@ class TestSmokeJobPage:
             await job_page.year_02_uncheck()
             await job_page.year_03_uncheck()
             await job_page.year_04_uncheck()
-
-    @pytest.mark.positive
-    @pytest.mark.smoke
-    @allure.feature("Pagination")
-    @allure.title("Pagination Section Validation")
-    @allure.severity(severity.NORMAL)
-    async def test_pagination(self, job_page):
-        with allure.step("1. The Pagination Component should be exist"):
-            await job_page.next_chevron_presence()
-            await job_page.prev_chevron_presence()
-            await job_page.page_number_presence()
-        with allure.step("2. Click on Pagination Chevron"):
-            await job_page.next_chevron_click()
-            await job_page.next_chevron_click()
-            await job_page.prev_chevron_click()

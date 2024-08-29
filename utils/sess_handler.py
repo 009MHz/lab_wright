@@ -3,7 +3,7 @@ import time
 import json
 import logging
 from filelock import FileLock
-from pages.login_page import LoginPage
+from pages.login.login_page import LoginPage
 
 SESSION_FILE = ".auth/session.json"
 SESSION_DIR = os.path.dirname(SESSION_FILE)

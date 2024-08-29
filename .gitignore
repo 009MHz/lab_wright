@@ -174,4 +174,4 @@ cython_debug/
 reports
 .auth/
 tests/reports
-tests/data/
+tests/resume_builder_feature/smoke/data/

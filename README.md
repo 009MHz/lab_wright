@@ -131,7 +131,7 @@ pytest tests/test_example.py
 
 *Running the test on multiple files*
 ```bash
-pytest tests/test_example.py tests/test_unit_job.py
+pytest tests/test_example.py tests/test_search_filter_menu.py
 ```
 
 *Running the test on directory*
