@@ -30,7 +30,7 @@ class SessionHandler:
         return False
 
     def load_credentials(self, user_type):
-        credentials = "../data/credentials.json"
+        credentials = "data/credentials.json"
         if not os.path.exists(credentials):
             raise FileNotFoundError(f"Credentials file not found: {credentials}")
 
