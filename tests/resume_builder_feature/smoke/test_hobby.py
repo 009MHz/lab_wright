@@ -22,6 +22,7 @@ class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @pytest.mark.hints
+    @pytest.mark.toggle
     @allure.title("Minat Hints Existence")
     @allure.feature("Resume Builder/ Minat/ Hints")
     @allure.severity(severity.MINOR)
@@ -40,6 +41,10 @@ class TestSmokeResumeBuilderPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.input_field
+    @pytest.mark.accordion
+    @pytest.mark.cancel
+    @pytest.mark.save
     @allure.title("Minat Section Validation")
     @allure.severity(severity.CRITICAL)
     async def test_minat_section(self, hobby):

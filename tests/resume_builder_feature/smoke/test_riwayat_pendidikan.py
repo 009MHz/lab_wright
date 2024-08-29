@@ -21,6 +21,8 @@ async def education(user_auth):
 class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.hints
+    @pytest.mark.toggle
     @allure.title("Riwayat Pendidikan Hints Existence")
     @allure.feature("Resume Builder/ Riwayat Pendidikan/ Hints")
     @allure.severity(severity.NORMAL)
@@ -39,6 +41,11 @@ class TestSmokeResumeBuilderPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.accordion
+    @pytest.mark.input_field
+    @pytest.mark.auto_complete
+    @pytest.mark.cancel
+    @pytest.mark.save
     @allure.title("Riwayat Pendidikan Validation")
     @allure.severity(severity.CRITICAL)
     async def test_education_section(self, education):

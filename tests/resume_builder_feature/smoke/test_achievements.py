@@ -21,6 +21,7 @@ class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @pytest.mark.hints
+    @pytest.mark.toggle
     @allure.title("Prestasi Hints Existence")
     @allure.feature("Resume Builder/ Achievements", "Resume Builder/ Achievements/ Hints")
     @allure.severity(severity.MINOR)
@@ -39,6 +40,10 @@ class TestSmokeResumeBuilderPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.input_field
+    @pytest.mark.accordion
+    @pytest.mark.cancel
+    @pytest.mark.save
     @allure.title("Prestasi Section Validation")
     @allure.feature("Resume Builder/ Achievements")
     @allure.severity(severity.CRITICAL)

@@ -22,6 +22,7 @@ class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @pytest.mark.hints
+    @pytest.mark.toggle
     @allure.title("Riwayat Pekerjaan Hints Existence")
     @allure.feature("Resume Builder/ Riwayat Pekerjaan/ Hints")
     @allure.severity(severity.MINOR)
@@ -40,6 +41,11 @@ class TestSmokeResumeBuilderPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.accordion
+    @pytest.mark.input_field
+    @pytest.mark.auto_complete
+    @pytest.mark.cancel
+    @pytest.mark.save
     @allure.title("Riwayat Pekerjaan Existence")
     @allure.severity(severity.CRITICAL)
     async def test_occupation_section(self, vocation):

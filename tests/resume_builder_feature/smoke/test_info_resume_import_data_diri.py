@@ -18,6 +18,7 @@ async def res_info(user_auth):
 @pytest.mark.res_builder
 @pytest.mark.resume_info
 @pytest.mark.import_data
+@pytest.mark.popup
 @allure.feature("Resume Builder/ Informasi Resume/ Import Data")
 class TestSmokeResBuildImportPage:
     @pytest.mark.positive

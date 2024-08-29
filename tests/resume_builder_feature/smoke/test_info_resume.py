@@ -20,6 +20,8 @@ async def res_info(user_auth):
 class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.input_field
+    @pytest.mark.accordion
     @allure.title("Informasi Resume Validation")
     @allure.feature("Resume Builder/ Informasi Resume")
     @allure.severity(severity.CRITICAL)

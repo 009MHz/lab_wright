@@ -22,6 +22,7 @@ class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @pytest.mark.hints
+    @pytest.mark.toggle
     @allure.title("Keahlian Hints Existence")
     @allure.feature("Resume Builder/ Keahlian/ Hints")
     @allure.severity(severity.MINOR)
@@ -40,6 +41,10 @@ class TestSmokeResumeBuilderPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.accordion
+    @pytest.mark.input_field
+    @pytest.mark.cancel
+    @pytest.mark.save
     @allure.title("Keahlian Section Validation")
     @allure.severity(severity.CRITICAL)
     async def test_proficient_section(self, proficient):
