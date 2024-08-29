@@ -13,12 +13,15 @@ async def builder(user_auth):
 
 
 @allure.epic("Resume Builder")
-@allure.story("Smoke Test", "Resume Builder/ Smoke Test")
+@allure.story("Smoke Testing: Resume Builder")
+@pytest.mark.res_builder
+@pytest.mark.achievement
 class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.hints
     @allure.title("Prestasi Hints Existence")
-    @allure.feature("Achievements", "Hints", "Resume Builder/ Achievements", "Resume Builder/ Achievements/ Hints")
+    @allure.feature("Resume Builder/ Achievements", "Resume Builder/ Achievements/ Hints")
     @allure.severity(severity.MINOR)
     async def test_achievement_section_hints(self, builder):
         with allure.step('1. Click on the Add Prestasi Form button'):
@@ -36,7 +39,7 @@ class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Prestasi Section Validation")
-    @allure.feature("Achievements", "Resume Builder/ Achievements")
+    @allure.feature("Resume Builder/ Achievements")
     @allure.severity(severity.CRITICAL)
     async def test_achievement_section(self, builder):
         with allure.step('1. Validate Prestasi form default state'):
