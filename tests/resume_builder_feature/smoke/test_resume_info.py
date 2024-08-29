@@ -13,12 +13,14 @@ async def builder(user_auth):
 
 
 @allure.epic("Resume Builder")
-@allure.story("Smoke Test", "Resume Builder/ Smoke Test")
+@allure.story("Smoke Testing: Resume Builder")
+@pytest.mark.res_builder
+@pytest.mark.resume_info
 class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Informasi Resume Validation")
-    @allure.feature("Resume Builder", "Informasi Resume", "Resume Builder/ Informasi Resume")
+    @allure.feature("Resume Builder/ Informasi Resume")
     @allure.severity(severity.CRITICAL)
     async def test_informasi_resume_section(self, builder):
         with allure.step('1. Validating Page Header'):
