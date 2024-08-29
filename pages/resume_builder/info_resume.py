@@ -177,13 +177,11 @@ class ResInfo(BasePage):
 
     async def import_resume_modal_click_displayed_option(self):
         count = await self._find(ResumeInfo.ImportModal.Resume.input_item).count()
-
         for x in range(1, count + 1):
             await self._click(f"{ResumeInfo.ImportModal.Resume.input_item}[{x}]")
             await self.import_resume_modal_select_filled()
 
-        await expect(self._find(DataDiri.province_lists)).not_to_be_visible()
-        await expect(self._find(DataDiri.city_input)).to_be_enabled()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_name)).to_be_enabled()
 
     async def import_resume_modal_click_cancel(self):
         await self._click(ResumeInfo.ImportModal.Resume.cancel)
@@ -194,6 +192,16 @@ class ResInfo(BasePage):
         await self._click(ResumeInfo.ImportModal.Resume.save)
         await expect(self._find(ResumeInfo.ImportModal.DataForm.info_main)).not_to_be_visible()
         await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
+
+        await expect(self._find(DataDiri.Initial.first_name_input)).not_to_be_attached()
+        await expect(self._find(DataDiri.Initial.last_name_input)).not_to_be_attached()
+        await expect(self._find(DataDiri.Initial.email_input)).not_to_be_attached()
+        await expect(self._find(DataDiri.Initial.phone_input)).not_to_be_attached()
+        await expect(self._find(DataDiri.Initial.country_input)).not_to_be_attached()
+        await expect(self._find(DataDiri.Initial.province_input)).not_to_be_attached()
+        await expect(self._find(DataDiri.Initial.city_input)).not_to_be_attached()
+        await expect(self._find(DataDiri.Initial.linkedin_input)).not_to_be_attached()
+        await expect(self._find(DataDiri.Initial.portfolio_input)).not_to_be_attached()
 
     async def import_resume_modal_click_close(self):
         await self._click(ResumeInfo.ImportModal.close)
@@ -229,7 +237,6 @@ class ResInfo(BasePage):
         for index in range(1, total_goals + 1):
             option = f"{ResumeInfo.goal_items}[{index}]"
             opt_label = await self._find(option).get_attribute('title')
-            print(f"Selecting: {opt_label}")
             await self._click(option)
             await expect(self._find(ResumeInfo.goal_content_selected)).to_have_attribute('title', opt_label)
             await self.tujuan_pekerjaan_click()

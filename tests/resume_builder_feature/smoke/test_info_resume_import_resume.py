@@ -101,7 +101,3 @@ class TestSmokeResBuildImportPage:
 
         with allure.step('6. Click on the Save button'):
             await res_info.import_resume_modal_click_save()
-            # Todo: Verify the popup is dismissed
-            # Todo: Verify the required Resume Form is not empty
-            # Todo: Verify the required Resume Form preview is match
-            pass
