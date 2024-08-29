@@ -13,12 +13,15 @@ async def builder(user_auth):
 
 
 @allure.epic("Resume Builder")
-@allure.story("Smoke Test", "Resume Builder/ Smoke Test")
+@allure.story("Smoke Testing: Resume Builder")
+@pytest.mark.res_builder
+@pytest.mark.data_diri
 class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.hints
     @allure.title("Data Diri Hints Existence")
-    @allure.feature("Data Diri", "Hints", "Resume Builder/ Data Diri", "Resume Builder/ Data Diri/ Hints")
+    @allure.feature("Resume Builder/ Data Diri", "Resume Builder/ Data Diri/ Hints")
     @allure.severity(severity.MINOR)
     async def test_data_diri_hints(self, builder):
         with allure.step('Validating Hints Component'):
@@ -33,7 +36,7 @@ class TestSmokeResumeBuilderPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @allure.title("Data Diri Existence Validation")
-    @allure.feature("Data Diri", "Resume Builder/ Data Diri")
+    @allure.feature("Resume Builder/ Data Diri")
     @allure.severity(severity.CRITICAL)
     async def test_data_diri_section(self, builder):
         with allure.step('1. Validating each input field completeness'):
