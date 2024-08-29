@@ -201,30 +201,30 @@ class ResInfo(BasePage):
         await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
 
     """Resume Information Section Interaction"""
-    async def info_resume_name_insert(self, text):
+    async def name_insert(self, text):
         await self._touch(ResumeInfo.name_input)
         await self._type(ResumeInfo.name_input, text)
         await expect(self._find(ResumeInfo.name_input)).to_have_value(text)
 
-    async def info_resume_lang_click(self):
+    async def lang_click(self):
         await self._touch(ResumeInfo.lang_input)
         await self._force(ResumeInfo.lang_input)
         await expect(self._find(ResumeInfo.lang_id)).to_be_attached()
         await expect(self._find(ResumeInfo.lang_en)).to_be_attached()
 
-    async def info_resume_select_bahasa(self):
+    async def lang_select_bahasa(self):
         await self._click(ResumeInfo.lang_id)
         await expect(self._find(ResumeInfo.lang_input)).to_contain_text("Bahasa Indonesia")
 
-    async def info_resume_select_language(self):
+    async def lang_select_language(self):
         await self._click(ResumeInfo.lang_en)
         await expect(self._find(ResumeInfo.lang_input)).to_contain_text("Bahasa Inggris")
 
-    async def info_resume_goal_click(self):
+    async def tujuan_pekerjaan_click(self):
         await self._force(ResumeInfo.goal_input)
         await expect(self._find(ResumeInfo.goal_lists)).to_be_attached()
 
-    async def info_resume_goal_items_interact(self):
+    async def tujuan_items_interact(self):
         total_goals = await self._find(ResumeInfo.goal_items).count()
         for index in range(1, total_goals + 1):
             option = f"{ResumeInfo.goal_items}[{index}]"
@@ -232,9 +232,9 @@ class ResInfo(BasePage):
             print(f"Selecting: {opt_label}")
             await self._click(option)
             await expect(self._find(ResumeInfo.goal_content_selected)).to_have_attribute('title', opt_label)
-            await self.info_resume_goal_click()
+            await self.tujuan_pekerjaan_click()
 
-    async def info_resume_import_data_click(self):
+    async def import_data_click(self):
         await self._click(ResumeInfo.import_btn)
         await expect(self._find(ResumeInfo.import_btn)).to_be_focused()
 
