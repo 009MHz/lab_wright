@@ -70,8 +70,9 @@ class TestSmokeResBuildImportPage:
 
     @pytest.mark.positive
     @pytest.mark.smoke
+    @pytest.mark.save
     @allure.title("Import Data Via My Resume Save Action")
-    @allure.feature("Informasi Resume", "Impor Data", "Resume Import", "Resume Import/ Save")
+    @allure.feature("Resume Builder/ Informasi Resume/ Import Data/ Resume Import/ Save")
     @allure.severity(severity.CRITICAL)
     async def test_informasi_resume_import_resume_save(self, builder):
         with allure.step('1. Click on the "Impor dari resume saya" carousel'):
