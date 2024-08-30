@@ -179,9 +179,10 @@ class ResInfo(BasePage):
         count = await self._find(ResumeInfo.ImportModal.Resume.input_item).count()
         for x in range(1, count + 1):
             await self._click(f"{ResumeInfo.ImportModal.Resume.input_item}[{x}]")
-            await self.import_resume_modal_select_filled()
+            if x != count:
+                await self.import_resume_modal_select_filled()
 
-        await expect(self._find(ResumeInfo.ImportModal.Resume.input_name)).to_be_enabled()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_lists)).not_to_be_visible()
 
     async def import_resume_modal_click_cancel(self):
         await self._click(ResumeInfo.ImportModal.Resume.cancel)
@@ -194,14 +195,16 @@ class ResInfo(BasePage):
         await expect(self._find(ResumeInfo.ImportModal.main_form)).not_to_be_visible()
 
         await expect(self._find(DataDiri.Initial.first_name_input)).not_to_be_attached()
-        await expect(self._find(DataDiri.Initial.last_name_input)).not_to_be_attached()
-        await expect(self._find(DataDiri.Initial.email_input)).not_to_be_attached()
-        await expect(self._find(DataDiri.Initial.phone_input)).not_to_be_attached()
-        await expect(self._find(DataDiri.Initial.country_input)).not_to_be_attached()
-        await expect(self._find(DataDiri.Initial.province_input)).not_to_be_attached()
-        await expect(self._find(DataDiri.Initial.city_input)).not_to_be_attached()
-        await expect(self._find(DataDiri.Initial.linkedin_input)).not_to_be_attached()
-        await expect(self._find(DataDiri.Initial.portfolio_input)).not_to_be_attached()
+        await expect(self._find(DataDiri.Filled.name)).to_be_visible()
+        await expect(self._find(DataDiri.Filled.name)).not_to_have_text('')
+        await expect(self._find(DataDiri.Filled.email)).to_be_visible()
+        await expect(self._find(DataDiri.Filled.email)).not_to_have_text('')
+        await expect(self._find(DataDiri.Filled.phone)).to_be_visible()
+        await expect(self._find(DataDiri.Filled.phone)).not_to_have_text('')
+        await expect(self._find(DataDiri.Filled.province)).to_be_visible()
+        await expect(self._find(DataDiri.Filled.province)).not_to_have_text('')
+        await expect(self._find(DataDiri.Filled.city)).to_be_visible()
+        await expect(self._find(DataDiri.Filled.city)).not_to_have_text('')
 
     async def import_resume_modal_click_close(self):
         await self._click(ResumeInfo.ImportModal.close)
@@ -283,7 +286,7 @@ class ResInfo(BasePage):
 
     """ Resume Information - Import Data - Data Form Interaction"""
     async def import_form_collapse_self_data(self):
-        await self._click(ResumeInfo.ImportModal.DataForm.info_toggle)
+        await self._force(ResumeInfo.ImportModal.DataForm.info_toggle, timeout=10000)
         await self._conceal(ResumeInfo.ImportModal.DataForm.info_name)
         await expect(self._find(ResumeInfo.ImportModal.DataForm.info_toggle)).to_have_attribute('aria-expanded', 'false')
 
