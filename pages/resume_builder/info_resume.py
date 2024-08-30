@@ -285,7 +285,7 @@ class ResInfo(BasePage):
 
     """ Resume Information - Import Data - Data Form Interaction"""
     async def import_form_collapse_self_data(self):
-        await self._click(ResumeInfo.ImportModal.DataForm.info_toggle)
+        await self._force(ResumeInfo.ImportModal.DataForm.info_toggle, timeout=10000)
         await self._conceal(ResumeInfo.ImportModal.DataForm.info_name)
         await expect(self._find(ResumeInfo.ImportModal.DataForm.info_toggle)).to_have_attribute('aria-expanded', 'false')
 
