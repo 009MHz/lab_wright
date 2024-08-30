@@ -179,9 +179,10 @@ class ResInfo(BasePage):
         count = await self._find(ResumeInfo.ImportModal.Resume.input_item).count()
         for x in range(1, count + 1):
             await self._click(f"{ResumeInfo.ImportModal.Resume.input_item}[{x}]")
-            await self.import_resume_modal_select_filled()
+            if x != count:
+                await self.import_resume_modal_select_filled()
 
-        await expect(self._find(ResumeInfo.ImportModal.Resume.input_name)).to_be_enabled()
+        await expect(self._find(ResumeInfo.ImportModal.Resume.input_lists)).not_to_be_visible()
 
     async def import_resume_modal_click_cancel(self):
         await self._click(ResumeInfo.ImportModal.Resume.cancel)
