@@ -51,7 +51,7 @@ class ResumeInfo:
 
         class DataForm:
             """Data Diri"""
-            info_main = "#DataProfInfoSelfDataToggle"
+            info_main = "//div[contains(@class, 'importDataModalMain')]//div[@id='DataProfInfoSelfDataToggle']"   #"div[class]#DataProfInfoSelfDataToggle"
             info_toggle = "div[id='DataProfInfoSelfDataToggle'] div[role='button']"
             info_check = "//label[contains(@class,'SelfDataCheck')]//input"
             info_title = "#DataProfInfoSelfDataHeader"
@@ -120,6 +120,9 @@ class DataDiri:
         portfolio_input = "#selfInfoPortfolioInput"
 
     class Filled:
+        save = "#infoSelfSave"
+        edit = "#infoSelfEdit"
+        delete = "#infoSelfDelete"
         wrapper = "//div[@id='selfInfoToggle']//div[@id='DataProfInfoSelfDataWrapper']"
         name = "div[id='selfInfoToggle'] #dataProfInfoSelfDataName"
         first_name = "div[id='selfInfoToggle'] #dataProfInfoSelfDataFirstName"
@@ -128,11 +131,23 @@ class DataDiri:
         phone = "div[id='selfInfoToggle'] #dataProfInfoSelfDataPhone"
         province = "div[id='selfInfoToggle'] #dataProfInfoSelfDataProvince"
         city = "div[id='selfInfoToggle'] #dataProfInfoSelfDataCity"
-        address = "|BELUM|#DataProfInfoSelfDataAddress"
-        linkedin = "|BELUM|#DataProfInfoSelfDataLinkedin"
-        linkedin_checkbox = "|BELUM|#DataProfInfoSelfDataLinkedin-checkbox-fill"
-        portfolio = "|BELUM|#DataProfInfoSelfDataPortfolio"
-        portfolio_checkbox = "|BELUM|#DataProfInfoSelfDataPortfolio-checkbox-fill"
+        address = "div[id='selfInfoToggle'] #dataProfInfoSelfDataAddress"
+        linkedin = "div[id='selfInfoToggle'] #dataProfInfoSelfDataLinkedin"
+        linkedin_checkbox = "div[id='selfInfoToggle'] #dataProfInfoSelfDataLinkedin-checkbox-fill"
+        portfolio = "div[id='selfInfoToggle'] #dataProfInfoSelfDataPortfolio"
+        portfolio_checkbox = "div[id='selfInfoToggle'] #dataProfInfoSelfDataPortfolio-checkbox-fill"
+
+    class Preview:
+        name = ".header-name"
+        first_name = "#previewFirstName"
+        last_name = "#previewLastName"
+        phone = "#previewPhoneNumber"
+        email = "#previewEmail"
+        city = "#previewCity"
+        province = "#previewProvince"
+        linkedin = "#previewLinkedinUrl"
+        portfolio = "#previewPortfolioUrl"
+        address = "#previewAddress"
 
 
 class EduHistory:
@@ -338,3 +353,10 @@ class Hobby:
     name_input = "#hobbyNameInput"
     form_cancel = "#hobbyFormCancel"
     form_save = "#hobbyFormSave"
+
+
+class Preview:
+    main = "#resume-preview"
+    section_title = "#previewLayoutTitle"
+    completeness = "//div[contains(@class, 'previewLayout')]//span//strong"
+    complete_tag = "#resumeStatusTag"
