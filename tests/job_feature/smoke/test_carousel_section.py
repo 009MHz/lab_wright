@@ -58,5 +58,4 @@ class TestSmokeJobPage:
             await job_page.page_number_presence()
         with allure.step("2. Click on Pagination Chevron"):
             await job_page.next_chevron_click()
-            await job_page.next_chevron_click()
             await job_page.prev_chevron_click()
