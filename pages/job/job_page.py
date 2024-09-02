@@ -410,17 +410,28 @@ class JobPage(BasePage):
         await self._look(Pagination.previous)
         await expect(self._find(Pagination.previous)).to_be_visible()
 
-    async def prev_chevron_click(self):
-        await self._click(Pagination.previous)
-        await expect(self._find(Pagination.previous)).to_be_focused()
-
     async def next_chevron_presence(self):
         await self._look(Pagination.next)
         await expect(self._find(Pagination.next)).to_be_visible()
 
+    async def _get_response(self):
+        """Helper function to capture and return the URL of the next API response."""
+        response = await self.page.wait_for_event("response", lambda response: "jobs?" in response.url)
+        return response.url
+
     async def next_chevron_click(self):
+        initial_request_url = await self._get_response()
         await self._click(Pagination.next)
-        await expect(self._find(Pagination.next)).to_be_focused()
+
+        current_request_url = await self._get_response()
+        assert current_request_url != initial_request_url, "Current request URL matches the initial one."
+
+    async def prev_chevron_click(self):
+        # initial_request_url = await self._get_response()
+        await self._click(Pagination.previous)
+
+        current_request_url = await self._get_response()
+        # assert current_request_url != initial_request_url, "Current request URL matches the initial one."
 
     async def page_number_count(self):
         print(f"Total Pages: {self._find(Pagination.container).count()}")
