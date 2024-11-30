@@ -49,8 +49,8 @@ jobs:
       continue-on-error: true
       with:
         fetch-depth: 0
-        ref: gh_pages
-        path: gh_pages
+        ref: gh-pages
+        path: gh-pages
 
     - name: Cleanup old allure history
       run: |
@@ -62,7 +62,7 @@ jobs:
       uses: simple-elf/allure-report-action@v1.7
       if: always()
       with:
-        gh_pages: gh_pages
+        gh-pages: gh-pages
         allure_history: allure-history
         allure_results: allure-results
 
@@ -71,5 +71,5 @@ jobs:
       if: always()
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: gh_pages
+        publish_branch: gh-pages
         publish_dir: allure-history
