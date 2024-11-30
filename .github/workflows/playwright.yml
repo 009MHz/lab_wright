@@ -34,10 +34,10 @@ jobs:
     - name: Install playwright browsers
       run: python -m playwright install --with-deps
 
-    - name: Generate Credentials data
-      run: |
-        mkdir -p data
-        echo "${{ secrets.TEST_ACCOUNT}}" | base64 -d > data/credentials.json
+#    - name: Generate Credentials data
+#      run: |
+#        mkdir -p data
+#        echo "${{ secrets.TEST_ACCOUNT}}" | base64 -d > data/credentials.json
 
     - name: Create .env file
       run: |
