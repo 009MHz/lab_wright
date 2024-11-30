@@ -8,7 +8,7 @@ on:
   pull_request:
     branches: [ main ]
   repository_dispatch:
-    types: [ karirlab-frontend-trigger ]
+    types: [ frontend-dispatch ]
 
 permissions:
   contents: write
@@ -39,9 +39,20 @@ jobs:
         mkdir -p data
         echo "${{ secrets.TEST_ACCOUNT}}" | base64 -d > data/credentials.json
 
+    - name: Create .env file
+      run: |
+        echo "USER_EMAIL_USER=${{ secrets.USER_EMAIL_USER }}" >> .env.pipeline
+        echo "USER_PASSWORD_USER=${{ secrets.USER_PASSWORD_USER }}" >> .env.pipeline
+        echo "USER_EMAIL_ADMIN=${{ secrets.USER_EMAIL_ADMIN }}" >> .env.pipeline
+        echo "USER_PASSWORD_ADMIN=${{ secrets.USER_PASSWORD_ADMIN }}" >> .env.pipeline
+        echo "USER_EMAIL_SUPER_ADMIN=${{ secrets.USER_EMAIL_SUPER_ADMIN }}" >> .env.pipeline
+        echo "USER_PASSWORD_SUPER_ADMIN=${{ secrets.USER_PASSWORD_SUPER_ADMIN }}" >> .env.pipeline
+        echo "USER_EMAIL_JOB_APPLICANT=${{ secrets.USER_EMAIL_JOB_APPLICANT }}" >> .env.pipeline
+        echo "USER_PASSWORD_JOB_APPLICANT=${{ secrets.USER_PASSWORD_JOB_APPLICANT }}" >> .env.pipeline    
+
     - name: Test execution
       run: |
-        pytest --env=test --mode=pipeline --headless --alluredir=allure-results -n=auto --reruns=2 --reruns-delay=3 --screenshot=only-on-failure --video=retain-on-failure
+        pytest --env=pipeline --mode=pipeline --headless --alluredir=allure-results -n=auto --reruns=2 --reruns-delay=3 --screenshot=only-on-failure --video=retain-on-failure
 
     - name: Load test report history
       uses: actions/checkout@v4
