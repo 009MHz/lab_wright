@@ -48,7 +48,6 @@ jobs:
       if: always()
       continue-on-error: true
       with:
-        fetch-depth: 0
         ref: gh-pages
         path: gh-pages
 
