@@ -30,18 +30,13 @@ class SessionHandler:
         return False
 
     def load_credentials(self, user_type):
-        credentials = "data/credentials.json"
-        if not os.path.exists(credentials):
-            raise FileNotFoundError(f"Credentials file not found: {credentials}")
+        email = os.getenv(f"USER_EMAIL_{user_type.upper()}")
+        password = os.getenv(f"USER_PASSWORD_{user_type.upper()}")
 
-        with open(credentials, 'r') as file:
-            credentials = json.load(file)
-
-        for cred in credentials:
-            if user_type in cred:
-                return cred[user_type]["email"], cred[user_type]["password"]
-
-        raise ValueError(f"User type '{user_type}' not found in credentials file")
+        if email and password:
+            return email, password
+        else:
+            raise ValueError(f"Credentials for {user_type} not found in environment variables")
 
     async def create_session(self, user_type: str):
         if not os.path.exists(SESSION_DIR):
