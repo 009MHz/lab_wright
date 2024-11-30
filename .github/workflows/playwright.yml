@@ -41,14 +41,14 @@ jobs:
 
     - name: Create .env file
       run: |
-        echo "USER_EMAIL_USER=${{ secrets.USER_EMAIL_USER }}" >> .env.pipeline
-        echo "USER_PASSWORD_USER=${{ secrets.USER_PASSWORD_USER }}" >> .env.pipeline
-        echo "USER_EMAIL_ADMIN=${{ secrets.USER_EMAIL_ADMIN }}" >> .env.pipeline
-        echo "USER_PASSWORD_ADMIN=${{ secrets.USER_PASSWORD_ADMIN }}" >> .env.pipeline
-        echo "USER_EMAIL_SUPER_ADMIN=${{ secrets.USER_EMAIL_SUPER_ADMIN }}" >> .env.pipeline
-        echo "USER_PASSWORD_SUPER_ADMIN=${{ secrets.USER_PASSWORD_SUPER_ADMIN }}" >> .env.pipeline
-        echo "USER_EMAIL_JOB_APPLICANT=${{ secrets.USER_EMAIL_JOB_APPLICANT }}" >> .env.pipeline
-        echo "USER_PASSWORD_JOB_APPLICANT=${{ secrets.USER_PASSWORD_JOB_APPLICANT }}" >> .env.pipeline    
+        echo "USER_EMAIL_USER=${{ secrets.USER_EMAIL_USER }}" >> .env
+        echo "USER_PASSWORD_USER=${{ secrets.USER_PASSWORD_USER }}" >> .env
+        echo "USER_EMAIL_ADMIN=${{ secrets.USER_EMAIL_ADMIN }}" >> .env
+        echo "USER_PASSWORD_ADMIN=${{ secrets.USER_PASSWORD_ADMIN }}" >> .env
+        echo "USER_EMAIL_SUPER_ADMIN=${{ secrets.USER_EMAIL_SUPER_ADMIN }}" >> .env
+        echo "USER_PASSWORD_SUPER_ADMIN=${{ secrets.USER_PASSWORD_SUPER_ADMIN }}" >> .env
+        echo "USER_EMAIL_JOB_APPLICANT=${{ secrets.USER_EMAIL_JOB_APPLICANT }}" >> .env
+        echo "USER_PASSWORD_JOB_APPLICANT=${{ secrets.USER_PASSWORD_JOB_APPLICANT }}" >> .env    
 
     - name: Test execution
       run: |
