@@ -1,0 +1,4 @@
+INFO     pages.login.login_page:login_page.py:96 Opening Login Page
+INFO     pages.login.login_page:login_page.py:100 Providing Valid Emails
+INFO     pages.login.login_page:login_page.py:103 Providing Valid Password
+INFO     root:sess_handler.py:58 Login Success for user, Creating the session file . . .
