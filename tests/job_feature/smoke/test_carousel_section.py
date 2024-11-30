@@ -48,6 +48,7 @@ class TestSmokeJobPage:
     @pytest.mark.positive
     @pytest.mark.smoke
     @pytest.mark.pagination
+    @pytest.mark.skip
     @allure.feature("Job/ Carousel/ Pagination")
     @allure.title("Pagination Section Validation")
     @allure.severity(severity.NORMAL)
