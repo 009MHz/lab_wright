@@ -52,17 +52,11 @@ jobs:
         ref: gh-pages
         path: gh-pages
 
-    - name: Cleanup old allure history
-      run: |
-        if [ -d allure-history ]; then
-          rm -rf allure-history
-        fi
-
     - name: Build test report
       uses: simple-elf/allure-report-action@v1.7
       if: always()
       with:
-        gh-pages: gh-pages
+        gh_pages: gh-pages
         allure_history: allure-history
         allure_results: allure-results
 
