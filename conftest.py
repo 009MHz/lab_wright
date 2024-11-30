@@ -4,6 +4,7 @@ import asyncio
 import allure
 from utils.browser_config import Config
 from playwright.async_api import async_playwright
+from dotenv import load_dotenv
 
 runner = Config()
 
@@ -18,6 +19,9 @@ def pytest_configure(config):
     os.environ["env"] = config.getoption('env')
     os.environ["mode"] = config.getoption('mode') or 'local'
     os.environ["headless"] = str(config.getoption('headless'))
+    env = config.getoption('env')
+    dotenv_file = f".env.{env}"
+    load_dotenv(dotenv_file)
 
 
 @pytest.fixture()
