@@ -2,9 +2,7 @@ name: Pipeline Test
 
 on:
   push:
-    branches:
-    - main
-    - opt__gitflow
+    branches: [ main ]
   pull_request:
     branches: [ main ]
   repository_dispatch:
